@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aktualności · Panel Parafii NSPJ</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/admin.css">
+<style>
+  .filters{
+    display:flex;gap:10px;align-items:center;background:var(--white);
+    border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin-bottom:16px;flex-wrap:wrap
+  }
+  .filters .tab{
+    padding:6px 12px;border-radius:5px;font-size:.85rem;color:var(--ink-soft);
+    cursor:pointer;font-weight:600
+  }
+  .filters .tab.active{background:var(--burgundy);color:#fff}
+  .filters .sep{width:1px;height:24px;background:var(--line);margin:0 4px}
+  .filters select{padding:6px 10px;border:1px solid var(--line);border-radius:5px;font-size:.85rem;background:var(--white);color:var(--ink)}
+  .filters .search-in{position:relative;margin-left:auto}
+  .filters .search-in input{padding:6px 12px 6px 32px;border:1px solid var(--line);border-radius:5px;font-size:.85rem;background:var(--white);width:240px}
+  .filters .search-in svg{position:absolute;left:10px;top:8px;color:var(--ink-soft)}
+
+  .thumb{width:60px;height:42px;border-radius:4px;background-size:cover;background-position:center;background-color:var(--beige-deep);flex-shrink:0}
+  .title-cell{display:flex;gap:12px;align-items:center}
+  .title-cell .meta{display:flex;flex-direction:column;gap:2px}
+  .title-cell b{color:var(--ink);font-size:.92rem;line-height:1.2}
+  .title-cell .sub{font-size:.78rem;color:var(--ink-soft)}
+
+  .pagination{
+    display:flex;gap:6px;justify-content:center;align-items:center;margin-top:18px;color:var(--ink-soft);font-size:.85rem
+  }
+  .pagination a,.pagination span{
+    padding:6px 11px;border-radius:5px;border:1px solid var(--line);background:var(--white);
+    color:var(--ink-soft);text-decoration:none;font-weight:600
+  }
+  .pagination a.active{background:var(--burgundy);color:#fff;border-color:var(--burgundy)}
+  .pagination a:hover{border-color:var(--copper);color:var(--burgundy)}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><img src="../public/img/logo1.png" alt="NSPJ" style="width:38px;height:38px;border-radius:50%;object-fit:contain;flex-shrink:0"><div class="brand-name">Parafia NSPJ<small>Czerwionka-Leszczyny</small></div></div>
+    <nav>
+      <a href="index.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/></svg>Pulpit</a>
+      <div class="nav-section">Strona WWW</div>
+      <a href="aktualnosci.html" class="active"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/><path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2zm10 1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/></svg>Aktualności<span class="badge">3</span></a>
+      <a href="ogloszenia.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M11.5 2v4.793l3.347 7.36a.75.75 0 0 1-.682 1.06H1.835a.75.75 0 0 1-.682-1.06l3.347-7.36V2H4a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1z"/></svg>Ogłoszenia parafialne</a>
+      <a href="galeria.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M14.002 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2z"/></svg>Galeria</a>
+      <a href="#"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.5.5 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3z"/></svg>Strony statyczne</a>
+      <div class="nav-section">Wspólnota</div>
+      <a href="intencje.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5"/></svg>Intencje mszalne</a>
+      <a href="sakramenty.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6 1h6v7l-2-1-2 1V1z"/><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/></svg>Sakramenty<span class="badge" style="background:var(--ink-soft)">Pkt 2</span></a>
+      <a href="parafianie.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>Parafianie<span class="badge" style="background:var(--ink-soft)">Pkt 2</span></a>
+      <div class="nav-section">System</div>
+      <a href="#"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H6zM1 11a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H1z"/></svg>Raporty</a>
+      <a href="ustawienia.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/></svg>Ustawienia parafii</a>
+    </nav>
+    <div class="user"><div class="user-avatar">TŻ</div><div class="user-name">ks. Tomasz Żołna<small>Proboszcz · <a href="login.html">Wyloguj</a></small></div></div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="crumbs"><a href="index.html">Pulpit</a><span>/</span><b>Aktualności</b></div>
+      <div class="actions">
+        <button class="icon-btn" title="Podgląd"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8"/></svg></button>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="page-head">
+        <div>
+          <h1>Aktualności</h1>
+          <div class="lead">Wpisy widoczne publicznie na stronie parafii · wszystkich: <b>47</b></div>
+        </div>
+        <div class="right">
+          <a href="aktualnosci-edit.html" class="btn btn-primary">
+            <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg>
+            Dodaj aktualność
+          </a>
+        </div>
+      </div>
+
+      <div class="filters">
+        <span class="tab active">Wszystkie (47)</span>
+        <span class="tab">Opublikowane (42)</span>
+        <span class="tab">Szkice (4)</span>
+        <span class="tab">Archiwum (1)</span>
+        <div class="sep"></div>
+        <select>
+          <option>Wszystkie kategorie</option>
+          <option>Wydarzenia</option>
+          <option>Pielgrzymki</option>
+          <option>Budowa kościoła</option>
+          <option>Sakramenty</option>
+        </select>
+        <select>
+          <option>Wszystkie lata</option>
+          <option>2026</option>
+          <option>2025</option>
+          <option>2024</option>
+        </select>
+        <div class="search-in">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.85 3.85a1 1 0 0 0 1.415-1.414zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg>
+          <input type="text" placeholder="Szukaj w tytułach...">
+        </div>
+      </div>
+
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th style="width:32px"><input type="checkbox"></th>
+            <th>Tytuł</th>
+            <th>Status</th>
+            <th>Kategoria</th>
+            <th>Data publikacji</th>
+            <th>Autor</th>
+            <th style="text-align:right">Akcje</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <div class="title-cell">
+                <div class="thumb" style="background-image:url('../public/img/event-wizytacja-1.jpg')"></div>
+                <div class="meta">
+                  <b>Wizytacja kanoniczna abp. Galbasa</b>
+                  <span class="sub">Wzbogacona o 14 zdjęć · 920 odsłon</span>
+                </div>
+              </div>
+            </td>
+            <td><span class="pill-badge pub">● Opublikowany</span></td>
+            <td>Wydarzenia</td>
+            <td>9 maja 2026</td>
+            <td>ks. Tomasz</td>
+            <td>
+              <div class="row-actions">
+                <a href="aktualnosci-edit.html" title="Edytuj"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/></svg></a>
+                <button title="Podgląd"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8"/></svg></button>
+                <button title="Usuń"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <div class="title-cell">
+                <div class="thumb" style="background-image:url('../public/img/budowa-2.jpg')"></div>
+                <div class="meta">
+                  <b>Kolejny etap budowy — wieża</b>
+                  <span class="sub">5 zdjęć · 580 odsłon</span>
+                </div>
+              </div>
+            </td>
+            <td><span class="pill-badge pub">● Opublikowany</span></td>
+            <td>Budowa kościoła</td>
+            <td>5 maja 2026</td>
+            <td>ks. Tomasz</td>
+            <td><div class="row-actions"><a href="aktualnosci-edit.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168z"/></svg></a><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8"/></svg></button><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5"/></svg></button></div></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <div class="title-cell">
+                <div class="thumb" style="background-image:url('../public/img/hero-2.jpg')"></div>
+                <div class="meta">
+                  <b>100 lat Parafii — fotorelacja z uroczystości</b>
+                  <span class="sub">38 zdjęć · 2 410 odsłon · 🔥 najczęściej oglądane</span>
+                </div>
+              </div>
+            </td>
+            <td><span class="pill-badge pub">● Opublikowany</span></td>
+            <td>Wydarzenia</td>
+            <td>3 sierpnia 2025</td>
+            <td>ks. Tomasz</td>
+            <td><div class="row-actions"><a href="aktualnosci-edit.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168z"/></svg></a><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8"/></svg></button><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6"/></svg></button></div></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <div class="title-cell">
+                <div class="thumb" style="background-image:url('../public/img/event-odpust-1.jpg')"></div>
+                <div class="meta">
+                  <b>Pielgrzymka do Rud — relacja księdza</b>
+                  <span class="sub">Tekst + 8 zdjęć · 340 odsłon</span>
+                </div>
+              </div>
+            </td>
+            <td><span class="pill-badge draft">● Szkic</span></td>
+            <td>Pielgrzymki</td>
+            <td>—</td>
+            <td>ks. Paweł O.</td>
+            <td><div class="row-actions"><a href="aktualnosci-edit.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3"/></svg></a><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5"/></svg></button><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6"/></svg></button></div></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <div class="title-cell">
+                <div class="thumb" style="background-image:url('../public/img/event-pozegnanie-1.jpg')"></div>
+                <div class="meta">
+                  <b>Bierzmowanie 2025 — zaproszenie dla młodzieży</b>
+                  <span class="sub">Tekst · 192 odsłony</span>
+                </div>
+              </div>
+            </td>
+            <td><span class="pill-badge pub">● Opublikowany</span></td>
+            <td>Sakramenty</td>
+            <td>14 kwietnia 2025</td>
+            <td>ks. Paweł O.</td>
+            <td><div class="row-actions"><a href="aktualnosci-edit.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3"/></svg></a><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5"/></svg></button><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6"/></svg></button></div></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <div class="title-cell">
+                <div class="thumb" style="background-image:url('../public/img/budowa-4.jpg')"></div>
+                <div class="meta">
+                  <b>Płyty elewacji — postęp prac</b>
+                  <span class="sub">12 zdjęć · 405 odsłon</span>
+                </div>
+              </div>
+            </td>
+            <td><span class="pill-badge pub">● Opublikowany</span></td>
+            <td>Budowa kościoła</td>
+            <td>27 marca 2025</td>
+            <td>ks. Tomasz</td>
+            <td><div class="row-actions"><a href="aktualnosci-edit.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3"/></svg></a><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5"/></svg></button><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6"/></svg></button></div></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <div class="title-cell">
+                <div class="thumb" style="background-image:url('../public/img/event-odpust-2.jpg')"></div>
+                <div class="meta">
+                  <b>Boże Ciało 2024 — procesja przez Czerwionkę</b>
+                  <span class="sub">9 zdjęć · 1 120 odsłon</span>
+                </div>
+              </div>
+            </td>
+            <td><span class="pill-badge pub">● Opublikowany</span></td>
+            <td>Wydarzenia</td>
+            <td>30 maja 2024</td>
+            <td>ks. Tomasz</td>
+            <td><div class="row-actions"><a href="aktualnosci-edit.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3"/></svg></a><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5"/></svg></button><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6"/></svg></button></div></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <div class="title-cell">
+                <div class="thumb" style="background-image:url('../public/img/noclegownia.jpg')"></div>
+                <div class="meta">
+                  <b>Schlafhaus — historia starego kościoła</b>
+                  <span class="sub">Esej historyczny · Marian Wójcik · 286 odsłon</span>
+                </div>
+              </div>
+            </td>
+            <td><span class="pill-badge pub">● Opublikowany</span></td>
+            <td>Wydarzenia</td>
+            <td>22 czerwca 2023</td>
+            <td>ks. Tomasz</td>
+            <td><div class="row-actions"><a href="aktualnosci-edit.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3"/></svg></a><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5"/></svg></button><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6"/></svg></button></div></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="pagination">
+        <span>← Poprzednia</span>
+        <a href="#" class="active">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">Następna →</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

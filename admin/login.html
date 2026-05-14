@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Logowanie · Panel Parafii NSPJ Czerwionka</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--beige:#f4ede0;--cream:#faf6ee;--burgundy:#7a1f2b;--burgundy-dark:#5e1620;--copper:#b87a4a;--copper-light:#d6a572;--ink:#2b2520;--ink-soft:#5a5048;--line:#d8cdb6}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;min-height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,'Inter',system-ui,sans-serif;
+    background:var(--ink);color:var(--ink);min-height:100vh;
+    display:grid;grid-template-columns:1.1fr 1fr;
+    background-image:linear-gradient(135deg,#1d1916,#3a302a);
+  }
+  .visual{
+    position:relative;overflow:hidden;
+    background-image:url('../public/img/hero-1.jpg');
+    background-size:cover;background-position:center
+  }
+  .visual::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(43,37,32,.6),rgba(122,31,43,.55))}
+  .visual .inner{position:relative;z-index:2;color:#f6e9d3;padding:60px;height:100%;display:flex;flex-direction:column;justify-content:space-between}
+  .visual .brand{display:flex;align-items:center;gap:14px}
+  .visual .brand-mark{width:48px;height:48px;border-radius:50%;background:rgba(246,233,211,.15);backdrop-filter:blur(8px);color:#f6d9b1;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;letter-spacing:.05em;border:1px solid rgba(246,233,211,.3)}
+  .visual .brand-name{font-family:'Playfair Display',serif;font-size:1.05rem;line-height:1.2}
+  .visual .brand-name small{display:block;font-size:.7rem;letter-spacing:.18em;color:rgba(246,233,211,.7);text-transform:uppercase;margin-top:3px;font-family:-apple-system,sans-serif;font-weight:700}
+  .visual h1{font-family:'Playfair Display',serif;font-size:2.4rem;line-height:1.15;font-weight:600;margin:0 0 16px;max-width:540px}
+  .visual h1 em{font-style:italic;color:var(--copper-light)}
+  .visual p{font-size:1rem;color:rgba(246,233,211,.85);max-width:480px;line-height:1.6;margin:0}
+  .visual .quote{padding:24px;border-left:3px solid var(--copper-light);background:rgba(0,0,0,.15);max-width:520px;backdrop-filter:blur(4px)}
+  .visual .quote span{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem}
+  .visual .quote cite{display:block;font-size:.82rem;color:rgba(246,233,211,.7);margin-top:10px;font-style:normal;letter-spacing:.05em}
+
+  .panel{
+    background:var(--cream);display:flex;align-items:center;justify-content:center;padding:40px
+  }
+  .form-box{width:100%;max-width:400px}
+  .form-box h2{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:600;color:var(--ink);margin:0 0 8px}
+  .form-box .sub{color:var(--ink-soft);font-size:.95rem;margin-bottom:30px}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:.85rem;font-weight:600;color:var(--ink);margin-bottom:7px}
+  .field input{
+    width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:6px;
+    font-size:.95rem;font-family:inherit;background:#fff;color:var(--ink)
+  }
+  .field input:focus{outline:none;border-color:var(--burgundy);box-shadow:0 0 0 3px rgba(122,31,43,.12)}
+  .field .row{display:flex;justify-content:space-between;align-items:center}
+  .field a.forgot{font-size:.82rem;color:var(--copper);text-decoration:none;font-weight:600}
+  .remember{display:flex;align-items:center;gap:8px;margin-bottom:22px;font-size:.88rem;color:var(--ink-soft)}
+  .btn-submit{width:100%;padding:13px;background:var(--burgundy);color:#fff;border:none;border-radius:6px;font-size:.95rem;font-weight:700;cursor:pointer;letter-spacing:.04em}
+  .btn-submit:hover{background:var(--burgundy-dark)}
+  .divider{margin:22px 0;text-align:center;position:relative;color:var(--ink-soft);font-size:.82rem}
+  .divider::before,.divider::after{content:"";position:absolute;top:50%;width:35%;height:1px;background:var(--line)}
+  .divider::before{left:0}.divider::after{right:0}
+  .help{margin-top:24px;padding:14px;background:#fff;border:1px solid var(--line);border-radius:6px;font-size:.82rem;color:var(--ink-soft)}
+  .help b{color:var(--ink)}
+  .back-home{font-size:.85rem;color:var(--ink-soft);margin-top:30px;text-align:center}
+  .back-home a{color:var(--burgundy);font-weight:600;text-decoration:none}
+
+  @media(max-width:880px){
+    body{grid-template-columns:1fr}
+    .visual{display:none}
+    .panel{padding:24px}
+  }
+</style>
+</head>
+<body>
+<div class="visual">
+  <div class="inner">
+    <div class="brand">
+      <div class="brand-mark" style="background:none;border:none;backdrop-filter:none;padding:0"><img src="../public/img/logo1.png" alt="Logo NSPJ" style="width:48px;height:48px;object-fit:contain;border-radius:50%"></div>
+      <div class="brand-name">Parafia Najświętszego Serca Pana Jezusa<small>Czerwionka-Leszczyny · od 1925</small></div>
+    </div>
+    <div>
+      <h1>Panel parafii — <em>prosty</em> jak kazanie niedzielne</h1>
+      <p>Dodawaj ogłoszenia, zarządzaj galerią, planuj intencje. Wszystko w jednym miejscu, bez technicznego ciężaru.</p>
+    </div>
+    <div class="quote">
+      <span>„Nie wiedziałem że to może być tak proste. Pierwsze ogłoszenie napisałem szybciej niż zaparzyłem herbatę."</span>
+      <cite>— ks. Tomasz Żołna, proboszcz</cite>
+    </div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="form-box">
+    <h2>Witaj z powrotem</h2>
+    <div class="sub">Zaloguj się do panelu parafii</div>
+    <form action="index.html" method="get">
+      <div class="field">
+        <label>Adres e-mail</label>
+        <input type="email" placeholder="proboszcz@nspjczerwionka.pl" value="proboszcz@nspjczerwionka.pl">
+      </div>
+      <div class="field">
+        <div class="row">
+          <label>Hasło</label>
+          <a class="forgot" href="#">Nie pamiętam</a>
+        </div>
+        <input type="password" placeholder="••••••••" value="demohaslo">
+      </div>
+      <label class="remember">
+        <input type="checkbox" checked> Zapamiętaj mnie na tym urządzeniu
+      </label>
+      <button type="submit" class="btn-submit">Zaloguj się →</button>
+    </form>
+    <div class="help">
+      <b>Demo</b> · login i hasło są wpisane na sztywno. Kliknij „Zaloguj się" żeby wejść do panelu.
+    </div>
+    <div class="back-home">
+      <a href="../index.html">← Wróć do strony parafii</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

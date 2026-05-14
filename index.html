@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parafia Najświętszego Serca Pana Jezusa · Czerwionka-Leszczyny</title>
+<meta name="description" content="Oficjalna strona Parafii pw. Najświętszego Serca Pana Jezusa w Czerwionce-Leszczynach. Msze święte, ogłoszenia parafialne, aktualności i życie wspólnoty.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --beige:#f4ede0;
+    --beige-deep:#ebe1cd;
+    --cream:#faf6ee;
+    --burgundy:#7a1f2b;
+    --burgundy-dark:#5e1620;
+    --copper:#b87a4a;
+    --copper-light:#d6a572;
+    --ink:#2b2520;
+    --ink-soft:#5a5048;
+    --line:#d8cdb6;
+    --white:#ffffff;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Lato',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--beige);
+    line-height:1.6;
+    font-weight:400;
+  }
+  h1,h2,h3,h4,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;color:var(--ink)}
+  h1{font-size:clamp(2.8rem,5.5vw,4.6rem);line-height:1.05;letter-spacing:-.01em;margin:0 0 1rem}
+  h2{font-size:clamp(2rem,3.5vw,3rem);line-height:1.12;margin:0 0 1rem}
+  h3{font-size:1.5rem;margin:0 0 .5rem}
+  p{margin:0 0 1rem}
+  a{color:var(--burgundy);text-decoration:none}
+  a:hover{text-decoration:underline}
+  img{max-width:100%;display:block}
+  .container{max-width:1240px;margin:0 auto;padding:0 24px}
+  .eyebrow{
+    font-family:'Lato',sans-serif;font-size:.78rem;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--copper);font-weight:700;margin-bottom:.8rem;
+    display:inline-block
+  }
+
+  /* TOP BAR */
+  .topbar{background:var(--burgundy-dark);color:#e8d9b8;font-size:.85rem}
+  .topbar .container{display:flex;justify-content:space-between;align-items:center;padding:8px 24px;gap:16px;flex-wrap:wrap}
+  .topbar a{color:#e8d9b8;text-decoration:none}
+  .topbar a:hover{color:#fff}
+  .topbar .left{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+  .topbar .right{display:flex;gap:14px;align-items:center}
+  .topbar svg{vertical-align:-3px;margin-right:6px}
+  .topbar-admin svg{margin-right:0;vertical-align:0}
+
+  /* HEADER */
+  header.site{
+    background:var(--cream);
+    border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:50;
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px}
+  .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
+  .brand-mark{
+    width:46px;height:46px;border-radius:50%;
+    display:grid;place-items:center;
+    overflow:hidden;flex-shrink:0
+  }
+  .brand-logo{
+    width:46px;height:46px;object-fit:contain;display:block
+  }
+  .brand-name{font-family:'Playfair Display',serif;font-size:.95rem;line-height:1.2}
+  .brand-name small{display:block;font-family:'Lato',sans-serif;font-size:.7rem;letter-spacing:.16em;color:var(--copper);text-transform:uppercase;font-weight:700;margin-top:3px}
+  nav.main{display:flex;gap:4px;align-items:center}
+  nav.main a{
+    padding:10px 12px;font-weight:400;font-size:.9rem;color:var(--ink);
+    border-radius:6px;transition:background .15s;position:relative;white-space:nowrap
+  }
+  nav.main a:hover{background:var(--beige);text-decoration:none}
+  nav.main a.has-sub::after{content:"▾";font-size:.7rem;margin-left:6px;color:var(--copper)}
+  .topbar-admin{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:30px;height:30px;border-radius:50%;
+    border:1px solid rgba(232,217,184,.35);
+    color:#e8d9b8;transition:all .15s;margin-left:4px;
+    text-decoration:none;
+  }
+  .topbar-admin:hover{background:rgba(232,217,184,.15);border-color:rgba(232,217,184,.7);color:#fff}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--ink);padding:8px}
+
+  /* HERO */
+  .hero{padding:60px 0 70px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center}
+  .hero-text .eyebrow{margin-bottom:1rem}
+  .hero-text h1{color:var(--ink)}
+  .hero-text h1 em{font-style:italic;color:var(--burgundy);font-weight:500}
+  .hero-lead{font-size:1.18rem;color:var(--ink-soft);margin-bottom:2rem;max-width:540px}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 26px;border-radius:6px;font-weight:700;font-size:.95rem;
+    letter-spacing:.03em;border:none;cursor:pointer;transition:all .15s
+  }
+  .btn-primary{background:var(--burgundy);color:#fff}
+  .btn-primary:hover{background:var(--burgundy-dark);text-decoration:none;transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--burgundy);border:2px solid var(--burgundy)}
+  .btn-ghost:hover{background:var(--burgundy);color:#fff;text-decoration:none}
+  .btn svg{width:16px;height:16px}
+
+  .hero-slider{position:relative;height:520px;border-radius:8px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(43,37,32,.35)}
+  .hero-slider .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;background-size:cover;background-position:center}
+  .hero-slider .slide.active{opacity:1}
+  .hero-slider::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(43,37,32,0) 50%,rgba(43,37,32,.5) 100%);
+    pointer-events:none
+  }
+  .hero-slider .caption{
+    position:absolute;left:24px;bottom:20px;color:#fff;z-index:2;
+    background:rgba(43,37,32,.4);backdrop-filter:blur(8px);
+    padding:10px 16px;border-radius:4px;font-size:.88rem;font-weight:300
+  }
+  .hero-dots{position:absolute;bottom:20px;right:24px;display:flex;gap:6px;z-index:2}
+  .hero-dots span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer;transition:all .2s}
+  .hero-dots span.active{background:#fff;width:28px;border-radius:4px}
+
+  /* INFO PILLS */
+  .pills{padding:0 0 70px}
+  .pills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .pill{
+    background:var(--cream);border:1px solid var(--line);border-radius:8px;
+    padding:24px;display:flex;gap:16px;align-items:flex-start;
+    transition:transform .15s,box-shadow .15s
+  }
+  .pill:hover{transform:translateY(-3px);box-shadow:0 16px 30px -12px rgba(43,37,32,.18);text-decoration:none}
+  .pill-icon{
+    width:46px;height:46px;border-radius:50%;background:var(--burgundy);color:#f6d9b1;
+    display:grid;place-items:center;flex-shrink:0
+  }
+  .pill-icon svg{width:22px;height:22px}
+  .pill h4{font-family:'Lato',sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--copper);font-weight:700;margin:0 0 6px}
+  .pill .value{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:4px}
+  .pill .sub{font-size:.85rem;color:var(--ink-soft)}
+
+  /* SECTION HELPERS */
+  section{padding:70px 0}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;gap:24px;flex-wrap:wrap}
+  .section-head .titles{max-width:720px}
+  .section-head .more{color:var(--burgundy);font-weight:700;font-size:.9rem;letter-spacing:.04em;text-transform:uppercase}
+  .section-head .more::after{content:"→";margin-left:6px;transition:transform .15s;display:inline-block}
+  .section-head .more:hover::after{transform:translateX(4px)}
+
+  /* OGŁOSZENIA + AKTUALNOŚCI */
+  .news-section{background:var(--cream);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .news-grid{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:24px}
+  .ogloszenia-card{
+    background:var(--burgundy);color:#f6e9d3;border-radius:8px;padding:36px;
+    position:relative;overflow:hidden;display:flex;flex-direction:column
+  }
+  .ogloszenia-card::before{
+    content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;
+    border:2px solid rgba(246,233,211,.15);border-radius:50%
+  }
+  .ogloszenia-card .eyebrow{color:var(--copper-light);margin-bottom:.6rem}
+  .ogloszenia-card h3{color:#fff;font-size:1.7rem;margin-bottom:.6rem}
+  .ogloszenia-card .meta{font-size:.85rem;color:rgba(246,233,211,.7);margin-bottom:1.5rem}
+  .ogloszenia-card p{font-size:.95rem;color:rgba(246,233,211,.92);flex:1}
+  .ogloszenia-card .actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .ogloszenia-card a.btn-light{
+    background:#f6e9d3;color:var(--burgundy);padding:11px 18px;border-radius:5px;
+    font-weight:700;font-size:.85rem;letter-spacing:.04em
+  }
+  .ogloszenia-card a.btn-light:hover{background:#fff;text-decoration:none}
+  .ogloszenia-card a.btn-outline{
+    border:1.5px solid rgba(246,233,211,.5);color:#f6e9d3;
+    padding:11px 18px;border-radius:5px;font-weight:700;font-size:.85rem;letter-spacing:.04em
+  }
+  .ogloszenia-card a.btn-outline:hover{border-color:#f6e9d3;text-decoration:none}
+
+  .news-card{background:var(--white);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--line)}
+  .news-card .img{height:200px;background-size:cover;background-position:center;background-color:var(--beige-deep)}
+  .news-card .body{padding:24px;flex:1;display:flex;flex-direction:column}
+  .news-card .date{font-size:.78rem;color:var(--copper);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+  .news-card h3{font-size:1.2rem;margin-bottom:.5rem}
+  .news-card p{font-size:.93rem;color:var(--ink-soft);flex:1}
+  .news-card .read-more{font-weight:700;color:var(--burgundy);font-size:.88rem;letter-spacing:.04em;text-transform:uppercase;margin-top:14px}
+
+  /* GALERIA / ŻYCIE PARAFII */
+  .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;grid-auto-rows:200px}
+  .gallery-grid a{display:block;border-radius:6px;overflow:hidden;position:relative;background-size:cover;background-position:center;background-color:var(--beige-deep);transition:transform .25s}
+  .gallery-grid a:hover{transform:scale(1.02)}
+  .gallery-grid a::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(43,37,32,0) 55%,rgba(43,37,32,.7) 100%)
+  }
+  .gallery-grid a span{
+    position:absolute;left:14px;right:14px;bottom:12px;color:#fff;z-index:2;
+    font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;line-height:1.3
+  }
+  .gallery-grid a.wide{grid-column:span 2}
+  .gallery-grid a.tall{grid-row:span 2}
+
+  /* WSPARCIE BUDOWY BANNER */
+  .support-banner{
+    position:relative;border-radius:12px;overflow:hidden;
+    background-color:var(--ink);min-height:380px;
+    display:flex;align-items:center
+  }
+  .support-banner .bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.45}
+  .support-banner::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(43,37,32,.85) 0%,rgba(43,37,32,.6) 60%,rgba(43,37,32,.3) 100%)}
+  .support-banner .inner{position:relative;z-index:2;padding:60px;color:#f6e9d3;max-width:640px}
+  .support-banner .eyebrow{color:var(--copper-light)}
+  .support-banner h2{color:#fff;font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:1rem}
+  .support-banner p{color:rgba(246,233,211,.92);font-size:1.05rem;margin-bottom:1.5rem;max-width:520px}
+  .support-banner .btns{display:flex;gap:12px;flex-wrap:wrap}
+  .support-banner .btn-primary{background:#f6e9d3;color:var(--burgundy)}
+  .support-banner .btn-primary:hover{background:#fff}
+
+  /* HISTORIA SECTION */
+  .historia-section .grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .historia-img{height:480px;border-radius:8px;background-size:cover;background-position:center;background-color:var(--beige-deep);box-shadow:0 24px 50px -20px rgba(43,37,32,.3)}
+  .historia-text p{font-size:1.02rem;color:var(--ink-soft)}
+  .historia-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px;padding-top:30px;border-top:1px solid var(--line)}
+  .stat .big{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:600;color:var(--burgundy);line-height:1}
+  .stat .lbl{font-size:.82rem;color:var(--ink-soft);margin-top:6px;letter-spacing:.05em}
+
+  /* GRUPY PARAFIALNE */
+  .groups{background:var(--cream);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .groups-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .group-card{
+    padding:28px 22px;background:var(--white);border:1px solid var(--line);
+    border-radius:8px;text-align:center;transition:all .15s
+  }
+  .group-card:hover{transform:translateY(-3px);border-color:var(--copper);text-decoration:none}
+  .group-icon{
+    width:54px;height:54px;border-radius:50%;background:var(--beige);
+    display:grid;place-items:center;margin:0 auto 16px
+  }
+  .group-icon svg{width:26px;height:26px;color:var(--burgundy)}
+  .group-card h4{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--ink);margin-bottom:.3rem}
+  .group-card p{font-size:.85rem;color:var(--ink-soft);margin:0}
+
+  /* FOOTER */
+  footer.site{background:var(--ink);color:#d8cdb6;padding:60px 0 30px;margin-top:40px}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px}
+  .footer-brand{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+  .footer-brand .brand-mark{box-shadow:none}
+  .footer-brand .brand-name{color:#f6e9d3;font-size:1.15rem}
+  .footer-brand .brand-name small{color:var(--copper-light)}
+  footer.site p{color:rgba(216,205,182,.78);font-size:.92rem}
+  footer.site h5{font-family:'Playfair Display',serif;font-size:1.05rem;color:#f6e9d3;margin-bottom:1rem}
+  footer.site ul{list-style:none;padding:0;margin:0}
+  footer.site ul li{margin-bottom:.6rem;font-size:.92rem}
+  footer.site ul a{color:rgba(216,205,182,.78)}
+  footer.site ul a:hover{color:#f6e9d3;text-decoration:none}
+  .footer-bank{font-size:.83rem;background:rgba(246,233,211,.06);padding:14px;border-radius:6px;margin-top:14px;border:1px solid rgba(246,233,211,.1)}
+  .footer-bank b{color:#f6e9d3;display:block;font-weight:700;margin-bottom:4px}
+  .footer-bank code{font-family:'Lato',monospace;color:var(--copper-light);font-weight:700;letter-spacing:.5px}
+  .footer-bottom{border-top:1px solid rgba(216,205,182,.14);margin-top:40px;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:.85rem;color:rgba(216,205,182,.55)}
+
+  /* RESPONSIVE */
+  @media (max-width: 980px){
+    .hero-grid{grid-template-columns:1fr;gap:36px}
+    .hero-slider{height:380px}
+    .pills-grid{grid-template-columns:repeat(2,1fr)}
+    .news-grid{grid-template-columns:1fr}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:180px}
+    .gallery-grid a.wide,.gallery-grid a.tall{grid-column:span 1;grid-row:span 1}
+    .historia-section .grid{grid-template-columns:1fr}
+    .historia-img{height:300px}
+    .groups-grid{grid-template-columns:repeat(2,1fr)}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+    nav.main{display:none}
+    .menu-toggle{display:block}
+  }
+  @media (max-width: 560px){
+    .pills-grid{grid-template-columns:1fr}
+    .gallery-grid{grid-template-columns:1fr}
+    .groups-grid{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr}
+    section{padding:50px 0}
+    .support-banner .inner{padding:36px 24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="container">
+    <div class="left">
+      <span><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>ul. 3-go Maja 36, 44-230 Czerwionka-Leszczyny</span>
+      <span><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.61 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58z"/></svg><a href="tel:+48324312992">32 43 12 992</a></span>
+    </div>
+    <div class="right">
+      <a href="#">Kalendarz liturgiczny</a>
+      <a href="#">Intencje mszalne</a>
+      <a href="#" style="border:1px solid rgba(232,217,184,.4);padding:4px 12px;border-radius:4px">Wsparcie budowy</a>
+      <a href="admin/login.html" class="topbar-admin" title="Panel parafii" aria-label="Panel parafii">
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site">
+  <div class="container">
+    <div class="nav">
+      <a class="brand" href="/">
+        <div class="brand-mark"><img src="public/img/logo1.png" alt="Logo NSPJ" class="brand-logo"></div>
+        <div class="brand-name">Parafia Najświętszego Serca Pana Jezusa<small>Czerwionka-Leszczyny · od 1925</small></div>
+      </a>
+      <nav class="main">
+        <a href="#" class="active">Strona&nbsp;główna</a>
+        <a href="strony/historia.html">Historia</a>
+        <a href="#" class="has-sub">Duszpasterstwo</a>
+        <a href="#" class="has-sub">Wspólnota</a>
+        <a href="#" class="has-sub">Galeria</a>
+        <a href="#">Aktualności</a>
+        <a href="strony/kontakt.html">Kontakt</a>
+      </nav>
+      <button class="menu-toggle" aria-label="Menu">
+        <svg width="28" height="28" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow">Witamy w naszej wspólnocie</span>
+        <h1>Wspólnota, która <em>od stu lat</em> bije w sercu Czerwionki</h1>
+        <p class="hero-lead">Od 1 sierpnia 1925 roku tworzymy parafię, w której wiara, modlitwa i sąsiedzka pomoc spotykają się każdego dnia. Dziś wspólnie budujemy nowy kościół — i nie zwalniamy tempa.</p>
+        <div class="hero-ctas">
+          <a href="#msze" class="btn btn-primary">
+            <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 0a1 1 0 0 1 1 1v5.4l3.6 1.8a1 1 0 0 1-.9 1.8L8 8.2 4.3 10a1 1 0 0 1-.9-1.8L7 6.4V1a1 1 0 0 1 1-1z"/></svg>
+            Msze święte
+          </a>
+          <a href="#aktualnosci" class="btn btn-ghost">Najnowsze ogłoszenia</a>
+        </div>
+      </div>
+      <div class="hero-slider" id="heroSlider">
+        <div class="slide active" style="background-image:url('public/img/hero-1.jpg')"></div>
+        <div class="slide" style="background-image:url('public/img/hero-2.jpg')"></div>
+        <div class="slide" style="background-image:url('public/img/hero-3.jpg')"></div>
+        <div class="caption">100 lat Parafii · 1 sierpnia 2025</div>
+        <div class="hero-dots">
+          <span class="active" data-i="0"></span><span data-i="1"></span><span data-i="2"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO PILLS -->
+<div class="pills">
+  <div class="container">
+    <div class="pills-grid">
+      <a class="pill" href="#msze">
+        <div class="pill-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5z"/><path d="M8 3.5a.5.5 0 0 1 .5.5v3l2 1.5a.5.5 0 0 1-.6.8l-2.2-1.6A.5.5 0 0 1 7.5 7V4a.5.5 0 0 1 .5-.5"/></svg></div>
+        <div>
+          <h4>Najbliższa msza</h4>
+          <div class="value">Dziś, 17:00</div>
+          <div class="sub">Kościół tymczasowy · Intencja: za parafian</div>
+        </div>
+      </a>
+      <a class="pill" href="#wydarzenia">
+        <div class="pill-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/></svg></div>
+        <div>
+          <h4>Najbliższe wydarzenie</h4>
+          <div class="value">Bierzmowanie</div>
+          <div class="sub">17 maja 2026 · godz. 11:00</div>
+        </div>
+      </a>
+      <a class="pill" href="#kancelaria">
+        <div class="pill-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/></svg></div>
+        <div>
+          <h4>Kancelaria</h4>
+          <div class="value">Pn, Śr · 17:30–18:30</div>
+          <div class="sub">Cz · 7:30–8:30 i 17:30–18:30</div>
+        </div>
+      </a>
+      <a class="pill" href="#intencja">
+        <div class="pill-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/></svg></div>
+        <div>
+          <h4>Intencja tygodnia</h4>
+          <div class="value">Za rodziny parafii</div>
+          <div class="sub">11–17 maja 2026</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS / OGŁOSZENIA -->
+<section class="news-section" id="aktualnosci">
+  <div class="container">
+    <div class="section-head">
+      <div class="titles">
+        <span class="eyebrow">Co się dzieje w parafii</span>
+        <h2>Ogłoszenia i aktualności</h2>
+      </div>
+      <a href="#" class="more">Zobacz archiwum</a>
+    </div>
+    <div class="news-grid">
+      <div class="ogloszenia-card">
+        <span class="eyebrow">Ogłoszenia parafialne</span>
+        <h3>V Niedziela Wielkanocna</h3>
+        <div class="meta">10 maja 2026 · ks. Tomasz Żołna · proboszcz</div>
+        <p>Bóg zapłać za ofiary na budowę nowego kościoła zebrane w minioną niedzielę — łącznie 14 380 zł. We wtorek o 18:00 zapraszamy na spotkanie Rady Parafialnej. W sobotę o 10:00 sprzątanie cmentarza — prosimy o zabranie rękawic i grabi.</p>
+        <div class="actions">
+          <a href="#" class="btn-light">Czytaj całość</a>
+          <a href="#" class="btn-outline">Pobierz PDF</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="img" style="background-image:url('public/img/event-wizytacja-1.jpg')"></div>
+        <div class="body">
+          <div class="date">9 maja 2026</div>
+          <h3>Wizytacja kanoniczna abp. Galbasa</h3>
+          <p>Ksiądz arcybiskup Adrian Galbas odwiedził naszą parafię w ramach wizytacji kanonicznej. Spotkał się z radą parafialną, grupami modlitewnymi i młodzieżą przygotowującą się do bierzmowania.</p>
+          <a href="#" class="read-more">Czytaj dalej →</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="img" style="background-image:url('public/img/budowa-2.jpg')"></div>
+        <div class="body">
+          <div class="date">5 maja 2026</div>
+          <h3>Kolejny etap budowy — wieża</h3>
+          <p>W październiku rozpoczęły się prace przy budowie wieży kościoła. Wykonawcą jest firma z Czerwionki, projekt według architekta Grzegorza Tkacza. Następny milestone: przekazanie hełmu wieży.</p>
+          <a href="#" class="read-more">Czytaj dalej →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA / ŻYCIE PARAFII -->
+<section id="galeria">
+  <div class="container">
+    <div class="section-head">
+      <div class="titles">
+        <span class="eyebrow">Życie wspólnoty w zdjęciach</span>
+        <h2>Galeria parafii</h2>
+      </div>
+      <a href="#" class="more">Wszystkie galerie</a>
+    </div>
+    <div class="gallery-grid">
+      <a href="#" class="wide tall" style="background-image:url('public/img/hero-1.jpg')"><span>100 lat Parafii<br>1 sierpnia 2025</span></a>
+      <a href="#" style="background-image:url('public/img/event-wizytacja-2.jpg')"><span>Wizytacja kanoniczna 2025</span></a>
+      <a href="#" style="background-image:url('public/img/budowa-1.jpg')"><span>Budowa — luty 2025</span></a>
+      <a href="#" style="background-image:url('public/img/event-odpust-1.jpg')"><span>Odpust parafialny 2024</span></a>
+      <a href="#" style="background-image:url('public/img/event-odpust-3.jpg')"><span>Suma odpustowa</span></a>
+      <a href="#" class="wide" style="background-image:url('public/img/budowa-3.jpg')"><span>Nowy kościół — podziemia · 5 marca 2025</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- WSPARCIE BUDOWY -->
+<section style="padding-top:0">
+  <div class="container">
+    <div class="support-banner">
+      <div class="bg" style="background-image:url('public/img/budowa-4.jpg')"></div>
+      <div class="inner">
+        <span class="eyebrow">Budujemy z Sercem</span>
+        <h2>Pomóż dokończyć nowy kościół parafialny</h2>
+        <p>Po stu latach od erygowania parafii kończymy najważniejszą inwestycję w jej historii. Każda ofiara — duża i mała — przybliża nas do dnia konsekracji nowej świątyni. Bóg zapłać.</p>
+        <div class="btns">
+          <a href="#" class="btn btn-primary">Wpłać darowiznę online</a>
+          <a href="#" class="btn btn-ghost" style="color:#f6e9d3;border-color:#f6e9d3">Numery kont</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORIA -->
+<section class="historia-section">
+  <div class="container">
+    <div class="grid">
+      <div class="historia-img" style="background-image:url('public/img/noclegownia.jpg')"></div>
+      <div class="historia-text">
+        <span class="eyebrow">Od 1925 roku</span>
+        <h2>Historia naszej parafii</h2>
+        <p>Wszystko zaczęło się od kopalni „Dębieńsko". W 1898 roku jej uruchomienie sprowadziło do Czerwionki tysiące nowych mieszkańców. W 1925 roku, dekretem z 1 sierpnia, erygowano parafię. Rok później dawny budynek Schlafhausu — noclegowni dla nieżonatych górników — został zaadaptowany na tymczasowy kościół.</p>
+        <p>Dziś, sto lat później, kończymy budowę nowej, stałej świątyni według projektu architekta Grzegorza Tkacza.</p>
+        <a href="strony/historia.html" class="btn btn-ghost" style="margin-top:8px">Czytaj pełną historię</a>
+        <div class="historia-stats">
+          <div class="stat"><div class="big">100</div><div class="lbl">lat parafii</div></div>
+          <div class="stat"><div class="big">~6 000</div><div class="lbl">parafian</div></div>
+          <div class="stat"><div class="big">7</div><div class="lbl">grup parafialnych</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRUPY PARAFIALNE -->
+<section class="groups">
+  <div class="container">
+    <div class="section-head">
+      <div class="titles">
+        <span class="eyebrow">Działaj z nami</span>
+        <h2>Wspólnoty parafialne</h2>
+      </div>
+    </div>
+    <div class="groups-grid">
+      <a href="#" class="group-card">
+        <div class="group-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4"/></svg></div>
+        <h4>Rada parafialna</h4>
+        <p>Wspiera proboszcza w sprawach życia parafii</p>
+      </a>
+      <a href="#" class="group-card">
+        <div class="group-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 0a1 1 0 0 1 1 1v5l3 2v8H4V8l3-2V1a1 1 0 0 1 1-1z"/></svg></div>
+        <h4>Ministranci</h4>
+        <p>Posługa przy ołtarzu — chłopcy i mężczyźni</p>
+      </a>
+      <a href="#" class="group-card">
+        <div class="group-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M9 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1H10v8.5a.5.5 0 0 1-1 0V3h-.5a.5.5 0 0 1-.5-.5M3 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2v-2H3V4h2V2z"/></svg></div>
+        <h4>Schola Parafialna</h4>
+        <p>Muzyka liturgiczna i śpiew w czasie Mszy</p>
+      </a>
+      <a href="#" class="group-card">
+        <div class="group-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/></svg></div>
+        <h4>Dzieci Maryi</h4>
+        <p>Wspólnota dziewcząt — formacja maryjna</p>
+      </a>
+      <a href="#" class="group-card">
+        <div class="group-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187z"/></svg></div>
+        <h4>Żywy Różaniec</h4>
+        <p>Modlitwa różańcowa we wspólnocie</p>
+      </a>
+      <a href="#" class="group-card">
+        <div class="group-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5m0 6c1.5 0 4 1.5 4 4v2H4v-2c0-2.5 2.5-4 4-4"/></svg></div>
+        <h4>Franciszkanie Świeccy</h4>
+        <p>Trzeci Zakon Świętego Franciszka</p>
+      </a>
+      <a href="#" class="group-card">
+        <div class="group-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 0 0 3-3V3a3 3 0 0 0-6 0v2a3 3 0 0 0 3 3m5 5c0-2.21-2.687-4-5-4s-5 1.79-5 4v2h10z"/></svg></div>
+        <h4>Zespół Charytatywny</h4>
+        <p>Pomoc potrzebującym z naszej parafii</p>
+      </a>
+      <a href="#" class="group-card">
+        <div class="group-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm6.5 4v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0V9h-3a.5.5 0 0 1 0-1h3V5a.5.5 0 0 1 1 0"/></svg></div>
+        <h4>Zobacz wszystkie</h4>
+        <p>7 wspólnot · pełna lista</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="public/img/logo1.png" alt="Logo NSPJ" class="brand-logo" style="width:46px;height:46px;object-fit:contain;border-radius:50%;box-shadow:none;flex-shrink:0">
+          <div class="brand-name">Parafia Najświętszego Serca Pana Jezusa<small>Czerwionka-Leszczyny · od 1925</small></div>
+        </div>
+        <p>ul. 3-go Maja 36<br>44-230 Czerwionka-Leszczyny<br>tel. <a href="tel:+48324312992" style="color:var(--copper-light)">32 43 12 992</a></p>
+        <div class="footer-bank">
+          <b>Konto parafii (Bank Spółdzielczy)</b>
+          <code>11 8454 1095 2003 0017 7467 0003</code>
+        </div>
+      </div>
+      <div>
+        <h5>Parafia</h5>
+        <ul>
+          <li><a href="strony/historia.html">Historia</a></li>
+          <li><a href="#">Duszpasterze</a></li>
+          <li><a href="strony/msze-swiete.html">Msze święte</a></li>
+          <li><a href="#">Sakramenty</a></li>
+          <li><a href="#">Standardy ochrony małoletnich</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Wspólnota</h5>
+        <ul>
+          <li><a href="#">Aktualności</a></li>
+          <li><a href="#">Ogłoszenia parafialne</a></li>
+          <li><a href="#">Kalendarz liturgiczny</a></li>
+          <li><a href="#">Intencje mszalne</a></li>
+          <li><a href="#">Cmentarz</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Kontakt</h5>
+        <ul>
+          <li><a href="strony/kontakt.html">Kancelaria</a></li>
+          <li><a href="#">RODO</a></li>
+          <li><a href="#">Polityka prywatności</a></li>
+          <li><a href="#">Wsparcie budowy</a></li>
+          <li><a href="admin/login.html" style="color:var(--copper-light);font-weight:700">→ Panel administracyjny</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Parafia NSPJ Czerwionka-Leszczyny. Wszelkie prawa zastrzeżone.</span>
+      <span>Wersja demonstracyjna · nowy CMS parafialny</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Hero slider — auto rotate
+  const slides=document.querySelectorAll('#heroSlider .slide');
+  const dots=document.querySelectorAll('.hero-dots span');
+  let cur=0;
+  function go(i){
+    slides[cur].classList.remove('active');
+    dots[cur].classList.remove('active');
+    cur=(i+slides.length)%slides.length;
+    slides[cur].classList.add('active');
+    dots[cur].classList.add('active');
+  }
+  dots.forEach(d=>d.addEventListener('click',()=>go(+d.dataset.i)));
+  setInterval(()=>go(cur+1),5500);
+
+  // Mobile menu toggle (very simple)
+  document.querySelector('.menu-toggle')?.addEventListener('click',()=>{
+    const nav=document.querySelector('nav.main');
+    if(nav.style.display==='flex'){nav.style.display='none';return}
+    nav.style.display='flex';
+    nav.style.position='absolute';nav.style.top='80px';nav.style.left='0';nav.style.right='0';
+    nav.style.flexDirection='column';nav.style.background='var(--cream)';
+    nav.style.padding='16px';nav.style.borderBottom='1px solid var(--line)';
+    nav.style.boxShadow='0 12px 30px rgba(0,0,0,.1)';
+  });
+</script>
+
+</body>
+</html>

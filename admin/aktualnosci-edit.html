@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Edycja aktualności · Panel Parafii NSPJ</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/admin.css">
+<style>
+  .editor-layout{display:grid;grid-template-columns:2fr 1fr;gap:18px;align-items:start}
+  .gallery-uploader{
+    border:2px dashed var(--line);border-radius:8px;padding:24px;text-align:center;
+    background:var(--bg);color:var(--ink-soft);transition:all .15s;cursor:pointer
+  }
+  .gallery-uploader:hover{border-color:var(--copper);background:var(--cream)}
+  .gallery-uploader svg{color:var(--copper);margin-bottom:8px}
+  .gallery-uploader .lbl{font-weight:700;color:var(--ink);font-size:.95rem}
+  .gallery-uploader .sub{font-size:.82rem;margin-top:4px}
+  .uploaded{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+  .uploaded .ph{
+    position:relative;height:90px;border-radius:5px;background-size:cover;background-position:center;
+    background-color:var(--beige-deep);cursor:grab;border:1px solid var(--line)
+  }
+  .uploaded .ph .rm{
+    position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;
+    background:rgba(0,0,0,.6);color:#fff;border:none;cursor:pointer;display:grid;place-items:center
+  }
+  .uploaded .ph .drag-handle{
+    position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.6);color:#fff;
+    padding:2px 5px;border-radius:3px;font-size:.7rem;font-weight:700
+  }
+  .sidebar-meta .card{margin-bottom:14px}
+  .checkbox-row{display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--ink);margin:6px 0}
+  .info-box{
+    background:#fff8e6;border-left:3px solid var(--amber);
+    padding:12px 14px;border-radius:5px;font-size:.85rem;color:var(--ink);margin-top:10px
+  }
+  .info-box b{display:block;margin-bottom:3px}
+  @media(max-width:980px){.editor-layout{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><img src="../public/img/logo1.png" alt="NSPJ" style="width:38px;height:38px;border-radius:50%;object-fit:contain;flex-shrink:0"><div class="brand-name">Parafia NSPJ<small>Czerwionka-Leszczyny</small></div></div>
+    <nav>
+      <a href="index.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7"/></svg>Pulpit</a>
+      <div class="nav-section">Strona WWW</div>
+      <a href="aktualnosci.html" class="active"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/></svg>Aktualności<span class="badge">3</span></a>
+      <a href="ogloszenia.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M11.5 2v4.793l3.347 7.36"/></svg>Ogłoszenia parafialne</a>
+      <a href="galeria.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M14.002 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/></svg>Galeria</a>
+      <a href="#"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 3A1.5 1.5 0 0 0 1 4.5"/></svg>Strony statyczne</a>
+      <div class="nav-section">Wspólnota</div>
+      <a href="intencje.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8"/></svg>Intencje mszalne</a>
+      <a href="sakramenty.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6 1h6v7l-2-1-2 1V1z"/><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/></svg>Sakramenty<span class="badge" style="background:var(--ink-soft)">Pkt 2</span></a>
+      <a href="parafianie.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>Parafianie<span class="badge" style="background:var(--ink-soft)">Pkt 2</span></a>
+      <div class="nav-section">System</div>
+      <a href="#"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H6zM1 11a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H1z"/></svg>Raporty</a>
+      <a href="ustawienia.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/></svg>Ustawienia parafii</a>
+    </nav>
+    <div class="user"><div class="user-avatar">TŻ</div><div class="user-name">ks. Tomasz Żołna<small>Proboszcz · <a href="login.html">Wyloguj</a></small></div></div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="crumbs"><a href="index.html">Pulpit</a><span>/</span><a href="aktualnosci.html">Aktualności</a><span>/</span><b>Edycja</b></div>
+      <div class="actions">
+        <a href="aktualnosci.html" class="btn btn-ghost">Anuluj</a>
+        <button class="btn btn-secondary">Zapisz jako szkic</button>
+        <button class="btn btn-primary">
+          <svg fill="currentColor" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/></svg>
+          Opublikuj
+        </button>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="page-head">
+        <div>
+          <h1>Edycja aktualności</h1>
+          <div class="lead">„Wizytacja kanoniczna abp. Galbasa" · ostatnio zmienione 2 godz. temu</div>
+        </div>
+      </div>
+
+      <div class="editor-layout">
+
+        <!-- LEWA: FORMULARZ -->
+        <div>
+          <div class="card">
+            <div class="form-row">
+              <label>Tytuł wpisu <span class="req">*</span></label>
+              <input type="text" value="Wizytacja kanoniczna abp. Galbasa" style="font-size:1.1rem;font-weight:600">
+            </div>
+            <div class="form-row">
+              <label>Krótki opis (do podglądu w listach) <span class="hint">Maks. 200 znaków. Pojawia się w karcie na stronie głównej i w mailingach.</span></label>
+              <textarea style="min-height:70px">Ksiądz arcybiskup Adrian Galbas odwiedził naszą parafię w ramach wizytacji kanonicznej. Spotkał się z radą parafialną, grupami modlitewnymi i młodzieżą przygotowującą się do bierzmowania.</textarea>
+            </div>
+
+            <div class="form-row">
+              <label>Treść <span class="req">*</span></label>
+              <div class="editor-toolbar">
+                <button title="Pogrubienie"><b>B</b></button>
+                <button title="Kursywa"><i>I</i></button>
+                <button title="Podkreślenie"><u>U</u></button>
+                <div class="sep"></div>
+                <button title="Nagłówek H2"><b>H2</b></button>
+                <button title="Nagłówek H3"><b>H3</b></button>
+                <div class="sep"></div>
+                <button title="Lista"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M2.5 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg></button>
+                <button title="Lista numerowana"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5"/></svg></button>
+                <button title="Cytat"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388q0-.527.062-1.054.093-.558.31-.992t.559-.683q.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 9 7.558V11a1 1 0 0 0 1 1z"/></svg></button>
+                <div class="sep"></div>
+                <button title="Link"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9q-.13 0-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535"/></svg></button>
+                <button title="Wstaw zdjęcie"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M14.002 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/></svg></button>
+              </div>
+              <div class="editor-content" contenteditable="true">
+                <p>W piątek 9 maja 2026 roku nasza parafia gościła Jego Ekscelencję ks. arcybiskupa Adriana Galbasa, metropolitę katowickiego, w ramach wizytacji kanonicznej. To wyjątkowe wydarzenie spotkało się z licznym udziałem wiernych ze wszystkich grup parafialnych.</p>
+                <p>O godzinie 17:00 w kościele tymczasowym odbyła się uroczysta Msza święta pod przewodnictwem ks. arcybiskupa. Podczas homilii pasterz archidiecezji odniósł się do stulecia parafii i podziękował za świadectwo wiary kolejnych pokoleń parafian.</p>
+                <p>Po Mszy świętej miały miejsce spotkania z Radą Parafialną, grupami parafialnymi oraz młodzieżą przygotowującą się do bierzmowania. Ksiądz arcybiskup zwiedził także plac budowy nowego kościoła, wyrażając wdzięczność wszystkim, którzy wspierają to dzieło.</p>
+                <p>Bóg zapłać wszystkim za obecność i piękne świadectwo wspólnoty.</p>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label>Zdjęcia do galerii wpisu <span class="hint">Pierwsze zdjęcie posłuży jako miniatura. Możesz zmieniać kolejność przeciągając kafelki. Wszystkie formaty (JPG/PNG/HEIC/WebP) zostaną automatycznie zoptymalizowane.</span></label>
+              <div class="gallery-uploader">
+                <svg width="40" height="40" fill="currentColor" viewBox="0 0 16 16"><path d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2zm1 9v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062z"/><path d="M10.648 8.646a.5.5 0 0 0 .577-.093l3.71 3.71V13a1 1 0 0 1-1 1h-12a1 1 0 0 1-1-1v-1l2.354-2.354a.5.5 0 0 1 .63-.062l2.66 1.772 3.71-3.71a.5.5 0 0 1 .576.093z"/><circle cx="11.5" cy="5.5" r="1.5"/></svg>
+                <div class="lbl">Upuść zdjęcia tutaj lub kliknij, żeby wybrać</div>
+                <div class="sub">JPG, PNG, HEIC, WebP · max 20 MB / plik · drag & drop działa</div>
+              </div>
+              <div class="uploaded">
+                <div class="ph" style="background-image:url('../public/img/event-wizytacja-1.jpg')"><button class="rm">×</button><div class="drag-handle">1 · okładka</div></div>
+                <div class="ph" style="background-image:url('../public/img/event-wizytacja-2.jpg')"><button class="rm">×</button><div class="drag-handle">2</div></div>
+                <div class="ph" style="background-image:url('../public/img/event-wizytacja-3.jpg')"><button class="rm">×</button><div class="drag-handle">3</div></div>
+                <div class="ph" style="background-image:url('../public/img/event-wizytacja-4.jpg')"><button class="rm">×</button><div class="drag-handle">4</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRAWA: META + USTAWIENIA -->
+        <div class="sidebar-meta">
+          <div class="card">
+            <div class="card-head"><h3>Publikacja</h3></div>
+            <div class="form-row">
+              <label>Status</label>
+              <select>
+                <option selected>Opublikowany</option>
+                <option>Szkic</option>
+                <option>Zaplanowany</option>
+                <option>Archiwum</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label>Data publikacji</label>
+              <input type="date" value="2026-05-09">
+            </div>
+            <div class="form-row">
+              <label>Autor</label>
+              <select>
+                <option selected>ks. Tomasz Żołna (proboszcz)</option>
+                <option>ks. Paweł Olszewski</option>
+                <option>Anna Marszałek (redakcja)</option>
+              </select>
+            </div>
+            <label class="checkbox-row"><input type="checkbox" checked> Wyróżnij na stronie głównej</label>
+            <label class="checkbox-row"><input type="checkbox" checked> Wyślij powiadomienie e-mail do parafian zapisanych na newsletter</label>
+            <label class="checkbox-row"><input type="checkbox"> Pojawi się na liście „ogłoszenia tygodnia"</label>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>Klasyfikacja</h3></div>
+            <div class="form-row">
+              <label>Kategoria <span class="req">*</span></label>
+              <select>
+                <option selected>Wydarzenia</option>
+                <option>Pielgrzymki</option>
+                <option>Budowa kościoła</option>
+                <option>Sakramenty</option>
+                <option>Ogłoszenia parafialne</option>
+                <option>Historia</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label>Tagi <span class="hint">oddzielone przecinkami, pomagają w wyszukiwaniu</span></label>
+              <input type="text" value="wizytacja, arcybiskup, Galbas, 100 lat parafii">
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>SEO</h3></div>
+            <div class="form-row">
+              <label>Tytuł w wyszukiwarce</label>
+              <input type="text" placeholder="np. Wizytacja arcybiskupa Galbasa · Parafia NSPJ" value="Wizytacja kanoniczna abp. Galbasa | Parafia NSPJ">
+            </div>
+            <div class="form-row">
+              <label>Adres URL <span class="hint">nspjczerwionka.pl/aktualnosci/<span style="color:var(--burgundy);font-weight:600">wizytacja-galbasa-2026</span></span></label>
+              <input type="text" value="wizytacja-galbasa-2026">
+            </div>
+          </div>
+
+          <div class="info-box">
+            <b>Automatyczna optymalizacja</b>
+            Zdjęcia zostaną przekonwertowane do .webp i wygenerowane miniatury w 3 rozmiarach. Strona główna i mapa serwisu zaktualizują się automatycznie po publikacji.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

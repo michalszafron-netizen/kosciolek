@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pulpit · Panel Parafii NSPJ</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/admin.css">
+<style>
+  .activity{display:grid;grid-template-columns:2fr 1fr;gap:18px}
+  .timeline{list-style:none;padding:0;margin:0}
+  .timeline li{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+  .timeline li:last-child{border-bottom:none}
+  .timeline .dot{width:34px;height:34px;border-radius:50%;background:var(--beige);display:grid;place-items:center;color:var(--burgundy);flex-shrink:0}
+  .timeline .info{flex:1;font-size:.9rem}
+  .timeline .info b{color:var(--ink)}
+  .timeline .info .when{font-size:.78rem;color:var(--ink-soft);margin-top:2px}
+  .quick-actions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .qa{
+    padding:18px 16px;background:var(--white);border:1px solid var(--line);border-radius:6px;
+    cursor:pointer;display:flex;flex-direction:column;gap:8px;text-align:left;
+    transition:all .12s;text-decoration:none
+  }
+  .qa:hover{border-color:var(--copper);background:var(--bg);transform:translateY(-1px)}
+  .qa svg{width:22px;height:22px;color:var(--burgundy)}
+  .qa .lbl{font-weight:600;color:var(--ink);font-size:.92rem;line-height:1.2}
+  .qa .sub{font-size:.78rem;color:var(--ink-soft)}
+  .upcoming{list-style:none;padding:0;margin:0}
+  .upcoming li{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .upcoming li:last-child{border-bottom:none}
+  .upcoming .day{
+    width:54px;text-align:center;flex-shrink:0;
+    background:var(--bg);border-radius:6px;padding:8px 0;border:1px solid var(--line)
+  }
+  .upcoming .day .d{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--burgundy);line-height:1}
+  .upcoming .day .m{font-size:.7rem;color:var(--ink-soft);letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
+  .upcoming .det{flex:1}
+  .upcoming .det b{display:block;color:var(--ink);font-size:.92rem}
+  .upcoming .det .t{font-size:.8rem;color:var(--ink-soft);margin-top:2px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="../public/img/logo1.png" alt="NSPJ" style="width:38px;height:38px;border-radius:50%;object-fit:contain;flex-shrink:0">
+      <div class="brand-name">Parafia NSPJ<small>Czerwionka-Leszczyny</small></div>
+    </div>
+    <nav>
+      <a href="index.html" class="active">
+        <svg fill="currentColor" viewBox="0 0 16 16"><path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/></svg>
+        Pulpit
+      </a>
+
+      <div class="nav-section">Strona WWW</div>
+      <a href="aktualnosci.html">
+        <svg fill="currentColor" viewBox="0 0 16 16"><path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/><path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2zm10 1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/></svg>
+        Aktualności
+        <span class="badge">3</span>
+      </a>
+      <a href="ogloszenia.html">
+        <svg fill="currentColor" viewBox="0 0 16 16"><path d="M11.5 2v4.793l3.347 7.36a.75.75 0 0 1-.682 1.06H1.835a.75.75 0 0 1-.682-1.06l3.347-7.36V2H4a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1zM5.5 2v4.901a.5.5 0 0 1-.045.207L2.434 13.5h11.132l-3.021-6.392a.5.5 0 0 1-.045-.207V2z"/></svg>
+        Ogłoszenia parafialne
+      </a>
+      <a href="galeria.html">
+        <svg fill="currentColor" viewBox="0 0 16 16"><path d="M14.002 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1 12.45V3a1 1 0 0 1 1-1z"/></svg>
+        Galeria
+      </a>
+      <a href="#">
+        <svg fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.5.5 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3zM15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5z"/></svg>
+        Strony statyczne
+      </a>
+
+      <div class="nav-section">Wspólnota</div>
+      <a href="intencje.html">
+        <svg fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/></svg>
+        Intencje mszalne
+      </a>
+      <a href="sakramenty.html">
+        <svg fill="currentColor" viewBox="0 0 16 16"><path d="M6 1h6v7l-2-1-2 1V1z"/><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/></svg>
+        Sakramenty
+        <span class="badge" style="background:var(--ink-soft)">Pkt 2</span>
+      </a>
+      <a href="parafianie.html">
+        <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4"/></svg>
+        Parafianie
+        <span class="badge" style="background:var(--ink-soft)">Pkt 2</span>
+      </a>
+
+      <div class="nav-section">System</div>
+      <a href="#">
+        <svg fill="currentColor" viewBox="0 0 16 16"><path d="M0 0h1v15h15v1H0zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07"/></svg>
+        Raporty
+      </a>
+      <a href="ustawienia.html">
+        <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/><path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52z"/></svg>
+        Ustawienia parafii
+      </a>
+    </nav>
+    <div class="user">
+      <div class="user-avatar">TŻ</div>
+      <div class="user-name">ks. Tomasz Żołna<small>Proboszcz · <a href="login.html">Wyloguj</a></small></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="crumbs"><b>Pulpit</b></div>
+      <div class="actions">
+        <div class="search">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg>
+          <input type="text" placeholder="Szukaj w panelu (Ctrl+K)">
+        </div>
+        <button class="icon-btn" title="Podgląd strony"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/></svg></button>
+        <button class="icon-btn" title="Powiadomienia"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/></svg></button>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="page-head">
+        <div>
+          <h1>Dzień dobry, ks. Tomasz</h1>
+          <div class="lead">Środa, 13 maja 2026 · Wspomnienie św. Andrzeja Boboli</div>
+        </div>
+        <div class="right">
+          <a href="aktualnosci-edit.html" class="btn btn-primary">
+            <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg>
+            Dodaj aktualność
+          </a>
+          <a href="../index.html" class="btn btn-secondary" target="_blank">
+            <svg fill="currentColor" viewBox="0 0 16 16"><path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9q-.13 0-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z"/><path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4.02 4.02 0 0 1-.82 1H12a3 3 0 1 0 0-6z"/></svg>
+            Zobacz stronę
+          </a>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats">
+        <div class="stat">
+          <div class="info">
+            <div class="lbl">Aktualności</div>
+            <div class="num">47</div>
+            <div class="delta"><b>+3</b> w tym miesiącu</div>
+          </div>
+          <div class="ic"><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/></svg></div>
+        </div>
+        <div class="stat">
+          <div class="info">
+            <div class="lbl">Zdjęć w galerii</div>
+            <div class="num">244</div>
+            <div class="delta">w <b>32</b> galeriach</div>
+          </div>
+          <div class="ic"><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M14.002 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/><path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1 12.45V3a1 1 0 0 1 1-1z"/></svg></div>
+        </div>
+        <div class="stat">
+          <div class="info">
+            <div class="lbl">Intencje na ten tydzień</div>
+            <div class="num">42</div>
+            <div class="delta">brakuje 8 — <b>Czw. wieczorna</b></div>
+          </div>
+          <div class="ic"><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/></svg></div>
+        </div>
+        <div class="stat">
+          <div class="info">
+            <div class="lbl">Wizyty na stronie (30 dni)</div>
+            <div class="num">3 247</div>
+            <div class="delta"><b>+18%</b> wzgl. poprz. miesiąca</div>
+          </div>
+          <div class="ic"><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M0 0h1v15h15v1H0zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07"/></svg></div>
+        </div>
+      </div>
+
+      <div class="activity">
+        <!-- LEWA: ostatnia aktywność -->
+        <div class="card">
+          <div class="card-head">
+            <h3>Ostatnia aktywność</h3>
+            <a href="#" class="btn btn-ghost sm">Pełny dziennik →</a>
+          </div>
+          <ul class="timeline">
+            <li>
+              <div class="dot"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/></svg></div>
+              <div class="info">
+                <div><b>ks. Tomasz Żołna</b> opublikował nową aktualność: <i>„Wizytacja kanoniczna abp. Galbasa"</i></div>
+                <div class="when">2 godz. temu · Aktualności</div>
+              </div>
+            </li>
+            <li>
+              <div class="dot"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M14.002 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/></svg></div>
+              <div class="info">
+                <div><b>Anna M.</b> dodała 14 zdjęć do galerii <i>„Wizytacja kanoniczna 2025"</i></div>
+                <div class="when">3 godz. temu · Galeria</div>
+              </div>
+            </li>
+            <li>
+              <div class="dot"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5"/></svg></div>
+              <div class="info">
+                <div><b>ks. Paweł O.</b> zaktualizował intencję mszalną na <i>16.05.2026, godz. 18:00</i></div>
+                <div class="when">wczoraj, 19:42 · Intencje</div>
+              </div>
+            </li>
+            <li>
+              <div class="dot"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M11.5 2v4.793l3.347 7.36a.75.75 0 0 1-.682 1.06H1.835a.75.75 0 0 1-.682-1.06l3.347-7.36V2H4a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1z"/></svg></div>
+              <div class="info">
+                <div><b>ks. Tomasz Żołna</b> opublikował ogłoszenia parafialne na V Niedzielę Wielkanocną</div>
+                <div class="when">2 dni temu · Ogłoszenia</div>
+              </div>
+            </li>
+            <li>
+              <div class="dot"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg></div>
+              <div class="info">
+                <div>Wygenerowano PDF z intencjami na <i>11–17 maja</i> · gotowy do druku</div>
+                <div class="when">3 dni temu · System</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- PRAWA: szybkie akcje + nadchodzące -->
+        <div>
+          <div class="card">
+            <div class="card-head"><h3>Szybkie akcje</h3></div>
+            <div class="quick-actions">
+              <a href="aktualnosci-edit.html" class="qa">
+                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg>
+                <div class="lbl">Nowa aktualność</div>
+                <div class="sub">Wpis + zdjęcia</div>
+              </a>
+              <a href="ogloszenia.html" class="qa">
+                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M11.5 2v4.793l3.347 7.36a.75.75 0 0 1-.682 1.06H1.835a.75.75 0 0 1-.682-1.06l3.347-7.36V2H4a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1z"/></svg>
+                <div class="lbl">Ogłoszenia tygodnia</div>
+                <div class="sub">Tekst + PDF</div>
+              </a>
+              <a href="galeria.html" class="qa">
+                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M14.002 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2z"/></svg>
+                <div class="lbl">Nowa galeria</div>
+                <div class="sub">Drag & drop foto</div>
+              </a>
+              <a href="intencje.html" class="qa">
+                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5"/></svg>
+                <div class="lbl">Intencje + druk</div>
+                <div class="sub">Kalendarz + PDF/Word</div>
+              </a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>Nadchodzące wydarzenia</h3></div>
+            <ul class="upcoming">
+              <li>
+                <div class="day"><div class="d">17</div><div class="m">Maj</div></div>
+                <div class="det"><b>Bierzmowanie</b><div class="t">godz. 11:00 · ks. Biskup</div></div>
+              </li>
+              <li>
+                <div class="day"><div class="d">19</div><div class="m">Maj</div></div>
+                <div class="det"><b>Spotkanie Rady Parafialnej</b><div class="t">godz. 18:00 · salka</div></div>
+              </li>
+              <li>
+                <div class="day"><div class="d">24</div><div class="m">Maj</div></div>
+                <div class="det"><b>Wczesna komunia święta</b><div class="t">godz. 10:00 · Msza</div></div>
+              </li>
+              <li>
+                <div class="day"><div class="d">9</div><div class="m">Cze</div></div>
+                <div class="det"><b>Odpust parafialny</b><div class="t">cały dzień</div></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ogłoszenia parafialne · Panel Parafii NSPJ</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/admin.css">
+<style>
+  .ann-layout{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start}
+  .ann-list{background:var(--white);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .ann-item{padding:14px 18px;border-bottom:1px solid var(--line);cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center}
+  .ann-item:last-child{border-bottom:none}
+  .ann-item:hover{background:var(--bg)}
+  .ann-item.active{background:var(--bg);border-left:3px solid var(--burgundy);padding-left:15px}
+  .ann-item .title{font-family:'Playfair Display',serif;font-size:1.02rem;color:var(--ink);margin-bottom:3px}
+  .ann-item .date{font-size:.78rem;color:var(--ink-soft)}
+  @media(max-width:980px){.ann-layout{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><img src="../public/img/logo1.png" alt="NSPJ" style="width:38px;height:38px;border-radius:50%;object-fit:contain;flex-shrink:0"><div class="brand-name">Parafia NSPJ<small>Czerwionka-Leszczyny</small></div></div>
+    <nav>
+      <a href="index.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/></svg>Pulpit</a>
+      <div class="nav-section">Strona WWW</div>
+      <a href="aktualnosci.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/><path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2zm10 1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/></svg>Aktualności<span class="badge">3</span></a>
+      <a href="ogloszenia.html" class="active"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M11.5 2v4.793l3.347 7.36a.75.75 0 0 1-.682 1.06H1.835a.75.75 0 0 1-.682-1.06l3.347-7.36V2H4a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1z"/></svg>Ogłoszenia parafialne</a>
+      <a href="galeria.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M14.002 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2z"/></svg>Galeria</a>
+      <a href="#"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 0 0-1H5a.5.5 0 0 0-.5.5M5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/><path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/></svg>Strony statyczne</a>
+      <div class="nav-section">Wspólnota</div>
+      <a href="intencje.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z"/></svg>Intencje mszalne</a>
+      <a href="sakramenty.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6 1h6v7l-2-1-2 1V1z"/><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/></svg>Sakramenty<span class="badge" style="background:var(--ink-soft)">Pkt 2</span></a>
+      <a href="parafianie.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>Parafianie<span class="badge" style="background:var(--ink-soft)">Pkt 2</span></a>
+      <div class="nav-section">System</div>
+      <a href="#"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H6zM1 11a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H1z"/></svg>Raporty</a>
+      <a href="ustawienia.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/></svg>Ustawienia parafii</a>
+    </nav>
+    <div class="user"><div class="user-avatar">TŻ</div><div class="user-name">ks. Tomasz Żołna<small>Proboszcz · <a href="login.html">Wyloguj</a></small></div></div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="crumbs"><a href="index.html">Pulpit</a><span>/</span><b>Ogłoszenia parafialne</b></div>
+    </div>
+
+    <div class="content">
+      <div class="page-head">
+        <div>
+          <h1>Ogłoszenia parafialne</h1>
+          <div class="lead">Cotygodniowe ogłoszenia czytane podczas Mszy św. niedzielnej</div>
+        </div>
+        <div class="right">
+          <button class="btn btn-primary">
+            <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg>
+            Nowe ogłoszenia
+          </button>
+        </div>
+      </div>
+
+      <div class="ann-layout">
+
+        <!-- LEWA: edytor -->
+        <div>
+          <div class="card">
+            <div class="card-head" style="margin-bottom:0;border-bottom:1px solid var(--line);padding-bottom:14px">
+              <div>
+                <h3 style="margin-bottom:2px">V Niedziela Wielkanocna</h3>
+                <div style="font-size:.82rem;color:var(--ink-soft)">10 maja 2026 · opublikowane · 320 wyświetleń</div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button class="btn btn-secondary sm">
+                  <svg fill="currentColor" viewBox="0 0 16 16"><path d="M5 0h6a2 2 0 0 1 2 2v4h1.5A1.5 1.5 0 0 1 16 7.5v4a1.5 1.5 0 0 1-1.5 1.5H13v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H1.5A1.5 1.5 0 0 1 0 11.5v-4A1.5 1.5 0 0 1 1.5 6H3V2a2 2 0 0 1 2-2"/></svg>
+                  PDF
+                </button>
+                <button class="btn btn-secondary sm">
+                  <svg fill="currentColor" viewBox="0 0 16 16"><path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2"/></svg>
+                  Word
+                </button>
+              </div>
+            </div>
+
+            <div style="padding-top:18px">
+              <div class="editor-toolbar">
+                <button><b>B</b></button><button><i>I</i></button><button><u>U</u></button>
+                <div class="sep"></div>
+                <button><b>H2</b></button><button><b>H3</b></button>
+                <div class="sep"></div>
+                <button>•</button><button>1.</button><button>"</button>
+              </div>
+              <div class="editor-content" contenteditable="true">
+                <p style="text-align:center;font-weight:700;font-family:'Playfair Display',serif;font-size:1.2rem">OGŁOSZENIA DUSZPASTERSKIE<br>V Niedziela Wielkanocna · 10 maja 2026</p>
+                <p>1. Dziś przeżywamy V Niedzielę Wielkanocną. Przed nami tydzień obchodzony jako tydzień modlitw o powołania kapłańskie i zakonne.</p>
+                <p>2. Bóg zapłać za ofiary na budowę nowego kościoła zebrane w minioną niedzielę — łącznie <b>14 380 zł</b>. Pan Bóg niech wynagrodzi wszystkim ofiarodawcom.</p>
+                <p>3. We <b>wtorek o godz. 18:00</b> w salce parafialnej zapraszamy na spotkanie Rady Parafialnej. W programie omówienie postępu prac przy budowie wieży.</p>
+                <p>4. W <b>sobotę o godz. 10:00</b> akcja porządkowa na cmentarzu parafialnym. Prosimy o zabranie rękawic i grabi. Po pracy planujemy wspólne ognisko.</p>
+                <p>5. W przyszłą niedzielę o godz. 11:00 odbędzie się <b>uroczystość bierzmowania</b>, której przewodniczył będzie ks. Biskup. Modlitwą obejmujemy 28 młodych ludzi przygotowujących się do przyjęcia tego sakramentu.</p>
+                <p>6. Przypominamy o możliwości zamawiania intencji mszalnych w kancelarii parafialnej w godzinach: poniedziałek, środa 17:30–18:30 oraz czwartek 7:30–8:30 i 17:30–18:30.</p>
+                <p>7. W minionym tygodniu odeszli z naszej wspólnoty: + Edward Mazur l. 84, + Anna Kędzierska l. 79. Polećmy ich Bożemu Miłosierdziu.</p>
+                <p style="font-style:italic;color:var(--ink-soft);font-size:.95rem">Z błogosławieństwem,<br>ks. Tomasz Żołna, proboszcz</p>
+              </div>
+            </div>
+
+            <div class="info-box" style="margin-top:18px">
+              <b>📄 Generowanie do druku</b>
+              Po kliknięciu „PDF" otrzymasz plik na 1 stronę A4 z logo parafii, gotowy do druku i czytania z ambony. Wersja Word pozwala na ostateczną korektę.
+            </div>
+          </div>
+        </div>
+
+        <!-- PRAWA: archiwum -->
+        <div>
+          <div class="card" style="padding:0">
+            <div class="card-head" style="padding:18px 18px 12px"><h3>Archiwum</h3></div>
+            <div class="ann-list" style="border:none;border-radius:0">
+              <div class="ann-item active">
+                <div>
+                  <div class="title">V Niedziela Wielkanocna</div>
+                  <div class="date">10 maja 2026 · opublikowane</div>
+                </div>
+                <span class="pill-badge pub">●</span>
+              </div>
+              <div class="ann-item">
+                <div>
+                  <div class="title">IV Niedziela Wielkanocna</div>
+                  <div class="date">3 maja 2026</div>
+                </div>
+                <span class="pill-badge pub">●</span>
+              </div>
+              <div class="ann-item">
+                <div>
+                  <div class="title">III Niedziela Wielkanocna</div>
+                  <div class="date">26 kwietnia 2026</div>
+                </div>
+                <span class="pill-badge pub">●</span>
+              </div>
+              <div class="ann-item">
+                <div>
+                  <div class="title">II Niedziela Wielkanocna · Miłosierdzia Bożego</div>
+                  <div class="date">19 kwietnia 2026</div>
+                </div>
+                <span class="pill-badge pub">●</span>
+              </div>
+              <div class="ann-item">
+                <div>
+                  <div class="title">Niedziela Wielkanocna</div>
+                  <div class="date">12 kwietnia 2026</div>
+                </div>
+                <span class="pill-badge pub">●</span>
+              </div>
+              <div class="ann-item">
+                <div>
+                  <div class="title">Niedziela Palmowa</div>
+                  <div class="date">5 kwietnia 2026</div>
+                </div>
+                <span class="pill-badge pub">●</span>
+              </div>
+              <div class="ann-item">
+                <div>
+                  <div class="title">V Niedziela Wielkiego Postu</div>
+                  <div class="date">29 marca 2026</div>
+                </div>
+                <span class="pill-badge pub">●</span>
+              </div>
+            </div>
+            <div style="padding:14px 18px;border-top:1px solid var(--line)">
+              <a href="#" class="btn btn-ghost sm" style="width:100%;justify-content:center">Pokaż wszystkie (47) →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

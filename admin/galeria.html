@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Galeria · Panel Parafii NSPJ</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/admin.css">
+<style>
+  .gallery-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .gcard{
+    background:var(--white);border:1px solid var(--line);border-radius:8px;overflow:hidden;
+    transition:all .15s;cursor:pointer;text-decoration:none;color:inherit
+  }
+  .gcard:hover{transform:translateY(-3px);box-shadow:0 14px 30px -10px rgba(0,0,0,.15);text-decoration:none}
+  .gcard .cover{height:160px;background-size:cover;background-position:center;background-color:var(--beige-deep);position:relative}
+  .gcard .badge-count{
+    position:absolute;top:10px;right:10px;background:rgba(43,37,32,.85);color:#fff;
+    padding:4px 10px;border-radius:4px;font-size:.78rem;font-weight:700
+  }
+  .gcard .body{padding:14px 16px}
+  .gcard h4{font-family:'Playfair Display',serif;font-size:1.05rem;margin:0 0 5px;color:var(--ink)}
+  .gcard .meta{font-size:.78rem;color:var(--ink-soft);display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .gcard .meta .pill-badge{padding:1px 7px}
+
+  .drag-info{
+    background:#e2f0e6;border-left:3px solid var(--green);padding:12px 14px;
+    border-radius:5px;font-size:.85rem;color:var(--ink);margin-bottom:18px
+  }
+  .drag-info b{display:block;margin-bottom:3px;color:var(--green)}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><img src="../public/img/logo1.png" alt="NSPJ" style="width:38px;height:38px;border-radius:50%;object-fit:contain;flex-shrink:0"><div class="brand-name">Parafia NSPJ<small>Czerwionka-Leszczyny</small></div></div>
+    <nav>
+      <a href="index.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/></svg>Pulpit</a>
+      <div class="nav-section">Strona WWW</div>
+      <a href="aktualnosci.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/><path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2zm10 1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/></svg>Aktualności<span class="badge">3</span></a>
+      <a href="ogloszenia.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M11.5 2v4.793l3.347 7.36a.75.75 0 0 1-.682 1.06H1.835a.75.75 0 0 1-.682-1.06l3.347-7.36V2H4a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1z"/></svg>Ogłoszenia parafialne</a>
+      <a href="galeria.html" class="active"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M14.002 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2z"/></svg>Galeria</a>
+      <a href="#"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 0 0-1H5a.5.5 0 0 0-.5.5M5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/><path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/></svg>Strony statyczne</a>
+      <div class="nav-section">Wspólnota</div>
+      <a href="intencje.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z"/></svg>Intencje mszalne</a>
+      <a href="sakramenty.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6 1h6v7l-2-1-2 1V1z"/><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/></svg>Sakramenty<span class="badge" style="background:var(--ink-soft)">Pkt 2</span></a>
+      <a href="parafianie.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>Parafianie<span class="badge" style="background:var(--ink-soft)">Pkt 2</span></a>
+      <div class="nav-section">System</div>
+      <a href="#"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H6zM1 11a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H1z"/></svg>Raporty</a>
+      <a href="ustawienia.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/></svg>Ustawienia parafii</a>
+    </nav>
+    <div class="user"><div class="user-avatar">TŻ</div><div class="user-name">ks. Tomasz Żołna<small>Proboszcz · <a href="login.html">Wyloguj</a></small></div></div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="crumbs"><a href="index.html">Pulpit</a><span>/</span><b>Galeria</b></div>
+    </div>
+
+    <div class="content">
+      <div class="page-head">
+        <div>
+          <h1>Galeria parafii</h1>
+          <div class="lead"><b>32</b> galerii · <b>244</b> zdjęcia · łącznie <b>71 MB</b></div>
+        </div>
+        <div class="right">
+          <button class="btn btn-secondary">
+            <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8.5 1.5a.5.5 0 0 0-1 0v9.293L4.354 7.646a.5.5 0 1 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0-.708-.708L8.5 10.793V1.5z"/></svg>
+            Import CSV/ZIP
+          </button>
+          <button class="btn btn-primary">
+            <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg>
+            Nowa galeria
+          </button>
+        </div>
+      </div>
+
+      <div class="drag-info">
+        <b>Jak dodawać zdjęcia?</b>
+        Kliknij w wybraną galerię, aby ją otworzyć. Wewnątrz galerii będzie można przeciągać zdjęcia z folderu bezpośrednio na siatkę oraz zmieniać ich kolejność metodą drag &amp; drop. Obsługiwane formaty: JPG, PNG, HEIC, WebP, AVIF — automatycznie optymalizowane do .webp w 3 rozmiarach. <i>Funkcja dostępna w pełnej wersji systemu — w demo nieaktywna.</i>
+      </div>
+
+      <div class="gallery-cards">
+        <a href="#" class="gcard">
+          <div class="cover" style="background-image:url('../public/img/hero-1.jpg')"><div class="badge-count">38 zdjęć</div></div>
+          <div class="body">
+            <h4>100 lat Parafii — 1.08.2025</h4>
+            <div class="meta"><span>3 sierpnia 2025</span><span class="pill-badge pub">● Publiczna</span></div>
+          </div>
+        </a>
+        <a href="#" class="gcard">
+          <div class="cover" style="background-image:url('../public/img/event-wizytacja-2.jpg')"><div class="badge-count">14 zdjęć</div></div>
+          <div class="body">
+            <h4>Wizytacja kanoniczna 2025</h4>
+            <div class="meta"><span>9 maja 2026</span><span class="pill-badge pub">● Publiczna</span></div>
+          </div>
+        </a>
+        <a href="#" class="gcard">
+          <div class="cover" style="background-image:url('../public/img/budowa-1.jpg')"><div class="badge-count">22 zdjęcia</div></div>
+          <div class="body">
+            <h4>Budowa — luty 2025</h4>
+            <div class="meta"><span>15 lutego 2025</span><span class="pill-badge pub">● Publiczna</span></div>
+          </div>
+        </a>
+        <a href="#" class="gcard">
+          <div class="cover" style="background-image:url('../public/img/event-odpust-1.jpg')"><div class="badge-count">26 zdjęć</div></div>
+          <div class="body">
+            <h4>Suma odpustowa — czerwiec 2024</h4>
+            <div class="meta"><span>9 czerwca 2024</span><span class="pill-badge pub">● Publiczna</span></div>
+          </div>
+        </a>
+        <a href="#" class="gcard">
+          <div class="cover" style="background-image:url('../public/img/budowa-3.jpg')"><div class="badge-count">18 zdjęć</div></div>
+          <div class="body">
+            <h4>Nowy kościół i podziemia — 5.03.2025</h4>
+            <div class="meta"><span>7 marca 2025</span><span class="pill-badge pub">● Publiczna</span></div>
+          </div>
+        </a>
+        <a href="#" class="gcard">
+          <div class="cover" style="background-image:url('../public/img/event-pozegnanie-1.jpg')"><div class="badge-count">12 zdjęć</div></div>
+          <div class="body">
+            <h4>Pożegnanie ks. proboszcza Antoniego</h4>
+            <div class="meta"><span>6 września 2023</span><span class="pill-badge pub">● Publiczna</span></div>
+          </div>
+        </a>
+        <a href="#" class="gcard">
+          <div class="cover" style="background-image:url('../public/img/event-odpust-3.jpg')"><div class="badge-count">21 zdjęć</div></div>
+          <div class="body">
+            <h4>Festyn odpustowy 2024</h4>
+            <div class="meta"><span>10 czerwca 2024</span><span class="pill-badge pub">● Publiczna</span></div>
+          </div>
+        </a>
+        <a href="#" class="gcard">
+          <div class="cover" style="background-image:url('../public/img/event-odpust-4.jpg')"><div class="badge-count">8 zdjęć</div></div>
+          <div class="body">
+            <h4>Boże Ciało 2024</h4>
+            <div class="meta"><span>30 maja 2024</span><span class="pill-badge pub">● Publiczna</span></div>
+          </div>
+        </a>
+        <a href="#" class="gcard">
+          <div class="cover" style="background-image:url('../public/img/noclegownia.jpg')"><div class="badge-count">3 zdjęcia</div></div>
+          <div class="body">
+            <h4>Noclegownia — stary kościół</h4>
+            <div class="meta"><span>22 czerwca 2023</span><span class="pill-badge draft">● Szkic</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Historia · Parafia NSPJ Czerwionka-Leszczyny</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--beige:#f4ede0;--beige-deep:#ebe1cd;--cream:#faf6ee;--burgundy:#7a1f2b;--burgundy-dark:#5e1620;--copper:#b87a4a;--copper-light:#d6a572;--ink:#2b2520;--ink-soft:#5a5048;--line:#d8cdb6;--white:#ffffff}
+  *{box-sizing:border-box}html,body{margin:0;padding:0}
+  body{font-family:'Lato',sans-serif;color:var(--ink);background:var(--beige);line-height:1.65}
+  h1,h2,h3,.serif{font-family:'Playfair Display',serif;color:var(--ink)}
+  a{color:var(--burgundy)}
+  .container{max-width:880px;margin:0 auto;padding:0 24px}
+  .container-wide{max-width:1240px;margin:0 auto;padding:0 24px}
+
+  /* HEADER kopia z index */
+  .topbar{background:var(--burgundy-dark);color:#e8d9b8;font-size:.85rem;padding:8px 0}
+  .topbar a{color:#e8d9b8;text-decoration:none}
+  header.site{background:var(--cream);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px}
+  .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
+  .brand-mark{width:46px;height:46px;border-radius:50%;background:var(--burgundy);color:#f6d9b1;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem}
+  .brand-name{font-family:'Playfair Display',serif;font-size:1.1rem;line-height:1.15}
+  .brand-name small{display:block;font-family:'Lato',sans-serif;font-size:.72rem;letter-spacing:.18em;color:var(--copper);text-transform:uppercase;font-weight:700;margin-top:2px}
+  nav.main{display:flex;gap:6px;align-items:center}
+  nav.main a{padding:10px 14px;font-size:.95rem;color:var(--ink);border-radius:6px;text-decoration:none}
+  nav.main a:hover{background:var(--beige)}
+  nav.main a.active{background:var(--beige);color:var(--burgundy);font-weight:700}
+  nav.main .cta{background:var(--burgundy);color:#fff;padding:10px 18px;font-weight:700;font-size:.88rem}
+  @media(max-width:980px){nav.main{display:none}}
+
+  /* PAGE HERO */
+  .page-hero{padding:60px 0 40px;text-align:center}
+  .eyebrow{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--copper);font-weight:700;margin-bottom:.8rem;display:inline-block}
+  .page-hero h1{font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:600;margin:0 0 .6rem}
+  .page-hero .lead{font-size:1.15rem;color:var(--ink-soft);max-width:620px;margin:0 auto}
+  .hero-photo{
+    margin:50px 0;height:480px;background-image:url('../public/img/noclegownia.jpg');
+    background-size:cover;background-position:center;border-radius:8px;
+    box-shadow:0 30px 60px -20px rgba(43,37,32,.4)
+  }
+  .photo-caption{text-align:center;margin-top:14px;font-size:.85rem;color:var(--ink-soft);font-style:italic}
+
+  /* CONTENT */
+  .content h2{font-size:1.8rem;margin:50px 0 16px;color:var(--burgundy)}
+  .content h3{font-size:1.3rem;margin:30px 0 10px}
+  .content p{font-size:1.06rem;margin:0 0 1.1rem;color:var(--ink)}
+  .content p.lead{font-size:1.2rem;color:var(--ink-soft)}
+  .divider{height:1px;background:var(--copper);width:80px;margin:30px auto;display:block}
+  .pullquote{
+    border-left:3px solid var(--copper);padding:18px 24px;margin:34px 0;
+    font-family:'Playfair Display',serif;font-style:italic;font-size:1.2rem;color:var(--ink);background:var(--cream);border-radius:0 6px 6px 0
+  }
+  .pullquote cite{display:block;font-style:normal;font-size:.85rem;color:var(--ink-soft);margin-top:10px;font-family:'Lato',sans-serif;letter-spacing:.05em}
+
+  /* TIMELINE */
+  .timeline{margin:50px 0;padding-left:30px;border-left:2px solid var(--copper);position:relative}
+  .tl-item{padding:0 0 26px 28px;position:relative}
+  .tl-item::before{content:"";position:absolute;left:-37px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--burgundy);border:3px solid var(--cream);box-shadow:0 0 0 2px var(--copper)}
+  .tl-year{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--burgundy);line-height:1}
+  .tl-title{font-weight:700;color:var(--ink);margin:6px 0 4px}
+  .tl-desc{font-size:.95rem;color:var(--ink-soft);margin:0}
+
+  /* FOOTER */
+  footer.site{background:var(--ink);color:#d8cdb6;padding:48px 0 24px;margin-top:60px}
+  footer.site a{color:var(--copper-light);text-decoration:none}
+  .footer-bottom{display:flex;justify-content:space-between;margin-top:24px;padding-top:18px;border-top:1px solid rgba(216,205,182,.14);font-size:.85rem;color:rgba(216,205,182,.6);flex-wrap:wrap;gap:10px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container-wide" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px">
+    <span>ul. 3-go Maja 36, 44-230 Czerwionka-Leszczyny · tel. <a href="tel:+48324312992">32 43 12 992</a></span>
+    <span><a href="#">Wsparcie budowy</a></span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="container-wide">
+    <div class="nav">
+      <a class="brand" href="../index.html">
+        <div class="brand-mark">NSPJ</div>
+        <div class="brand-name">Parafia Najświętszego Serca Pana Jezusa<small>Czerwionka-Leszczyny · od 1925</small></div>
+      </a>
+      <nav class="main">
+        <a href="../index.html">Strona główna</a>
+        <a href="#" class="active">Historia</a>
+        <a href="#">Duszpasterstwo</a>
+        <a href="#">Wspólnota</a>
+        <a href="#">Galeria</a>
+        <a href="#">Aktualności</a>
+        <a href="kontakt.html">Kontakt</a>
+        <a href="../admin/login.html" class="cta">Panel parafii</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Od 1925 roku</span>
+    <h1>Historia naszej parafii</h1>
+    <p class="lead">Sto lat wiary, modlitwy i wspólnoty w cieniu kopalni „Dębieńsko"</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="hero-photo"></div>
+  <div class="photo-caption">Dawny Schlafhaus — noclegownia kopalni „Dębieńsko", po 1926 r. zaadaptowana na tymczasowy kościół</div>
+</div>
+
+<div class="container content">
+
+  <h2>Symbolika logo parafii</h2>
+  <p>Zgodnie ze współczesnymi trendami logo parafii przybrało formę graficznego zapisu skrótu wezwania — Najświętszego Serca Pana Jezusa. Pierwsze litery <b>NSPJ</b> ułożono w kształt serca.</p>
+  <p>Kolor pieczęci parafialnych i logo to burgund — barwa, która bardziej pasuje do koloru krwi. Szarość tła logo to kolor, który z kolei nawiązuje do betonu budowanego kościoła.</p>
+
+  <hr class="divider">
+
+  <h2>Początki — od XIII wieku do erygowania parafii</h2>
+  <p>Od XIII wieku Czerwionka należała do parafii św. Jerzego w Dębieńsku.</p>
+  <p>2 listopada 1898 roku została uruchomiona kopalnia „Dębieńsko", co spowodowało gwałtowny wzrost liczby mieszkańców. Stąd też podjęto starania o utworzenie własnej parafii. Od 1907 roku nabożeństwa sprawowano w kopalnianej cechowni, w 1915 roku przeniesiono je do prawego skrzydła nowo wybudowanej Szkoły Ludowej im. Chrystusa Króla.</p>
+
+  <div class="pullquote">
+    „Dekretem z 1 sierpnia 1925 roku erygowano parafię."
+    <cite>— Z kroniki parafialnej</cite>
+  </div>
+
+  <p>W 1926 roku pomiędzy władzami kościelnymi a koncernem Zjednoczone Huty „Królewska" i „Laura" — właścicielem kopalni „Dębieńsko" — została podpisana umowa o przekazaniu na cele liturgiczne domu robotniczego. Prace adaptacyjne rozpoczęto w marcu 1926 roku.</p>
+  <p>Był to jednak kościół tymczasowy, stąd też pierwszy proboszcz ks. Jan Komraus podjął starania o budowę nowej, neogotyckiej świątyni. Dzięki staraniom ks. Komrausa oraz kierownika miejscowej szkoły w 1927 roku do parafii przybyły cztery Siostry Elżbietanki.</p>
+
+  <hr class="divider">
+
+  <h2>Kalendarium parafii</h2>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">1898</div><div class="tl-title">Powstanie kopalni „Dębieńsko"</div><div class="tl-desc">2 listopada. Inwestor: koncern „Laura und Konigshutte".</div></div>
+    <div class="tl-item"><div class="tl-year">1899–1900</div><div class="tl-title">Budowa Schlafhausu</div><div class="tl-desc">Noclegownia dla nieżonatych górników, później adaptowana na pierwszy kościół.</div></div>
+    <div class="tl-item"><div class="tl-year">1907</div><div class="tl-title">Pierwsze nabożeństwa</div><div class="tl-desc">W kopalnianej cechowni.</div></div>
+    <div class="tl-item"><div class="tl-year">1915</div><div class="tl-title">Przeniesienie do Szkoły Ludowej</div><div class="tl-desc">Prawe skrzydło Szkoły im. Chrystusa Króla.</div></div>
+    <div class="tl-item"><div class="tl-year">1925</div><div class="tl-title">Erygowanie parafii</div><div class="tl-desc">Dekret z 1 sierpnia. Pierwszy proboszcz: ks. Jan Komraus.</div></div>
+    <div class="tl-item"><div class="tl-year">1926</div><div class="tl-title">Adaptacja Schlafhausu na kościół</div><div class="tl-desc">Tymczasowa świątynia. Poświęcenie w tym samym roku.</div></div>
+    <div class="tl-item"><div class="tl-year">1927</div><div class="tl-title">Siostry Elżbietanki w parafii</div><div class="tl-desc">Cztery siostry — kursy, ambulatorium, kuchnia dla ubogich, ochronka.</div></div>
+    <div class="tl-item"><div class="tl-year">1948–1975</div><div class="tl-title">Posługa ks. Eryka Juraszka</div><div class="tl-desc">Administrator, od 1957 proboszcz. Budowa probostwa 1958–61.</div></div>
+    <div class="tl-item"><div class="tl-year">1971</div><div class="tl-title">Dzwonnica i dzwon „św. Barbara"</div><div class="tl-desc">Poświęcenie 16 sierpnia — bp Czesław Domin.</div></div>
+    <div class="tl-item"><div class="tl-year">1980–2000</div><div class="tl-title">Posługa ks. Feliksa Hanuska</div><div class="tl-desc">Proboszcz do roku 2000.</div></div>
+    <div class="tl-item"><div class="tl-year">2000</div><div class="tl-title">Ks. Antoni Szczypka proboszczem</div><div class="tl-desc">Posługa do 31 grudnia 2022 r.</div></div>
+    <div class="tl-item"><div class="tl-year">2010</div><div class="tl-title">Poświęcenie placu pod nowy kościół</div><div class="tl-desc">4 marca — bp Gerard Bernacki. Projekt: arch. Grzegorz Tkacz.</div></div>
+    <div class="tl-item"><div class="tl-year">2023</div><div class="tl-title">Ks. Tomasz Żołna administratorem</div><div class="tl-desc">1 stycznia. Proboszcz od 9 czerwca 2024 r. (mianowany przez abp. Adriana Galbasa).</div></div>
+    <div class="tl-item"><div class="tl-year">2025</div><div class="tl-title">100-lecie parafii</div><div class="tl-desc">Uroczyste obchody 1 sierpnia. Trwa budowa wieży nowego kościoła.</div></div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>Historia budynku — Schlafhaus</h2>
+  <p>Historia górnictwa w Czerwionce-Leszczynach rozpoczyna się w roku 1792, kiedy to zatwierdzone zostało pierwsze pole górnicze „Neues Gluck" (Nowe Szczęście). Później powstało jeszcze ponad 20 podobnych nadań, na części z nich uruchomiono niewielkie kopalnie.</p>
+  <p>Przełomowym momentem, który pozostawił po sobie istniejące do dziś świadectwo materialne, było powstanie w roku 1898 Kopalni „Dubensko" (po 1922 r. — „Dębieńsko"), której inwestorem był koncern „Laura und Konigshutte". Kopalnia od razu przystąpiła do budowy trwałej i nowoczesnej infrastruktury przemysłowej, komunalnej i mieszkaniowej.</p>
+  <p>Właśnie wtedy, tuż na początku intensywnej rozbudowy kopalni, powstał budynek o intrygującej i tajemniczo brzmiącej nazwie: <b>„Schlafhaus"</b>. Wybudowany w latach 1899–1900, jego przeznaczeniem była noclegownia dla górników nieżonatych, jak to wówczas określono.</p>
+  <p>W roku 1925 budynek noclegowni został przekazany nowo utworzonej w Czerwionce parafii rzymskokatolickiej pw. Najświętszego Serca Pana Jezusa. Natychmiast przystąpiono do jego adaptacji na tymczasowy kościół. W 1926 dokonano poświęcenia świątyni. Ostatecznie zakończono prace związane z przebudową w roku 1928.</p>
+  <p>Oczywiście od razu planowano w Czerwionce budowę nowego, stałego kościoła, lecz te plany pokrzyżowały kolejno: I Wojna Światowa, kolejne Powstania Śląskie, Plebiscyt, wielki kryzys, II Wojna Światowa i wreszcie okres ustroju socjalistycznego w czasie istnienia PRL. Budynek, który był „Schlafhausem", a stał się tymczasowym kościołem, został mocno nadjedzony zębem czasu — zaczyna grozić zawaleniem i musi zostać rozebrany, zastąpiony nowym obiektem.</p>
+
+  <p style="font-style:italic;color:var(--ink-soft);margin-top:30px">Opracowano na podstawie tekstu Mariana Wójcika.</p>
+
+</div>
+
+<footer class="site">
+  <div class="container-wide" style="text-align:center">
+    <div style="font-family:'Playfair Display',serif;color:#f6e9d3;font-size:1.15rem">Parafia NSPJ Czerwionka-Leszczyny</div>
+    <div style="font-size:.9rem;margin-top:6px;color:rgba(216,205,182,.78)">ul. 3-go Maja 36 · tel. 32 43 12 992</div>
+    <div class="footer-bottom" style="justify-content:center;border-bottom:none">
+      <span>© 2026 · wersja demonstracyjna nowego CMS-a · <a href="../index.html">Wróć na stronę główną</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
