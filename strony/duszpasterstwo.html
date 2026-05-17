@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Duszpasterstwo · Parafia NSPJ Czerwionka-Leszczyny</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--beige:#f4ede0;--beige-deep:#ebe1cd;--cream:#faf6ee;--burgundy:#7a1f2b;--burgundy-dark:#5e1620;--copper:#b87a4a;--copper-light:#d6a572;--ink:#2b2520;--ink-soft:#5a5048;--line:#d8cdb6;--white:#ffffff}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:90px} body{margin:0;padding:0}
+  body{font-family:'Lato',sans-serif;color:var(--ink);background:var(--beige);line-height:1.65}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;color:var(--ink)}
+  a{color:var(--burgundy); text-decoration:none}
+  a:hover{text-decoration:underline}
+  a:focus-visible, button:focus-visible, .btn:focus-visible { outline: 2px solid var(--burgundy); outline-offset: 3px; border-radius: 4px; }
+  .container{max-width:1240px;margin:0 auto;padding:0 24px}
+  .container-content{max-width:1000px;margin:0 auto;padding:0 24px}
+
+  /* HEADER kopia z index */
+  .sticky-header{position:sticky;top:0;z-index:50}
+  .topbar{background:var(--burgundy-dark);color:#e8d9b8;font-size:.82rem;line-height:1;min-height:40px;display:flex;align-items:center}
+  .topbar .container,.topbar .container-wide{display:flex;justify-content:space-between;align-items:center;width:100%;padding:4px 24px;gap:12px}
+  .topbar a{color:#e8d9b8;text-decoration:none;display:inline-flex;align-items:center}
+  .topbar a:hover{color:#fff}
+  .topbar .left,.topbar .right{display:flex;gap:18px;align-items:center}
+  .topbar svg{flex-shrink:0;margin-right:6px}
+  .topbar-admin svg{margin-right:0;display:block}
+  @media(max-width:768px){
+    .topbar .left span:first-child{display:none}
+    .topbar .right a:not(.topbar-admin){display:none}
+    .topbar .container,.topbar .container-wide{justify-content:center}
+  }
+  header.site{background:var(--cream);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px}
+  .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
+  .brand-mark{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;overflow:hidden;flex-shrink:0}
+  .brand-logo{width:46px;height:46px;object-fit:contain;display:block}
+  .brand-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:.95rem;line-height:1.2}
+  .brand-name small{display:block;font-family:'Lato',sans-serif;font-size:.7rem;letter-spacing:.16em;color:var(--copper);text-transform:uppercase;font-weight:700;margin-top:3px}
+  nav.main{display:flex;gap:4px;align-items:center}
+  nav.main a{padding:10px 12px;font-weight:400;font-size:.9rem;color:var(--ink);border-radius:6px;transition:background .15s;position:relative;white-space:nowrap;text-decoration:none}
+  nav.main a:hover{background:var(--beige);text-decoration:none}
+  nav.main a.has-sub::after{content:"▾";font-size:.7rem;margin-left:6px;color:var(--copper)}
+  .topbar-admin{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid rgba(232,217,184,.35);color:#e8d9b8;transition:all .15s;margin-left:4px;text-decoration:none}
+  .topbar-admin:hover{background:rgba(232,217,184,.15);border-color:rgba(232,217,184,.7);color:#fff}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--ink);padding:8px}
+  @media(max-width:980px){nav.main{display:none} .menu-toggle{display:block}}
+
+  /* PAGE HERO */
+  .page-hero{padding:50px 0 30px;text-align:center}
+  .eyebrow{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--copper);font-weight:700;margin-bottom:.8rem;display:inline-block}
+  .page-hero h1{font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:600;margin:0 0 .6rem}
+  .page-hero .lead{font-size:1.15rem;color:var(--ink-soft);max-width:620px;margin:0 auto}
+
+  /* DUSZPASTERZE OVERRIDES */
+  .content-section { padding: 40px 0 80px; }
+  
+  .clergy-profile { 
+    display: grid; grid-template-columns: 280px 1fr; gap: 50px; 
+    margin-bottom: 70px; align-items: flex-start; 
+  }
+  .clergy-profile.no-image { grid-template-columns: 1fr; }
+  .clergy-photo { 
+    width: 100%; aspect-ratio: 3/4; border-radius: 8px; 
+    background-size: cover; background-position: top center; 
+    box-shadow: 0 16px 40px -12px rgba(43,37,32,0.25); 
+    background-color: var(--beige-deep);
+  }
+  .clergy-bio { padding-top: 10px; }
+  .clergy-role { 
+    font-size: .8rem; font-weight: 700; color: var(--copper); 
+    text-transform: uppercase; letter-spacing: 0.15em; 
+    display: block; margin-bottom: 8px; 
+  }
+  .clergy-name { 
+    font-family: 'Cormorant Garamond', Georgia, serif; 
+    font-size: 2.4rem; font-weight: 600; color: var(--burgundy); 
+    margin: 0 0 16px; line-height: 1.1; 
+  }
+  .clergy-desc { font-size: 1.05rem; color: var(--ink-soft); line-height: 1.7; margin: 0; }
+
+  hr.elegant-divider { 
+    border: 0; height: 1px; background: var(--line); 
+    margin: 60px 0 50px; position: relative; overflow: visible; text-align: center; 
+  }
+  hr.elegant-divider::after { 
+    content: "☩"; position: absolute; top: -14px; left: 50%; 
+    transform: translateX(-50%); background: var(--beige); 
+    padding: 0 10px; color: var(--copper); font-size: 1.2rem; 
+  }
+
+  .content-section h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.8rem; font-weight: 600; color: var(--burgundy);
+    margin: 0 0 24px; text-align: center;
+  }
+
+  .history-list { 
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px 40px; 
+    margin-bottom: 40px;
+  }
+  .history-item { 
+    padding-bottom: 12px; border-bottom: 1px solid var(--line); 
+    display: flex; justify-content: space-between; align-items: baseline; 
+  }
+  .history-name { font-weight: 600; color: var(--ink); font-size: 1.05rem; }
+  .history-years { 
+    font-size: .9rem; color: var(--copper); text-align: right; 
+    font-family: 'Lato', sans-serif; white-space: nowrap; margin-left: 10px;
+  }
+
+  @media(max-width:768px){
+    .clergy-profile { grid-template-columns: 1fr; gap: 30px; }
+    .clergy-photo { max-width: 320px; margin: 0 auto; aspect-ratio: 1/1; }
+    .history-list { grid-template-columns: 1fr; }
+  }
+
+  /* FOOTER */
+  footer.site{background:var(--ink);color:#d8cdb6;padding:60px 0 30px;margin-top:40px}
+  footer.site a{color:var(--copper-light);text-decoration:none}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px}
+  .footer-brand{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+  .footer-brand .brand-name{color:#f6e9d3;font-size:1.15rem}
+  .footer-brand .brand-name small{color:var(--copper-light)}
+  footer.site p{color:rgba(216,205,182,.78);font-size:.92rem}
+  footer.site h5{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.05rem;color:#f6e9d3;margin-bottom:1rem}
+  footer.site ul{list-style:none;padding:0;margin:0}
+  footer.site ul li{margin-bottom:.6rem;font-size:.92rem}
+  footer.site ul a{color:rgba(216,205,182,.78)}
+  footer.site ul a:hover{color:#f6e9d3;text-decoration:none}
+  .footer-bank{font-size:.83rem;background:rgba(246,233,211,.06);padding:14px;border-radius:6px;margin-top:14px;border:1px solid rgba(246,233,211,.1)}
+  .footer-bank b{color:#f6e9d3;display:block;font-weight:700;margin-bottom:4px}
+  .footer-bank code{font-family:'Lato',monospace;color:var(--copper-light);font-weight:700;letter-spacing:.5px}
+  .footer-bottom{border-top:1px solid rgba(216,205,182,.14);margin-top:40px;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:.85rem;color:rgba(216,205,182,.55)}
+  @media(max-width:980px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+  @media(max-width:560px){.footer-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="sticky-header">
+<div class="topbar">
+  <div class="container">
+    <div class="left">
+      <span><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>ul. 3-go Maja 36, 44-230 Czerwionka-Leszczyny</span>
+      <span><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.61 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58z"/></svg><a href="tel:+48324312992">32 43 12 992</a></span>
+    </div>
+    <div class="right">
+      <a href="msze.html">Kalendarz liturgiczny</a>
+      <a href="kontakt.html">Intencje mszalne</a>
+      <a href="../index.html#budowa" style="border:1px solid rgba(232,217,184,.4);padding:4px 12px;border-radius:4px">Wsparcie budowy</a>
+      <a href="../admin/login.html" class="topbar-admin" title="Panel parafii" aria-label="Panel parafii">
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<header class="site">
+  <div class="container">
+    <div class="nav">
+      <a class="brand" href="../index.html">
+        <div class="brand-mark"><img src="../public/img/logo1.png" alt="Logo NSPJ" class="brand-logo"></div>
+        <div class="brand-name">Parafia Najświętszego Serca Pana Jezusa<small>Czerwionka-Leszczyny · od 1925</small></div>
+      </a>
+      <nav class="main">
+        <a href="../index.html">Strona&nbsp;główna</a>
+        <a href="historia.html">Historia</a>
+        <a href="duszpasterstwo.html" class="active">Duszpasterstwo</a>
+        <a href="../index.html#wspolnota" class="has-sub">Wspólnota</a>
+        <a href="../index.html#galeria" class="has-sub">Galeria</a>
+        <a href="../index.html#aktualnosci">Aktualności</a>
+        <a href="kontakt.html">Kontakt</a>
+      </nav>
+      <button class="menu-toggle" aria-label="Menu">
+        <svg width="28" height="28" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+</div><!-- /sticky-header -->
+
+<div class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Duszpasterstwo</span>
+    <h1>Nasi Duszpasterze</h1>
+    <p class="lead">Kapłani pełniący posługę w naszej wspólnocie parafialnej oraz historia duszpasterzy na przestrzeni wieku.</p>
+  </div>
+</div>
+
+<div class="container-content content-section">
+  
+  <!-- OBECNI DUSZPASTERZE -->
+  <div class="clergy-profile">
+    <div class="clergy-photo" style="background-image:url('https://www.nspjczerwionka.pl/uploaded/IMG_0632.jpg')"></div>
+    <div class="clergy-bio">
+      <span class="clergy-role">Proboszcz</span>
+      <h2 class="clergy-name">Ks. Tomasz Żołna</h2>
+      <p class="clergy-desc">
+        Urodził się 6 lipca 1972 roku w Opolu. Po uzyskaniu w 1991 roku świadectwa dojrzałości wstąpił do Wyższego Śląskiego Seminarium Duchownego w Katowicach. 10 maja 1997 roku otrzymał święcenia kapłańskie. Posługę wikariusza pełnił w parafiach w: Pszczynie, Rydułtowach (jednocześnie kapelan szpitalny), Katowicach – Zawodziu, Rybniku, Mysłowicach Janowie-Miejskim, Bytomiu, Wodzisławiu Śl. i ostatecznie w Czerwionce-Leszczynach (od 31 sierpnia do 31 grudnia 2022 roku). 
+        <br><br>
+        1 stycznia 2023 roku ksiądz arcybiskup Wiktor Skworc odwołał go z funkcji wikariusza i mianował administratorem parafii Najświętszego Serca Pana Jezusa. 9 czerwca 2024 roku ksiądz arcybiskup Adrian Galbas w czasie udziału w uroczystości odpustowej mianował go proboszczem.
+      </p>
+    </div>
+  </div>
+
+  <div class="clergy-profile no-image">
+    <div class="clergy-bio">
+      <span class="clergy-role">Wikariusz</span>
+      <h2 class="clergy-name">Ks. Rafał Woźnica</h2>
+      <p class="clergy-desc">
+        Urodził się 22 lipca 1982 roku w Wodzisławiu Śląskim. Święcenia otrzymał 09 maja 2009 roku. Posługę wikariuszowską pełnił do tej pory w parafiach: Radlin-Biertutowy, Tychy-Paprocany i w Goczałkowicach. 30 sierpnia 2025 roku rozpoczął swoją posługę w Czerwionce-Leszczynach.
+      </p>
+    </div>
+  </div>
+
+  <hr class="elegant-divider">
+
+  <!-- HISTORIA PROBOSZCZÓW -->
+  <h3>Księża proboszczowie</h3>
+  <div class="history-list" style="margin-bottom:60px">
+    <div class="history-item">
+      <div class="history-name">ks. Jan Komraus</div>
+      <div class="history-years">kuratus (1923-1925), proboszcz (1925-1948)</div>
+    </div>
+    <div class="history-item">
+      <div class="history-name">ks. Eryk Juraszek</div>
+      <div class="history-years">administrator (1948-1957), proboszcz (1957-1975)</div>
+    </div>
+    <div class="history-item">
+      <div class="history-name">ks. Justyn Oleś</div>
+      <div class="history-years">1975-1980</div>
+    </div>
+    <div class="history-item">
+      <div class="history-name">ks. Feliks Hanusek</div>
+      <div class="history-years">1980-2000</div>
+    </div>
+    <div class="history-item">
+      <div class="history-name">ks. Antoni Szczypka</div>
+      <div class="history-years">2000-2022</div>
+    </div>
+    <div class="history-item">
+      <div class="history-name">ks. Tomasz Żołna</div>
+      <div class="history-years">od 2023 r.</div>
+    </div>
+  </div>
+
+  <!-- HISTORIA WIKARIUSZY -->
+  <h3>Księża wikariusze</h3>
+  <div class="history-list">
+    <div class="history-item"><div class="history-name">Ks. Pruski</div><div class="history-years">1933</div></div>
+    <div class="history-item"><div class="history-name">ks. Lorek</div><div class="history-years">1934</div></div>
+    <div class="history-item"><div class="history-name">ks. Wojciech Konrad</div><div class="history-years">1934</div></div>
+    <div class="history-item"><div class="history-name">ks. Georg Wolff</div><div class="history-years">1935-1936</div></div>
+    <div class="history-item"><div class="history-name">ks. Kręczkowski</div><div class="history-years">1936-1937</div></div>
+    <div class="history-item"><div class="history-name">ks. Erwin Muszer</div><div class="history-years">1937</div></div>
+    <div class="history-item"><div class="history-name">ks. Henryk Pieprzyk</div><div class="history-years">1937</div></div>
+    <div class="history-item"><div class="history-name">ks. Edward Karwoth</div><div class="history-years">1940</div></div>
+    <div class="history-item"><div class="history-name">ks. Michla</div><div class="history-years">1940</div></div>
+    <div class="history-item"><div class="history-name">ks. Herbert Szymankiewicz</div><div class="history-years">1942</div></div>
+    <div class="history-item"><div class="history-name">ks. Pankrotus</div><div class="history-years">1942</div></div>
+    <div class="history-item"><div class="history-name">ks. Grabowski</div><div class="history-years">1942</div></div>
+    <div class="history-item"><div class="history-name">ks. Alojzy Jaskółka</div><div class="history-years">1943</div></div>
+    <div class="history-item"><div class="history-name">ks. Bohn</div><div class="history-years">1944-1945</div></div>
+    <div class="history-item"><div class="history-name">ks. Adamski</div><div class="history-years">1946</div></div>
+    <div class="history-item"><div class="history-name">ks. Emil Kozus</div><div class="history-years">1946</div></div>
+    <div class="history-item"><div class="history-name">ks. Józef Maśka</div><div class="history-years">1947-1948</div></div>
+    <div class="history-item"><div class="history-name">ks. Górecki</div><div class="history-years">1949</div></div>
+    <div class="history-item"><div class="history-name">ks. Ernest Szlapa SVD</div><div class="history-years">1949</div></div>
+    <div class="history-item"><div class="history-name">ks. Michalski</div><div class="history-years">1950</div></div>
+    <div class="history-item"><div class="history-name">ks. Grycman SVD</div><div class="history-years"></div></div>
+    <div class="history-item"><div class="history-name">ks. Piotrowski</div><div class="history-years">1951</div></div>
+    <div class="history-item"><div class="history-name">ks. Gabriel SVD</div><div class="history-years">1952</div></div>
+    <div class="history-item"><div class="history-name">ks. Kuczera</div><div class="history-years">1953</div></div>
+    <div class="history-item"><div class="history-name">ks. Dyrda</div><div class="history-years">1953</div></div>
+    <div class="history-item"><div class="history-name">ks. B. Brząkalik</div><div class="history-years">1956</div></div>
+    <div class="history-item"><div class="history-name">ks. Andrzej Matura</div><div class="history-years">1956</div></div>
+    <div class="history-item"><div class="history-name">ks. Eudeniusz Zając</div><div class="history-years">1959</div></div>
+    <div class="history-item"><div class="history-name">ks. Antoni Mazur</div><div class="history-years">1962-1965</div></div>
+    <div class="history-item"><div class="history-name">ks. Jan Brzozoń</div><div class="history-years">1965</div></div>
+    <div class="history-item"><div class="history-name">ks. Henryk Kuś</div><div class="history-years">1968</div></div>
+    <div class="history-item"><div class="history-name">ks. Zenon Szczęsny</div><div class="history-years">1971</div></div>
+    <div class="history-item"><div class="history-name">ks. Gerard Syguda</div><div class="history-years">1974-1977</div></div>
+    <div class="history-item"><div class="history-name">ks. Andrzej Simon</div><div class="history-years">1977</div></div>
+    <div class="history-item"><div class="history-name">ks. Augustyn Pinior SCJ</div><div class="history-years">1977</div></div>
+    <div class="history-item"><div class="history-name">ks. Gotfryd Strzoda</div><div class="history-years">1980-1986</div></div>
+    <div class="history-item"><div class="history-name">ks. Henryk Sitek</div><div class="history-years">1986</div></div>
+    <div class="history-item"><div class="history-name">ks. Adam Kandziora</div><div class="history-years">1986-1991</div></div>
+    <div class="history-item"><div class="history-name">ks. Andrzej Morawski</div><div class="history-years">1989-1990</div></div>
+    <div class="history-item"><div class="history-name">ks. Ireneusz Tosta</div><div class="history-years">1991-1995</div></div>
+    <div class="history-item"><div class="history-name">ks. Damian Wojtyczka</div><div class="history-years">1995-1998</div></div>
+    <div class="history-item"><div class="history-name">ks. Jacek Jadasz</div><div class="history-years">1998-2001</div></div>
+    <div class="history-item"><div class="history-name">ks. Bogdan Michalski</div><div class="history-years">2001-2005</div></div>
+    <div class="history-item"><div class="history-name">ks. Maciej Kuś</div><div class="history-years">2005-2008</div></div>
+    <div class="history-item"><div class="history-name">ks. dr Zbigniew Zieliński</div><div class="history-years">2008-2010</div></div>
+    <div class="history-item"><div class="history-name">ks. Marek Zyzak</div><div class="history-years">2010-2013</div></div>
+    <div class="history-item"><div class="history-name">ks. Andrzej Cioska</div><div class="history-years">2013-2017</div></div>
+    <div class="history-item"><div class="history-name">ks. Arkadiusz Rząsa</div><div class="history-years">2017-2022</div></div>
+    <div class="history-item"><div class="history-name">ks. Tomasz Żołna</div><div class="history-years">2022</div></div>
+    <div class="history-item"><div class="history-name">ks. Marcin Wójcik</div><div class="history-years">2023-2025</div></div>
+    <div class="history-item"><div class="history-name">ks. Rafał Woźnica</div><div class="history-years">2025 - nadal</div></div>
+  </div>
+
+  <hr class="elegant-divider">
+
+  <!-- KSIĘŻA POCHODZĄCY Z PARAFII -->
+  <h3>Księża pochodzący z parafii</h3>
+  <div class="history-list">
+    <div class="history-item"><div class="history-name">ks. Dariusz Mazur</div><div class="history-years">święcony: 1994</div></div>
+    <div class="history-item"><div class="history-name">ks. dr Leszek Makówka</div><div class="history-years">1995</div></div>
+    <div class="history-item"><div class="history-name">o. Gwidon (Grzegorz) Hensel OFM</div><div class="history-years">1995</div></div>
+    <div class="history-item"><div class="history-name">ks. Michał Chlubek</div><div class="history-years">1996</div></div>
+    <div class="history-item"><div class="history-name">o. Czesław Hensel OSCam</div><div class="history-years">1999</div></div>
+    <div class="history-item"><div class="history-name">ks. dr Ireneusz Pawlak</div><div class="history-years">2000</div></div>
+    <div class="history-item"><div class="history-name">o. Piotr Hensel OCD</div><div class="history-years">2004</div></div>
+    <div class="history-item"><div class="history-name">o. Krzysztof Grzybek SVD</div><div class="history-years">2010</div></div>
+    <div class="history-item"><div class="history-name">ks. Kamil Kiełkowski</div><div class="history-years">2016</div></div>
+  </div>
+
+</div>
+
+<footer class="site">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../public/img/logo1.png" alt="Logo NSPJ" class="brand-logo" style="width:46px;height:46px;object-fit:contain;border-radius:50%;box-shadow:none;flex-shrink:0">
+          <div class="brand-name">Parafia Najświętszego Serca Pana Jezusa<small>Czerwionka-Leszczyny · od 1925</small></div>
+        </div>
+        <p>ul. 3-go Maja 36<br>44-230 Czerwionka-Leszczyny<br>tel. <a href="tel:+48324312992" style="color:var(--copper-light)">32 43 12 992</a></p>
+        <div class="footer-bank">
+          <b>Konto parafii (Bank Spółdzielczy)</b>
+          <code>11 8454 1095 2003 0017 7467 0003</code>
+        </div>
+      </div>
+      <div>
+        <h5>Parafia</h5>
+        <ul>
+          <li><a href="historia.html">Historia</a></li>
+          <li><a href="duszpasterstwo.html">Duszpasterstwo</a></li>
+          <li><a href="msze.html">Msze święte</a></li>
+          <li><a href="#">Sakramenty</a></li>
+          <li><a href="#">Standardy ochrony małoletnich</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Wspólnota</h5>
+        <ul>
+          <li><a href="#">Aktualności</a></li>
+          <li><a href="#">Ogłoszenia parafialne</a></li>
+          <li><a href="msze.html">Kalendarz liturgiczny</a></li>
+          <li><a href="kontakt.html">Intencje mszalne</a></li>
+          <li><a href="#">Cmentarz</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Kontakt</h5>
+        <ul>
+          <li><a href="kontakt.html">Kancelaria</a></li>
+          <li><a href="#">RODO</a></li>
+          <li><a href="#">Polityka prywatności</a></li>
+          <li><a href="#">Wsparcie budowy</a></li>
+          <li><a href="../admin/login.html" style="color:var(--copper-light);font-weight:700">→ Panel administracyjny</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Parafia NSPJ Czerwionka-Leszczyny. Wszelkie prawa zastrzeżone.</span>
+      <span>Wersja demonstracyjna · nowy CMS parafialny</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelector('.menu-toggle')?.addEventListener('click',()=>{
+    const nav=document.querySelector('nav.main');
+    if(nav.style.display==='flex'){nav.style.display='none';return}
+    nav.style.display='flex';
+    nav.style.position='absolute';nav.style.top='80px';nav.style.left='0';nav.style.right='0';
+    nav.style.flexDirection='column';nav.style.background='var(--cream)';
+    nav.style.padding='16px';nav.style.borderBottom='1px solid var(--line)';
+    nav.style.boxShadow='0 12px 30px rgba(0,0,0,.1)';nav.style.zIndex='100';
+  });
+</script>
+</body>
+</html>

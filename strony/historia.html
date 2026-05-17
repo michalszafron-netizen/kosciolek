@@ -4,31 +4,47 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Historia · Parafia NSPJ Czerwionka-Leszczyny</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
   :root{--beige:#f4ede0;--beige-deep:#ebe1cd;--cream:#faf6ee;--burgundy:#7a1f2b;--burgundy-dark:#5e1620;--copper:#b87a4a;--copper-light:#d6a572;--ink:#2b2520;--ink-soft:#5a5048;--line:#d8cdb6;--white:#ffffff}
-  *{box-sizing:border-box}html,body{margin:0;padding:0}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:90px} body{margin:0;padding:0}
   body{font-family:'Lato',sans-serif;color:var(--ink);background:var(--beige);line-height:1.65}
-  h1,h2,h3,.serif{font-family:'Playfair Display',serif;color:var(--ink)}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;color:var(--ink)}
   a{color:var(--burgundy)}
-  .container{max-width:880px;margin:0 auto;padding:0 24px}
-  .container-wide{max-width:1240px;margin:0 auto;padding:0 24px}
+  a:focus-visible, button:focus-visible, .btn:focus-visible { outline: 2px solid var(--burgundy); outline-offset: 3px; border-radius: 4px; }
+  .container{max-width:1240px;margin:0 auto;padding:0 24px}
+  .container-narrow{max-width:900px;margin:0 auto;padding:0 24px}
 
   /* HEADER kopia z index */
-  .topbar{background:var(--burgundy-dark);color:#e8d9b8;font-size:.85rem;padding:8px 0}
-  .topbar a{color:#e8d9b8;text-decoration:none}
-  header.site{background:var(--cream);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+  .sticky-header{position:sticky;top:0;z-index:50}
+  .topbar{background:var(--burgundy-dark);color:#e8d9b8;font-size:.82rem;line-height:1;min-height:40px;display:flex;align-items:center}
+  .topbar .container,.topbar .container-wide{display:flex;justify-content:space-between;align-items:center;width:100%;padding:4px 24px;gap:12px}
+  .topbar a{color:#e8d9b8;text-decoration:none;display:inline-flex;align-items:center}
+  .topbar a:hover{color:#fff}
+  .topbar .left,.topbar .right{display:flex;gap:18px;align-items:center}
+  .topbar svg{flex-shrink:0;margin-right:6px}
+  .topbar-admin svg{margin-right:0;display:block}
+  @media(max-width:768px){
+    .topbar .left span:first-child{display:none}
+    .topbar .right a:not(.topbar-admin){display:none}
+    .topbar .container,.topbar .container-wide{justify-content:center}
+  }
+  header.site{background:var(--cream);border-bottom:1px solid var(--line)}
   .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px}
   .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
-  .brand-mark{width:46px;height:46px;border-radius:50%;background:var(--burgundy);color:#f6d9b1;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem}
-  .brand-name{font-family:'Playfair Display',serif;font-size:1.1rem;line-height:1.15}
-  .brand-name small{display:block;font-family:'Lato',sans-serif;font-size:.72rem;letter-spacing:.18em;color:var(--copper);text-transform:uppercase;font-weight:700;margin-top:2px}
-  nav.main{display:flex;gap:6px;align-items:center}
-  nav.main a{padding:10px 14px;font-size:.95rem;color:var(--ink);border-radius:6px;text-decoration:none}
-  nav.main a:hover{background:var(--beige)}
-  nav.main a.active{background:var(--beige);color:var(--burgundy);font-weight:700}
-  nav.main .cta{background:var(--burgundy);color:#fff;padding:10px 18px;font-weight:700;font-size:.88rem}
-  @media(max-width:980px){nav.main{display:none}}
+  .brand-mark{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;overflow:hidden;flex-shrink:0}
+  .brand-logo{width:46px;height:46px;object-fit:contain;display:block}
+  .brand-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:.95rem;line-height:1.2}
+  .brand-name small{display:block;font-family:'Lato',sans-serif;font-size:.7rem;letter-spacing:.16em;color:var(--copper);text-transform:uppercase;font-weight:700;margin-top:3px}
+  nav.main{display:flex;gap:4px;align-items:center}
+  nav.main a{padding:10px 12px;font-weight:400;font-size:.9rem;color:var(--ink);border-radius:6px;transition:background .15s;position:relative;white-space:nowrap;text-decoration:none}
+  nav.main a:hover{background:var(--beige);text-decoration:none}
+  nav.main a.has-sub::after{content:"▾";font-size:.7rem;margin-left:6px;color:var(--copper)}
+  .topbar-admin{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid rgba(232,217,184,.35);color:#e8d9b8;transition:all .15s;margin-left:4px;text-decoration:none}
+  .topbar-admin:hover{background:rgba(232,217,184,.15);border-color:rgba(232,217,184,.7);color:#fff}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--ink);padding:8px}
+  @media(max-width:980px){nav.main{display:none} .menu-toggle{display:block}}
 
   /* PAGE HERO */
   .page-hero{padding:60px 0 40px;text-align:center}
@@ -63,43 +79,72 @@
   .tl-desc{font-size:.95rem;color:var(--ink-soft);margin:0}
 
   /* FOOTER */
-  footer.site{background:var(--ink);color:#d8cdb6;padding:48px 0 24px;margin-top:60px}
+  footer.site{background:var(--ink);color:#d8cdb6;padding:60px 0 30px;margin-top:40px}
   footer.site a{color:var(--copper-light);text-decoration:none}
-  .footer-bottom{display:flex;justify-content:space-between;margin-top:24px;padding-top:18px;border-top:1px solid rgba(216,205,182,.14);font-size:.85rem;color:rgba(216,205,182,.6);flex-wrap:wrap;gap:10px}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px}
+  .footer-brand{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+  .footer-brand .brand-name{color:#f6e9d3;font-size:1.15rem}
+  .footer-brand .brand-name small{color:var(--copper-light)}
+  footer.site p{color:rgba(216,205,182,.78);font-size:.92rem}
+  footer.site h5{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.05rem;color:#f6e9d3;margin-bottom:1rem}
+  footer.site ul{list-style:none;padding:0;margin:0}
+  footer.site ul li{margin-bottom:.6rem;font-size:.92rem}
+  footer.site ul a{color:rgba(216,205,182,.78)}
+  footer.site ul a:hover{color:#f6e9d3;text-decoration:none}
+  .footer-bank{font-size:.83rem;background:rgba(246,233,211,.06);padding:14px;border-radius:6px;margin-top:14px;border:1px solid rgba(246,233,211,.1)}
+  .footer-bank b{color:#f6e9d3;display:block;font-weight:700;margin-bottom:4px}
+  .footer-bank code{font-family:'Lato',monospace;color:var(--copper-light);font-weight:700;letter-spacing:.5px}
+  .footer-bottom{border-top:1px solid rgba(216,205,182,.14);margin-top:40px;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:.85rem;color:rgba(216,205,182,.55)}
+  @media(max-width:980px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+  @media(max-width:560px){.footer-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
+<div class="sticky-header">
 <div class="topbar">
-  <div class="container-wide" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px">
-    <span>ul. 3-go Maja 36, 44-230 Czerwionka-Leszczyny · tel. <a href="tel:+48324312992">32 43 12 992</a></span>
-    <span><a href="#">Wsparcie budowy</a></span>
+  <div class="container">
+    <div class="left">
+      <span><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>ul. 3-go Maja 36, 44-230 Czerwionka-Leszczyny</span>
+      <span><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.61 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58z"/></svg><a href="tel:+48324312992">32 43 12 992</a></span>
+    </div>
+    <div class="right">
+      <a href="msze.html">Kalendarz liturgiczny</a>
+      <a href="kontakt.html">Intencje mszalne</a>
+      <a href="../index.html#budowa" style="border:1px solid rgba(232,217,184,.4);padding:4px 12px;border-radius:4px">Wsparcie budowy</a>
+      <a href="../admin/login.html" class="topbar-admin" title="Panel parafii" aria-label="Panel parafii">
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>
+      </a>
+    </div>
   </div>
 </div>
 
 <header class="site">
-  <div class="container-wide">
+  <div class="container">
     <div class="nav">
       <a class="brand" href="../index.html">
-        <div class="brand-mark">NSPJ</div>
+        <div class="brand-mark"><img src="../public/img/logo1.png" alt="Logo NSPJ" class="brand-logo"></div>
         <div class="brand-name">Parafia Najświętszego Serca Pana Jezusa<small>Czerwionka-Leszczyny · od 1925</small></div>
       </a>
       <nav class="main">
-        <a href="../index.html">Strona główna</a>
-        <a href="#" class="active">Historia</a>
-        <a href="#">Duszpasterstwo</a>
-        <a href="#">Wspólnota</a>
-        <a href="#">Galeria</a>
-        <a href="#">Aktualności</a>
+        <a href="../index.html">Strona&nbsp;główna</a>
+        <a href="historia.html" class="active">Historia</a>
+        <a href="duszpasterstwo.html">Duszpasterstwo</a>
+        <a href="../index.html#wspolnota" class="has-sub">Wspólnota</a>
+        <a href="../index.html#galeria" class="has-sub">Galeria</a>
+        <a href="../index.html#aktualnosci">Aktualności</a>
         <a href="kontakt.html">Kontakt</a>
-        <a href="../admin/login.html" class="cta">Panel parafii</a>
       </nav>
+      <button class="menu-toggle" aria-label="Menu">
+        <svg width="28" height="28" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
+      </button>
     </div>
   </div>
 </header>
+</div><!-- /sticky-header -->
 
 <div class="page-hero">
-  <div class="container">
+  <div class="container-narrow">
     <span class="eyebrow">Od 1925 roku</span>
     <h1>Historia naszej parafii</h1>
     <p class="lead">Sto lat wiary, modlitwy i wspólnoty w cieniu kopalni „Dębieńsko"</p>
@@ -111,7 +156,7 @@
   <div class="photo-caption">Dawny Schlafhaus — noclegownia kopalni „Dębieńsko", po 1926 r. zaadaptowana na tymczasowy kościół</div>
 </div>
 
-<div class="container content">
+<div class="container-narrow content">
 
   <h2>Symbolika logo parafii</h2>
   <p>Zgodnie ze współczesnymi trendami logo parafii przybrało formę graficznego zapisu skrótu wezwania — Najświętszego Serca Pana Jezusa. Pierwsze litery <b>NSPJ</b> ułożono w kształt serca.</p>
@@ -165,14 +210,67 @@
 </div>
 
 <footer class="site">
-  <div class="container-wide" style="text-align:center">
-    <div style="font-family:'Playfair Display',serif;color:#f6e9d3;font-size:1.15rem">Parafia NSPJ Czerwionka-Leszczyny</div>
-    <div style="font-size:.9rem;margin-top:6px;color:rgba(216,205,182,.78)">ul. 3-go Maja 36 · tel. 32 43 12 992</div>
-    <div class="footer-bottom" style="justify-content:center;border-bottom:none">
-      <span>© 2026 · wersja demonstracyjna nowego CMS-a · <a href="../index.html">Wróć na stronę główną</a></span>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../public/img/logo1.png" alt="Logo NSPJ" class="brand-logo" style="width:46px;height:46px;object-fit:contain;border-radius:50%;box-shadow:none;flex-shrink:0">
+          <div class="brand-name">Parafia Najświętszego Serca Pana Jezusa<small>Czerwionka-Leszczyny · od 1925</small></div>
+        </div>
+        <p>ul. 3-go Maja 36<br>44-230 Czerwionka-Leszczyny<br>tel. <a href="tel:+48324312992" style="color:var(--copper-light)">32 43 12 992</a></p>
+        <div class="footer-bank">
+          <b>Konto parafii (Bank Spółdzielczy)</b>
+          <code>11 8454 1095 2003 0017 7467 0003</code>
+        </div>
+      </div>
+      <div>
+        <h5>Parafia</h5>
+        <ul>
+          <li><a href="historia.html">Historia</a></li>
+          <li><a href="duszpasterstwo.html">Duszpasterstwo</a></li>
+          <li><a href="msze.html">Msze święte</a></li>
+          <li><a href="#">Sakramenty</a></li>
+          <li><a href="#">Standardy ochrony małoletnich</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Wspólnota</h5>
+        <ul>
+          <li><a href="#">Aktualności</a></li>
+          <li><a href="#">Ogłoszenia parafialne</a></li>
+          <li><a href="msze.html">Kalendarz liturgiczny</a></li>
+          <li><a href="kontakt.html">Intencje mszalne</a></li>
+          <li><a href="#">Cmentarz</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Kontakt</h5>
+        <ul>
+          <li><a href="kontakt.html">Kancelaria</a></li>
+          <li><a href="#">RODO</a></li>
+          <li><a href="#">Polityka prywatności</a></li>
+          <li><a href="#">Wsparcie budowy</a></li>
+          <li><a href="../admin/login.html" style="color:var(--copper-light);font-weight:700">→ Panel administracyjny</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Parafia NSPJ Czerwionka-Leszczyny. Wszelkie prawa zastrzeżone.</span>
+      <span>Wersja demonstracyjna · nowy CMS parafialny</span>
     </div>
   </div>
 </footer>
 
+<script>
+  document.querySelector('.menu-toggle')?.addEventListener('click',()=>{
+    const nav=document.querySelector('nav.main');
+    if(nav.style.display==='flex'){nav.style.display='none';return}
+    nav.style.display='flex';
+    nav.style.position='absolute';nav.style.top='80px';nav.style.left='0';nav.style.right='0';
+    nav.style.flexDirection='column';nav.style.background='var(--cream)';
+    nav.style.padding='16px';nav.style.borderBottom='1px solid var(--line)';
+    nav.style.boxShadow='0 12px 30px rgba(0,0,0,.1)';nav.style.zIndex='100';
+  });
+</script>
 </body>
 </html>

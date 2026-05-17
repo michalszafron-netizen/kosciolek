@@ -3,18 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kontakt · Parafia NSPJ Czerwionka-Leszczyny</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<title>Msze Święte i Intencje · Parafia NSPJ Czerwionka-Leszczyny</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
-  :root{--beige:#f4ede0;--cream:#faf6ee;--burgundy:#7a1f2b;--burgundy-dark:#5e1620;--copper:#b87a4a;--copper-light:#d6a572;--ink:#2b2520;--ink-soft:#5a5048;--line:#d8cdb6}
+  :root{--beige:#f4ede0;--beige-deep:#ebe1cd;--cream:#faf6ee;--burgundy:#7a1f2b;--burgundy-dark:#5e1620;--copper:#b87a4a;--copper-light:#d6a572;--ink:#2b2520;--ink-soft:#5a5048;--line:#d8cdb6;--white:#ffffff}
   *{box-sizing:border-box}
   html{scroll-behavior:smooth;scroll-padding-top:90px} body{margin:0;padding:0}
   body{font-family:'Lato',sans-serif;color:var(--ink);background:var(--beige);line-height:1.65}
-  h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;color:var(--ink)}
-  a{color:var(--burgundy)}
-  a:focus-visible, button:focus-visible, .btn:focus-visible { outline: 2px solid var(--burgundy); outline-offset: 3px; border-radius: 4px; }
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;color:var(--ink)}
+  a{color:var(--burgundy); text-decoration:none}
+  a:hover{text-decoration:underline}
+  a:focus-visible, button:focus-visible, .btn:focus-visible, .day-card:focus-visible { outline: 2px solid var(--burgundy); outline-offset: 3px; border-radius: 4px; }
   .container{max-width:1240px;margin:0 auto;padding:0 24px}
-  .container-content{max-width:1000px;margin:0 auto;padding:0 24px}
+  .container-narrow{max-width:880px;margin:0 auto;padding:0 24px}
 
   /* HEADER kopia z index */
   .sticky-header{position:sticky;top:0;z-index:50}
@@ -46,35 +47,103 @@
   .menu-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--ink);padding:8px}
   @media(max-width:980px){nav.main{display:none} .menu-toggle{display:block}}
 
-  .page-hero{padding:60px 0 20px;text-align:center}
+  /* PAGE HERO */
+  .page-hero{padding:50px 0 30px;text-align:center}
   .eyebrow{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--copper);font-weight:700;margin-bottom:.8rem;display:inline-block}
-  .page-hero h1{font-size:clamp(2.2rem,4.5vw,3.2rem);font-weight:600;margin:0 0 .6rem;color:var(--ink)}
-  .page-hero .lead{font-size:1.1rem;color:var(--ink-soft);max-width:580px;margin:0 auto}
+  .page-hero h1{font-family:'Lora',Georgia,serif;font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:500;letter-spacing:-0.02em;margin:0 0 .6rem;color:var(--ink)}
+  .page-hero .lead{font-size:1.15rem;color:var(--ink-soft);max-width:620px;margin:0 auto}
 
-  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:50px 0}
-  .info-card{background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:32px}
-  .info-card h2{font-size:1.4rem;color:var(--burgundy);margin:0 0 18px;display:flex;align-items:center;gap:10px}
-  .info-card h2 svg{color:var(--copper)}
-  .info-card .row{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
-  .info-card .row:last-child{border-bottom:none}
-  .info-card .row .ic{width:36px;height:36px;border-radius:50%;background:var(--beige);color:var(--burgundy);display:grid;place-items:center;flex-shrink:0}
-  .info-card .row .lbl{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:3px}
-  .info-card .row .val{font-size:1rem;color:var(--ink);font-weight:600}
-  .info-card .row .val small{display:block;color:var(--ink-soft);font-weight:400;margin-top:2px;font-size:.85rem}
+  /* MSZE SCHEDULE (Stałyy porządek) */
+  .schedule-box {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 40px;
+    margin: 40px auto 60px;
+    max-width: 800px;
+    text-align: center;
+    box-shadow: 0 20px 40px -15px rgba(43,37,32,0.1);
+  }
+  .schedule-box h3 {
+    font-size: 1.8rem; color: var(--burgundy); margin: 0 0 24px;
+  }
+  .schedule-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
+  }
+  .schedule-col {
+    padding: 0 20px;
+  }
+  .schedule-col:first-child { border-right: 1px solid var(--line); }
+  .schedule-col h4 {
+    font-size: .85rem; text-transform: uppercase; letter-spacing: 0.15em; 
+    color: var(--copper); margin: 0 0 16px; font-weight: 700;
+  }
+  .schedule-times {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 2.2rem; font-weight: 600; color: var(--ink);
+    line-height: 1.4;
+  }
+  @media(max-width: 600px) {
+    .schedule-grid { grid-template-columns: 1fr; gap: 40px; }
+    .schedule-col:first-child { border-right: none; border-bottom: 1px solid var(--line); padding-bottom: 30px; }
+  }
 
-  .hours-tbl{width:100%;border-collapse:collapse;margin-top:4px}
-  .hours-tbl td{padding:8px 0;border-bottom:1px solid var(--line);font-size:.95rem}
-  .hours-tbl td:first-child{color:var(--ink-soft)}
-  .hours-tbl td:last-child{text-align:right;font-weight:700;color:var(--ink);font-family:'Lato',monospace}
-  .hours-tbl tr.holiday td{color:var(--copper)}
+  /* INTENCJE SECTION */
+  .intentions-section {
+    max-width: 800px; margin: 0 auto 80px;
+  }
+  .intentions-header {
+    display: flex; justify-content: space-between; align-items: flex-end; 
+    margin-bottom: 30px; padding-bottom: 10px; border-bottom: 2px solid var(--copper);
+  }
+  .intentions-header h2 { font-size: 2.2rem; color: var(--ink); margin: 0; }
+  .intentions-week { font-family: 'Lato', sans-serif; font-size: 1rem; color: var(--ink-soft); font-weight: 600; }
 
-  .bank-cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:0 0 60px}
-  .bank-card{background:var(--burgundy);color:#f6e9d3;border-radius:8px;padding:28px;position:relative;overflow:hidden}
-  .bank-card::before{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;border:2px solid rgba(246,233,211,.15);border-radius:50%}
-  .bank-card .eyebrow{color:var(--copper-light);margin-bottom:6px}
-  .bank-card h3{color:#fff;font-size:1.1rem;margin:0 0 14px}
-  .bank-card .nr{font-family:'Lato',monospace;font-size:1.15rem;letter-spacing:1px;font-weight:700;background:rgba(0,0,0,.18);padding:11px 14px;border-radius:5px;color:#f6e9d3}
-  .bank-card .note{font-size:.85rem;color:rgba(246,233,211,.78);margin-top:10px}
+  .day-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .day-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -10px rgba(43,37,32,0.15);
+  }
+  .day-card.today {
+    border-color: var(--copper-light);
+  }
+  .day-header {
+    background: var(--cream);
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .day-card.today .day-header {
+    background: var(--beige-deep);
+  }
+  .day-date {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.6rem; font-weight: 600; color: var(--burgundy);
+  }
+  .day-saint {
+    font-size: .85rem; color: var(--ink-soft); font-style: italic;
+  }
+  
+  .mass-row {
+    display: grid; grid-template-columns: 80px 1fr;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--beige);
+  }
+  .mass-row:last-child { border-bottom: none; }
+  .mass-time {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.4rem; font-weight: 600; color: var(--copper);
+  }
+  .mass-intention {
+    font-size: 1.05rem; color: var(--ink); line-height: 1.5;
+  }
 
   /* FOOTER */
   footer.site{background:var(--ink);color:#d8cdb6;padding:60px 0 30px;margin-top:40px}
@@ -95,8 +164,6 @@
   .footer-bottom{border-top:1px solid rgba(216,205,182,.14);margin-top:40px;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:.85rem;color:rgba(216,205,182,.55)}
   @media(max-width:980px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
   @media(max-width:560px){.footer-grid{grid-template-columns:1fr}}
-
-  @media(max-width:880px){.contact-grid{grid-template-columns:1fr}.bank-cards{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -128,12 +195,12 @@
       </a>
       <nav class="main">
         <a href="../index.html">Strona&nbsp;główna</a>
-        <a href="../index.html#historia">Historia</a>
+        <a href="historia.html">Historia</a>
         <a href="duszpasterstwo.html">Duszpasterstwo</a>
         <a href="../index.html#wspolnota" class="has-sub">Wspólnota</a>
         <a href="../index.html#galeria" class="has-sub">Galeria</a>
         <a href="../index.html#aktualnosci">Aktualności</a>
-        <a href="kontakt.html" class="active">Kontakt</a>
+        <a href="kontakt.html">Kontakt</a>
       </nav>
       <button class="menu-toggle" aria-label="Menu">
         <svg width="28" height="28" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
@@ -144,86 +211,142 @@
 </div><!-- /sticky-header -->
 
 <div class="page-hero">
-  <div class="container">
-    <span class="eyebrow">Skontaktuj się z nami</span>
-    <h1>Kontakt z parafią</h1>
-    <p class="lead">Jesteśmy do Twojej dyspozycji w sprawach sakramentów, ofiar mszalnych i wszystkich potrzeb duszpasterskich</p>
+  <div class="container-narrow">
+    <span class="eyebrow">Porządek Nabożeństw</span>
+    <h1>Msze Święte i Intencje</h1>
+    <p class="lead">Zapraszamy do wspólnej modlitwy w naszym parafialnym kościele.</p>
   </div>
 </div>
 
-<div class="container-content contact-grid">
-
-  <div class="info-card">
-    <h2><svg width="22" height="22" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/></svg>Adres i kontakt</h2>
-    <div class="row">
-      <div class="ic"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/></svg></div>
-      <div>
-        <div class="lbl">Adres</div>
-        <div class="val">ul. 3-go Maja 36<small>44-230 Czerwionka-Leszczyny</small></div>
+<div class="container">
+  
+  <div class="schedule-box">
+    <h3>Stałyy Porządek Mszy Świętych</h3>
+    <div class="schedule-grid">
+      <div class="schedule-col">
+        <h4>Niedziele i Święta</h4>
+        <div class="schedule-times">8:00<br>11:00<br>17:00</div>
       </div>
-    </div>
-    <div class="row">
-      <div class="ic"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.61 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58z"/></svg></div>
-      <div>
-        <div class="lbl">Telefon</div>
-        <div class="val">32 43 12 992</div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="ic"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zM1 11.105l4.708-2.897L1 5.383zm.034.706 5.07-3.117L8 9.671l1.896-1.137 5.07 3.117A1 1 0 0 1 14 12H2a1 1 0 0 1-.966-.189z"/></svg></div>
-      <div>
-        <div class="lbl">E-mail kancelarii</div>
-        <div class="val">kancelaria@nspjczerwionka.pl</div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="ic"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/></svg></div>
-      <div>
-        <div class="lbl">Proboszcz</div>
-        <div class="val">ks. Tomasz Żołna<small>od 9 czerwca 2024 r.</small></div>
+      <div class="schedule-col">
+        <h4>Dni powszednie</h4>
+        <div class="schedule-times">7:00<br>17:00</div>
       </div>
     </div>
   </div>
 
-  <div class="info-card">
-    <h2><svg width="22" height="22" fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/></svg>Godziny kancelarii</h2>
-    <table class="hours-tbl">
-      <tr><td>Poniedziałek</td><td>17:30 – 18:30</td></tr>
-      <tr><td>Wtorek</td><td>—</td></tr>
-      <tr><td>Środa</td><td>17:30 – 18:30</td></tr>
-      <tr><td>Czwartek</td><td>7:30 – 8:30<br>17:30 – 18:30</td></tr>
-      <tr><td>Piątek</td><td>—</td></tr>
-      <tr><td>Sobota</td><td>—</td></tr>
-      <tr><td>Niedziela</td><td>—</td></tr>
-    </table>
-    <p style="margin-top:18px;padding:14px;background:#fff;border-left:3px solid var(--copper);font-size:.9rem;color:var(--ink)">
-      <b>W okresie wakacji i ferii zimowych:</b><br>
-      Pn i śr 17:30 – 18:30 · Cz 7:30 – 8:30
-    </p>
+  <div class="intentions-section">
+    <div class="intentions-header">
+      <h2>Intencje Mszalne</h2>
+      <div class="intentions-week">Tydzień 11–17 maja 2026</div>
+    </div>
+
+    <div class="day-card" tabindex="0">
+      <div class="day-header">
+        <span class="day-date">Poniedziałek, 11 maja</span>
+        <span class="day-saint">św. Filipa i Jakuba</span>
+      </div>
+      <div class="mass-row">
+        <div class="mass-time">7:00</div>
+        <div class="mass-intention">+ Stefania Nowak — w 5. rocznicę śmierci, prosi rodzina</div>
+      </div>
+      <div class="mass-row">
+        <div class="mass-time">17:00</div>
+        <div class="mass-intention">+ Józef Czerwiński, jego żona Maria oraz dusze w czyśćcu cierpiące</div>
+      </div>
+    </div>
+
+    <div class="day-card" tabindex="0">
+      <div class="day-header">
+        <span class="day-date">Wtorek, 12 maja</span>
+        <span class="day-saint">św. Pankracego</span>
+      </div>
+      <div class="mass-row">
+        <div class="mass-time">7:00</div>
+        <div class="mass-intention">Za parafian o zdrowie i Boże błogosławieństwo</div>
+      </div>
+      <div class="mass-row">
+        <div class="mass-time">17:00</div>
+        <div class="mass-intention">+ Helena i Władysław Kowalscy — od dzieci i wnuków</div>
+      </div>
+    </div>
+
+    <div class="day-card today" tabindex="0">
+      <div class="day-header">
+        <span class="day-date">Środa, 13 maja (Dziś)</span>
+        <span class="day-saint">NMP Fatimskiej</span>
+      </div>
+      <div class="mass-row">
+        <div class="mass-time">7:00</div>
+        <div class="mass-intention">+ Edward Mazur — od żony i dzieci</div>
+      </div>
+      <div class="mass-row">
+        <div class="mass-time">17:00</div>
+        <div class="mass-intention">Za parafian o pokój Boży w rodzinach</div>
+      </div>
+    </div>
+
+    <div class="day-card" tabindex="0">
+      <div class="day-header">
+        <span class="day-date">Czwartek, 14 maja</span>
+        <span class="day-saint">św. Macieja Apostoła</span>
+      </div>
+      <div class="mass-row">
+        <div class="mass-time">7:00</div>
+        <div class="mass-intention">+ Anna Kędzierska — w 30. dniu po pogrzebie</div>
+      </div>
+    </div>
+
+    <div class="day-card" tabindex="0">
+      <div class="day-header">
+        <span class="day-date">Piątek, 15 maja</span>
+        <span class="day-saint">św. Zofii</span>
+      </div>
+      <div class="mass-row">
+        <div class="mass-time">7:00</div>
+        <div class="mass-intention">+ Zofia Wójcik — w dniu imienin</div>
+      </div>
+      <div class="mass-row">
+        <div class="mass-time">17:00</div>
+        <div class="mass-intention">+ Krzysztof Brzeziński, w 10. rocznicę śmierci</div>
+      </div>
+    </div>
+
+    <div class="day-card" tabindex="0">
+      <div class="day-header">
+        <span class="day-date">Sobota, 16 maja</span>
+        <span class="day-saint">św. Andrzeja Boboli</span>
+      </div>
+      <div class="mass-row">
+        <div class="mass-time">7:00</div>
+        <div class="mass-intention">Za zmarłych członków Żywego Różańca</div>
+      </div>
+      <div class="mass-row">
+        <div class="mass-time">17:00</div>
+        <div class="mass-intention">+ Władysław Pieczka, jego rodzice i rodzeństwo</div>
+      </div>
+    </div>
+
+    <div class="day-card" tabindex="0">
+      <div class="day-header">
+        <span class="day-date">Niedziela, 17 maja</span>
+        <span class="day-saint">VI Niedziela Wielkanocna · Bierzmowanie</span>
+      </div>
+      <div class="mass-row">
+        <div class="mass-time">8:00</div>
+        <div class="mass-intention">Za parafian</div>
+      </div>
+      <div class="mass-row">
+        <div class="mass-time">11:00</div>
+        <div class="mass-intention">W intencji bierzmowanych, ich rodzin i świadków</div>
+      </div>
+      <div class="mass-row">
+        <div class="mass-time">17:00</div>
+        <div class="mass-intention">+ Małgorzata Janicka — od męża i synów</div>
+      </div>
+    </div>
+
   </div>
 
-</div>
-
-<div class="container-content" id="konta">
-  <div style="text-align:center;margin-bottom:24px">
-    <span class="eyebrow">Wsparcie parafii</span>
-    <h2 style="font-size:1.8rem;margin:.4rem 0">Numery kont bankowych</h2>
-  </div>
-</div>
-
-<div class="container-content bank-cards">
-  <div class="bank-card">
-    <span class="eyebrow">Konto główne</span>
-    <h3>Bank Spółdzielczy</h3>
-    <div class="nr">11 8454 1095 2003 0017 7467 0003</div>
-    <div class="note">Konto ogólne parafii — utrzymanie, remonty, działalność.</div>
-  </div>
-  <div class="bank-card">
-    <span class="eyebrow">Konto na intencje</span>
-    <h3>mBank</h3>
-    <div class="nr">18 1140 2004 0000 3902 8332 4667</div>
-    <div class="note">Konto na wpłaty ofiar za intencje mszalne.</div>
-  </div>
 </div>
 
 <footer class="site">
