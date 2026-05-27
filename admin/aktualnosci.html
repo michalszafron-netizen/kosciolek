@@ -73,21 +73,28 @@
       <div class="page-head">
         <div>
           <h1>Aktualności</h1>
-          <div class="lead">Wpisy widoczne publicznie na stronie parafii · wszystkich: <b>47</b></div>
+          <div class="lead">Wpisy widoczne publicznie na stronie parafii · wszystkich: <b id="news-total">0</b></div>
         </div>
         <div class="right">
-          <a href="aktualnosci-edit.html" class="btn btn-primary">
+          <a href="aktualnosci-edit.html?new=1" class="btn btn-primary">
             <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg>
             Dodaj aktualność
           </a>
         </div>
       </div>
 
+      <!-- POTWIERDZENIE USUNIĘCIA -->
+      <div id="del-banner" style="display:none;background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:12px 16px;margin-bottom:14px;display:none;align-items:center;gap:12px;font-size:.88rem">
+        <svg width="16" height="16" fill="#991b1b" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg>
+        <span id="del-banner-msg">Na pewno usunąć wpis?</span>
+        <button class="btn btn-danger sm" id="del-confirm-btn">Usuń</button>
+        <button class="btn btn-secondary sm" id="del-cancel-btn">Anuluj</button>
+      </div>
+
       <div class="filters">
-        <span class="tab active">Wszystkie (47)</span>
-        <span class="tab">Opublikowane (42)</span>
-        <span class="tab">Szkice (4)</span>
-        <span class="tab">Archiwum (1)</span>
+        <span class="tab active" data-filter="all">Wszystkie (<span class="f-count-all">0</span>)</span>
+        <span class="tab" data-filter="published">Opublikowane (<span class="f-count-pub">0</span>)</span>
+        <span class="tab" data-filter="draft">Szkice (<span class="f-count-draft">0</span>)</span>
         <div class="sep"></div>
         <select>
           <option>Wszystkie kategorie</option>
@@ -120,164 +127,227 @@
             <th style="text-align:right">Akcje</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td>
-              <div class="title-cell">
-                <div class="thumb" style="background-image:url('../public/img/event-wizytacja-1.jpg')"></div>
-                <div class="meta">
-                  <b>Wizytacja kanoniczna abp. Galbasa</b>
-                  <span class="sub">Wzbogacona o 14 zdjęć · 920 odsłon</span>
-                </div>
-              </div>
-            </td>
-            <td><span class="pill-badge pub">● Opublikowany</span></td>
-            <td>Wydarzenia</td>
-            <td>9 maja 2026</td>
-            <td>ks. Tomasz</td>
-            <td>
-              <div class="row-actions">
-                <a href="aktualnosci-edit.html" title="Edytuj"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/></svg></a>
-                <button title="Podgląd"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8"/></svg></button>
-                <button title="Usuń"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg></button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td>
-              <div class="title-cell">
-                <div class="thumb" style="background-image:url('../public/img/budowa-2.jpg')"></div>
-                <div class="meta">
-                  <b>Kolejny etap budowy — wieża</b>
-                  <span class="sub">5 zdjęć · 580 odsłon</span>
-                </div>
-              </div>
-            </td>
-            <td><span class="pill-badge pub">● Opublikowany</span></td>
-            <td>Budowa kościoła</td>
-            <td>5 maja 2026</td>
-            <td>ks. Tomasz</td>
-            <td><div class="row-actions"><a href="aktualnosci-edit.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168z"/></svg></a><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8"/></svg></button><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td>
-              <div class="title-cell">
-                <div class="thumb" style="background-image:url('../public/img/hero-2.jpg')"></div>
-                <div class="meta">
-                  <b>100 lat Parafii — fotorelacja z uroczystości</b>
-                  <span class="sub">38 zdjęć · 2 410 odsłon · 🔥 najczęściej oglądane</span>
-                </div>
-              </div>
-            </td>
-            <td><span class="pill-badge pub">● Opublikowany</span></td>
-            <td>Wydarzenia</td>
-            <td>3 sierpnia 2025</td>
-            <td>ks. Tomasz</td>
-            <td><div class="row-actions"><a href="aktualnosci-edit.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168z"/></svg></a><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8"/></svg></button><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td>
-              <div class="title-cell">
-                <div class="thumb" style="background-image:url('../public/img/event-odpust-1.jpg')"></div>
-                <div class="meta">
-                  <b>Pielgrzymka do Rud — relacja księdza</b>
-                  <span class="sub">Tekst + 8 zdjęć · 340 odsłon</span>
-                </div>
-              </div>
-            </td>
-            <td><span class="pill-badge draft">● Szkic</span></td>
-            <td>Pielgrzymki</td>
-            <td>—</td>
-            <td>ks. Paweł O.</td>
-            <td><div class="row-actions"><a href="aktualnosci-edit.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3"/></svg></a><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5"/></svg></button><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td>
-              <div class="title-cell">
-                <div class="thumb" style="background-image:url('../public/img/event-pozegnanie-1.jpg')"></div>
-                <div class="meta">
-                  <b>Bierzmowanie 2025 — zaproszenie dla młodzieży</b>
-                  <span class="sub">Tekst · 192 odsłony</span>
-                </div>
-              </div>
-            </td>
-            <td><span class="pill-badge pub">● Opublikowany</span></td>
-            <td>Sakramenty</td>
-            <td>14 kwietnia 2025</td>
-            <td>ks. Paweł O.</td>
-            <td><div class="row-actions"><a href="aktualnosci-edit.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3"/></svg></a><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5"/></svg></button><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td>
-              <div class="title-cell">
-                <div class="thumb" style="background-image:url('../public/img/budowa-4.jpg')"></div>
-                <div class="meta">
-                  <b>Płyty elewacji — postęp prac</b>
-                  <span class="sub">12 zdjęć · 405 odsłon</span>
-                </div>
-              </div>
-            </td>
-            <td><span class="pill-badge pub">● Opublikowany</span></td>
-            <td>Budowa kościoła</td>
-            <td>27 marca 2025</td>
-            <td>ks. Tomasz</td>
-            <td><div class="row-actions"><a href="aktualnosci-edit.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3"/></svg></a><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5"/></svg></button><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td>
-              <div class="title-cell">
-                <div class="thumb" style="background-image:url('../public/img/event-odpust-2.jpg')"></div>
-                <div class="meta">
-                  <b>Boże Ciało 2024 — procesja przez Czerwionkę</b>
-                  <span class="sub">9 zdjęć · 1 120 odsłon</span>
-                </div>
-              </div>
-            </td>
-            <td><span class="pill-badge pub">● Opublikowany</span></td>
-            <td>Wydarzenia</td>
-            <td>30 maja 2024</td>
-            <td>ks. Tomasz</td>
-            <td><div class="row-actions"><a href="aktualnosci-edit.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3"/></svg></a><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5"/></svg></button><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td>
-              <div class="title-cell">
-                <div class="thumb" style="background-image:url('../public/img/noclegownia.jpg')"></div>
-                <div class="meta">
-                  <b>Schlafhaus — historia starego kościoła</b>
-                  <span class="sub">Esej historyczny · Marian Wójcik · 286 odsłon</span>
-                </div>
-              </div>
-            </td>
-            <td><span class="pill-badge pub">● Opublikowany</span></td>
-            <td>Wydarzenia</td>
-            <td>22 czerwca 2023</td>
-            <td>ks. Tomasz</td>
-            <td><div class="row-actions"><a href="aktualnosci-edit.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3"/></svg></a><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5"/></svg></button><button><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6"/></svg></button></div></td>
-          </tr>
+        <tbody id="news-tbody">
+          <!-- wypelniane dynamicznie przez JS -->
         </tbody>
       </table>
 
-      <div class="pagination">
-        <span>← Poprzednia</span>
-        <a href="#" class="active">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">Następna →</a>
-      </div>
+      <div class="pagination" id="pagination"></div>
 
     </div>
   </div>
 </div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" style="position:fixed;bottom:24px;right:24px;background:var(--ink);color:#fff;padding:10px 18px;border-radius:8px;font-size:.88rem;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9999"><span id="toast-msg"></span></div>
+<style>
+.toast.show{opacity:1!important}
+.toast.success{background:#166534!important}
+.toast.error{background:#991b1b!important}
+</style>
+
+<script>
+// ════════════════════════════════════════════════════════
+//  DATA STORE — kanoniczny seed aktualności
+//  Tożsamy z aktualnosci-edit.html, index.html, strony/aktualnosci.html
+//  Bump DATA_VERSION przy każdej zmianie struktury danych.
+// ════════════════════════════════════════════════════════
+const LS_KEY = 'nspj_aktualnosci';
+const LS_VER_KEY = 'nspj_aktualnosci_v';
+const DATA_VERSION = 2;
+
+const DEFAULT_NEWS = [
+  { id:'news-wizytacja', title:'Wizytacja kanoniczna abp. Galbasa', date:'2026-05-09', category:'Wydarzenia', status:'published', author:'ks. Tomasz Żołna',
+    excerpt:'Ksiądz arcybiskup Adrian Galbas odwiedził naszą parafię w ramach wizytacji kanonicznej. Spotkał się z radą parafialną, grupami modlitewnymi i młodzieżą przygotowującą się do bierzmowania.',
+    content:'<p>W piątek 9 maja 2026 roku nasza parafia gościła Jego Ekscelencję ks. arcybiskupa Adriana Galbasa, metropolitę katowickiego, w ramach wizytacji kanonicznej.</p><h3>Spotkania z grupami</h3><p>Ksiądz arcybiskup spotkał się z Radą Parafialną, grupami modlitewnymi oraz młodzieżą przygotowującą się do bierzmowania. Zwiedził plac budowy nowego kościoła, wyrażając wdzięczność wszystkim ofiarodawcom.</p><p>Bóg zapłać wszystkim za obecność i piękne świadectwo wspólnoty.</p>',
+    image:'../public/img/event-wizytacja-1.jpg', tags:'wizytacja, arcybiskup, Galbas', featured:false, views:920, slug:'wizytacja-galbasa-2026' },
+  { id:'news-budowa-wieza', title:'Kolejny etap budowy — wieża', date:'2026-05-05', category:'Budowa kościoła', status:'published', author:'ks. Tomasz Żołna',
+    excerpt:'W październiku 2025 roku rozpoczęły się prace przy budowie wieży kościoła. Wykonawcą jest firma z Czerwionki, projekt według architekta Grzegorza Tkacza.',
+    content:'<p>W październiku 2025 roku przy budującej się nowej świątyni parafii NSPJ w Czerwionce-Leszczynach rozpoczął się kolejny etap prac — budowa wieży kościelnej.</p><h3>Projekt i wykonawca</h3><p>Projekt architektoniczny wieży przygotował architekt Grzegorz Tkacz. Wykonawcą jest firma budowlana z terenu Czerwionki-Leszczyn.</p><h3>Harmonogram</h3><p>Najbliższym kamieniem milowym jest przekazanie hełmu wieży. Parafianie mogą wspierać budowę zakupem symbolicznej płyty elewacji.</p>',
+    image:'../public/img/budowa-2.jpg', tags:'budowa, wieża, kościół', featured:false, views:580, slug:'budowa-wieza-2026' },
+  { id:'news-100lat', title:'100 lat Parafii — fotorelacja z uroczystości', date:'2025-08-03', category:'Wydarzenia', status:'published', author:'ks. Tomasz Żołna',
+    excerpt:'Jubileuszowa uroczystość stulecia parafii zgromadziła setki parafian. Relacja z obchodów 100-lecia.',
+    content:'<p>W sierpniu 2025 roku parafia obchodziła uroczyście swoje 100-lecie. Jubileuszowa Msza Święta pod przewodnictwem biskupa pomocniczego zgromadziła ponad 500 wiernych.</p><p>Po uroczystości odbyła się wystawa historyczna oraz wspólny obiad parafialny na placu przed kościołem.</p>',
+    image:'../public/img/hero-2.jpg', tags:'100 lat, jubileusz, historia', featured:false, views:2410, slug:'100-lat-parafii-2025' },
+  { id:'news-pielgrzymka', title:'Pielgrzymka do Rud — relacja księdza', date:'', category:'Pielgrzymki', status:'draft', author:'ks. Paweł Olszewski',
+    excerpt:'Tekst relacji z pielgrzymki do opactwa cystersów w Rudach. Artykuł w przygotowaniu.',
+    content:'<p>Artykuł w przygotowaniu…</p>',
+    image:'../public/img/event-odpust-1.jpg', tags:'pielgrzymka, Rudy, cystersi', featured:false, views:340, slug:'pielgrzymka-rudy' },
+  { id:'news-bierzmowanie', title:'Bierzmowanie 2025 — zaproszenie dla młodzieży', date:'2025-04-14', category:'Sakramenty', status:'published', author:'ks. Paweł Olszewski',
+    excerpt:'Zaproszenie dla młodych parafian do przystąpienia do sakramentu bierzmowania w roku 2025.',
+    content:'<p>Zapraszamy wszystkich młodych parafian urodzonych w roku 2009 i 2010 do zgłoszenia się na przygotowanie do sakramentu bierzmowania.</p><p>Spotkania przygotowawcze w każdy wtorek o godz. 17:30 w salce parafialnej. Kontakt: kancelaria parafialna.</p>',
+    image:'../public/img/event-pozegnanie-1.jpg', tags:'bierzmowanie, młodzież, sakrament', featured:false, views:192, slug:'bierzmowanie-2025' },
+  { id:'news-plytyelewacji', title:'Płyty elewacji — postęp prac', date:'2025-03-27', category:'Budowa kościoła', status:'published', author:'ks. Tomasz Żołna',
+    excerpt:'Relacja z postępu prac przy montażu płyt elewacyjnych na nowym kościele.',
+    content:'<p>Trwają intensywne prace przy montażu płyt elewacji zewnętrznej nowego kościoła. Dotychczas zamontowano 87 z 240 płyt.</p><p>Każdy parafian może wziąć udział w budowie poprzez zakup symbolicznej płyty — certyfikat do odbioru po Mszy świętej.</p>',
+    image:'../public/img/budowa-4.jpg', tags:'budowa, elewacja, postęp', featured:false, views:405, slug:'plyty-elewacji-2025' },
+  { id:'news-bozecial0', title:'Boże Ciało 2024 — procesja przez Czerwionkę', date:'2024-05-30', category:'Wydarzenia', status:'published', author:'ks. Tomasz Żołna',
+    excerpt:'Procesja Bożego Ciała przeszła tradycyjnymi ulicami Czerwionki-Leszczyn. Wzięło w niej udział ponad 300 wiernych.',
+    content:'<p>W uroczystość Bożego Ciała parafianie przeszli w procesji przez główne ulice Czerwionki-Leszczyn. Przy czterech ołtarzach ustawiono ozdobione kwiatami stoły, przy których odprawiono modlitwy.</p><p>W procesji wzięło udział około 300 wiernych, a oprawę muzyczną zapewniła schola parafialna.</p>',
+    image:'../public/img/event-odpust-2.jpg', tags:'Boże Ciało, procesja, tradycja', featured:false, views:1120, slug:'boze-cialo-2024' },
+  { id:'news-schlafhaus', title:'Schlafhaus — historia starego kościoła', date:'2023-06-22', category:'Historia', status:'published', author:'Marian Wójcik',
+    excerpt:'Esej historyczny o dawnym kościele w Czerwionce — tajemnicze Schlafhaus i jego miejsce w dziejach parafii.',
+    content:'<p>Słowo „Schlafhaus" (dom snu) od pokoleń funkcjonowało wśród starszych mieszkańców Czerwionki na określenie starej świątyni parafialnej. Skąd ta nazwa?</p><p>Według lokalnej tradycji, w czasie wojen napoleońskich budynek kościoła służył jako schronisko dla żołnierzy. Stąd ironiczne określenie, które przylgnęło do świątyni na lata.</p>',
+    image:'../public/img/hero-3.jpg', tags:'historia, Schlafhaus, stary kościół', featured:false, views:286, slug:'schlafhaus-historia' }
+];
+
+function loadNews() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch(e) {}
+  return JSON.parse(JSON.stringify(DEFAULT_NEWS));
+}
+function saveNews(data) {
+  try { localStorage.setItem(LS_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+// Migracja: nadpisz localStorage gdy poprzednia wersja seedu była niespójna
+// (np. atrapy bez `content`, ASCII-zowane polskie znaki, błędne ścieżki).
+const storedVer = parseInt(localStorage.getItem(LS_VER_KEY) || '0', 10);
+if (storedVer < DATA_VERSION) {
+  saveNews(DEFAULT_NEWS);
+  localStorage.setItem(LS_VER_KEY, String(DATA_VERSION));
+}
+
+let allNews = loadNews();
+let currentFilter = 'all';
+let pendingDeleteId = null;
+
+function fmtDate(iso) {
+  if (!iso) return '—';
+  try { return new Date(iso + 'T12:00:00').toLocaleDateString('pl-PL', {day:'numeric', month:'long', year:'numeric'}); } catch(e) { return iso; }
+}
+
+// ════════════════════════════════════════════════════════
+//  RENDER TABLE
+// ════════════════════════════════════════════════════════
+const SVG_EDIT = '<svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/></svg>';
+const SVG_EYE = '<svg fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/><path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/></svg>';
+const SVG_DEL = '<svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg>';
+
+function renderTable() {
+  const pub = allNews.filter(a => a.status === 'published').length;
+  const draft = allNews.filter(a => a.status === 'draft').length;
+  document.getElementById('news-total').textContent = allNews.length;
+  document.querySelectorAll('.f-count-all').forEach(el => el.textContent = allNews.length);
+  document.querySelectorAll('.f-count-pub').forEach(el => el.textContent = pub);
+  document.querySelectorAll('.f-count-draft').forEach(el => el.textContent = draft);
+
+  const filtered = allNews.filter(a => {
+    if (currentFilter === 'published') return a.status === 'published';
+    if (currentFilter === 'draft') return a.status === 'draft';
+    return true;
+  });
+
+  const tbody = document.getElementById('news-tbody');
+  if (!filtered.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--ink-soft);padding:28px">Brak wpisów w tej kategorii</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = filtered.map(a => {
+    const isPub = a.status === 'published';
+    const authorShort = (a.author || '')
+      .replace('ks. Tomasz Żołna', 'ks. Tomasz')
+      .replace('ks. Paweł Olszewski', 'ks. Paweł O.');
+    const sub = (a.views ? a.views + ' odsłon' : 'brak odsłon') + (a.featured ? ' · ★ wyróżniony' : '');
+    const imgUrl = (a.image || '').replace(/"/g, '&quot;');
+    return `<tr>
+      <td><input type="checkbox"></td>
+      <td><div class="title-cell">
+        <div class="thumb" style="background-image:url(&quot;${imgUrl}&quot;)"></div>
+        <div class="meta"><b>${a.title}</b><span class="sub">${sub}</span></div>
+      </div></td>
+      <td><span class="pill-badge ${isPub ? 'pub' : 'draft'}">&#9679; ${isPub ? 'Opublikowany' : 'Szkic'}</span></td>
+      <td>${a.category || '—'}</td>
+      <td>${fmtDate(a.date)}</td>
+      <td>${authorShort}</td>
+      <td><div class="row-actions">
+        <a href="aktualnosci-edit.html?id=${a.id}" title="Edytuj">${SVG_EDIT}</a>
+        <button title="Podgląd" data-preview="${a.id}">${SVG_EYE}</button>
+        <button title="Usuń" data-delete="${a.id}">${SVG_DEL}</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+
+  tbody.querySelectorAll('[data-delete]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      pendingDeleteId = btn.dataset.delete;
+      const art = allNews.find(a => a.id === pendingDeleteId);
+      document.getElementById('del-banner-msg').textContent = `Na pewno usunąć: „${art ? art.title : 'wpis'}"?`;
+      const banner = document.getElementById('del-banner');
+      banner.style.display = 'flex';
+      banner.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
+  });
+  tbody.querySelectorAll('[data-preview]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      window.open('../strony/aktualnosci.html#' + btn.dataset.preview, '_blank');
+    });
+  });
+}
+
+// ════════════════════════════════════════════════════════
+//  FILTERS
+// ════════════════════════════════════════════════════════
+document.querySelectorAll('.tab[data-filter]').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab[data-filter]').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentFilter = tab.dataset.filter;
+    renderTable();
+  });
+});
+
+// ════════════════════════════════════════════════════════
+//  DELETE CONFIRM
+// ════════════════════════════════════════════════════════
+document.getElementById('del-confirm-btn').addEventListener('click', () => {
+  if (!pendingDeleteId) return;
+  allNews = allNews.filter(a => a.id !== pendingDeleteId);
+  saveNews(allNews);
+  pendingDeleteId = null;
+  document.getElementById('del-banner').style.display = 'none';
+  renderTable();
+  showToast('Wpis został usunięty', 'success');
+});
+document.getElementById('del-cancel-btn').addEventListener('click', () => {
+  pendingDeleteId = null;
+  document.getElementById('del-banner').style.display = 'none';
+});
+
+// ════════════════════════════════════════════════════════
+//  SEARCH
+// ════════════════════════════════════════════════════════
+document.querySelector('.filters .search-in input').addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  document.querySelectorAll('#news-tbody tr').forEach(row => {
+    const b = row.querySelector('b');
+    row.style.display = (!b || b.textContent.toLowerCase().includes(q)) ? '' : 'none';
+  });
+});
+
+// ════════════════════════════════════════════════════════
+//  TOAST
+// ════════════════════════════════════════════════════════
+let toastTimer = null;
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.className = 'show ' + (type || 'success');
+  document.getElementById('toast-msg').textContent = msg;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.className = ''; }, 3000);
+}
+
+// ════════════════════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════════════════════
+renderTable();
+</script>
+
 </body>
 </html>

@@ -7,15 +7,111 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/admin.css">
 <style>
-  .ann-layout{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start}
+  /* ── LAYOUT ── */
+  .ann-layout{display:grid;grid-template-columns:1fr 300px;gap:18px;align-items:start}
+  @media(max-width:980px){.ann-layout{grid-template-columns:1fr}}
+
+  /* ── ARCHIVE LIST ── */
   .ann-list{background:var(--white);border:1px solid var(--line);border-radius:8px;overflow:hidden}
-  .ann-item{padding:14px 18px;border-bottom:1px solid var(--line);cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center}
+  .ann-item{padding:12px 16px;border-bottom:1px solid var(--line);cursor:pointer;display:flex;justify-content:space-between;gap:10px;align-items:center;transition:background .12s}
   .ann-item:last-child{border-bottom:none}
   .ann-item:hover{background:var(--bg)}
-  .ann-item.active{background:var(--bg);border-left:3px solid var(--burgundy);padding-left:15px}
-  .ann-item .title{font-family:'Playfair Display',serif;font-size:1.02rem;color:var(--ink);margin-bottom:3px}
-  .ann-item .date{font-size:.78rem;color:var(--ink-soft)}
-  @media(max-width:980px){.ann-layout{grid-template-columns:1fr}}
+  .ann-item.active{background:var(--bg);border-left:3px solid var(--burgundy);padding-left:13px}
+  .ann-item .title{font-family:'Playfair Display',serif;font-size:.97rem;color:var(--ink);margin-bottom:2px}
+  .ann-item .date{font-size:.76rem;color:var(--ink-soft)}
+  .status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .status-dot.pub{background:#22c55e}
+  .status-dot.draft{background:#f59e0b}
+
+  /* ── EDITOR CARD ── */
+  .editor-card{background:var(--white);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .editor-card-head{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .editor-title-input{font-family:'Playfair Display',serif;font-size:1.12rem;font-weight:600;color:var(--ink);border:none;background:transparent;outline:none;width:100%;padding:0;min-width:0}
+  .editor-title-input::placeholder{color:var(--ink-soft)}
+  .editor-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:4px}
+  .editor-meta input[type="date"]{font-family:'Lato',sans-serif;font-size:.8rem;color:var(--ink-soft);border:1px solid var(--line);border-radius:4px;padding:3px 8px;background:var(--white);outline:none;cursor:pointer}
+  .editor-meta input[type="date"]:focus{border-color:var(--burgundy)}
+  .status-badge{display:inline-flex;align-items:center;gap:5px;font-size:.75rem;font-weight:700;padding:3px 10px;border-radius:20px;cursor:pointer;border:none;transition:all .15s;font-family:'Lato',sans-serif}
+  .status-badge.pub{background:#dcfce7;color:#15803d}
+  .status-badge.draft{background:#fef3c7;color:#92400e}
+  .status-badge:hover{filter:brightness(.94)}
+
+  /* ── TOOLBAR ── */
+  .editor-toolbar{display:flex;align-items:center;gap:2px;padding:8px 12px;background:var(--bg);border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .tb-btn{width:32px;height:30px;border:none;background:transparent;border-radius:4px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:.88rem;color:var(--ink-soft);font-family:'Lato',sans-serif;transition:all .12s;position:relative}
+  .tb-btn:hover{background:var(--line);color:var(--ink)}
+  .tb-btn.active{background:var(--burgundy);color:#fff}
+  .tb-sep{width:1px;height:20px;background:var(--line);margin:0 4px;flex-shrink:0}
+  .tb-btn-wide{width:auto;padding:0 8px;font-size:.78rem;font-weight:700}
+
+  /* ── EDITOR BODY ── */
+  .editor-content{
+    min-height:360px;padding:20px 24px;outline:none;
+    font-family:'Lato',sans-serif;font-size:.97rem;line-height:1.85;color:var(--ink);
+  }
+  .editor-content:focus{box-shadow:inset 0 0 0 2px rgba(122,31,43,.12)}
+  .editor-content p{margin:0 0 .8rem}
+  .editor-content p:last-child{margin-bottom:0}
+  .editor-content h2{font-family:'Playfair Display',serif;font-size:1.3rem;margin:1.4rem 0 .5rem;color:var(--burgundy)}
+  .editor-content h3{font-family:'Playfair Display',serif;font-size:1.1rem;margin:1.2rem 0 .4rem}
+  .placeholder-hint{color:var(--ink-soft);font-style:italic;pointer-events:none}
+
+  /* ── FOOTER BAR ── */
+  .editor-footer{padding:14px 20px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--bg)}
+  .editor-footer-left{display:flex;align-items:center;gap:8px}
+  .editor-footer-right{display:flex;align-items:center;gap:8px}
+  .views-info{font-size:.78rem;color:var(--ink-soft)}
+
+  /* ── FEATURED BUTTON ── */
+  .btn-feature{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:6px;border:1.5px solid var(--line);background:var(--white);color:var(--ink-soft);font-size:.8rem;font-family:'Lato',sans-serif;cursor:pointer;transition:all .15s;white-space:nowrap}
+  .btn-feature:hover{border-color:var(--copper);color:var(--copper)}
+  .btn-feature.is-featured{background:#fef9ec;border-color:var(--copper);color:#92400e;font-weight:700}
+  .btn-feature .star{font-size:.95rem}
+
+  /* ── STAR IN ARCHIVE LIST ── */
+  .feat-star{font-size:.85rem;color:var(--copper);flex-shrink:0;margin-right:2px}
+  .feat-star.hidden{visibility:hidden}
+
+  /* ── TOAST ── */
+  #toast{
+    position:fixed;bottom:28px;right:28px;z-index:9999;
+    background:var(--ink);color:#fff;padding:13px 20px;border-radius:8px;
+    font-size:.88rem;font-weight:700;display:flex;align-items:center;gap:10px;
+    transform:translateY(80px);opacity:0;transition:all .25s cubic-bezier(.34,1.56,.64,1);
+    pointer-events:none;max-width:340px
+  }
+  #toast.show{transform:translateY(0);opacity:1}
+  #toast.success{background:#15803d}
+  #toast.error{background:#b91c1c}
+  #toast svg{flex-shrink:0}
+
+  /* ── MODAL: Nowe ogłoszenia ── */
+  .modal-overlay{
+    position:fixed;inset:0;z-index:500;background:rgba(43,37,32,.55);
+    display:flex;align-items:center;justify-content:center;padding:20px;
+    opacity:0;pointer-events:none;transition:opacity .2s
+  }
+  .modal-overlay.open{opacity:1;pointer-events:all}
+  .modal{background:var(--white);border-radius:10px;width:100%;max-width:520px;padding:28px;box-shadow:0 20px 60px rgba(43,37,32,.25)}
+  .modal h3{font-family:'Playfair Display',serif;font-size:1.4rem;margin:0 0 20px}
+  .modal label{display:block;font-size:.82rem;font-weight:700;color:var(--ink-soft);margin-bottom:5px;letter-spacing:.06em;text-transform:uppercase}
+  .modal input,.modal textarea{width:100%;padding:10px 13px;border:1px solid var(--line);border-radius:6px;font-family:'Lato',sans-serif;font-size:.95rem;color:var(--ink);background:var(--white);outline:none;box-sizing:border-box;transition:border-color .15s}
+  .modal input:focus,.modal textarea:focus{border-color:var(--burgundy)}
+  .modal textarea{min-height:120px;resize:vertical;line-height:1.6}
+  .modal-row{margin-bottom:16px}
+  .modal-foot{display:flex;gap:10px;justify-content:flex-end;margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}
+
+  /* ── INLINE LINK ── */
+  .view-on-site{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:700;color:var(--burgundy);text-decoration:none}
+  .view-on-site:hover{text-decoration:underline}
+
+  /* ── CONFIRM DELETE ── */
+  .del-confirm{display:none;align-items:center;gap:8px;background:#fef2f2;border:1px solid #fecaca;padding:10px 14px;border-radius:6px;margin-top:10px;font-size:.85rem;color:#991b1b}
+  .del-confirm.show{display:flex}
+
+  /* ── EXTRA BUTTON VARIANTS ── */
+  .btn-danger-ghost{background:transparent;color:#b91c1c;border-color:#fecaca}
+  .btn-danger-ghost:hover{background:#fef2f2;border-color:#f87171}
 </style>
 </head>
 <body>
@@ -52,7 +148,7 @@
           <div class="lead">Cotygodniowe ogłoszenia czytane podczas Mszy św. niedzielnej</div>
         </div>
         <div class="right">
-          <button class="btn btn-primary">
+          <button class="btn btn-primary" id="btn-new">
             <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg>
             Nowe ogłoszenia
           </button>
@@ -61,111 +157,109 @@
 
       <div class="ann-layout">
 
-        <!-- LEWA: edytor -->
+        <!-- ── LEWA: edytor ── -->
         <div>
-          <div class="card">
-            <div class="card-head" style="margin-bottom:0;border-bottom:1px solid var(--line);padding-bottom:14px">
-              <div>
-                <h3 style="margin-bottom:2px">V Niedziela Wielkanocna</h3>
-                <div style="font-size:.82rem;color:var(--ink-soft)">10 maja 2026 · opublikowane · 320 wyświetleń</div>
+          <div class="editor-card" id="editor-card">
+
+            <!-- Nagłówek: tytuł + data + status -->
+            <div class="editor-card-head">
+              <div style="flex:1;min-width:0">
+                <input type="text" class="editor-title-input" id="ed-title" placeholder="Tytuł ogłoszenia…" autocomplete="off">
+                <div class="editor-meta">
+                  <input type="date" id="ed-date">
+                  <button class="status-badge pub" id="ed-status-btn" title="Kliknij aby zmienić status"></button>
+                  <span class="views-info" id="ed-views"></span>
+                </div>
               </div>
-              <div style="display:flex;gap:8px">
-                <button class="btn btn-secondary sm">
-                  <svg fill="currentColor" viewBox="0 0 16 16"><path d="M5 0h6a2 2 0 0 1 2 2v4h1.5A1.5 1.5 0 0 1 16 7.5v4a1.5 1.5 0 0 1-1.5 1.5H13v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H1.5A1.5 1.5 0 0 1 0 11.5v-4A1.5 1.5 0 0 1 1.5 6H3V2a2 2 0 0 1 2-2"/></svg>
+              <div style="display:flex;gap:8px;align-items:center;flex-shrink:0">
+                <button class="btn btn-secondary sm" id="btn-pdf" title="Generuj PDF do druku">
+                  <svg width="13" height="13" fill="currentColor" viewBox="0 0 16 16"><path d="M5 0h6a2 2 0 0 1 2 2v4h1.5A1.5 1.5 0 0 1 16 7.5v4a1.5 1.5 0 0 1-1.5 1.5H13v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H1.5A1.5 1.5 0 0 1 0 11.5v-4A1.5 1.5 0 0 1 1.5 6H3V2a2 2 0 0 1 2-2m0 1a1 1 0 0 0-1 1v4h8V2a1 1 0 0 0-1-1zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zm1.5-3H3.5A.5.5 0 0 0 3 6.5v4A.5.5 0 0 0 3.5 11H5v-1a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1h1.5a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-.5-.5"/></svg>
                   PDF
                 </button>
-                <button class="btn btn-secondary sm">
-                  <svg fill="currentColor" viewBox="0 0 16 16"><path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2"/></svg>
-                  Word
+                <button class="btn btn-danger-ghost sm" id="btn-delete" title="Usuń ogłoszenie">
+                  <svg width="13" height="13" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg>
                 </button>
               </div>
             </div>
 
-            <div style="padding-top:18px">
-              <div class="editor-toolbar">
-                <button><b>B</b></button><button><i>I</i></button><button><u>U</u></button>
-                <div class="sep"></div>
-                <button><b>H2</b></button><button><b>H3</b></button>
-                <div class="sep"></div>
-                <button>•</button><button>1.</button><button>"</button>
+            <!-- Pasek narzędzi -->
+            <div class="editor-toolbar" id="toolbar">
+              <button class="tb-btn" data-cmd="bold" title="Pogrubienie (Ctrl+B)"><b>B</b></button>
+              <button class="tb-btn" data-cmd="italic" title="Kursywa (Ctrl+I)"><i>I</i></button>
+              <button class="tb-btn" data-cmd="underline" title="Podkreślenie (Ctrl+U)"><u>U</u></button>
+              <div class="tb-sep"></div>
+              <button class="tb-btn tb-btn-wide" data-cmd="formatBlock" data-val="h2" title="Nagłówek 2">H2</button>
+              <button class="tb-btn tb-btn-wide" data-cmd="formatBlock" data-val="h3" title="Nagłówek 3">H3</button>
+              <button class="tb-btn tb-btn-wide" data-cmd="formatBlock" data-val="p" title="Normalny akapit">¶</button>
+              <div class="tb-sep"></div>
+              <button class="tb-btn" data-cmd="insertUnorderedList" title="Lista punktowana">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/></svg>
+              </button>
+              <button class="tb-btn" data-cmd="insertOrderedList" title="Lista numerowana">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5"/><path d="M1.713 11.865v-.474H2c.217 0 .363-.137.363-.317 0-.185-.158-.31-.361-.31-.223 0-.367.152-.373.31h-.59c.016-.467.373-.787.986-.787.588-.002.954.291.957.703a.595.595 0 0 1-.492.594v.033a.615.615 0 0 1 .569.631c.003.533-.502.8-1.051.8-.656 0-1-.37-1.008-.794h.582c.008.178.186.306.422.309.254 0 .424-.145.422-.35-.002-.195-.155-.348-.414-.348h-.3zm-.004-4.699h-.604v-.035c0-.408.295-.844.958-.844.583 0 .96.326.96.756 0 .389-.257.617-.476.848l-.537.572v.03h1.054V9H1.143v-.395l.957-.99c.138-.142.293-.304.293-.508 0-.18-.147-.32-.342-.32a.33.33 0 0 0-.342.338v.041zM2.564 5h-.635V2.924h-.031l-.598.42v-.567l.629-.443h.635z"/></svg>
+              </button>
+              <div class="tb-sep"></div>
+              <button class="tb-btn" data-cmd="removeFormat" title="Usuń formatowanie">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8.21 1a.5.5 0 0 1 .477.349l3.227 10.956L13.5 11h.5a.5.5 0 0 1 0 1h-.5l-1.586 1.586a.5.5 0 0 1-.707 0L7.964 9.828A.5.5 0 0 1 8 9.5v-.038l-2.572-4.39L4.5 6.5a.5.5 0 0 1-.5-.5c0-.28.22-.5.5-.5l1.28-1.28L4.487 1.85A.5.5 0 0 1 4.5 1.5a.5.5 0 0 1 .357-.849h3.353z"/><path d="m12.5 2-1 1L9 5l-.5.5L7 4l.5-.5L10 1l1-1 1.5 2z"/></svg>
+              </button>
+              <button class="tb-btn" id="btn-undo" title="Cofnij (Ctrl+Z)">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/><path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/></svg>
+              </button>
+              <button class="tb-btn" id="btn-redo" title="Ponów (Ctrl+Y)">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/></svg>
+              </button>
+            </div>
+
+            <!-- Obszar edycji -->
+            <div class="editor-content" id="editor-body" contenteditable="true" spellcheck="true"></div>
+
+            <!-- Stopka edytora -->
+            <div class="editor-footer">
+              <div class="editor-footer-left" style="gap:10px">
+                <button class="btn-feature" id="btn-feature" title="Zaznacz to ogłoszenie jako wyświetlane na stronie głównej">
+                  <span class="star">★</span>
+                  <span id="btn-feature-label">Pokaż na stronie głównej</span>
+                </button>
+                <a href="#" class="view-on-site" id="view-on-site" target="_blank">
+                  <svg width="13" height="13" fill="currentColor" viewBox="0 0 16 16"><path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5H8.136a.5.5 0 0 0 .5-.5z"/><path d="M10.5 0a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0V.5a.5.5 0 0 0-.5-.5H10.5z"/></svg>
+                  Zobacz na stronie
+                </a>
               </div>
-              <div class="editor-content" contenteditable="true">
-                <p style="text-align:center;font-weight:700;font-family:'Playfair Display',serif;font-size:1.2rem">OGŁOSZENIA DUSZPASTERSKIE<br>V Niedziela Wielkanocna · 10 maja 2026</p>
-                <p>1. Dziś przeżywamy V Niedzielę Wielkanocną. Przed nami tydzień obchodzony jako tydzień modlitw o powołania kapłańskie i zakonne.</p>
-                <p>2. Bóg zapłać za ofiary na budowę nowego kościoła zebrane w minioną niedzielę — łącznie <b>14 380 zł</b>. Pan Bóg niech wynagrodzi wszystkim ofiarodawcom.</p>
-                <p>3. We <b>wtorek o godz. 18:00</b> w salce parafialnej zapraszamy na spotkanie Rady Parafialnej. W programie omówienie postępu prac przy budowie wieży.</p>
-                <p>4. W <b>sobotę o godz. 10:00</b> akcja porządkowa na cmentarzu parafialnym. Prosimy o zabranie rękawic i grabi. Po pracy planujemy wspólne ognisko.</p>
-                <p>5. W przyszłą niedzielę o godz. 11:00 odbędzie się <b>uroczystość bierzmowania</b>, której przewodniczył będzie ks. Biskup. Modlitwą obejmujemy 28 młodych ludzi przygotowujących się do przyjęcia tego sakramentu.</p>
-                <p>6. Przypominamy o możliwości zamawiania intencji mszalnych w kancelarii parafialnej w godzinach: poniedziałek, środa 17:30–18:30 oraz czwartek 7:30–8:30 i 17:30–18:30.</p>
-                <p>7. W minionym tygodniu odeszli z naszej wspólnoty: + Edward Mazur l. 84, + Anna Kędzierska l. 79. Polećmy ich Bożemu Miłosierdziu.</p>
-                <p style="font-style:italic;color:var(--ink-soft);font-size:.95rem">Z błogosławieństwem,<br>ks. Tomasz Żołna, proboszcz</p>
+              <div class="editor-footer-right">
+                <button class="btn btn-secondary sm" id="btn-save-draft">Zapisz szkic</button>
+                <button class="btn btn-primary sm" id="btn-publish">
+                  <svg width="13" height="13" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+                  Opublikuj
+                </button>
               </div>
             </div>
 
-            <div class="info-box" style="margin-top:18px">
-              <b>📄 Generowanie do druku</b>
-              Po kliknięciu „PDF" otrzymasz plik na 1 stronę A4 z logo parafii, gotowy do druku i czytania z ambony. Wersja Word pozwala na ostateczną korektę.
+            <!-- Potwierdzenie usunięcia -->
+            <div class="del-confirm" id="del-confirm">
+              <svg width="16" height="16" fill="#991b1b" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg>
+              <span>Na pewno usunąć to ogłoszenie?</span>
+              <button class="btn btn-danger sm" id="btn-delete-confirm">Usuń</button>
+              <button class="btn btn-secondary sm" id="btn-delete-cancel">Anuluj</button>
             </div>
+
+          </div><!-- /editor-card -->
+
+          <div class="info-box" style="margin-top:12px">
+            <b>💡 Wskazówka</b>
+            Zaznacz tekst i użyj przycisków na pasku, aby sformatować. Skróty: <b>Ctrl+B</b> pogrubienie, <b>Ctrl+I</b> kursywa, <b>Ctrl+U</b> podkreślenie, <b>Ctrl+S</b> zapisz.
           </div>
         </div>
 
-        <!-- PRAWA: archiwum -->
+        <!-- ── PRAWA: archiwum ── -->
         <div>
           <div class="card" style="padding:0">
-            <div class="card-head" style="padding:18px 18px 12px"><h3>Archiwum</h3></div>
-            <div class="ann-list" style="border:none;border-radius:0">
-              <div class="ann-item active">
-                <div>
-                  <div class="title">V Niedziela Wielkanocna</div>
-                  <div class="date">10 maja 2026 · opublikowane</div>
-                </div>
-                <span class="pill-badge pub">●</span>
-              </div>
-              <div class="ann-item">
-                <div>
-                  <div class="title">IV Niedziela Wielkanocna</div>
-                  <div class="date">3 maja 2026</div>
-                </div>
-                <span class="pill-badge pub">●</span>
-              </div>
-              <div class="ann-item">
-                <div>
-                  <div class="title">III Niedziela Wielkanocna</div>
-                  <div class="date">26 kwietnia 2026</div>
-                </div>
-                <span class="pill-badge pub">●</span>
-              </div>
-              <div class="ann-item">
-                <div>
-                  <div class="title">II Niedziela Wielkanocna · Miłosierdzia Bożego</div>
-                  <div class="date">19 kwietnia 2026</div>
-                </div>
-                <span class="pill-badge pub">●</span>
-              </div>
-              <div class="ann-item">
-                <div>
-                  <div class="title">Niedziela Wielkanocna</div>
-                  <div class="date">12 kwietnia 2026</div>
-                </div>
-                <span class="pill-badge pub">●</span>
-              </div>
-              <div class="ann-item">
-                <div>
-                  <div class="title">Niedziela Palmowa</div>
-                  <div class="date">5 kwietnia 2026</div>
-                </div>
-                <span class="pill-badge pub">●</span>
-              </div>
-              <div class="ann-item">
-                <div>
-                  <div class="title">V Niedziela Wielkiego Postu</div>
-                  <div class="date">29 marca 2026</div>
-                </div>
-                <span class="pill-badge pub">●</span>
-              </div>
+            <div class="card-head" style="padding:16px 18px 12px;display:flex;align-items:center;justify-content:space-between">
+              <h3>Archiwum</h3>
+              <span class="badge" id="archive-count"></span>
             </div>
-            <div style="padding:14px 18px;border-top:1px solid var(--line)">
-              <a href="#" class="btn btn-ghost sm" style="width:100%;justify-content:center">Pokaż wszystkie (47) →</a>
+            <div class="ann-list" id="ann-list" style="border:none;border-radius:0;max-height:520px;overflow-y:auto"></div>
+            <div style="padding:12px 16px;border-top:1px solid var(--line)">
+              <button class="btn btn-ghost sm" style="width:100%;justify-content:center" id="btn-show-all">Pokaż wszystkie →</button>
             </div>
           </div>
         </div>
@@ -174,5 +268,410 @@
     </div>
   </div>
 </div>
+
+<!-- ── MODAL: nowe ogłoszenia ── -->
+<div class="modal-overlay" id="modal-new">
+  <div class="modal">
+    <h3>Nowe ogłoszenia</h3>
+    <div class="modal-row">
+      <label for="new-title">Tytuł</label>
+      <input type="text" id="new-title" placeholder="np. VI Niedziela Wielkanocna" autocomplete="off">
+    </div>
+    <div class="modal-row">
+      <label for="new-date">Data niedzieli</label>
+      <input type="date" id="new-date">
+    </div>
+    <div class="modal-row">
+      <label for="new-content">Treść ogłoszeń (opcjonalnie — możesz uzupełnić w edytorze)</label>
+      <textarea id="new-content" placeholder="1. …&#10;2. …&#10;3. …"></textarea>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" id="modal-cancel">Anuluj</button>
+      <button class="btn btn-primary" id="modal-create">Utwórz szkic</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── TOAST ── -->
+<div id="toast">
+  <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" id="toast-icon"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+  <span id="toast-msg"></span>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════
+//  DATA — announcements stored in localStorage
+// ════════════════════════════════════════════════════════
+const DEFAULT_ANNOUNCEMENTS = [
+  {
+    id: 'ogl-2026-05-10',
+    title: 'V Niedziela Wielkanocna',
+    date: '2026-05-10',
+    status: 'published',
+    featured: true,
+    views: 320,
+    content: `<p style="text-align:center;font-weight:700;font-family:'Playfair Display',serif;font-size:1.2rem">OGŁOSZENIA DUSZPASTERSKIE<br>V Niedziela Wielkanocna · 10 maja 2026</p>
+<p>1. Dziś przeżywamy V Niedzielę Wielkanocną. Przed nami tydzień obchodzony jako tydzień modlitw o powołania kapłańskie i zakonne.</p>
+<p>2. Bóg zapłać za ofiary na budowę nowego kościoła zebrane w minioną niedzielę — łącznie <b>14 380 zł</b>. Pan Bóg niech wynagrodzi wszystkim ofiarodawcom.</p>
+<p>3. We <b>wtorek o godz. 18:00</b> w salce parafialnej zapraszamy na spotkanie Rady Parafialnej. W programie omówienie postępu prac przy budowie wieży.</p>
+<p>4. W <b>sobotę o godz. 10:00</b> akcja porządkowa na cmentarzu parafialnym. Prosimy o zabranie rękawic i grabi. Po pracy planujemy wspólne ognisko.</p>
+<p>5. W przyszłą niedzielę o godz. 11:00 odbędzie się <b>uroczystość bierzmowania</b>, której przewodniczył będzie ks. Biskup. Modlitwą obejmujemy 28 młodych ludzi przygotowujących się do przyjęcia tego sakramentu.</p>
+<p>6. Przypominamy o możliwości zamawiania intencji mszalnych w kancelarii parafialnej w godzinach: poniedziałek, środa 17:30–18:30 oraz czwartek 7:30–8:30 i 17:30–18:30.</p>
+<p>7. W minionym tygodniu odeszli z naszej wspólnoty: + Edward Mazur l. 84, + Anna Kędzierska l. 79. Polećmy ich Bożemu Miłosierdziu.</p>
+<p><em>Z błogosławieństwem,<br>ks. Tomasz Żołna, proboszcz</em></p>`
+  },
+  { id: 'ogl-2026-04-26', title: 'IV Niedziela Wielkanocna', date: '2026-04-26', status: 'published', views: 287,
+    content: `<p><b>OGŁOSZENIA DUSZPASTERSKIE — 26 kwietnia 2026</b></p><p>1. Dziś przeżywamy Niedzielę Dobrego Pasterza — będziemy modlić się o powołania do stanu kapłańskiego. Kolekta na pokrycie rachunków użytkowania kościoła.</p><p>2. Zapraszamy na nieszpory o 16:30.</p><p>3. W środę wspomnienie św. Katarzyny Sieneńskiej, patronki Europy.</p>` },
+  { id: 'ogl-2026-04-19', title: 'III Niedziela Wielkanocna', date: '2026-04-19', status: 'published', views: 241,
+    content: `<p><b>OGŁOSZENIA DUSZPASTERSKIE — 19 kwietnia 2026</b></p><p>1. Dziś przeżywamy Niedzielę Biblijną. Zachęcamy wiernych do lektury Pisma Świętego.</p>` },
+  { id: 'ogl-2026-04-12', title: 'II Niedziela Wielkanocna · Miłosierdzia Bożego', date: '2026-04-12', status: 'published', views: 198,
+    content: `<p><b>OGŁOSZENIA DUSZPASTERSKIE — 12 kwietnia 2026</b></p><p>1. Dziś oddajemy cześć Miłosierdziu Bożemu. Kolekta na Caritas.</p>` },
+  { id: 'ogl-2026-04-05', title: 'Niedziela Wielkanocna', date: '2026-04-05', status: 'published', views: 354,
+    content: `<p><b>OGŁOSZENIA DUSZPASTERSKIE — 5 kwietnia 2026</b></p><p>1. Dziś Uroczystość Zmartwychwstania Pańskiego — Wielkanoc. Alleluja!</p>` },
+  { id: 'ogl-2026-03-29', title: 'Niedziela Palmowa', date: '2026-03-29', status: 'published', views: 210,
+    content: `<p><b>OGŁOSZENIA DUSZPASTERSKIE — 29 marca 2026</b></p><p>1. Dziś rozpoczyna się Wielki Tydzień.</p>` },
+  { id: 'ogl-2026-03-22', title: 'V Niedziela Wielkiego Postu', date: '2026-03-22', status: 'published', views: 175,
+    content: `<p><b>OGŁOSZENIA DUSZPASTERSKIE — 22 marca 2026</b></p><p>1. Trwamy w pokucie i nawróceniu.</p>` },
+];
+
+function loadData() {
+  try {
+    const raw = localStorage.getItem('nspj_ogloszenia');
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  return JSON.parse(JSON.stringify(DEFAULT_ANNOUNCEMENTS));
+}
+function saveData(data) {
+  try { localStorage.setItem('nspj_ogloszenia', JSON.stringify(data)); } catch(e) {}
+}
+
+let announcements = loadData();
+let currentId = announcements[0]?.id ?? null;
+let showAll = false;
+
+// ════════════════════════════════════════════════════════
+//  HELPERS
+// ════════════════════════════════════════════════════════
+function formatDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso + 'T12:00:00');
+  return d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+function genId() {
+  return 'ogl-' + (document.getElementById('new-date').value || new Date().toISOString().slice(0,10));
+}
+function currentAnn() {
+  return announcements.find(a => a.id === currentId);
+}
+
+// ════════════════════════════════════════════════════════
+//  TOAST
+// ════════════════════════════════════════════════════════
+let toastTimer = null;
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.className = 'show ' + type;
+  document.getElementById('toast-msg').textContent = msg;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.className = ''; }, 3000);
+}
+
+// ════════════════════════════════════════════════════════
+//  RENDER ARCHIVE LIST
+// ════════════════════════════════════════════════════════
+function renderList() {
+  const list = document.getElementById('ann-list');
+  const LIMIT = 7;
+  const items = showAll ? announcements : announcements.slice(0, LIMIT);
+  list.innerHTML = items.map(a => `
+    <div class="ann-item ${a.id === currentId ? 'active' : ''}" data-id="${a.id}">
+      <div style="min-width:0;flex:1">
+        <div class="title" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${a.title}</div>
+        <div class="date">${formatDate(a.date)} · ${a.status === 'published' ? 'opublikowane' : 'szkic'}</div>
+      </div>
+      <span class="feat-star${a.featured ? '' : ' hidden'}" title="Wyświetlane na stronie głównej">★</span>
+      <div class="status-dot ${a.status === 'published' ? 'pub' : 'draft'}" title="${a.status === 'published' ? 'Opublikowane' : 'Szkic'}"></div>
+    </div>`).join('');
+
+  list.querySelectorAll('.ann-item').forEach(el => {
+    el.addEventListener('click', () => loadAnnouncement(el.dataset.id));
+  });
+
+  const btn = document.getElementById('btn-show-all');
+  if (announcements.length <= LIMIT) {
+    btn.style.display = 'none';
+  } else {
+    btn.style.display = '';
+    btn.textContent = showAll
+      ? 'Pokaż mniej ↑'
+      : `Pokaż wszystkie (${announcements.length}) →`;
+  }
+  document.getElementById('archive-count').textContent = announcements.length;
+}
+
+// ════════════════════════════════════════════════════════
+//  LOAD ANNOUNCEMENT INTO EDITOR
+// ════════════════════════════════════════════════════════
+function loadAnnouncement(id) {
+  const ann = announcements.find(a => a.id === id);
+  if (!ann) return;
+  currentId = id;
+
+  document.getElementById('ed-title').value = ann.title;
+  document.getElementById('ed-date').value  = ann.date;
+  document.getElementById('editor-body').innerHTML = ann.content || '';
+  document.getElementById('ed-views').textContent  = ann.views ? `· ${ann.views} wyświetleń` : '';
+  updateStatusBadge(ann.status);
+  updateViewLink(ann);
+  updateFeatureBtn(ann);
+  hideDelConfirm();
+  renderList();
+}
+
+function updateFeatureBtn(ann) {
+  const btn = document.getElementById('btn-feature');
+  const lbl = document.getElementById('btn-feature-label');
+  if (ann.featured) {
+    btn.classList.add('is-featured');
+    lbl.textContent = 'Wyświetlane na stronie głównej';
+  } else {
+    btn.classList.remove('is-featured');
+    lbl.textContent = 'Pokaż na stronie głównej';
+  }
+}
+
+function updateStatusBadge(status) {
+  const btn = document.getElementById('ed-status-btn');
+  if (status === 'published') {
+    btn.className = 'status-badge pub';
+    btn.textContent = '● Opublikowane';
+  } else {
+    btn.className = 'status-badge draft';
+    btn.textContent = '○ Szkic';
+  }
+}
+
+function updateViewLink(ann) {
+  const lnk = document.getElementById('view-on-site');
+  if (ann.status === 'published') {
+    lnk.href = '../strony/aktualnosci.html#ogl-' + ann.date;
+    lnk.style.opacity = '1';
+    lnk.style.pointerEvents = '';
+  } else {
+    lnk.href = '#';
+    lnk.style.opacity = '.4';
+    lnk.style.pointerEvents = 'none';
+  }
+}
+
+// ════════════════════════════════════════════════════════
+//  SAVE
+// ════════════════════════════════════════════════════════
+function saveCurrentAnn(newStatus) {
+  const ann = currentAnn();
+  if (!ann) return;
+
+  const title   = document.getElementById('ed-title').value.trim();
+  const date    = document.getElementById('ed-date').value;
+  const content = document.getElementById('editor-body').innerHTML;
+
+  if (!title) { showToast('Wpisz tytuł ogłoszenia', 'error'); return; }
+
+  ann.title   = title;
+  ann.date    = date;
+  ann.content = content;
+  if (newStatus) ann.status = newStatus;
+
+  saveData(announcements);
+  updateStatusBadge(ann.status);
+  updateViewLink(ann);
+  renderList();
+
+  if (newStatus === 'published') {
+    showToast('✓ Ogłoszenia opublikowane na stronie!', 'success');
+  } else {
+    showToast('✓ Szkic zapisany', 'success');
+  }
+}
+
+// ════════════════════════════════════════════════════════
+//  TOOLBAR
+// ════════════════════════════════════════════════════════
+document.getElementById('toolbar').addEventListener('mousedown', e => {
+  const btn = e.target.closest('[data-cmd]');
+  if (!btn) return;
+  e.preventDefault(); // keep focus in editor
+  const cmd = btn.dataset.cmd;
+  const val = btn.dataset.val || null;
+  document.execCommand(cmd, false, val);
+  updateToolbarState();
+});
+
+document.getElementById('btn-undo').addEventListener('mousedown', e => {
+  e.preventDefault();
+  document.execCommand('undo');
+});
+document.getElementById('btn-redo').addEventListener('mousedown', e => {
+  e.preventDefault();
+  document.execCommand('redo');
+});
+
+function updateToolbarState() {
+  ['bold','italic','underline','insertUnorderedList','insertOrderedList'].forEach(cmd => {
+    const btn = document.querySelector(`[data-cmd="${cmd}"]`);
+    if (btn) btn.classList.toggle('active', document.queryCommandState(cmd));
+  });
+}
+
+document.getElementById('editor-body').addEventListener('keyup', updateToolbarState);
+document.getElementById('editor-body').addEventListener('mouseup', updateToolbarState);
+document.getElementById('editor-body').addEventListener('selectionchange', updateToolbarState);
+
+// Ctrl+S save
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    saveCurrentAnn(null);
+  }
+});
+
+// ════════════════════════════════════════════════════════
+//  STATUS TOGGLE
+// ════════════════════════════════════════════════════════
+document.getElementById('ed-status-btn').addEventListener('click', () => {
+  const ann = currentAnn();
+  if (!ann) return;
+  const newSt = ann.status === 'published' ? 'draft' : 'published';
+  ann.status = newSt;
+  saveData(announcements);
+  updateStatusBadge(newSt);
+  updateViewLink(ann);
+  renderList();
+  showToast(newSt === 'published' ? '✓ Opublikowano' : '○ Przeniesiono do szkiców', 'success');
+});
+
+// ════════════════════════════════════════════════════════
+//  SAVE / PUBLISH BUTTONS
+// ════════════════════════════════════════════════════════
+document.getElementById('btn-save-draft').addEventListener('click', () => saveCurrentAnn('draft'));
+document.getElementById('btn-publish').addEventListener('click', () => saveCurrentAnn('published'));
+
+// ════════════════════════════════════════════════════════
+//  FEATURED — "Pokaż na stronie głównej"
+// ════════════════════════════════════════════════════════
+document.getElementById('btn-feature').addEventListener('click', () => {
+  const ann = currentAnn();
+  if (!ann) return;
+  if (ann.featured) {
+    // toggle off — unfeature
+    ann.featured = false;
+    saveData(announcements);
+    updateFeatureBtn(ann);
+    renderList();
+    showToast('★ Usunięto z wyróżnionych na stronie głównej', 'success');
+  } else {
+    // set as featured, clear others
+    announcements.forEach(a => { a.featured = false; });
+    ann.featured = true;
+    // also publish if it's a draft
+    if (ann.status !== 'published') {
+      ann.status = 'published';
+      updateStatusBadge('published');
+      updateViewLink(ann);
+    }
+    saveData(announcements);
+    updateFeatureBtn(ann);
+    renderList();
+    showToast('★ Ogłoszenie będzie teraz wyświetlane na stronie głównej!', 'success');
+  }
+});
+
+// PDF (print)
+document.getElementById('btn-pdf').addEventListener('click', () => window.print());
+
+// ════════════════════════════════════════════════════════
+//  DELETE
+// ════════════════════════════════════════════════════════
+function hideDelConfirm() {
+  document.getElementById('del-confirm').classList.remove('show');
+}
+document.getElementById('btn-delete').addEventListener('click', () => {
+  const dc = document.getElementById('del-confirm');
+  dc.classList.toggle('show');
+});
+document.getElementById('btn-delete-cancel').addEventListener('click', hideDelConfirm);
+document.getElementById('btn-delete-confirm').addEventListener('click', () => {
+  if (announcements.length <= 1) { showToast('Nie można usunąć ostatniego ogłoszenia', 'error'); hideDelConfirm(); return; }
+  announcements = announcements.filter(a => a.id !== currentId);
+  saveData(announcements);
+  currentId = announcements[0].id;
+  loadAnnouncement(currentId);
+  showToast('Ogłoszenie usunięte', 'success');
+});
+
+// ════════════════════════════════════════════════════════
+//  NEW ANNOUNCEMENT MODAL
+// ════════════════════════════════════════════════════════
+const modalOverlay = document.getElementById('modal-new');
+
+document.getElementById('btn-new').addEventListener('click', () => {
+  // prefill today's next Sunday
+  const today = new Date();
+  const daysToSun = (7 - today.getDay()) % 7 || 7;
+  const nextSun = new Date(today); nextSun.setDate(today.getDate() + daysToSun);
+  document.getElementById('new-date').value = nextSun.toISOString().slice(0,10);
+  document.getElementById('new-title').value = '';
+  document.getElementById('new-content').value = '';
+  modalOverlay.classList.add('open');
+  setTimeout(() => document.getElementById('new-title').focus(), 100);
+});
+
+function closeModal() { modalOverlay.classList.remove('open'); }
+document.getElementById('modal-cancel').addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
+
+document.getElementById('modal-create').addEventListener('click', () => {
+  const title   = document.getElementById('new-title').value.trim();
+  const date    = document.getElementById('new-date').value;
+  const rawText = document.getElementById('new-content').value.trim();
+
+  if (!title) { document.getElementById('new-title').focus(); return; }
+  if (!date)  { document.getElementById('new-date').focus(); return; }
+
+  // Build HTML from plain text (numbered lines → <p> elements)
+  let content = rawText
+    ? rawText.split('\n').filter(l => l.trim()).map(l => `<p>${l.trim()}</p>`).join('\n')
+    : `<p style="text-align:center;font-weight:700;font-family:'Playfair Display',serif;font-size:1.2rem">OGŁOSZENIA DUSZPASTERSKIE<br>${title}</p>\n<p>1. </p>`;
+
+  const id = 'ogl-' + date + '-' + Date.now();
+  const ann = { id, title, date, status: 'draft', views: 0, content };
+
+  // insert at top of list
+  announcements.unshift(ann);
+  saveData(announcements);
+  closeModal();
+  loadAnnouncement(id);
+  showToast('✓ Nowe ogłoszenie utworzone — uzupełnij treść i opublikuj', 'success');
+});
+
+// Enter to confirm modal
+document.getElementById('new-title').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('modal-create').click();
+});
+
+// ════════════════════════════════════════════════════════
+//  SHOW ALL TOGGLE
+// ════════════════════════════════════════════════════════
+document.getElementById('btn-show-all').addEventListener('click', () => {
+  showAll = !showAll;
+  renderList();
+});
+
+// ════════════════════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════════════════════
+renderList();
+if (currentId) loadAnnouncement(currentId);
+</script>
 </body>
 </html>

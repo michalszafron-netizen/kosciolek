@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wspólnoty parafialne · Parafia NSPJ Czerwionka-Leszczyny</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--beige:#f4ede0;--beige-deep:#ebe1cd;--cream:#faf6ee;--burgundy:#7a1f2b;--burgundy-dark:#5e1620;--copper:#b87a4a;--copper-light:#d6a572;--ink:#2b2520;--ink-soft:#5a5048;--line:#d8cdb6;--white:#ffffff}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:90px}
+  body{margin:0;padding:0;font-family:'Lato',sans-serif;color:var(--ink);background:var(--beige);line-height:1.65}
+  h1,h2,h3,h4,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;color:var(--ink)}
+  a{color:var(--burgundy);text-decoration:none}
+  a:hover{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--burgundy);outline-offset:3px;border-radius:4px}
+  .container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+  /* ── HEADER ── */
+  .sticky-header{position:sticky;top:0;z-index:50}
+  .topbar{background:var(--burgundy-dark);color:#e8d9b8;font-size:.82rem;line-height:1;min-height:40px;display:flex;align-items:center}
+  .topbar .container{display:flex;justify-content:space-between;align-items:center;width:100%;padding:4px 24px;gap:12px}
+  .topbar a{color:#e8d9b8;text-decoration:none;display:inline-flex;align-items:center}
+  .topbar a:hover{color:#fff}
+  .topbar .left,.topbar .right{display:flex;gap:18px;align-items:center}
+  .topbar svg{flex-shrink:0;margin-right:6px}
+  .topbar-admin{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid rgba(232,217,184,.35);color:#e8d9b8;transition:all .15s;margin-left:4px}
+  .topbar-admin svg{margin-right:0;display:block}
+  .topbar-admin:hover{background:rgba(232,217,184,.15);border-color:rgba(232,217,184,.7);color:#fff}
+  .topbar-btn-wsparcie{background:#e8d9b8;color:var(--burgundy-dark)!important;font-weight:700;padding:5px 14px;border-radius:4px;font-size:.82rem;transition:all .15s;white-space:nowrap}
+  .topbar-btn-wsparcie:hover{background:#fff;text-decoration:none!important}
+  @media(max-width:768px){.topbar .left span:first-child{display:none}.topbar .right a:not(.topbar-admin){display:none}.topbar .container{justify-content:center}}
+  header.site{background:var(--cream);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px}
+  .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
+  .brand-mark{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;overflow:hidden;flex-shrink:0}
+  .brand-logo{width:46px;height:46px;object-fit:contain;display:block}
+  .brand-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:.95rem;line-height:1.2}
+  .brand-name small{display:block;font-family:'Lato',sans-serif;font-size:.7rem;letter-spacing:.16em;color:var(--copper);text-transform:uppercase;font-weight:700;margin-top:3px}
+  nav.main{display:flex;gap:4px;align-items:center}
+  nav.main a{padding:10px 12px;font-weight:400;font-size:.9rem;color:var(--ink);border-radius:6px;transition:background .15s;position:relative;white-space:nowrap;text-decoration:none}
+  nav.main a:hover{background:var(--beige);text-decoration:none}
+  nav.main a.has-sub::after{content:"▾";font-size:.7rem;margin-left:6px;color:var(--copper)}
+  .dropdown{position:relative}
+  .dropdown-menu{display:none;position:absolute;top:calc(100% + 6px);left:0;background:var(--cream);border:1px solid var(--line);border-radius:8px;min-width:230px;z-index:200;box-shadow:0 8px 32px rgba(43,37,32,.14);padding:6px 0}
+  .dropdown:hover .dropdown-menu,.dropdown.open .dropdown-menu{display:block}
+  .dropdown-menu a{display:block;padding:9px 18px;color:var(--ink);font-size:.88rem;font-weight:400;white-space:nowrap;background:none}
+  .dropdown-menu a:hover{background:var(--beige);text-decoration:none}
+  .dropdown-menu hr{border:none;border-top:1px solid var(--line);margin:4px 12px}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--ink);padding:8px}
+  @media(max-width:980px){nav.main{display:none}.menu-toggle{display:block}}
+
+  /* ── PAGE HERO ── */
+  .page-hero{padding:50px 0 30px;text-align:center}
+  .eyebrow{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--copper);font-weight:700;margin-bottom:.8rem;display:inline-block}
+  .page-hero h1{font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:600;margin:0 0 .6rem}
+  .page-hero .lead{font-size:1.15rem;color:var(--ink-soft);max-width:620px;margin:0 auto}
+
+  /* ── TWO-COLUMN LAYOUT ── */
+  .wspolnoty-layout{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 0 80px;align-items:start}
+
+  /* ── SIDEBAR NAV ── */
+  .group-sidebar{position:sticky;top:100px}
+  .group-sidebar-title{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);font-weight:700;margin:0 0 12px;padding:0 0 10px;border-bottom:1px solid var(--line)}
+  .group-nav-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+  .group-nav-list li a{
+    display:flex;align-items:center;gap:10px;padding:10px 14px;
+    border-radius:7px;font-size:.88rem;color:var(--ink-soft);
+    transition:all .15s;text-decoration:none;border-left:3px solid transparent;
+  }
+  .group-nav-list li a:hover{background:var(--beige-deep);color:var(--ink);text-decoration:none}
+  .group-nav-list li a.active{
+    background:var(--white);color:var(--burgundy);font-weight:700;
+    border-left-color:var(--burgundy);box-shadow:0 2px 8px rgba(43,37,32,.08)
+  }
+  .group-nav-list li a .nav-icon{
+    width:30px;height:30px;border-radius:50%;background:var(--beige);
+    display:grid;place-items:center;flex-shrink:0;transition:background .15s
+  }
+  .group-nav-list li a .nav-icon svg{width:16px;height:16px;color:var(--copper)}
+  .group-nav-list li a.active .nav-icon{background:rgba(122,31,43,.1)}
+  .group-nav-list li a.active .nav-icon svg{color:var(--burgundy)}
+
+  /* ── CONTENT PANELS ── */
+  .group-panel{display:none}
+  .group-panel.active{display:block}
+
+  .group-panel-header{
+    display:flex;align-items:center;gap:18px;
+    padding-bottom:22px;margin-bottom:28px;border-bottom:1px solid var(--line)
+  }
+  .group-panel-icon{
+    width:60px;height:60px;border-radius:50%;background:var(--beige-deep);
+    display:grid;place-items:center;flex-shrink:0
+  }
+  .group-panel-icon svg{width:30px;height:30px;color:var(--burgundy)}
+  .group-panel-header h2{font-size:clamp(1.7rem,3vw,2.4rem);margin:0 0 4px}
+  .group-panel-header .group-tagline{font-size:.95rem;color:var(--ink-soft);margin:0}
+
+  /* ── INFO CHIPS ── */
+  .info-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+  .info-chip{
+    display:inline-flex;align-items:center;gap:7px;
+    background:var(--white);border:1px solid var(--line);
+    border-radius:20px;padding:6px 14px;font-size:.82rem;color:var(--ink-soft)
+  }
+  .info-chip svg{width:14px;height:14px;color:var(--copper);flex-shrink:0}
+  .info-chip strong{color:var(--ink)}
+
+  /* ── PROSE ── */
+  .group-prose{font-size:.98rem;line-height:1.75;color:var(--ink)}
+  .group-prose p{margin:0 0 1.2rem}
+  .group-prose p:last-child{margin-bottom:0}
+  .group-prose h3{font-size:1.35rem;margin:2rem 0 .8rem;color:var(--burgundy)}
+  .group-prose blockquote{
+    border-left:3px solid var(--copper-light);margin:1.5rem 0;
+    padding:.8rem 1.4rem;background:var(--white);border-radius:0 6px 6px 0;
+    font-style:italic;color:var(--ink-soft);font-size:1rem
+  }
+  .group-prose blockquote cite{display:block;font-size:.82rem;margin-top:.5rem;font-style:normal;color:var(--copper)}
+
+  /* ── MEMBERS LIST ── */
+  .members-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+    gap:10px;margin:20px 0
+  }
+  .member-chip{
+    display:flex;align-items:center;gap:10px;
+    background:var(--white);border:1px solid var(--line);
+    border-radius:8px;padding:10px 14px;font-size:.85rem
+  }
+  .member-chip .dot{width:8px;height:8px;border-radius:50%;background:var(--copper-light);flex-shrink:0}
+  .member-chip .role{font-size:.75rem;color:var(--copper);font-weight:700;display:block;line-height:1.2}
+
+  /* ── ROZANIEC GRUPY ── */
+  .rozaniec-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}
+  .rozaniec-group{
+    background:var(--white);border:1px solid var(--line);border-radius:8px;
+    padding:18px 16px;text-align:center
+  }
+  .rozaniec-group .rg-num{
+    font-family:'Cormorant Garamond',Georgia,serif;font-size:2rem;
+    font-weight:600;color:var(--burgundy);display:block;line-height:1
+  }
+  .rozaniec-group h4{font-size:.9rem;margin:.6rem 0 .3rem;color:var(--ink)}
+  .rozaniec-group p{font-size:.8rem;color:var(--ink-soft);margin:0}
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight-box{
+    background:var(--white);border:1px solid var(--line);border-radius:8px;
+    padding:22px 24px;margin:24px 0
+  }
+  .highlight-box.primary{border-left:4px solid var(--burgundy)}
+  .highlight-box.secondary{border-left:4px solid var(--copper-light)}
+  .highlight-box p{margin:0;font-size:.95rem;color:var(--ink-soft)}
+  .highlight-box strong{color:var(--ink)}
+
+  /* ── HISTORY SUMMARY ── */
+  .history-timeline{margin:20px 0}
+  .ht-item{
+    display:grid;grid-template-columns:100px 1fr;gap:16px;
+    padding:10px 0;border-bottom:1px solid var(--line);font-size:.88rem
+  }
+  .ht-item:last-child{border-bottom:none}
+  .ht-year{font-weight:700;color:var(--copper)}
+
+  /* ── FOOTER ── */
+  footer.site{background:var(--burgundy-dark);color:#e8d9b8;padding:56px 0 32px}
+  .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px}
+  .footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .footer-brand .brand-name{color:#e8d9b8;font-size:.88rem}
+  .footer-brand .brand-name small{color:var(--copper-light)}
+  footer p{font-size:.88rem;margin:.5rem 0;color:rgba(232,217,184,.75)}
+  .footer-bank{margin-top:14px;padding:12px 16px;background:rgba(246,233,211,.06);border:1px solid rgba(246,233,211,.12);border-radius:6px;font-size:.8rem}
+  .footer-bank b{display:block;color:#e8d9b8;margin-bottom:4px}
+  .footer-bank code{font-size:.78rem;color:var(--copper-light);letter-spacing:.04em}
+  .footer-social{display:flex;gap:10px;margin-top:18px}
+  .footer-social a{width:36px;height:36px;border-radius:50%;background:rgba(246,233,211,.06);border:1px solid rgba(246,233,211,.15);display:grid;place-items:center;color:var(--copper-light);transition:all .15s}
+  .footer-social a:hover{background:rgba(246,233,211,.14);border-color:rgba(246,233,211,.4);color:#f6e9d3;text-decoration:none}
+  .footer-social svg{width:16px;height:16px}
+  .footer-col h5{font-family:'Cormorant Garamond',Georgia,serif;font-size:1rem;color:#e8d9b8;margin:0 0 14px;font-weight:600}
+  .footer-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+  .footer-col ul li a{color:rgba(232,217,184,.7);font-size:.85rem}
+  .footer-col ul li a:hover{color:#e8d9b8;text-decoration:none}
+  .footer-bottom{border-top:1px solid rgba(246,233,211,.12);margin-top:40px;padding-top:22px;display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:rgba(232,217,184,.5)}
+  @media(max-width:1024px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+  @media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr;gap:24px}.footer-bottom{flex-direction:column;gap:8px;text-align:center}}
+  @media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:860px){
+    .wspolnoty-layout{grid-template-columns:1fr}
+    .group-sidebar{position:static;margin-bottom:24px}
+    .group-nav-list{flex-direction:row;flex-wrap:wrap;gap:8px}
+    .group-nav-list li a{padding:8px 14px;border-left:none;border-bottom:2px solid transparent;font-size:.82rem}
+    .group-nav-list li a.active{border-left:none;border-bottom-color:var(--burgundy)}
+    .group-nav-list li a .nav-icon{display:none}
+    .rozaniec-groups{grid-template-columns:1fr}
+  }
+  @media(max-width:600px){
+    .members-grid{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="sticky-header">
+<div class="topbar">
+  <div class="container">
+    <div class="left">
+      <span><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>ul. 3-go Maja 36, 44-230 Czerwionka-Leszczyny</span>
+      <span><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.61 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58z"/></svg><a href="tel:+48324312992">32 43 12 992</a></span>
+    </div>
+    <div class="right">
+      <a href="../index.html#budowa" class="topbar-btn-wsparcie">Wsparcie budowy</a>
+      <a href="../admin/login.html" class="topbar-admin" title="Panel parafii" aria-label="Panel parafii">
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<header class="site">
+  <div class="container">
+    <div class="nav">
+      <a class="brand" href="../index.html">
+        <div class="brand-mark"><img src="../public/img/logo1.png" alt="Logo NSPJ" class="brand-logo"></div>
+        <div class="brand-name">Parafia Najświętszego Serca Pana Jezusa<small>Czerwionka-Leszczyny · od 1925</small></div>
+      </a>
+      <nav class="main">
+        <a href="../index.html">Strona główna</a>
+        <div class="dropdown">
+          <a href="#" class="has-sub active">O kościele</a>
+          <div class="dropdown-menu">
+            <a href="duszpasterstwo.html">Kapłani</a>
+            <a href="wspolnoty.html">Wspólnoty</a>
+            <a href="historia.html">Historia</a>
+            <hr>
+            <a href="standardy.html">Standardy ochrony małoletnich</a>
+          </div>
+        </div>
+        <a href="msze.html">Msze święte</a>
+        <div class="dropdown">
+          <a href="#" class="has-sub">Sakramenty</a>
+          <div class="dropdown-menu">
+            <a href="sakramenty/chrzest.html">Chrzest</a>
+            <a href="sakramenty/komunia.html">I Komunia Święta</a>
+            <a href="sakramenty/bierzmowanie.html">Bierzmowanie</a>
+            <a href="sakramenty/slub.html">Ślub</a>
+            <hr>
+            <a href="sakramenty/namaszczenie.html">Namaszczenie chorych</a>
+            <a href="sakramenty/pogrzeb.html">Pogrzeb</a>
+            <a href="sakramenty/spowiedz.html">Spowiedź</a>
+          </div>
+        </div>
+        <a href="#">Cmentarz</a>
+        <a href="../index.html#galeria">Galeria</a>
+        <a href="../index.html#aktualnosci">Aktualności</a>
+        <a href="kontakt.html">Kontakt</a>
+      </nav>
+      <button class="menu-toggle" aria-label="Menu">
+        <svg width="28" height="28" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+</div><!-- /sticky-header -->
+
+<div class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Działaj z nami</span>
+    <h1>Wspólnoty parafialne</h1>
+    <p class="lead">Siedem grup formacyjnych, modlitewnych i charytatywnych tworzących żywą wspólnotę naszej parafii.</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="wspolnoty-layout">
+
+    <!-- ═══════════════ SIDEBAR ═══════════════ -->
+    <aside class="group-sidebar">
+      <p class="group-sidebar-title">Grupy parafialne</p>
+      <ul class="group-nav-list">
+        <li>
+          <a href="#rada-parafialna" class="group-nav-link" data-group="rada-parafialna">
+            <span class="nav-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/></svg></span>
+            Rada parafialna
+          </a>
+        </li>
+        <li>
+          <a href="#ministranci" class="group-nav-link" data-group="ministranci">
+            <span class="nav-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 1C6.8 2.3 6 3.8 6 5a2 2 0 0 0 4 0c0-1.2-.8-2.7-2-4z"/><rect x="6.5" y="6" width="3" height="6" rx=".5"/><rect x="5" y="12" width="6" height="1.5" rx=".5"/></svg></span>
+            Ministranci
+          </a>
+        </li>
+        <li>
+          <a href="#schola" class="group-nav-link" data-group="schola">
+            <span class="nav-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6 13c0 1.105-1.12 2-2.5 2S1 14.105 1 13s1.12-2 2.5-2 2.5.895 2.5 2m9-2c0 1.105-1.12 2-2.5 2s-2.5-.895-2.5-2 1.12-2 2.5-2 2.5.895 2.5 2"/><path d="M14 11V2h1v9zM6 3v10H5V3z"/><path d="M5 2.905a1 1 0 0 1 .9-.995l8-.8a1 1 0 0 1 1.1.995V3L5 4V2.905z"/></svg></span>
+            Schola Parafialna
+          </a>
+        </li>
+        <li>
+          <a href="#dzieci-maryi" class="group-nav-link" data-group="dzieci-maryi">
+            <span class="nav-icon"><svg fill="currentColor" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.2"/><ellipse cx="8" cy="2.8" rx="1.7" ry="2.5"/><ellipse cx="8" cy="13.2" rx="1.7" ry="2.5"/><ellipse cx="2.8" cy="8" rx="2.5" ry="1.7"/><ellipse cx="13.2" cy="8" rx="2.5" ry="1.7"/><ellipse cx="4.3" cy="4.3" rx="1.7" ry="2.5" transform="rotate(-45 4.3 4.3)"/><ellipse cx="11.7" cy="4.3" rx="1.7" ry="2.5" transform="rotate(45 11.7 4.3)"/><ellipse cx="4.3" cy="11.7" rx="1.7" ry="2.5" transform="rotate(45 4.3 11.7)"/><ellipse cx="11.7" cy="11.7" rx="1.7" ry="2.5" transform="rotate(-45 11.7 11.7)"/></svg></span>
+            Dzieci Maryi
+          </a>
+        </li>
+        <li>
+          <a href="#zywy-rozaniec" class="group-nav-link" data-group="zywy-rozaniec">
+            <span class="nav-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M7.25 1h1.5v2.5H10v1.5H8.75V6.3a5.25 5.25 0 1 1-1.5 0V5H6V3.5h1.25V1zM8 7.5a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5z"/><circle cx="8" cy="11.25" r="1"/></svg></span>
+            Żywy Różaniec
+          </a>
+        </li>
+        <li>
+          <a href="#franciszkanie" class="group-nav-link" data-group="franciszkanie">
+            <span class="nav-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M1.5 2h13v3.5H9.25V15h-2.5V5.5H1.5z"/></svg></span>
+            Franciszkański ZŚ
+          </a>
+        </li>
+        <li>
+          <a href="#charytatywny" class="group-nav-link" data-group="charytatywny">
+            <span class="nav-icon"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 2.748C10.72-.955 17.15 2.64 8 9.5-1.15 2.64 5.28-.955 8 2.748z"/><path d="M2.5 10.5c-.83 0-1.5.67-1.5 1.5v.5c0 .83.67 1.5 1.5 1.5h.94l.56.94C4.35 15.46 4.83 16 6 16h4c1.17 0 1.65-.54 2-1.06l.56-.94H13.5c.83 0 1.5-.67 1.5-1.5V12c0-.83-.67-1.5-1.5-1.5H2.5z"/></svg></span>
+            Zespół Charytatywny
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- ═══════════════ CONTENT PANELS ═══════════════ -->
+    <main>
+
+      <!-- ── 1. RADA PARAFIALNA ── -->
+      <div class="group-panel" id="panel-rada-parafialna">
+        <div class="group-panel-header">
+          <div class="group-panel-icon">
+            <svg fill="currentColor" viewBox="0 0 16 16"><path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/></svg>
+          </div>
+          <div>
+            <h2>Rada parafialna</h2>
+            <p class="group-tagline">Doradcze ciało świeckich parafian</p>
+          </div>
+        </div>
+
+        <div class="info-chips">
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/></svg><strong>16 osób</strong></div>
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>Przewodniczący: <strong>ks. proboszcz Tomasz Żołna</strong></div>
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/></svg>Spotkania: <strong>na miarę potrzeb</strong></div>
+        </div>
+
+        <div class="group-prose">
+          <p>W naszym kościele tworzy grupę 16 osób, której przewodniczy ks. proboszcz Tomasz Żołna. Spotkania odbywają się na miarę potrzeb i tematów do omówienia — ogłaszane przez przewodniczącego na 2 tygodnie przed terminem.</p>
+          <p>Na spotkaniach poruszane są sprawy budowy kościoła, jak i inne tematy interesujące parafian, którzy jako przedstawiciele świeccy przekazują nam różne kwestie. Po przedyskutowaniu i analizie pod kątem zgodności z doktryną Kościoła katolickiego podejmowane są decyzje dotyczące danej sprawy.</p>
+          <p>Rada zajmuje się także pomocą przy pozyskiwaniu środków na budowę nowej świątyni — np. fanty na zabawę karnawałową pozyskiwane u lokalnych przedsiębiorców. Pomaga przy liczeniu wiernych oraz zbiórkach charytatywnych ogłaszanych w archidiecezji katowickiej.</p>
+          <p>Zgodnie z umiejętnościami, doświadczeniem życiowym i zawodowym członkowie Rady starają się jako przedstawiciele świeckich doradzać proboszczowi w różnych sprawach dotyczących parafii.</p>
+        </div>
+      </div>
+
+      <!-- ── 2. MINISTRANCI ── -->
+      <div class="group-panel" id="panel-ministranci">
+        <div class="group-panel-header">
+          <div class="group-panel-icon">
+            <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 1C6.8 2.3 6 3.8 6 5a2 2 0 0 0 4 0c0-1.2-.8-2.7-2-4z"/><rect x="6.5" y="6" width="3" height="6" rx=".5"/><rect x="5" y="12" width="6" height="1.5" rx=".5"/></svg>
+          </div>
+          <div>
+            <h2>Ministranci</h2>
+            <p class="group-tagline">Liturgiczna Służba Ołtarza parafii NSPJ</p>
+          </div>
+        </div>
+
+        <div class="info-chips">
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/></svg><strong>16 ministrantów</strong></div>
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>Opiekun: <strong>ks. Marcin Wójcik</strong></div>
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/></svg>Zbiórki: <strong>soboty, godz. 10:00</strong></div>
+        </div>
+
+        <div class="group-prose">
+          <p>Słowo <em>ministrant</em> pochodzi od łacińskiego <em>ministrare</em>, które tłumaczy się jako służyć, posługiwać, pomagać. Liturgiczna Służba Ołtarza jest odpowiedzialna przede wszystkim za służbę — pomagają kapłanowi podczas sprawowania liturgii.</p>
+          <p>Do zadań ministrantów należy przynoszenie darów na ołtarz, dawanie znaków dzwonkami oraz noszenie krzyża i kadzielnicy.</p>
+
+          <h3>Struktura grupy</h3>
+          <div class="members-grid">
+            <div class="member-chip"><span class="dot"></span><div><span class="role">Kandydaci</span>4 osoby</div></div>
+            <div class="member-chip"><span class="dot"></span><div><span class="role">Ministranci młodsi</span>4 osoby</div></div>
+            <div class="member-chip"><span class="dot"></span><div><span class="role">Ministranci starsi</span>5 osób</div></div>
+            <div class="member-chip"><span class="dot"></span><div><span class="role">Animatorzy</span>2 osoby</div></div>
+            <div class="member-chip"><span class="dot"></span><div><span class="role">Ministrant senior</span>1 osoba</div></div>
+          </div>
+
+          <p>Oprócz stałej formacji oraz służenia podczas Eucharystii i innych nabożeństw, ministranci wspólnie spędzają czas podczas tradycyjnych ognisk, śniadań wielkanocnych, wycieczek lub innych form integracji.</p>
+        </div>
+      </div>
+
+      <!-- ── 3. SCHOLA PARAFIALNA ── -->
+      <div class="group-panel" id="panel-schola">
+        <div class="group-panel-header">
+          <div class="group-panel-icon">
+            <svg fill="currentColor" viewBox="0 0 16 16"><path d="M6 13c0 1.105-1.12 2-2.5 2S1 14.105 1 13s1.12-2 2.5-2 2.5.895 2.5 2m9-2c0 1.105-1.12 2-2.5 2s-2.5-.895-2.5-2 1.12-2 2.5-2 2.5.895 2.5 2"/><path d="M14 11V2h1v9zM6 3v10H5V3z"/><path d="M5 2.905a1 1 0 0 1 .9-.995l8-.8a1 1 0 0 1 1.1.995V3L5 4V2.905z"/></svg>
+          </div>
+          <div>
+            <h2>Schola Parafialna</h2>
+            <p class="group-tagline">Muzyka liturgiczna i śpiew w czasie Mszy Świętej</p>
+          </div>
+        </div>
+
+        <div class="info-chips">
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>Opiekun: <strong>ks. Marcin Wójcik</strong></div>
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2m5-2c0 1.105-1.12 2-2.5 2s-2.5-.895-2.5-2 1.12-2 2.5-2 2.5.895 2.5 2m.5-8v5H9V3l9-2v1"/></svg>Opiekun muzyczny: <strong>Bartosz Wundersee</strong></div>
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/></svg>Spotkania: <strong>czwartki, godz. 19:30</strong></div>
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>Miejsce: <strong>sala pod probostwem</strong></div>
+        </div>
+
+        <div class="group-prose">
+          <p>Schola Parafialna wspiera liturgię muzyczną podczas Mszy Świętych w naszej parafii. Tworzą ją wierni zaangażowani w śpiew i muzykę kościelną pod kierunkiem ks. Marcina Wójcika i opiekuna muzycznego Bartosza Wundersee.</p>
+
+          <div class="highlight-box secondary">
+            <p>Kontakt do opiekuna muzycznego: <strong>Bartosz Wundersee</strong><br>tel. <a href="tel:+48722279214">722 27 92 14</a></p>
+          </div>
+
+          <p>Próby odbywają się regularnie w każdy czwartek o godzinie 19:30 w sali pod probostwem. Zapraszamy wszystkich, którzy chcą wzbogacić liturgię pięknym śpiewem.</p>
+        </div>
+      </div>
+
+      <!-- ── 4. DZIECI MARYI ── -->
+      <div class="group-panel" id="panel-dzieci-maryi">
+        <div class="group-panel-header">
+          <div class="group-panel-icon">
+            <svg fill="currentColor" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.2"/><ellipse cx="8" cy="2.8" rx="1.7" ry="2.5"/><ellipse cx="8" cy="13.2" rx="1.7" ry="2.5"/><ellipse cx="2.8" cy="8" rx="2.5" ry="1.7"/><ellipse cx="13.2" cy="8" rx="2.5" ry="1.7"/><ellipse cx="4.3" cy="4.3" rx="1.7" ry="2.5" transform="rotate(-45 4.3 4.3)"/><ellipse cx="11.7" cy="4.3" rx="1.7" ry="2.5" transform="rotate(45 11.7 4.3)"/><ellipse cx="4.3" cy="11.7" rx="1.7" ry="2.5" transform="rotate(45 4.3 11.7)"/><ellipse cx="11.7" cy="11.7" rx="1.7" ry="2.5" transform="rotate(-45 11.7 11.7)"/></svg>
+          </div>
+          <div>
+            <h2>Dzieci Maryi</h2>
+            <p class="group-tagline">Wspólnota maryjna działająca w parafii od 1980 roku</p>
+          </div>
+        </div>
+
+        <div class="info-chips">
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/></svg><strong>11 osób</strong></div>
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>Opiekun: <strong>ks. Marcin Wójcik</strong></div>
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>Moderatorka: <strong>Ania Wencel</strong></div>
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/></svg>Spotkania: <strong>soboty, godz. 9:00</strong></div>
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/></svg>W parafii od: <strong>1980 r.</strong></div>
+        </div>
+
+        <div class="group-prose">
+          <blockquote>
+            Dziecko Maryi jest dzieckiem Bożym, a to znaczy, że jest kochane przez Pana Boga i jest przez Niego powołane do ŚWIĘTOŚCI!
+          </blockquote>
+
+          <p>A co to znaczy być świętym? Pan Bóg nie wymaga od nas wielkich rzeczy. Pragnie jedynie, byśmy każdego dnia byli Mu wierni, nie zapominali o Nim i starali się żyć zgodnie z przykazaniami.</p>
+
+          <blockquote>
+            „Będziesz miłował Pana, Boga swego, całym swoim sercem, całą swoją duszą, całym swoim umysłem i całą swoją mocą. […] Będziesz miłował swego bliźniego jak siebie samego."
+            <cite>Mk 12, 30–32</cite>
+          </blockquote>
+
+          <p>Nasze spotkania odbywają się w każdą sobotę o godzinie 9:00. Staramy się poznać i jeszcze bardziej pokochać Maryję — przez Ewangelię, Objawienia i modlitwę. Spotkania to nie tylko modlitwa, jest też czas na zabawy, działalność plastyczną (piękne kartki okolicznościowe dla starszych i chorych parafian) oraz śpiew. Co pewien czas jeździmy na wycieczki razem z ministrantami.</p>
+
+          <h3>Historia wspólnoty</h3>
+          <p>Wszystko zaczęło się we Francji. Katarzyna, zwykła dziewczyna, w wieku 9 lat straciła matkę. W 1830 roku objawiła jej się Maryja, prosząc o wykonanie medalika z jej podobizną. W 1832 roku wybito pierwsze Cudowne Medaliki — każde dziecko przynależące do Wspólnoty Dzieci Maryi nosi go na szyi.</p>
+          <p>Oficjalnie 24 maja 1978 roku ks. Jan Morcinek założył pierwszą Wspólnotę Dzieci Maryi. <strong>W naszej parafii powstała dwa lata później, w 1980 roku.</strong></p>
+
+          <h3>Skład grupy</h3>
+          <div class="members-grid">
+            <div class="member-chip"><span class="dot"></span><div><span class="role">Opiekun</span>ks. Marcin Wójcik</div></div>
+            <div class="member-chip"><span class="dot"></span><div><span class="role">Moderatorka</span>Ania Wencel</div></div>
+            <div class="member-chip"><span class="dot"></span><div><span class="role">Animatorka</span>Kasia Gudzik</div></div>
+            <div class="member-chip"><span class="dot"></span><div><span class="role">Animatorka</span>Jadzia Pluta</div></div>
+            <div class="member-chip"><span class="dot"></span><div><span class="role">Animatorka</span>Amelka Cieślik</div></div>
+            <div class="member-chip"><span class="dot"></span><div>Zuzia Marszałek</div></div>
+            <div class="member-chip"><span class="dot"></span><div>Karolina Kubica</div></div>
+            <div class="member-chip"><span class="dot"></span><div>Agata Pietrzyk</div></div>
+            <div class="member-chip"><span class="dot"></span><div>Zuzia Redosz</div></div>
+            <div class="member-chip"><span class="dot"></span><div>Zosia Redosz</div></div>
+            <div class="member-chip"><span class="dot"></span><div>Maya Marchewka</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 5. ŻYWY RÓŻANIEC ── -->
+      <div class="group-panel" id="panel-zywy-rozaniec">
+        <div class="group-panel-header">
+          <div class="group-panel-icon">
+            <svg fill="currentColor" viewBox="0 0 16 16"><path d="M7.25 1h1.5v2.5H10v1.5H8.75V6.3a5.25 5.25 0 1 1-1.5 0V5H6V3.5h1.25V1zM8 7.5a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5z"/><circle cx="8" cy="11.25" r="1"/></svg>
+          </div>
+          <div>
+            <h2>Żywy Różaniec</h2>
+            <p class="group-tagline">Trzy grupy różańcowe — modlitwa we wspólnocie</p>
+          </div>
+        </div>
+
+        <div class="info-chips">
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>Opiekun: <strong>ks. proboszcz</strong></div>
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/></svg>Spotkania formacyjne: <strong>2. piątek miesiąca</strong></div>
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>Modlitwa: <strong>czwartki, piątki, soboty rano</strong></div>
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zm3 2h4v2H9V4.5h1v.5H6v-.5h1V4zm-1 4h6v1H5V8zm0 2h6v1H5v-1z"/></svg>Posiadają własny <strong>sztandar</strong></div>
+        </div>
+
+        <div class="group-prose">
+          <p>Żywy Różaniec skupia trzy grupy modlitewne parafian, którzy wspólnie odmawiają różaniec i trwają w formacji duchowej. Spotkania formacyjne odbywają się w drugi piątek miesiąca w salce pod probostwem.</p>
+          <p>Grupy prowadzą modlitwę różańcową po Mszy porannej w czwartki, piątki i soboty.</p>
+
+          <h3>Grupy różańcowe</h3>
+          <div class="rozaniec-groups">
+            <div class="rozaniec-group">
+              <span class="rg-num">I</span>
+              <h4>Grupa pw. św. Barbary</h4>
+              <p>Patronka górników i ochrony</p>
+            </div>
+            <div class="rozaniec-group">
+              <span class="rg-num">II</span>
+              <h4>Grupa pw. św. Ojca Pio</h4>
+              <p>Patron modlitwy i miłosierdzia</p>
+            </div>
+            <div class="rozaniec-group">
+              <span class="rg-num">III</span>
+              <h4>Grupa pw. św. Teresy od Dzieciątka Jezus</h4>
+              <p>Patronka miłości i ufności</p>
+            </div>
+          </div>
+
+          <div class="highlight-box primary">
+            <p>Chcesz dołączyć do Żywego Różańca? Zgłoś się do kancelarii parafialnej lub skontaktuj się bezpośrednio z ks. proboszczem.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 6. FRANCISZKAŃSKI ZAKON ŚWIECKICH ── -->
+      <div class="group-panel" id="panel-franciszkanie">
+        <div class="group-panel-header">
+          <div class="group-panel-icon">
+            <svg fill="currentColor" viewBox="0 0 16 16"><path d="M1.5 2h13v3.5H9.25V15h-2.5V5.5H1.5z"/></svg>
+          </div>
+          <div>
+            <h2>Franciszkański Zakon Świeckich</h2>
+            <p class="group-tagline">III Zakon Świętego Franciszka — od 1927 roku w parafii</p>
+          </div>
+        </div>
+
+        <div class="info-chips">
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/></svg><strong>16 tercjarzy</strong></div>
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>Przełożona: <strong>s. Aniela Liszka</strong></div>
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>Opiekun: <strong>ks. proboszcz</strong></div>
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/></svg>Spotkania: <strong>wtorek po 1. sobocie miesiąca</strong></div>
+        </div>
+
+        <div class="group-prose">
+          <p>Franciszkański Zakon Świeckich powstał, by zjednoczyć wspólnotę modlitewną ludzi żyjących na co dzień w rodzinach oraz ludzi samotnych. III Zakon jest otwarty dla wszystkich, którzy chcą w życiu codziennym realizować ideały moralne i duchowe zaproponowane przez Świętego Franciszka.</p>
+
+          <div class="highlight-box secondary">
+            <p>Siostra Aniela wraz z opiekunem ks. proboszczem prowadzi regularne comiesięczne spotkania formacyjne. <strong>Odbywają się we wtorek po każdej pierwszej sobocie miesiąca, po Mszy Świętej porannej.</strong> Po Eucharystii udajemy się do salki pod probostwem — modlimy się jutrznię, a następnie słuchamy konferencji przygotowanej przez opiekuna.</p>
+          </div>
+
+          <h3>Historia w naszej parafii</h3>
+          <div class="history-timeline">
+            <div class="ht-item"><span class="ht-year">1893</span><span>Pierwsi tercjarze z Czerwionki wstępują do zakonu w Dębieńsku</span></div>
+            <div class="ht-item"><span class="ht-year">1927</span><span>Powstaje parafia NSPJ — ks. Jan Komraus zapoczątkowuje kult św. Franciszka</span></div>
+            <div class="ht-item"><span class="ht-year">1928</span><span>Wspólnota liczy 56 tercjarzy (7 braci, 45 sióstr, 4 panny)</span></div>
+            <div class="ht-item"><span class="ht-year">1999</span><span>Arcybiskup Damian Zimoń eryguje FZŚ przy parafii NSPJ (21 stycznia)</span></div>
+            <div class="ht-item"><span class="ht-year">2003</span><span>Uroczyste wprowadzenie relikwii św. Franciszka do parafii (27 maja)</span></div>
+            <div class="ht-item"><span class="ht-year">2007</span><span>Poświęcenie sztandaru, ornatu i stuły franciszkańskiej (25 listopada)</span></div>
+            <div class="ht-item"><span class="ht-year">2022</span><span>Siostra Aniela Liszka zostaje wybraną przełożoną wspólnoty</span></div>
+            <div class="ht-item"><span class="ht-year">dziś</span><span>16 tercjarzy po złożonej profesji wieczystej, Region Rybnicki</span></div>
+          </div>
+
+          <p>Wszystkie 16 sióstr złożyło profesję wieczystą. Wspólnota przynależy do Regionu Rybnickiego FZŚ.</p>
+        </div>
+      </div>
+
+      <!-- ── 7. ZESPÓŁ CHARYTATYWNY ── -->
+      <div class="group-panel" id="panel-charytatywny">
+        <div class="group-panel-header">
+          <div class="group-panel-icon">
+            <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 2.748C10.72-.955 17.15 2.64 8 9.5-1.15 2.64 5.28-.955 8 2.748z"/><path d="M2.5 10.5c-.83 0-1.5.67-1.5 1.5v.5c0 .83.67 1.5 1.5 1.5h.94l.56.94C4.35 15.46 4.83 16 6 16h4c1.17 0 1.65-.54 2-1.06l.56-.94H13.5c.83 0 1.5-.67 1.5-1.5V12c0-.83-.67-1.5-1.5-1.5H2.5z"/></svg>
+          </div>
+          <div>
+            <h2>Zespół Charytatywny</h2>
+            <p class="group-tagline">Pomoc potrzebującym parafianom i nie tylko</p>
+          </div>
+        </div>
+
+        <div class="info-chips">
+          <div class="info-chip"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2h13v3.5H9.25V15h-2.5V5.5H1.5z"/></svg>Prowadzi: <strong>Franciszkański Zakon Świeckich</strong></div>
+        </div>
+
+        <div class="group-prose">
+          <div class="highlight-box primary">
+            <p><strong>W Parafii pomoc charytatywną prowadzi Franciszkański Zakon Świecki.</strong></p>
+          </div>
+
+          <p>Działalność charytatywna parafii realizowana jest przez Franciszkański Zakon Świeckich, który od lat 20. XX wieku obecny jest w naszej wspólnocie. Tercjarze w duchu ubogiego z Asyżu służą potrzebującym parafianom, realizując franciszkański ideał miłości bliźniego.</p>
+          <p>Jeśli potrzebujesz pomocy lub chcesz wesprzeć działalność charytatywną — skontaktuj się z kancelarią parafialną lub bezpośrednio z Franciszkańskim Zakonem Świeckich.</p>
+
+          <div class="highlight-box secondary">
+            <p>Więcej informacji o Franciszkańskim Zakonie Świeckich znajdziesz <a href="#franciszkanie" class="switch-group" data-group="franciszkanie">w zakładce FZŚ</a>.</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="site">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../public/img/logo1.png" alt="Logo NSPJ" class="brand-logo" style="width:46px;height:46px;object-fit:contain;border-radius:50%;box-shadow:none;flex-shrink:0">
+          <div class="brand-name">Parafia Najświętszego Serca Pana Jezusa<small>Czerwionka-Leszczyny · od 1925</small></div>
+        </div>
+        <p>ul. 3-go Maja 36<br>44-230 Czerwionka-Leszczyny<br>tel. <a href="tel:+48324312992" style="color:var(--copper-light)">32 43 12 992</a></p>
+        <div class="footer-bank">
+          <b>Konto parafii (Bank Spółdzielczy)</b>
+          <code>11 8454 1095 2003 0017 7467 0003</code>
+        </div>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/profile.php?id=61557137199765" target="_blank" rel="noopener" title="Facebook NSPJ Czerwionka" aria-label="Facebook">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/parafianspjczerwionka/" target="_blank" rel="noopener" title="Instagram NSPJ Czerwionka" aria-label="Instagram">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Grupy parafialne</h5>
+        <ul>
+          <li><a href="wspolnoty.html#rada-parafialna">Rada parafialna</a></li>
+          <li><a href="wspolnoty.html#ministranci">Ministranci</a></li>
+          <li><a href="wspolnoty.html#schola">Schola Parafialna</a></li>
+          <li><a href="wspolnoty.html#dzieci-maryi">Dzieci Maryi</a></li>
+          <li><a href="wspolnoty.html#zywy-rozaniec">Żywy Różaniec</a></li>
+          <li><a href="wspolnoty.html#franciszkanie">Franciszkański ZŚ</a></li>
+          <li><a href="wspolnoty.html#charytatywny">Zespół Charytatywny</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Nawigacja</h5>
+        <ul>
+          <li><a href="../index.html">Strona główna</a></li>
+          <li><a href="duszpasterstwo.html">Kapłani</a></li>
+          <li><a href="historia.html">Historia parafii</a></li>
+          <li><a href="msze.html">Msze święte</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+          <li><a href="standardy.html">Standardy ochrony małoletnich</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Sakramenty</h5>
+        <ul>
+          <li><a href="sakramenty/chrzest.html">Chrzest</a></li>
+          <li><a href="sakramenty/komunia.html">I Komunia Święta</a></li>
+          <li><a href="sakramenty/bierzmowanie.html">Bierzmowanie</a></li>
+          <li><a href="sakramenty/slub.html">Ślub</a></li>
+          <li><a href="sakramenty/spowiedz.html">Spowiedź</a></li>
+          <li><a href="sakramenty/pogrzeb.html">Pogrzeb</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Parafia NSPJ Czerwionka-Leszczyny</span>
+      <span>ul. 3-go Maja 36 · tel. 32 43 12 992</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Group switching ────────────────────────────────────────────────────────
+const GROUPS = ['rada-parafialna','ministranci','schola','dzieci-maryi','zywy-rozaniec','franciszkanie','charytatywny'];
+
+function showGroup(id) {
+  if (!GROUPS.includes(id)) id = GROUPS[0];
+
+  // Update sidebar links
+  document.querySelectorAll('.group-nav-link').forEach(a => {
+    a.classList.toggle('active', a.dataset.group === id);
+  });
+
+  // Show/hide panels
+  document.querySelectorAll('.group-panel').forEach(p => {
+    p.classList.toggle('active', p.id === 'panel-' + id);
+  });
+
+  // Update URL hash without scroll
+  history.replaceState(null, '', '#' + id);
+}
+
+// Sidebar links
+document.querySelectorAll('.group-nav-link').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    showGroup(a.dataset.group);
+    // On mobile, scroll to top of content
+    if (window.innerWidth <= 860) {
+      document.querySelector('.wspolnoty-layout main').scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  });
+});
+
+// Internal "switch-group" links (e.g. in Charytatywny → FZŚ)
+document.querySelectorAll('.switch-group').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    showGroup(a.dataset.group);
+  });
+});
+
+// Dropdown nav click toggle (mobile)
+document.querySelectorAll('.dropdown > a').forEach(a => {
+  a.addEventListener('click', e => {
+    if (window.innerWidth <= 980) {
+      e.preventDefault();
+      a.closest('.dropdown').classList.toggle('open');
+    }
+  });
+});
+
+// Init: read hash on load
+const hash = location.hash.replace('#', '');
+showGroup(GROUPS.includes(hash) ? hash : GROUPS[0]);
+</script>
+</body>
+</html>

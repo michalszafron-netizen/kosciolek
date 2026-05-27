@@ -7,36 +7,65 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/admin.css">
 <style>
-  .editor-layout{display:grid;grid-template-columns:2fr 1fr;gap:18px;align-items:start}
-  .gallery-uploader{
-    border:2px dashed var(--line);border-radius:8px;padding:24px;text-align:center;
-    background:var(--bg);color:var(--ink-soft);transition:all .15s;cursor:pointer
-  }
-  .gallery-uploader:hover{border-color:var(--copper);background:var(--cream)}
-  .gallery-uploader svg{color:var(--copper);margin-bottom:8px}
-  .gallery-uploader .lbl{font-weight:700;color:var(--ink);font-size:.95rem}
-  .gallery-uploader .sub{font-size:.82rem;margin-top:4px}
-  .uploaded{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
-  .uploaded .ph{
-    position:relative;height:90px;border-radius:5px;background-size:cover;background-position:center;
-    background-color:var(--beige-deep);cursor:grab;border:1px solid var(--line)
-  }
-  .uploaded .ph .rm{
-    position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;
-    background:rgba(0,0,0,.6);color:#fff;border:none;cursor:pointer;display:grid;place-items:center
-  }
-  .uploaded .ph .drag-handle{
-    position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.6);color:#fff;
-    padding:2px 5px;border-radius:3px;font-size:.7rem;font-weight:700
-  }
-  .sidebar-meta .card{margin-bottom:14px}
-  .checkbox-row{display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--ink);margin:6px 0}
-  .info-box{
-    background:#fff8e6;border-left:3px solid var(--amber);
-    padding:12px 14px;border-radius:5px;font-size:.85rem;color:var(--ink);margin-top:10px
-  }
-  .info-box b{display:block;margin-bottom:3px}
+  .editor-layout{display:grid;grid-template-columns:2fr 300px;gap:18px;align-items:start}
   @media(max-width:980px){.editor-layout{grid-template-columns:1fr}}
+
+  /* ── TOOLBAR ── */
+  .editor-toolbar{display:flex;align-items:center;gap:2px;padding:8px 12px;background:var(--bg);border:1px solid var(--line);border-bottom:none;border-radius:6px 6px 0 0;flex-wrap:wrap}
+  .tb-btn{width:32px;height:30px;border:none;background:transparent;border-radius:4px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:.88rem;color:var(--ink-soft);font-family:'Lato',sans-serif;transition:all .12s}
+  .tb-btn:hover{background:var(--line);color:var(--ink)}
+  .tb-btn.active{background:var(--burgundy);color:#fff}
+  .tb-sep{width:1px;height:20px;background:var(--line);margin:0 4px;flex-shrink:0}
+  .tb-btn-wide{width:auto;padding:0 8px;font-size:.78rem;font-weight:700}
+
+  /* ── EDITOR BODY ── */
+  .editor-content{
+    min-height:320px;padding:18px 20px;outline:none;border:1px solid var(--line);
+    border-radius:0 0 6px 6px;font-family:'Lato',sans-serif;font-size:.97rem;
+    line-height:1.85;color:var(--ink);background:var(--white);
+  }
+  .editor-content:focus{border-color:var(--burgundy-dark)}
+  .editor-content h2{font-family:'Playfair Display',serif;font-size:1.25rem;margin:1.2em 0 .4em}
+  .editor-content h3{font-family:'Playfair Display',serif;font-size:1.05rem;margin:1em 0 .3em}
+  .editor-content p{margin:.5em 0}
+  .editor-content ul,.editor-content ol{padding-left:1.5em;margin:.5em 0}
+  .editor-content blockquote{border-left:3px solid var(--copper);padding:.5em 1em;margin:.8em 0;color:var(--ink-soft);font-style:italic}
+
+  /* ── GALLERY UPLOADER ── */
+  .gallery-uploader{border:2px dashed var(--line);border-radius:8px;padding:20px;text-align:center;background:var(--bg);color:var(--ink-soft);cursor:pointer;transition:all .15s}
+  .gallery-uploader:hover{border-color:var(--copper)}
+  .gallery-uploader.drag-over{border-color:var(--burgundy);background:rgba(122,31,43,.05);}
+  .gallery-uploader svg{color:var(--copper);margin-bottom:8px}
+  .gallery-uploader .lbl{font-weight:700;color:var(--ink);font-size:.92rem}
+  .gallery-uploader .sub{font-size:.8rem;margin-top:3px}
+  .uploaded-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+  .uploaded-ph{position:relative;height:80px;border-radius:5px;background-size:cover;background-position:center;background-color:var(--beige-deep);border:1px solid var(--line)}
+  .uploaded-ph .rm{position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;border:none;cursor:pointer;display:grid;place-items:center;font-size:.8rem;line-height:1}
+  .uploaded-ph .drag-lbl{position:absolute;bottom:3px;left:4px;background:rgba(0,0,0,.6);color:#fff;padding:1px 5px;border-radius:3px;font-size:.65rem;font-weight:700}
+  .img-url-row{display:flex;gap:8px;align-items:center;margin-top:10px}
+  .img-url-row input{flex:1;padding:7px 10px;border:1px solid var(--line);border-radius:5px;font-family:'Lato',sans-serif;font-size:.85rem;background:var(--white)}
+  .img-url-row input:focus{border-color:var(--burgundy);outline:none}
+  .img-preview{width:52px;height:38px;border-radius:4px;background-size:cover;background-position:center;background-color:var(--beige-deep);border:1px solid var(--line);flex-shrink:0}
+
+  /* ── RIGHT SIDEBAR ── */
+  .sidebar-meta .card{margin-bottom:14px}
+  .checkbox-row{display:flex;align-items:center;gap:8px;font-size:.86rem;color:var(--ink);margin:7px 0;cursor:pointer}
+  .checkbox-row input[type=checkbox]{accent-color:var(--burgundy);width:15px;height:15px;cursor:pointer;flex-shrink:0}
+  .url-preview{font-size:.78rem;color:var(--ink-soft);background:var(--bg);padding:6px 10px;border-radius:5px;border:1px solid var(--line);word-break:break-all}
+  .url-preview strong{color:var(--burgundy);font-weight:700}
+  .save-actions{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+  .save-actions .btn{width:100%;justify-content:center}
+
+  /* ── TOAST ── */
+  .toast{position:fixed;bottom:24px;right:24px;background:var(--ink);color:#fff;padding:10px 18px;border-radius:8px;font-size:.88rem;font-family:'Lato',sans-serif;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9999}
+  .toast.show{opacity:1}
+  .toast.success{background:#166534}
+  .toast.error{background:#991b1b}
+
+  /* form helpers */
+  .form-hint{font-size:.76rem;color:var(--ink-soft);margin-top:3px}
+  select.form-select{width:100%;padding:7px 10px;border:1px solid var(--line);border-radius:5px;font-family:'Lato',sans-serif;font-size:.88rem;background:var(--white);color:var(--ink)}
+  select.form-select:focus{border-color:var(--burgundy);outline:none}
 </style>
 </head>
 <body>
@@ -44,18 +73,15 @@
   <aside class="sidebar">
     <div class="brand"><img src="../public/img/logo1.png" alt="NSPJ" style="width:38px;height:38px;border-radius:50%;object-fit:contain;flex-shrink:0"><div class="brand-name">Parafia NSPJ<small>Czerwionka-Leszczyny</small></div></div>
     <nav>
-      <a href="index.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7"/></svg>Pulpit</a>
+      <a href="index.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/></svg>Pulpit</a>
       <div class="nav-section">Strona WWW</div>
-      <a href="aktualnosci.html" class="active"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/></svg>Aktualności<span class="badge">3</span></a>
-      <a href="ogloszenia.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M11.5 2v4.793l3.347 7.36"/></svg>Ogłoszenia parafialne</a>
-      <a href="galeria.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M14.002 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/></svg>Galeria</a>
-      <a href="#"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 3A1.5 1.5 0 0 0 1 4.5"/></svg>Strony statyczne</a>
+      <a href="aktualnosci.html" class="active"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/><path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2zm10 1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/></svg>Aktualności</a>
+      <a href="ogloszenia.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M11.5 2v4.793l3.347 7.36a.75.75 0 0 1-.682 1.06H1.835a.75.75 0 0 1-.682-1.06l3.347-7.36V2H4a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1z"/></svg>Ogłoszenia parafialne</a>
+      <a href="galeria.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M14.002 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2z"/></svg>Galeria</a>
+      <a href="#"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.5.5 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3z"/></svg>Strony statyczne</a>
       <div class="nav-section">Wspólnota</div>
-      <a href="intencje.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8"/></svg>Intencje mszalne</a>
-      <a href="sakramenty.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6 1h6v7l-2-1-2 1V1z"/><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/></svg>Sakramenty<span class="badge" style="background:var(--ink-soft)">Pkt 2</span></a>
-      <a href="parafianie.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>Parafianie<span class="badge" style="background:var(--ink-soft)">Pkt 2</span></a>
+      <a href="intencje.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5"/></svg>Intencje mszalne</a>
       <div class="nav-section">System</div>
-      <a href="#"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H6zM1 11a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H1z"/></svg>Raporty</a>
       <a href="ustawienia.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/></svg>Ustawienia parafii</a>
     </nav>
     <div class="user"><div class="user-avatar">TŻ</div><div class="user-name">ks. Tomasz Żołna<small>Proboszcz · <a href="login.html">Wyloguj</a></small></div></div>
@@ -63,12 +89,12 @@
 
   <div class="main">
     <div class="topbar">
-      <div class="crumbs"><a href="index.html">Pulpit</a><span>/</span><a href="aktualnosci.html">Aktualności</a><span>/</span><b>Edycja</b></div>
+      <div class="crumbs"><a href="index.html">Pulpit</a><span>/</span><a href="aktualnosci.html">Aktualności</a><span>/</span><b id="crumb-mode">Edycja</b></div>
       <div class="actions">
         <a href="aktualnosci.html" class="btn btn-ghost">Anuluj</a>
-        <button class="btn btn-secondary">Zapisz jako szkic</button>
-        <button class="btn btn-primary">
-          <svg fill="currentColor" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/></svg>
+        <button class="btn btn-secondary" id="btn-draft">Zapisz szkic</button>
+        <button class="btn btn-primary" id="btn-publish">
+          <svg fill="currentColor" viewBox="0 0 16 16" width="13" height="13"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
           Opublikuj
         </button>
       </div>
@@ -77,137 +103,507 @@
     <div class="content">
       <div class="page-head">
         <div>
-          <h1>Edycja aktualności</h1>
-          <div class="lead">„Wizytacja kanoniczna abp. Galbasa" · ostatnio zmienione 2 godz. temu</div>
+          <h1 id="page-h1">Edycja aktualności</h1>
+          <div class="lead" id="ed-lead">Wczytywanie…</div>
         </div>
       </div>
 
       <div class="editor-layout">
 
-        <!-- LEWA: FORMULARZ -->
+        <!-- ── LEWA: TREŚĆ ── -->
         <div>
           <div class="card">
             <div class="form-row">
               <label>Tytuł wpisu <span class="req">*</span></label>
-              <input type="text" value="Wizytacja kanoniczna abp. Galbasa" style="font-size:1.1rem;font-weight:600">
-            </div>
-            <div class="form-row">
-              <label>Krótki opis (do podglądu w listach) <span class="hint">Maks. 200 znaków. Pojawia się w karcie na stronie głównej i w mailingach.</span></label>
-              <textarea style="min-height:70px">Ksiądz arcybiskup Adrian Galbas odwiedził naszą parafię w ramach wizytacji kanonicznej. Spotkał się z radą parafialną, grupami modlitewnymi i młodzieżą przygotowującą się do bierzmowania.</textarea>
+              <input type="text" id="ed-title" placeholder="np. Bierzmowanie 2026 — uroczystość w parafii" style="font-size:1.08rem;font-weight:600">
             </div>
 
-            <div class="form-row">
+            <div class="form-row" style="margin-top:14px">
+              <label>Krótki opis <span class="hint">Maks. 200 znaków · pojawia się w karcie na stronie głównej</span></label>
+              <textarea id="ed-excerpt" rows="3" placeholder="Zwięzłe streszczenie wpisu widoczne na listach i na stronie głównej…" style="resize:vertical"></textarea>
+            </div>
+
+            <div class="form-row" style="margin-top:14px">
               <label>Treść <span class="req">*</span></label>
-              <div class="editor-toolbar">
-                <button title="Pogrubienie"><b>B</b></button>
-                <button title="Kursywa"><i>I</i></button>
-                <button title="Podkreślenie"><u>U</u></button>
-                <div class="sep"></div>
-                <button title="Nagłówek H2"><b>H2</b></button>
-                <button title="Nagłówek H3"><b>H3</b></button>
-                <div class="sep"></div>
-                <button title="Lista"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M2.5 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg></button>
-                <button title="Lista numerowana"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5"/></svg></button>
-                <button title="Cytat"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388q0-.527.062-1.054.093-.558.31-.992t.559-.683q.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 9 7.558V11a1 1 0 0 0 1 1z"/></svg></button>
-                <div class="sep"></div>
-                <button title="Link"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9q-.13 0-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535"/></svg></button>
-                <button title="Wstaw zdjęcie"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M14.002 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/></svg></button>
+              <!-- TOOLBAR -->
+              <div class="editor-toolbar" id="toolbar">
+                <button class="tb-btn tb-btn-wide" data-cmd="bold" title="Pogrubienie (Ctrl+B)"><b>B</b></button>
+                <button class="tb-btn tb-btn-wide" data-cmd="italic" title="Kursywa (Ctrl+I)"><i>I</i></button>
+                <button class="tb-btn tb-btn-wide" data-cmd="underline" title="Podkreślenie (Ctrl+U)"><u>U</u></button>
+                <div class="tb-sep"></div>
+                <button class="tb-btn tb-btn-wide" data-cmd="formatBlock" data-val="h2" title="Nagłówek H2">H2</button>
+                <button class="tb-btn tb-btn-wide" data-cmd="formatBlock" data-val="h3" title="Nagłówek H3">H3</button>
+                <button class="tb-btn tb-btn-wide" data-cmd="formatBlock" data-val="p" title="Akapit">¶</button>
+                <div class="tb-sep"></div>
+                <button class="tb-btn" data-cmd="insertUnorderedList" title="Lista punktowana">
+                  <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M2.5 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg>
+                </button>
+                <button class="tb-btn" data-cmd="insertOrderedList" title="Lista numerowana">
+                  <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m3-6a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5"/><path d="M1.713 11.865v-.474H2c.217 0 .363-.137.363-.317 0-.185-.158-.31-.361-.31-.223 0-.367.152-.373.31h-.59c.016-.467.373-.787.986-.787.588 0 .997.318.997.782 0 .394-.238.611-.492.635v.033c.315.04.554.28.554.683 0 .533-.478.904-1.115.904-.609 0-1.028-.344-1.049-.87h.596c.01.188.177.32.443.32.264 0 .451-.158.451-.394 0-.219-.155-.37-.456-.37h-.277zM2 7.527h-.535V5.562L.748 5.85v-.567l.824-.44h.428z"/></svg>
+                </button>
+                <div class="tb-sep"></div>
+                <button class="tb-btn" data-cmd="formatBlock" data-val="blockquote" title="Cytat">
+                  <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388q0-.527.062-1.054.093-.558.31-.992t.559-.683q.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 9 7.558V11a1 1 0 0 0 1 1zm-5.5 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H5.112q0-.527.062-1.054.094-.558.31-.992.217-.434.559-.683.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 3 7.558V11a1 1 0 0 0 1 1z"/></svg>
+                </button>
+                <div class="tb-sep"></div>
+                <button class="tb-btn" data-cmd="removeFormat" title="Usuń formatowanie">
+                  <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8.21 1a.5.5 0 0 1 .487.38l1.873 7.17-1.437 1.463L7.04 2.44 5.338 10H2.5a.5.5 0 0 1 0-1H4.7L6.5 1.38A.5.5 0 0 1 6.99 1zM.5 14.5A.5.5 0 0 1 1 14h14a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5"/></svg>
+                </button>
+                <button class="tb-btn" data-cmd="undo" title="Cofnij (Ctrl+Z)">
+                  <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/><path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/></svg>
+                </button>
+                <button class="tb-btn" data-cmd="redo" title="Ponów (Ctrl+Shift+Z)">
+                  <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/></svg>
+                </button>
               </div>
-              <div class="editor-content" contenteditable="true">
-                <p>W piątek 9 maja 2026 roku nasza parafia gościła Jego Ekscelencję ks. arcybiskupa Adriana Galbasa, metropolitę katowickiego, w ramach wizytacji kanonicznej. To wyjątkowe wydarzenie spotkało się z licznym udziałem wiernych ze wszystkich grup parafialnych.</p>
-                <p>O godzinie 17:00 w kościele tymczasowym odbyła się uroczysta Msza święta pod przewodnictwem ks. arcybiskupa. Podczas homilii pasterz archidiecezji odniósł się do stulecia parafii i podziękował za świadectwo wiary kolejnych pokoleń parafian.</p>
-                <p>Po Mszy świętej miały miejsce spotkania z Radą Parafialną, grupami parafialnymi oraz młodzieżą przygotowującą się do bierzmowania. Ksiądz arcybiskup zwiedził także plac budowy nowego kościoła, wyrażając wdzięczność wszystkim, którzy wspierają to dzieło.</p>
-                <p>Bóg zapłać wszystkim za obecność i piękne świadectwo wspólnoty.</p>
-              </div>
+              <div class="editor-content" id="editor-body" contenteditable="true" spellcheck="true"></div>
             </div>
 
-            <div class="form-row">
-              <label>Zdjęcia do galerii wpisu <span class="hint">Pierwsze zdjęcie posłuży jako miniatura. Możesz zmieniać kolejność przeciągając kafelki. Wszystkie formaty (JPG/PNG/HEIC/WebP) zostaną automatycznie zoptymalizowane.</span></label>
-              <div class="gallery-uploader">
-                <svg width="40" height="40" fill="currentColor" viewBox="0 0 16 16"><path d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2zm1 9v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062z"/><path d="M10.648 8.646a.5.5 0 0 0 .577-.093l3.71 3.71V13a1 1 0 0 1-1 1h-12a1 1 0 0 1-1-1v-1l2.354-2.354a.5.5 0 0 1 .63-.062l2.66 1.772 3.71-3.71a.5.5 0 0 1 .576.093z"/><circle cx="11.5" cy="5.5" r="1.5"/></svg>
-                <div class="lbl">Upuść zdjęcia tutaj lub kliknij, żeby wybrać</div>
-                <div class="sub">JPG, PNG, HEIC, WebP · max 20 MB / plik · drag & drop działa</div>
+            <!-- ZDJĘCIA -->
+            <div class="form-row" style="margin-top:18px">
+              <label>Zdjęcia do galerii wpisu <span class="hint">Pierwsze zdjęcie będzie miniaturą. Drag &amp; drop działa wizualnie.</span></label>
+              <input type="file" id="photo-file-input" accept="image/*" style="display:none">
+              <div class="gallery-uploader" id="gallery-drop">
+                <svg width="36" height="36" fill="currentColor" viewBox="0 0 16 16"><path d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2zm1 9v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062zm8.646-6.354a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1 12V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v5.5z"/></svg>
+                <div class="lbl">Upuść zdjęcie tutaj lub kliknij, żeby wybrać</div>
+                <div class="sub">JPG, PNG, HEIC, WebP · zdjęcie zostanie skompresowane i zapisane</div>
               </div>
-              <div class="uploaded">
-                <div class="ph" style="background-image:url('../public/img/event-wizytacja-1.jpg')"><button class="rm">×</button><div class="drag-handle">1 · okładka</div></div>
-                <div class="ph" style="background-image:url('../public/img/event-wizytacja-2.jpg')"><button class="rm">×</button><div class="drag-handle">2</div></div>
-                <div class="ph" style="background-image:url('../public/img/event-wizytacja-3.jpg')"><button class="rm">×</button><div class="drag-handle">3</div></div>
-                <div class="ph" style="background-image:url('../public/img/event-wizytacja-4.jpg')"><button class="rm">×</button><div class="drag-handle">4</div></div>
+              <div class="uploaded-grid" id="photo-grid"></div>
+              <!-- Działający input URL (demo) -->
+              <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line)">
+                <label style="font-size:.8rem;font-weight:700;color:var(--ink-soft);display:block;margin-bottom:4px">URL zdjęcia okładki <span class="form-hint" style="font-weight:400">(wklej adres lub ścieżkę — np. ../public/img/budowa-2.jpg)</span></label>
+                <div class="img-url-row">
+                  <div class="img-preview" id="img-preview"></div>
+                  <input type="text" id="ed-image" placeholder="../public/img/event-wizytacja-1.jpg">
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </div><!-- /lewa -->
 
-        <!-- PRAWA: META + USTAWIENIA -->
+        <!-- ── PRAWA: META + USTAWIENIA ── -->
         <div class="sidebar-meta">
+
+          <!-- PUBLIKACJA -->
           <div class="card">
             <div class="card-head"><h3>Publikacja</h3></div>
             <div class="form-row">
               <label>Status</label>
-              <select>
-                <option selected>Opublikowany</option>
-                <option>Szkic</option>
-                <option>Zaplanowany</option>
-                <option>Archiwum</option>
+              <select class="form-select" id="ed-status">
+                <option value="published">Opublikowany</option>
+                <option value="draft">Szkic</option>
               </select>
             </div>
-            <div class="form-row">
+            <div class="form-row" style="margin-top:10px">
               <label>Data publikacji</label>
-              <input type="date" value="2026-05-09">
+              <input type="date" id="ed-date" style="width:100%;padding:7px 10px;border:1px solid var(--line);border-radius:5px;font-family:'Lato',sans-serif;font-size:.88rem;background:var(--white)">
             </div>
-            <div class="form-row">
+            <div class="form-row" style="margin-top:10px">
               <label>Autor</label>
-              <select>
-                <option selected>ks. Tomasz Żołna (proboszcz)</option>
-                <option>ks. Paweł Olszewski</option>
-                <option>Anna Marszałek (redakcja)</option>
+              <select class="form-select" id="ed-author">
+                <option value="ks. Tomasz Żołna">ks. Tomasz Żołna (proboszcz)</option>
+                <option value="ks. Paweł Olszewski">ks. Paweł Olszewski</option>
+                <option value="Anna Marszałek">Anna Marszałek (redakcja)</option>
               </select>
             </div>
-            <label class="checkbox-row"><input type="checkbox" checked> Wyróżnij na stronie głównej</label>
-            <label class="checkbox-row"><input type="checkbox" checked> Wyślij powiadomienie e-mail do parafian zapisanych na newsletter</label>
-            <label class="checkbox-row"><input type="checkbox"> Pojawi się na liście „ogłoszenia tygodnia"</label>
+            <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--line)">
+              <label class="checkbox-row"><input type="checkbox" id="ed-featured"> Wyróżnij na stronie głównej</label>
+              <label class="checkbox-row"><input type="checkbox" id="ed-newsletter"> Wyślij powiadomienie e-mail do parafian</label>
+              <label class="checkbox-row"><input type="checkbox" id="ed-ogloszenia-tyg"> Pojawi się na liście „ogłoszenia tygodnia"</label>
+            </div>
+            <div class="save-actions" style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line)">
+              <button class="btn btn-secondary sm" id="btn-draft-side">Zapisz szkic</button>
+              <button class="btn btn-primary sm" id="btn-publish-side">
+                <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+                Opublikuj
+              </button>
+            </div>
           </div>
 
+          <!-- KLASYFIKACJA -->
           <div class="card">
             <div class="card-head"><h3>Klasyfikacja</h3></div>
             <div class="form-row">
               <label>Kategoria <span class="req">*</span></label>
-              <select>
-                <option selected>Wydarzenia</option>
-                <option>Pielgrzymki</option>
-                <option>Budowa kościoła</option>
-                <option>Sakramenty</option>
-                <option>Ogłoszenia parafialne</option>
-                <option>Historia</option>
+              <select class="form-select" id="ed-category">
+                <option value="Wydarzenia">Wydarzenia</option>
+                <option value="Pielgrzymki">Pielgrzymki</option>
+                <option value="Budowa kościoła">Budowa kościoła</option>
+                <option value="Sakramenty">Sakramenty</option>
+                <option value="Ogłoszenia">Ogłoszenia parafialne</option>
+                <option value="Historia">Historia</option>
+                <option value="Inne">Inne</option>
               </select>
             </div>
-            <div class="form-row">
-              <label>Tagi <span class="hint">oddzielone przecinkami, pomagają w wyszukiwaniu</span></label>
-              <input type="text" value="wizytacja, arcybiskup, Galbas, 100 lat parafii">
+            <div class="form-row" style="margin-top:10px">
+              <label>Tagi <span class="hint">oddzielone przecinkami</span></label>
+              <input type="text" id="ed-tags" placeholder="np. wizytacja, arcybiskup, bierzmowanie" style="width:100%;padding:7px 10px;border:1px solid var(--line);border-radius:5px;font-family:'Lato',sans-serif;font-size:.85rem">
             </div>
           </div>
 
+          <!-- SEO -->
           <div class="card">
             <div class="card-head"><h3>SEO</h3></div>
             <div class="form-row">
               <label>Tytuł w wyszukiwarce</label>
-              <input type="text" placeholder="np. Wizytacja arcybiskupa Galbasa · Parafia NSPJ" value="Wizytacja kanoniczna abp. Galbasa | Parafia NSPJ">
+              <input type="text" id="ed-seo-title" placeholder="np. Wizytacja arcybiskupa Galbasa · Parafia NSPJ" style="width:100%;padding:7px 10px;border:1px solid var(--line);border-radius:5px;font-family:'Lato',sans-serif;font-size:.85rem">
             </div>
-            <div class="form-row">
-              <label>Adres URL <span class="hint">nspjczerwionka.pl/aktualnosci/<span style="color:var(--burgundy);font-weight:600">wizytacja-galbasa-2026</span></span></label>
-              <input type="text" value="wizytacja-galbasa-2026">
+            <div class="form-row" style="margin-top:10px">
+              <label>Adres URL</label>
+              <div class="url-preview">nspjczerwionka.pl/aktualnosci/<strong id="ed-slug-display">…</strong></div>
+              <input type="text" id="ed-slug" placeholder="slug-wpisu" style="width:100%;margin-top:6px;padding:7px 10px;border:1px solid var(--line);border-radius:5px;font-family:'Lato',sans-serif;font-size:.82rem">
             </div>
           </div>
 
-          <div class="info-box">
-            <b>Automatyczna optymalizacja</b>
-            Zdjęcia zostaną przekonwertowane do .webp i wygenerowane miniatury w 3 rozmiarach. Strona główna i mapa serwisu zaktualizują się automatycznie po publikacji.
+          <!-- PODGLĄD -->
+          <div style="text-align:center;margin-top:4px">
+            <a href="../strony/aktualnosci.html" target="_blank" style="font-size:.78rem;color:var(--copper);display:inline-flex;align-items:center;gap:5px">
+              <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5H8.136a.5.5 0 0 0 .5-.5z"/><path d="M10.5 0a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0V.5a.5.5 0 0 0-.5-.5z"/></svg>
+              Zobacz stronę aktualności
+            </a>
           </div>
-        </div>
 
-      </div>
-    </div>
-  </div>
-</div>
+        </div><!-- /prawa -->
+
+      </div><!-- /editor-layout -->
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span id="toast-msg"></span></div>
+
+<script>
+// ════════════════════════════════════════════════════════
+//  SHARED DATA STORE
+// ════════════════════════════════════════════════════════
+const LS_KEY = 'nspj_aktualnosci';
+
+const DEFAULT_NEWS = [
+  { id:'news-wizytacja', title:'Wizytacja kanoniczna abp. Galbasa', date:'2026-05-09', category:'Wydarzenia', status:'published', author:'ks. Tomasz Żołna',
+    excerpt:'Ksiądz arcybiskup Adrian Galbas odwiedził naszą parafię w ramach wizytacji kanonicznej. Spotkał się z radą parafialną, grupami modlitewnymi i młodzieżą przygotowującą się do bierzmowania.',
+    content:'<p>W piątek 9 maja 2026 roku nasza parafia gościła Jego Ekscelencję ks. arcybiskupa Adriana Galbasa, metropolitę katowickiego, w ramach wizytacji kanonicznej.</p><h3>Spotkania z grupami</h3><p>Ksiądz arcybiskup spotkał się z Radą Parafialną, grupami modlitewnymi oraz młodzieżą przygotowującą się do bierzmowania. Zwiedził plac budowy nowego kościoła, wyrażając wdzięczność wszystkim ofiarodawcom.</p><p>Bóg zapłać wszystkim za obecność i piękne świadectwo wspólnoty.</p>',
+    image:'../public/img/event-wizytacja-1.jpg', tags:'wizytacja, arcybiskup, Galbas', featured:false, views:920, slug:'wizytacja-galbasa-2026' },
+  { id:'news-budowa-wieza', title:'Kolejny etap budowy — wieża', date:'2026-05-05', category:'Budowa kościoła', status:'published', author:'ks. Tomasz Żołna',
+    excerpt:'W październiku 2025 roku rozpoczęły się prace przy budowie wieży kościoła. Wykonawcą jest firma z Czerwionki, projekt według architekta Grzegorza Tkacza.',
+    content:'<p>W październiku 2025 roku przy budującej się nowej świątyni parafii NSPJ w Czerwionce-Leszczynach rozpoczął się kolejny etap prac — budowa wieży kościelnej.</p><h3>Projekt i wykonawca</h3><p>Projekt architektoniczny wieży przygotował architekt Grzegorz Tkacz. Wykonawcą jest firma budowlana z terenu Czerwionki-Leszczyn.</p><h3>Harmonogram</h3><p>Najbliższym kamieniem milowym jest przekazanie hełmu wieży. Parafianie mogą wspierać budowę zakupem symbolicznej płyty elewacji.</p>',
+    image:'../public/img/budowa-2.jpg', tags:'budowa, wieża, kościół', featured:false, views:580, slug:'budowa-wieza-2026' },
+  { id:'news-100lat', title:'100 lat Parafii — fotorelacja z uroczystości', date:'2025-08-03', category:'Wydarzenia', status:'published', author:'ks. Tomasz Żołna',
+    excerpt:'Jubileuszowa uroczystość stulecia parafii zgromadziła setki parafian. Relacja z obchodów 100-lecia.',
+    content:'<p>W sierpniu 2025 roku parafia obchodziła uroczyście swoje 100-lecie. Jubileuszowa Msza Święta pod przewodnictwem biskupa pomocniczego zgromadziła ponad 500 wiernych.</p><p>Po uroczystości odbyła się wystawa historyczna oraz wspólny obiad parafialny na placu przed kościołem.</p>',
+    image:'../public/img/hero-2.jpg', tags:'100 lat, jubileusz, historia', featured:false, views:2410, slug:'100-lat-parafii-2025' },
+  { id:'news-pielgrzymka', title:'Pielgrzymka do Rud — relacja księdza', date:'', category:'Pielgrzymki', status:'draft', author:'ks. Paweł Olszewski',
+    excerpt:'Tekst relacji z pielgrzymki do opactwa cystersów w Rudach. Artykuł w przygotowaniu.',
+    content:'<p>Artykuł w przygotowaniu…</p>',
+    image:'../public/img/event-odpust-1.jpg', tags:'pielgrzymka, Rudy, cystersi', featured:false, views:340, slug:'pielgrzymka-rudy' },
+  { id:'news-bierzmowanie', title:'Bierzmowanie 2025 — zaproszenie dla młodzieży', date:'2025-04-14', category:'Sakramenty', status:'published', author:'ks. Paweł Olszewski',
+    excerpt:'Zaproszenie dla młodych parafian do przystąpienia do sakramentu bierzmowania w roku 2025.',
+    content:'<p>Zapraszamy wszystkich młodych parafian urodzonych w roku 2009 i 2010 do zgłoszenia się na przygotowanie do sakramentu bierzmowania.</p><p>Spotkania przygotowawcze w każdy wtorek o godz. 17:30 w salce parafialnej. Kontakt: kancelaria parafialna.</p>',
+    image:'../public/img/event-pozegnanie-1.jpg', tags:'bierzmowanie, młodzież, sakrament', featured:false, views:192, slug:'bierzmowanie-2025' },
+  { id:'news-plytyelewacji', title:'Płyty elewacji — postęp prac', date:'2025-03-27', category:'Budowa kościoła', status:'published', author:'ks. Tomasz Żołna',
+    excerpt:'Relacja z postępu prac przy montażu płyt elewacyjnych na nowym kościele.',
+    content:'<p>Trwają intensywne prace przy montażu płyt elewacji zewnętrznej nowego kościoła. Dotychczas zamontowano 87 z 240 płyt.</p><p>Każdy parafian może wziąć udział w budowie poprzez zakup symbolicznej płyty — certyfikat do odbioru po Mszy świętej.</p>',
+    image:'../public/img/budowa-4.jpg', tags:'budowa, elewacja, postęp', featured:false, views:405, slug:'plyty-elewacji-2025' },
+  { id:'news-bozecial0', title:'Boże Ciało 2024 — procesja przez Czerwionkę', date:'2024-05-30', category:'Wydarzenia', status:'published', author:'ks. Tomasz Żołna',
+    excerpt:'Procesja Bożego Ciała przeszła tradycyjnymi ulicami Czerwionki-Leszczyn. Wzięło w niej udział ponad 300 wiernych.',
+    content:'<p>W uroczystość Bożego Ciała parafianie przeszli w procesji przez główne ulice Czerwionki-Leszczyn. Przy czterech ołtarzach ustawiono ozdobione kwiatami stoły, przy których odprawiono modlitwy.</p><p>W procesji wzięło udział około 300 wiernych, a oprawę muzyczną zapewniła schola parafialna.</p>',
+    image:'../public/img/event-odpust-2.jpg', tags:'Boże Ciało, procesja, tradycja', featured:false, views:1120, slug:'boze-cialo-2024' },
+  { id:'news-schlafhaus', title:'Schlafhaus — historia starego kościoła', date:'2023-06-22', category:'Historia', status:'published', author:'Marian Wójcik',
+    excerpt:'Esej historyczny o dawnym kościele w Czerwionce — tajemnicze Schlafhaus i jego miejsce w dziejach parafii.',
+    content:'<p>Słowo „Schlafhaus" (dom snu) od pokoleń funkcjonowało wśród starszych mieszkańców Czerwionki na określenie starej świątyni parafialnej. Skąd ta nazwa?</p><p>Według lokalnej tradycji, w czasie wojen napoleońskich budynek kościoła służył jako schronisko dla żołnierzy. Stąd ironiczne określenie, które przylgnęło do świątyni na lata.</p>',
+    image:'../public/img/hero-3.jpg', tags:'historia, Schlafhaus, stary kościół', featured:false, views:286, slug:'schlafhaus-historia' }
+];
+
+function loadAllNews() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (raw) { const p = JSON.parse(raw); if (Array.isArray(p) && p.length > 0) return p; }
+  } catch(e) {}
+  return JSON.parse(JSON.stringify(DEFAULT_NEWS));
+}
+
+function saveAllNews(data) {
+  try { localStorage.setItem(LS_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+// ════════════════════════════════════════════════════════
+//  URL PARAMS — ?id=xxx to edit, ?new=1 to create
+// ════════════════════════════════════════════════════════
+const params  = new URLSearchParams(location.search);
+const editId  = params.get('id');
+const isNew   = params.get('new') === '1';
+
+// Migracja: nadpisz localStorage gdy poprzednia wersja seedu była niespójna
+// (np. atrapy bez `content`). Tożsame z admin/aktualnosci.html, index.html, strony/aktualnosci.html.
+const LS_VER_KEY = 'nspj_aktualnosci_v';
+const DATA_VERSION = 2;
+const storedVer = parseInt(localStorage.getItem(LS_VER_KEY) || '0', 10);
+if (storedVer < DATA_VERSION) {
+  saveAllNews(DEFAULT_NEWS);
+  localStorage.setItem(LS_VER_KEY, String(DATA_VERSION));
+}
+
+let allNews = loadAllNews();
+
+let currentArticle = null;
+if (isNew) {
+  currentArticle = {
+    id: 'news-' + Date.now(),
+    title: '', date: new Date().toISOString().slice(0, 10),
+    category: 'Wydarzenia', status: 'draft',
+    author: 'ks. Tomasz Żołna', excerpt: '', content: '',
+    image: '', tags: '', featured: false, views: 0, slug: ''
+  };
+  document.getElementById('crumb-mode').textContent = 'Nowy wpis';
+  document.getElementById('page-h1').textContent = 'Nowy wpis';
+} else if (editId) {
+  currentArticle = allNews.find(a => a.id === editId) || null;
+} else {
+  // No param — load first article (fallback)
+  currentArticle = allNews[0] || null;
+}
+
+// ════════════════════════════════════════════════════════
+//  TOAST
+// ════════════════════════════════════════════════════════
+let toastTimer = null;
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.className = 'show ' + type;
+  document.getElementById('toast-msg').textContent = msg;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.className = ''; }, 3200);
+}
+
+// ════════════════════════════════════════════════════════
+//  POPULATE FORM
+// ════════════════════════════════════════════════════════
+function slugify(str) {
+  return str.toLowerCase()
+    .replace(/ą/g,'a').replace(/ć/g,'c').replace(/ę/g,'e')
+    .replace(/ł/g,'l').replace(/ń/g,'n').replace(/ó/g,'o')
+    .replace(/ś/g,'s').replace(/ź/g,'z').replace(/ż/g,'z')
+    .replace(/[^a-z0-9 -]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').trim();
+}
+
+function updateSlugDisplay() {
+  const slug = document.getElementById('ed-slug').value || slugify(document.getElementById('ed-title').value) || '…';
+  document.getElementById('ed-slug-display').textContent = slug;
+}
+
+function updateImagePreview(url) {
+  const el = document.getElementById('img-preview');
+  if (url && url.trim()) {
+    el.style.backgroundImage = `url('${url.trim()}')`;
+  } else {
+    el.style.backgroundImage = '';
+  }
+}
+
+function populateForm(art) {
+  if (!art) {
+    document.getElementById('ed-lead').textContent = 'Artykuł nie istnieje — sprawdź adres.';
+    return;
+  }
+  document.getElementById('ed-title').value   = art.title || '';
+  document.getElementById('ed-excerpt').value = art.excerpt || '';
+  document.getElementById('editor-body').innerHTML = art.content || '';
+  document.getElementById('ed-date').value    = art.date || '';
+  document.getElementById('ed-status').value  = art.status || 'draft';
+  document.getElementById('ed-author').value  = art.author || 'ks. Tomasz Żołna';
+  document.getElementById('ed-category').value = art.category || 'Wydarzenia';
+  document.getElementById('ed-tags').value    = art.tags || '';
+  document.getElementById('ed-featured').checked = !!art.featured;
+  document.getElementById('ed-image').value   = art.image || '';
+  document.getElementById('ed-slug').value    = art.slug || slugify(art.title || '');
+  document.getElementById('ed-seo-title').value = art.seoTitle || (art.title ? art.title + ' | Parafia NSPJ' : '');
+
+  updateImagePreview(art.image);
+  updateSlugDisplay();
+
+  document.getElementById('ed-lead').textContent = art.title
+    ? `„${art.title}" · ostatnio zmienione niedawno`
+    : 'Nowy wpis — uzupełnij tytuł i treść';
+}
+
+populateForm(currentArticle);
+
+// ════════════════════════════════════════════════════════
+//  PHOTO GRID (demo — wizualne)
+// ════════════════════════════════════════════════════════
+function renderPhotoGrid(art) {
+  const grid = document.getElementById('photo-grid');
+  if (!art || !art.image) { grid.innerHTML = ''; return; }
+  grid.innerHTML = `
+    <div class="uploaded-ph" style="background-image:url('${art.image}')">
+      <div class="drag-lbl">1 · okładka</div>
+    </div>`;
+}
+renderPhotoGrid(currentArticle);
+
+document.getElementById('ed-image').addEventListener('input', function() {
+  updateImagePreview(this.value);
+  renderPhotoGrid({ image: this.value });
+});
+
+// ════════════════════════════════════════════════════════
+//  TOOLBAR
+// ════════════════════════════════════════════════════════
+document.getElementById('toolbar').addEventListener('mousedown', e => {
+  const btn = e.target.closest('[data-cmd]');
+  if (!btn) return;
+  e.preventDefault();
+  const cmd = btn.dataset.cmd;
+  const val = btn.dataset.val || null;
+  document.execCommand(cmd, false, val);
+  document.getElementById('editor-body').focus();
+});
+
+// ════════════════════════════════════════════════════════
+//  LIVE SLUG UPDATE
+// ════════════════════════════════════════════════════════
+document.getElementById('ed-title').addEventListener('input', function() {
+  const slug = document.getElementById('ed-slug');
+  // Auto-fill slug only if it's empty or matches old auto-value
+  if (!slug.dataset.manualEdit) {
+    slug.value = slugify(this.value);
+  }
+  updateSlugDisplay();
+});
+document.getElementById('ed-slug').addEventListener('input', function() {
+  this.dataset.manualEdit = '1';
+  updateSlugDisplay();
+});
+
+// ════════════════════════════════════════════════════════
+//  SAVE
+// ════════════════════════════════════════════════════════
+function saveArticle(forcedStatus) {
+  if (!currentArticle) { showToast('Brak artykułu do zapisania', 'error'); return; }
+
+  const title = document.getElementById('ed-title').value.trim();
+  if (!title) { showToast('Wpisz tytuł wpisu', 'error'); return; }
+
+  const newStatus = forcedStatus || document.getElementById('ed-status').value;
+
+  const updated = {
+    ...currentArticle,
+    title,
+    excerpt:   document.getElementById('ed-excerpt').value,
+    content:   document.getElementById('editor-body').innerHTML,
+    date:      document.getElementById('ed-date').value,
+    status:    newStatus,
+    author:    document.getElementById('ed-author').value,
+    category:  document.getElementById('ed-category').value,
+    tags:      document.getElementById('ed-tags').value,
+    featured:  document.getElementById('ed-featured').checked,
+    image:     document.getElementById('ed-image').value.trim(),
+    slug:      document.getElementById('ed-slug').value || slugify(title),
+    seoTitle:  document.getElementById('ed-seo-title').value,
+  };
+
+  // If featured: unset others
+  if (updated.featured) {
+    allNews.forEach(a => { if (a.id !== updated.id) a.featured = false; });
+  }
+
+  const idx = allNews.findIndex(a => a.id === updated.id);
+  if (idx >= 0) {
+    allNews[idx] = updated;
+  } else {
+    allNews.unshift(updated);  // new article → top of list
+  }
+
+  currentArticle = updated;
+  saveAllNews(allNews);
+
+  // Update URL if was new
+  if (isNew) {
+    history.replaceState(null, '', '?id=' + updated.id);
+  }
+
+  // Sync status select
+  document.getElementById('ed-status').value = newStatus;
+  document.getElementById('ed-lead').textContent = `„${title}" · zapisane`;
+
+  if (newStatus === 'published') {
+    showToast('✓ Aktualność opublikowana na stronie!', 'success');
+  } else {
+    showToast('✓ Szkic zapisany', 'success');
+  }
+}
+
+// Button handlers
+document.getElementById('btn-draft').addEventListener('click',        () => saveArticle('draft'));
+document.getElementById('btn-publish').addEventListener('click',      () => saveArticle('published'));
+document.getElementById('btn-draft-side').addEventListener('click',   () => saveArticle('draft'));
+document.getElementById('btn-publish-side').addEventListener('click', () => saveArticle('published'));
+
+// Ctrl+S
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    saveArticle(null);
+  }
+});
+
+// ════════════════════════════════════════════════════════
+//  PHOTO UPLOAD — obsługa klik + drag&drop + kompresja canvas
+// ════════════════════════════════════════════════════════
+function processImageFile(file) {
+  if (!file || !file.type.startsWith('image/')) {
+    showToast('Wybierz plik graficzny (JPG, PNG, WebP…)', 'error');
+    return;
+  }
+  const MAX_PX = 1400;
+  const QUALITY = 0.82;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = new Image();
+    img.onload = function() {
+      let w = img.naturalWidth, h = img.naturalHeight;
+      if (w > MAX_PX || h > MAX_PX) {
+        if (w >= h) { h = Math.round(h * MAX_PX / w); w = MAX_PX; }
+        else        { w = Math.round(w * MAX_PX / h); h = MAX_PX; }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      const dataUrl = canvas.toDataURL('image/jpeg', QUALITY);
+      const sizeKB = Math.round(dataUrl.length * 0.75 / 1024);
+      document.getElementById('ed-image').value = dataUrl;
+      updateImagePreview(dataUrl);
+      renderPhotoGrid({ image: dataUrl });
+      showToast(`✓ Zdjęcie dodane (${w}×${h}px, ~${sizeKB} KB)`, 'success');
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+(function setupUpload() {
+  const dropZone  = document.getElementById('gallery-drop');
+  const fileInput = document.getElementById('photo-file-input');
+
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  fileInput.addEventListener('change', function() {
+    if (this.files.length > 0) processImageFile(this.files[0]);
+    this.value = '';
+  });
+
+  dropZone.addEventListener('dragover', e => {
+    e.preventDefault();
+    dropZone.classList.add('drag-over');
+  });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('drag-over');
+    const files = e.dataTransfer.files;
+    if (files.length > 0) processImageFile(files[0]);
+  });
+})();
+</script>
 </body>
 </html>

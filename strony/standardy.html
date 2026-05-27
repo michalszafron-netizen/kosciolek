@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Standardy Ochrony Małoletnich · Parafia NSPJ Czerwionka-Leszczyny</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--beige:#f4ede0;--beige-deep:#ebe1cd;--cream:#faf6ee;--burgundy:#7a1f2b;--burgundy-dark:#5e1620;--copper:#b87a4a;--copper-light:#d6a572;--ink:#2b2520;--ink-soft:#5a5048;--line:#d8cdb6;--white:#ffffff}
+  *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}
+  body{margin:0;padding:0;font-family:'Lato',-apple-system,sans-serif;color:var(--ink);background:var(--beige);line-height:1.6}
+  h1,h2,h3,h4{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;color:var(--ink)}
+  h1{font-size:clamp(2.4rem,4vw,3.6rem);line-height:1.1;margin:0 0 1rem}h2{font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.2;margin:0 0 1rem}p{margin:0 0 1rem}
+  a{color:var(--burgundy);text-decoration:none}a:hover{text-decoration:underline}img{max-width:100%;display:block}
+  .container{max-width:1240px;margin:0 auto;padding:0 24px}.sticky-header{position:sticky;top:0;z-index:50}
+  .eyebrow{font-family:'Lato',sans-serif;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--copper);font-weight:700;margin-bottom:.8rem;display:inline-block}
+  /* Topbar */
+  .topbar{background:var(--burgundy-dark);color:#e8d9b8;font-size:.82rem;line-height:1;min-height:40px;display:flex;align-items:center}.topbar .container{display:flex;justify-content:space-between;align-items:center;width:100%;padding:4px 24px;gap:12px}
+  .topbar a{color:#e8d9b8;text-decoration:none;display:inline-flex;align-items:center}.topbar a:hover{color:#fff}.topbar .left,.topbar .right{display:flex;gap:18px;align-items:center}.topbar svg{flex-shrink:0;margin-right:6px}.topbar-admin svg{margin-right:0;display:block}
+  .topbar-btn-wsparcie{background:#e8d9b8;color:var(--burgundy-dark)!important;font-weight:700;padding:5px 14px;border-radius:4px;font-size:.82rem;white-space:nowrap}.topbar-btn-wsparcie:hover{background:#fff;text-decoration:none!important}
+  .topbar-admin{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid rgba(232,217,184,.35);color:#e8d9b8;margin-left:4px;text-decoration:none}
+  @media(max-width:768px){.topbar .left span:first-child{display:none}.topbar .right a:not(.topbar-admin){display:none}.topbar .container{justify-content:center}}
+  /* Header nav */
+  header.site{background:var(--cream);border-bottom:1px solid var(--line)}.nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px}
+  .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}.brand-mark{width:46px;height:46px;border-radius:50%;overflow:hidden;flex-shrink:0}.brand-logo{width:46px;height:46px;object-fit:contain;display:block}
+  .brand-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:.95rem;line-height:1.2}.brand-name small{display:block;font-family:'Lato',sans-serif;font-size:.7rem;letter-spacing:.16em;color:var(--copper);text-transform:uppercase;font-weight:700;margin-top:3px}
+  nav.main{display:flex;gap:4px;align-items:center}nav.main a{padding:10px 12px;font-weight:400;font-size:.9rem;color:var(--ink);border-radius:6px;transition:background .15s;white-space:nowrap}nav.main a:hover{background:var(--beige);text-decoration:none}nav.main a.has-sub::after{content:"▾";font-size:.7rem;margin-left:6px;color:var(--copper)}nav.main a.active{background:var(--beige-deep);font-weight:700;color:var(--burgundy)}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--ink);padding:8px}
+  .dropdown{position:relative}.dropdown-menu{display:none;position:absolute;top:calc(100% + 6px);left:0;background:var(--cream);border:1px solid var(--line);border-radius:8px;min-width:230px;z-index:200;box-shadow:0 8px 32px rgba(43,37,32,.14);padding:6px 0}
+  .dropdown:hover .dropdown-menu,.dropdown.open .dropdown-menu{display:block}.dropdown-menu a{display:block;padding:9px 18px;color:var(--ink);font-size:.88rem;background:none}.dropdown-menu a:hover{background:var(--beige);text-decoration:none}.dropdown-menu a.active-item{background:var(--beige-deep);color:var(--burgundy);font-weight:700}.dropdown-menu hr{border:none;border-top:1px solid var(--line);margin:4px 12px}
+  @media(max-width:980px){nav.main{display:none}.menu-toggle{display:block}}
+  /* Page hero */
+  .page-hero{background:var(--cream);border-bottom:1px solid var(--line);padding:50px 0 0}
+  .breadcrumb{font-size:.83rem;color:var(--ink-soft);margin-bottom:16px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}.breadcrumb a{color:var(--copper)}
+  /* Tabs */
+  .tab-bar{display:flex;gap:0;margin-top:32px;border-bottom:none}
+  .tab-btn{padding:12px 28px;font-family:'Lato',sans-serif;font-size:.9rem;font-weight:700;border:none;border-radius:8px 8px 0 0;cursor:pointer;transition:all .15s;background:var(--beige-deep);color:var(--ink-soft);border:1px solid var(--line);border-bottom:none;margin-right:4px}
+  .tab-btn.active{background:var(--beige);color:var(--burgundy);border-color:var(--line);position:relative;z-index:2}
+  .tab-btn:hover:not(.active){background:var(--beige);color:var(--ink)}
+  /* Tab content */
+  .tab-content{display:none;padding-bottom:60px}.tab-content.active{display:block}
+  .tab-divider{border-top:1px solid var(--line);margin:0 0 40px}
+
+  /* === INFORMACJE OGÓLNE === */
+  .som-layout{display:grid;grid-template-columns:1fr 340px;gap:40px;padding:40px 0;align-items:start}
+  .som-section{margin-bottom:36px}
+  .som-section h2{font-size:1.5rem;border-left:3px solid var(--burgundy);padding-left:14px;margin-bottom:16px}
+  .som-intro{background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:28px;margin-bottom:36px}
+  .som-intro p{color:var(--ink-soft);margin:0}
+  .zasady-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+  .zasada-card{background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start}
+  .zasada-icon{font-size:1.4rem;flex-shrink:0;margin-top:2px}
+  .zasada-text{font-size:.9rem;color:var(--ink-soft);line-height:1.45}
+  .proc-list{list-style:none;padding:0;margin:0}
+  .proc-list li{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line);font-size:.93rem;color:var(--ink-soft)}
+  .proc-list li:last-child{border-bottom:none}
+  .proc-num{flex-shrink:0;width:28px;height:28px;background:var(--burgundy);color:#f6e9d3;border-radius:50%;display:grid;place-items:center;font-family:'Cormorant Garamond',Georgia,serif;font-size:1rem;font-weight:600;margin-top:2px}
+  .alarm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+  .alarm-item{background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:14px;text-align:center}
+  .alarm-num{font-family:'Cormorant Garamond',Georgia,serif;font-size:2rem;font-weight:700;color:var(--burgundy);display:block;line-height:1}
+  .alarm-label{font-size:.78rem;color:var(--ink-soft);margin-top:4px}
+  .req-list{list-style:none;padding:0;margin:0}.req-list li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);font-size:.93rem;color:var(--ink-soft)}.req-list li:last-child{border-bottom:none}.req-list li::before{content:"✓";flex-shrink:0;color:var(--burgundy);font-weight:700;margin-top:2px}
+  /* Sidebar */
+  .contact-card{background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:24px;margin-bottom:20px}
+  .contact-card h3{font-size:1.05rem;margin-bottom:14px;color:var(--burgundy)}
+  .contact-card .person-name{font-weight:700;font-size:.95rem;color:var(--ink);margin-bottom:4px}
+  .contact-card .person-role{font-size:.82rem;color:var(--ink-soft);margin-bottom:10px;line-height:1.4}
+  .contact-card .phone-link{display:inline-flex;align-items:center;gap:6px;background:var(--burgundy);color:#f6e9d3;padding:7px 14px;border-radius:6px;font-size:.88rem;font-weight:700;text-decoration:none;margin-top:4px}
+  .contact-card .phone-link:hover{background:var(--burgundy-dark);text-decoration:none}
+  .helpline-list{list-style:none;padding:0;margin:0}
+  .helpline-list li{padding:10px 0;border-bottom:1px solid var(--line);font-size:.88rem;color:var(--ink-soft)}
+  .helpline-list li:last-child{border-bottom:none}
+  .helpline-list .hl-name{font-weight:700;color:var(--ink);display:block;margin-bottom:2px}
+  .helpline-list .hl-num{color:var(--burgundy);font-weight:700;font-size:.95rem}
+
+  /* === PEŁNY DOKUMENT === */
+  .doc-layout{display:grid;grid-template-columns:1fr 280px;gap:40px;padding:40px 0;align-items:start}
+  .doc-body{background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:40px 48px}
+  .doc-title{text-align:center;margin-bottom:10px;font-size:clamp(1.4rem,2.4vw,1.9rem)}
+  .doc-subtitle{text-align:center;font-family:'Lato',sans-serif;font-size:.88rem;color:var(--ink-soft);margin-bottom:6px}
+  .doc-basis{text-align:center;font-size:.82rem;color:var(--ink-soft);font-style:italic;padding:10px 20px;background:var(--beige);border-radius:6px;margin-bottom:32px}
+  .doc-dzial{margin:32px 0 0;padding:18px 22px;background:var(--burgundy);color:#f6e9d3;border-radius:8px;text-align:center}
+  .doc-dzial h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.25rem;color:#f6e9d3;margin:0;letter-spacing:.04em}
+  .doc-dzial .dzial-num{font-family:'Lato',sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(246,233,211,.7);display:block;margin-bottom:4px}
+  .doc-rozdzial{margin:24px 0 10px;font-size:1.05rem;color:var(--burgundy);font-weight:600;border-bottom:1px solid var(--line);padding-bottom:8px}
+  .doc-par{margin:20px 0 0}
+  .doc-par-header{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.05rem;font-weight:600;color:var(--burgundy);margin-bottom:8px}
+  .doc-par ol{margin:0;padding-left:22px;color:var(--ink-soft);font-size:.93rem;line-height:1.6}
+  .doc-par ol li{margin-bottom:8px;padding-left:4px}
+  .doc-par ol li ol{margin-top:8px;list-style-type:lower-alpha}
+  .doc-par p{color:var(--ink-soft);font-size:.93rem}
+  .doc-instytucje{list-style:none;padding:0;margin:0}
+  .doc-instytucje li{padding:8px 12px;border-bottom:1px solid var(--line);font-size:.88rem;color:var(--ink-soft);display:flex;gap:10px;align-items:flex-start}
+  .doc-instytucje li:last-child{border-bottom:none}
+  .doc-instytucje li::before{content:"»";color:var(--burgundy);font-weight:700;flex-shrink:0}
+  .doc-instytucje .tel{font-weight:700;color:var(--burgundy)}
+  /* Załączniki */
+  .doc-zalacznik{margin:28px 0 0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .doc-zalacznik-header{background:var(--beige-deep);padding:12px 18px;font-size:.88rem;font-weight:700;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
+  .doc-zalacznik-header:hover{background:var(--line)}
+  .doc-zalacznik-header .arrow{transition:transform .2s;font-size:.75rem;color:var(--copper)}
+  .doc-zalacznik-body{display:none;padding:18px 22px;background:var(--cream);font-size:.88rem;color:var(--ink-soft)}
+  .doc-zalacznik.open .doc-zalacznik-body{display:block}
+  .doc-zalacznik.open .arrow{transform:rotate(180deg)}
+  /* Podstawy prawne */
+  .doc-prawo{background:var(--beige);border:1px solid var(--line);border-radius:8px;padding:18px 22px;margin:12px 0;font-size:.85rem;color:var(--ink-soft)}
+  .doc-prawo strong{color:var(--ink);display:block;margin-bottom:6px}
+  /* TOC sidebar */
+  .doc-toc{background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:20px;position:sticky;top:110px}
+  .doc-toc h4{font-size:.9rem;margin-bottom:12px;color:var(--burgundy);padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .doc-toc a{display:block;font-size:.82rem;color:var(--ink-soft);padding:5px 0;border-bottom:1px solid var(--beige-deep);text-decoration:none;line-height:1.3}
+  .doc-toc a:hover{color:var(--burgundy)}
+  .doc-toc a.toc-dzial{font-weight:700;color:var(--ink);margin-top:8px}
+  .doc-toc a.toc-rozdzial{padding-left:10px}
+
+  /* Footer */
+  footer.site{background:var(--ink);color:#d8cdb6;padding:60px 0 30px;margin-top:0}.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px}.footer-brand{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+  footer.site p{color:rgba(216,205,182,.78);font-size:.92rem}footer.site h5{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.05rem;color:#f6e9d3;margin-bottom:1rem}footer.site ul{list-style:none;padding:0;margin:0}footer.site ul li{margin-bottom:.6rem;font-size:.92rem}footer.site ul a{color:rgba(216,205,182,.78)}footer.site ul a:hover{color:#f6e9d3;text-decoration:none}
+  .footer-bank{font-size:.83rem;background:rgba(246,233,211,.06);padding:14px;border-radius:6px;margin-top:14px;border:1px solid rgba(246,233,211,.1)}.footer-bank b{color:#f6e9d3;display:block;font-weight:700;margin-bottom:4px}.footer-bank code{font-family:'Lato',monospace;color:var(--copper-light);font-weight:700;letter-spacing:.5px}
+  .footer-social{display:flex;gap:10px;margin-top:18px}.footer-social a{width:36px;height:36px;border-radius:50%;background:rgba(246,233,211,.06);border:1px solid rgba(246,233,211,.15);display:grid;place-items:center;color:var(--copper-light);transition:all .15s}.footer-social a:hover{background:rgba(246,233,211,.14);color:#f6e9d3;text-decoration:none}.footer-social svg{width:16px;height:16px}
+  .footer-bottom{border-top:1px solid rgba(216,205,182,.14);margin-top:40px;padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:.85rem;color:rgba(216,205,182,.55)}
+  @media(max-width:980px){.som-layout,.doc-layout{grid-template-columns:1fr}.doc-toc{display:none}.footer-grid{grid-template-columns:1fr 1fr;gap:32px}.zasady-grid{grid-template-columns:1fr}.alarm-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.footer-grid{grid-template-columns:1fr}.alarm-grid{grid-template-columns:repeat(3,1fr)}.doc-body{padding:24px 20px}}
+</style>
+</head>
+<body>
+<div class="sticky-header">
+<div class="topbar"><div class="container">
+  <div class="left">
+    <span><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>ul. 3-go Maja 36, 44-230 Czerwionka-Leszczyny</span>
+    <span><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.61 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58z"/></svg><a href="tel:+48324312992">32 43 12 992</a></span>
+  </div>
+  <div class="right">
+    <a href="../index.html#budowa" class="topbar-btn-wsparcie">Wsparcie budowy</a>
+    <a href="../admin/login.html" class="topbar-admin" aria-label="Panel parafii"><svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg></a>
+  </div>
+</div></div>
+<header class="site"><div class="container"><div class="nav">
+  <a class="brand" href="../index.html">
+    <div class="brand-mark"><img src="../public/img/logo1.png" alt="Logo NSPJ" class="brand-logo"></div>
+    <div class="brand-name">Parafia Najświętszego Serca Pana Jezusa<small>Czerwionka-Leszczyny · od 1925</small></div>
+  </a>
+  <nav class="main">
+    <a href="../index.html">Strona główna</a>
+    <div class="dropdown">
+      <a href="#" class="has-sub active">O kościele</a>
+      <div class="dropdown-menu">
+        <a href="duszpasterstwo.html">Kapłani</a>
+        <a href="wspolnoty.html">Wspólnoty</a>
+        <a href="historia.html">Historia</a>
+        <hr>
+        <a href="standardy.html" class="active-item">Standardy ochrony małoletnich</a>
+      </div>
+    </div>
+    <a href="msze.html">Msze święte</a>
+    <div class="dropdown">
+      <a href="#" class="has-sub">Sakramenty</a>
+      <div class="dropdown-menu">
+        <a href="sakramenty/chrzest.html">Chrzest</a>
+        <a href="sakramenty/komunia.html">I Komunia Święta</a>
+        <a href="sakramenty/bierzmowanie.html">Bierzmowanie</a>
+        <a href="sakramenty/slub.html">Ślub</a>
+        <hr>
+        <a href="sakramenty/namaszczenie.html">Namaszczenie chorych</a>
+        <a href="sakramenty/pogrzeb.html">Pogrzeb</a>
+        <a href="sakramenty/spowiedz.html">Spowiedź</a>
+      </div>
+    </div>
+    <a href="#">Cmentarz</a>
+    <a href="../index.html#galeria">Galeria</a>
+    <a href="../index.html#aktualnosci">Aktualności</a>
+    <a href="kontakt.html">Kontakt</a>
+  </nav>
+  <button class="menu-toggle" aria-label="Menu"><svg width="28" height="28" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg></button>
+</div></div></header>
+</div>
+
+<!-- Page Hero -->
+<div class="page-hero"><div class="container">
+  <div class="breadcrumb">
+    <a href="../index.html">Strona główna</a><span>›</span>
+    <span>O kościele</span><span>›</span>
+    <span>Standardy ochrony małoletnich</span>
+  </div>
+  <span class="eyebrow">O kościele</span>
+  <h1>Standardy Ochrony Małoletnich</h1>
+  <p style="font-size:1.1rem;color:var(--ink-soft);max-width:700px;margin:0 0 28px">Nasza parafia zobowiązuje się do zapewnienia bezpiecznego środowiska dla każdego dziecka i młodego człowieka. Poniżej znajdziesz informacje ogólne lub pełną treść dokumentu.</p>
+  <!-- Tabs -->
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="ogolne">📋 Informacje ogólne</button>
+    <button class="tab-btn" data-tab="regulamin">📄 Pełny dokument</button>
+  </div>
+</div></div>
+
+<div class="container">
+  <div class="tab-divider"></div>
+
+  <!-- =============== TAB 1: INFORMACJE OGÓLNE =============== -->
+  <div class="tab-content active" id="tab-ogolne">
+    <div class="som-layout">
+      <div class="som-main">
+
+        <div class="som-intro">
+          <p>Parafia Najświętszego Serca Pana Jezusa w Czerwionce-Leszczynach przyjęła kompleksowe <strong>Standardy Ochrony Małoletnich</strong> w trosce o bezpieczeństwo dzieci i młodzieży uczestniczących w życiu parafialnym. Dokument ten obowiązuje wszystkich pracowników, wolontariuszy i osoby działające w imieniu parafii.</p>
+          <p style="margin:0">Celem standardów jest uwrażliwienie personelu na powagę działań zmierzających do ochrony dzieci przed krzywdzeniem oraz wskazanie jednoznacznych procedur postępowania w przypadku podejrzenia lub stwierdzenia krzywdzenia małoletniego.</p>
+        </div>
+
+        <div class="som-section">
+          <h2>Zasady bezpiecznych relacji z małoletnimi</h2>
+          <p style="color:var(--ink-soft);margin-bottom:18px">Każdy pracownik i wolontariusz parafii zobowiązany jest do przestrzegania następujących zasad:</p>
+          <div class="zasady-grid">
+            <div class="zasada-card"><span class="zasada-icon">🤝</span><div class="zasada-text"><strong style="color:var(--ink);display:block;margin-bottom:4px">Szacunek i godność</strong>Komunikacja z cierpliwością, szacunkiem, z uwzględnieniem godności i potrzeb dziecka. Zakaz faworyzowania.</div></div>
+            <div class="zasada-card"><span class="zasada-icon">🚫</span><div class="zasada-text"><strong style="color:var(--ink);display:block;margin-bottom:4px">Zero przemocy</strong>Bezwzględny zakaz stosowania jakichkolwiek form przemocy — fizycznej, psychicznej, słownej wobec małoletnich.</div></div>
+            <div class="zasada-card"><span class="zasada-icon">🔒</span><div class="zasada-text"><strong style="color:var(--ink);display:block;margin-bottom:4px">Poufność</strong>Informacje wrażliwe dotyczące małoletnich i ich rodzin są chronione i nie mogą być ujawniane osobom nieuprawnionym.</div></div>
+            <div class="zasada-card"><span class="zasada-icon">👁️</span><div class="zasada-text"><strong style="color:var(--ink);display:block;margin-bottom:4px">Widoczność rozmów</strong>Rozmowy indywidualne z małoletnim wyłącznie w miejscach widocznych dla innych lub z drzwiami uchylonymi.</div></div>
+            <div class="zasada-card"><span class="zasada-icon">❌</span><div class="zasada-text"><strong style="color:var(--ink);display:block;margin-bottom:4px">Zakaz relacji romantycznych</strong>Absolutny zakaz nawiązywania relacji romantycznych lub seksualnych z małoletnimi. Dotyczy też komentarzy i treści.</div></div>
+            <div class="zasada-card"><span class="zasada-icon">📱</span><div class="zasada-text"><strong style="color:var(--ink);display:block;margin-bottom:4px">Kontakt online</strong>Komunikacja z małoletnimi wyłącznie przez oficjalne kanały parafialne (e-mail, telefon służbowy).</div></div>
+          </div>
+        </div>
+
+        <div class="som-section">
+          <h2>Bezpieczna rekrutacja personelu</h2>
+          <ul class="req-list">
+            <li>Pisemne <strong>oświadczenie o niekaralności</strong> przed dopuszczeniem do pracy z dziećmi — w szczególności za przestępstwa seksualne wobec małoletnich.</li>
+            <li>Sprawdzenie w <strong>Rejestrze Sprawców Przestępstw na Tle Seksualnym</strong> prowadzonym przez Ministerstwo Sprawiedliwości.</li>
+            <li>Obowiązkowe <strong>szkolenie wprowadzające</strong> z zakresu standardów ochrony małoletnich.</li>
+            <li>Regularne szkolenia odnawiające co dwa lata dla wszystkich mających kontakt z małoletnimi.</li>
+          </ul>
+        </div>
+
+        <div class="som-section">
+          <h2>Procedury interwencji</h2>
+          <p style="color:var(--ink-soft);margin-bottom:18px">Ścieżka postępowania przy podejrzeniu krzywdzenia małoletniego:</p>
+          <ol class="proc-list">
+            <li><div class="proc-num">1</div><div><strong style="color:var(--ink)">Sporządzenie notatki służbowej</strong><br><span style="font-size:.88rem">Pracownik niezwłocznie opisuje zaobserwowaną sytuację lub wypowiedź dziecka.</span></div></li>
+            <li><div class="proc-num">2</div><div><strong style="color:var(--ink)">Zgłoszenie Proboszczowi</strong><br><span style="font-size:.88rem">Notatka trafia do ks. Proboszcza lub koordynatora ochrony małoletnich w parafii.</span></div></li>
+            <li><div class="proc-num">3</div><div><strong style="color:var(--ink)">Ocena sytuacji i decyzja</strong><br><span style="font-size:.88rem">Proboszcz ocenia powagę sytuacji — rozmowa z rodzicami lub zgłoszenie do Policji/Prokuratury.</span></div></li>
+            <li><div class="proc-num">4</div><div><strong style="color:var(--ink)">Zawiadomienie organów ścigania</strong><br><span style="font-size:.88rem">Obowiązek wynikający z art. 304 § 1 k.p.k. — zgłoszenie do Policji lub Prokuratury.</span></div></li>
+          </ol>
+          <div style="margin-top:22px">
+            <p style="font-size:.9rem;font-weight:700;color:var(--ink);margin-bottom:10px">⚠️ Bezpośrednie zagrożenie życia — dzwoń natychmiast:</p>
+            <div class="alarm-grid">
+              <div class="alarm-item"><span class="alarm-num">112</span><div class="alarm-label">Numer alarmowy</div></div>
+              <div class="alarm-item"><span class="alarm-num">997</span><div class="alarm-label">Policja</div></div>
+              <div class="alarm-item"><span class="alarm-num">998</span><div class="alarm-label">Straż Pożarna</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="som-section">
+          <h2>System monitorowania i ewaluacji</h2>
+          <ul class="req-list">
+            <li>Wyznaczony <strong>Zespół Monitorujący</strong> nadzoruje wdrożenie i przestrzeganie standardów.</li>
+            <li>Prowadzony jest <strong>rejestr incydentów</strong> — wszystkie zgłoszone sytuacje są dokumentowane.</li>
+            <li>Co dwa lata przeprowadzana jest <strong>ankieta ewaluacyjna</strong> wśród pracowników i wolontariuszy.</li>
+            <li>Standardy są regularnie aktualizowane — co najmniej raz na dwa lata.</li>
+            <li>Rodzice i opiekunowie mają prawo <strong>wglądu w standardy</strong> i składają oświadczenie o zapoznaniu.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="som-sidebar">
+        <div class="contact-card">
+          <h3>👤 Koordynator ochrony małoletnich</h3>
+          <div class="person-name">Anna Marszałek</div>
+          <div class="person-role">Koordynator ds. Ochrony Małoletnich<br>Parafia NSPJ Czerwionka-Leszczyny</div>
+          <a href="tel:+48605188277" class="phone-link"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.61 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58z"/></svg>605 188 277</a>
+        </div>
+        <div class="contact-card">
+          <h3>⛪ Delegat Archidiecezji</h3>
+          <div class="person-name">ks. Łukasz Nocoń</div>
+          <div class="person-role">Delegat ds. Ochrony Dzieci i Młodzieży<br>Archidiecezja Katowicka</div>
+          <a href="tel:+48519318959" class="phone-link"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.61 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58z"/></svg>519 318 959</a>
+        </div>
+        <div class="contact-card">
+          <h3>📞 Linie wsparcia dla dzieci</h3>
+          <ul class="helpline-list">
+            <li><span class="hl-name">Rzecznik Praw Dziecka</span><a href="tel:226965542" class="hl-num">22 696-55-42</a></li>
+            <li><span class="hl-name">Telefon Zaufania dla Dzieci i Młodzieży</span><a href="tel:116111" class="hl-num">116 111</a><span style="font-size:.78rem;color:var(--ink-soft);display:block">bezpłatny, całą dobę</span></li>
+            <li><span class="hl-name">Dziecięcy Telefon Zaufania RPD</span><a href="tel:800121212" class="hl-num">800 12 12 12</a></li>
+            <li><span class="hl-name">Niebieska Linia</span><a href="tel:116123" class="hl-num">116 123</a></li>
+            <li><span class="hl-name">Centrum Interwencyjne KOPD</span><a href="tel:226269419" class="hl-num">22 626-94-19</a></li>
+          </ul>
+        </div>
+        <div class="contact-card">
+          <h3>🏢 Instytucje lokalne</h3>
+          <ul class="helpline-list">
+            <li><span class="hl-name">Gminny Zespół Interdyscyplinarny</span><a href="tel:324312039" class="hl-num">32 43 12 039</a></li>
+            <li><span class="hl-name">Poradnia Psychologiczno-Pedagogiczna</span><a href="tel:324311267" class="hl-num">32 43 11 267</a></li>
+            <li><span class="hl-name">Ośrodek Pomocy Społecznej</span><a href="tel:324311083" class="hl-num">32 43 11 083</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div><!-- /tab-ogolne -->
+
+  <!-- =============== TAB 2: PEŁNY DOKUMENT =============== -->
+  <div class="tab-content" id="tab-regulamin">
+    <div class="doc-layout">
+
+      <!-- Dokument główny -->
+      <div class="doc-body">
+        <div class="doc-title">STANDARDY OCHRONY MAŁOLETNICH</div>
+        <div class="doc-subtitle">W PARAFII NAJŚWIĘTSZEGO SERCA PANA JEZUSA W CZERWIONCE-LESZCZYNACH</div>
+        <div class="doc-basis">Podstawa prawna: ustawa z dnia 13 maja 2016 r. o przeciwdziałaniu zagrożeniom przestępczością na tle seksualnym i ochronie małoletnich (tj. Dz. U. z 2023 r. poz. 1304 z zm.)</div>
+
+        <!-- DZIAŁ I -->
+        <div id="dzial1" class="doc-dzial"><span class="dzial-num">Dział I</span><h2>POLITYKA OCHRONY DZIECI</h2></div>
+
+        <div id="par1" class="doc-par">
+          <div class="doc-par-header">Podstawowe terminy · § 1</div>
+          <ol>
+            <li><strong>Personelem</strong> Parafii Najświętszego Serca Pana Jezusa w Czerwionce-Leszczynach jest osoba zatrudniona na podstawie umowy o pracę, umowy cywilnoprawnej, a także osoby zaangażowane w działalność duszpastersko-katechetyczną lub inne osoby współpracujące niezależnie od podstawy prawnej tej współpracy.</li>
+            <li><strong>Dzieckiem, małoletnim</strong> jest każda osoba od urodzenia do ukończenia 18 roku życia.</li>
+            <li><strong>Opiekunem dziecka</strong> jest osoba uprawniona do reprezentacji dziecka, w szczególności jego rodzic lub opiekun prawny. W myśl niniejszego dokumentu opiekunem jest również rodzic zastępczy.</li>
+            <li>Przez <strong>krzywdzenie dziecka</strong> należy rozumieć popełnienie czynu zabronionego lub czynu karalnego na szkodę dziecka, zagrożenie dobra dziecka, w tym jego zaniedbanie przez jakąkolwiek osobę, w tym członka personelu.</li>
+          </ol>
+        </div>
+
+        <div id="par2" class="doc-par">
+          <div class="doc-par-header">Cel Polityki Ochrony Dzieci · § 2</div>
+          <p>Polityka Ochrony Dzieci w Parafii Najświętszego Serca Pana Jezusa w Czerwionce-Leszczynach dotyczy personelu, opiekunów oraz dzieci. Polityka ta przedstawia zasady i standardy oraz wytyczne działań podejmowanych przez personel, które mają na celu:</p>
+          <ol>
+            <li>uwrażliwienie personelu na powagę podejmowanych przez nich działań zmierzających do ochrony dzieci przed krzywdzeniem,</li>
+            <li>podejmowanie adekwatnych do indywidualnej sytuacji, zgodnych z prawem działań na rzecz ochrony dziecka,</li>
+            <li>wskazanie procedur postępowania w przypadku powzięcia informacji o podejrzeniu krzywdzenia małoletniego,</li>
+            <li>podejmowanie działań mających na celu dokształcenie w zakresie praw dziecka i kultury pracy z dzieckiem.</li>
+          </ol>
+          <p>Obowiązkiem personelu jest znajomość oraz praktyczne stosowanie niniejszej Polityki Ochrony Dzieci.</p>
+        </div>
+
+        <div id="rozdzial1" class="doc-rozdzial">Rozdział I — Zasady bezpiecznych relacji personel–dziecko</div>
+
+        <div id="par3" class="doc-par">
+          <div class="doc-par-header">§ 3</div>
+          <ol>
+            <li>Personel jest zobowiązany do utrzymania profesjonalnej relacji z dziećmi i każdorazowego rozważenia czy reakcja, komunikat, działanie wobec dziecka są adekwatne do sytuacji, bezpieczne, uzasadnione i sprawiedliwe wobec innych dzieci. Personel działa w sposób otwarty i przejrzysty dla innych, aby zminimalizować ryzyko błędnej interpretacji zachowania.</li>
+            <li>Stosuje się następujące zasady w relacjach z dzieckiem:
+              <ol>
+                <li>w komunikacji z dziećmi należy zachować cierpliwość, szacunek, uwzględniać jego godność i potrzeby,</li>
+                <li>wszystkie czynności podejmowane przez personel są dla dobra dziecka i w jego interesie,</li>
+                <li>niedopuszczalne jest stosowanie przemocy w jakiejkolwiek formie,</li>
+                <li>należy unikać faworyzowania, traktować równo bez względu na płeć, orientację seksualną, sprawność/niepełnosprawność, status społeczny, etniczny, kulturowy, religijny i światopogląd,</li>
+                <li>należy chronić informacje wrażliwe dotyczące dziecka, nie ujawniać informacji osobom nieuprawnionym,</li>
+                <li>podejmując decyzje dotyczące dziecka, należy poinformować je o tym i starać się brać pod uwagę jego stanowisko i oczekiwania,</li>
+                <li>należy szanować prawo dziecka do prywatności, a jeśli konieczne jest odstąpić od zasady poufności, aby chronić dziecko, wyjaśnić mu to najszybciej jak to możliwe,</li>
+                <li>należy zadbać o to, aby kontakt z dzieckiem odbywał się za zgodą jego rodzica lub opiekuna prawnego,</li>
+                <li>jeśli pojawi się konieczność porozmawiania z dzieckiem na osobności, należy zostawić uchylone drzwi do pomieszczenia i zadbać, aby być w zasięgu wzroku innych, lub prowadzić rozmowę w obecności drugiego pracownika,</li>
+                <li>nie należy dotykać dziecka w sposób, który może być uznany za nieprzyzwoity lub niestosowny,</li>
+                <li>dotyk dziecka jest możliwy tylko w sposób szanujący jego komfort i bezpieczeństwo,</li>
+                <li>właściwą formą komunikacji z dziećmi i ich opiekunami poza godzinami pracy są kanały służbowe (e-mail, telefon służbowy, komunikator społecznościowy),</li>
+                <li>utrzymywanie relacji towarzyskich lub rodzinnych wymaga zachowania poufności wszystkich informacji dotyczących innych dzieci i ich rodziców,</li>
+                <li>nie wolno nawiązywać z dzieckiem jakichkolwiek relacji romantycznych lub seksualnych. Obejmuje to także seksualne komentarze, żarty, gesty oraz udostępnianie dzieciom treści erotycznych i pornograficznych,</li>
+                <li>nie wolno proponować dzieciom alkoholu, wyrobów tytoniowych ani nielegalnych substancji, jak również używać ich w obecności dzieci,</li>
+                <li>nie wolno zapraszać dzieci do swojego mieszkania ani spotykać się z nimi poza godzinami pracy.</li>
+              </ol>
+            </li>
+          </ol>
+        </div>
+
+        <!-- DZIAŁ II -->
+        <div id="dzial2" class="doc-dzial"><span class="dzial-num">Dział II</span><h2>PERSONEL</h2></div>
+
+        <div id="rozdzial2-1" class="doc-rozdzial">Rozdział I — Zasady bezpiecznej rekrutacji</div>
+        <div id="par5" class="doc-par">
+          <div class="doc-par-header">§ 5</div>
+          <ol>
+            <li>Personel mający kontakt z dzieckiem przed nawiązaniem stosunku pracy lub przed dopuszczeniem osoby do działalności duszpastersko-katechetycznej składa oświadczenie pod odpowiedzialnością karną o braku podstaw do pracy z dziećmi, w tym w szczególności o niekaralności za przestępstwa popełnione względem dzieci <em>(Załącznik nr 5)</em>.</li>
+            <li>Cały personel realizujący bezpośrednio działania na rzecz dzieci, przed rozpoczęciem pracy podpisuje oświadczenie o zapoznaniu się ze Standardami Ochrony Małoletnich obowiązującymi w Parafii oraz zobowiązaniu do przestrzegania podstawowych zasad ochrony dzieci <em>(Załącznik nr 2)</em>.</li>
+          </ol>
+        </div>
+
+        <div id="rozdzial2-2" class="doc-rozdzial">Rozdział II — Zasady szkoleniowe</div>
+        <div id="par6" class="doc-par">
+          <div class="doc-par-header">§ 6</div>
+          <ol>
+            <li>W celu zapoznania personelu z wiedzą w zakresie rozpoznawania czynników ryzyka i symptomów krzywdzenia dzieci, a także działań profilaktycznych i interwencyjnych, będą przeprowadzane spotkania.</li>
+            <li>W celu zapoznania dzieci z wiedzą na temat obowiązujących Standardów Ochrony Małoletnich będą przeprowadzone spotkania.</li>
+            <li>Każdy członek personelu będzie zobowiązany do zapoznania się ze Standardami Ochrony Małoletnich i podpisania stosownego oświadczenia <em>(Załącznik nr 2)</em>.</li>
+          </ol>
+        </div>
+
+        <div id="rozdzial2-3" class="doc-rozdzial">Rozdział III — Obszary stosowania zasad bezpiecznych relacji</div>
+        <div id="par7" class="doc-par">
+          <div class="doc-par-header">§ 7</div>
+          <ol>
+            <li>Zasady bezpiecznych relacji pomiędzy personelem a dziećmi (opisane w § 3 niniejszych Standardów) stosuje się w szczególności w odniesieniu do osób w następujących obszarach:
+              <ol>
+                <li>Dzieci Maryi,</li>
+                <li>Ministranci,</li>
+                <li>Schola.</li>
+              </ol>
+            </li>
+          </ol>
+        </div>
+
+        <!-- DZIAŁ III -->
+        <div id="dzial3" class="doc-dzial"><span class="dzial-num">Dział III</span><h2>PROCEDURY INTERWENCJI</h2></div>
+
+        <div id="rozdzial3-1" class="doc-rozdzial">Rozdział I — Przepisy ogólne</div>
+        <div id="par8" class="doc-par">
+          <div class="doc-par-header">§ 8</div>
+          <ol>
+            <li>Każdy członek personelu jest obowiązany respektować obowiązujące przepisy prawne, w szczególności określone w art. 240 k.k., 304 § 1 i 2 k.p.k., art. 572 § 1 i 2 k.p.c. oraz w Ustawie z dnia 29.07.2005 r. o przeciwdziałaniu przemocy domowej.</li>
+          </ol>
+        </div>
+
+        <div id="rozdzial3-2" class="doc-rozdzial">Rozdział II — Postępowanie w sytuacji przemocy domowej wobec małoletnich</div>
+        <div id="par9" class="doc-par">
+          <div class="doc-par-header">§ 9</div>
+          <ol>
+            <li>Personel Parafii, który w trakcie realizacji czynności poweźmie informacje o zagrożeniu zdrowia i życia dziecka w związku z przemocą domową, niezwłocznie informuje Proboszcza Parafii celem podjęcia działań.</li>
+            <li>W przypadku bezpośredniego zagrożenia życia lub zdrowia należy natychmiast poinformować odpowiednie służby (Policja, Pogotowie ratunkowe) dzwoniąc pod numer <strong>112</strong> lub <strong>998</strong>, <strong>997</strong>. Poinformowania służb dokonuje osoba, która pierwsza powzięła informacje o zagrożeniu, a następnie powiadamia swojego przełożonego.</li>
+          </ol>
+        </div>
+
+        <div id="rozdzial3-3" class="doc-rozdzial">Rozdział III — Postępowanie w sytuacji cyberprzemocy</div>
+        <div id="par13" class="doc-par">
+          <div class="doc-par-header">§ 13</div>
+          <ol>
+            <li>Personel, który powziął informację na temat przemocy rówieśniczej stosowanej z wykorzystaniem Internetu i narzędzi elektronicznych (CYBERPRZEMOCY), zobowiązany jest przeprowadzić rozmowę z pokrzywdzonym dzieckiem.</li>
+            <li>Personel o sytuacji zagrażającej dziecku zawiadamia jego opiekunów oraz zapoznaje z działaniami, które podjął.</li>
+          </ol>
+        </div>
+
+        <div id="rozdzial3-4" class="doc-rozdzial">Rozdział IV — Postępowanie w sytuacji krzywdzenia dziecka przez członka personelu</div>
+        <div id="par14" class="doc-par">
+          <div class="doc-par-header">§ 14</div>
+          <ol>
+            <li>W przypadku powzięcia informacji na temat krzywdzenia dziecka przez członka personelu, każdy inny członek personelu ma obowiązek zgłoszenia tego Proboszczowi poprzez złożenie Notatki służbowej <em>(Załącznik nr 3)</em>. Proboszcz zobowiązany jest do podjęcia działań wyjaśniających zgłoszenie oraz podjęcia odpowiednich działań prawnych wobec podejrzanego.</li>
+            <li>Proboszcz podejmuje rozmowę z osobą, której dotyczy zgłoszenie i wzywa wskazanego członka personelu do złożenia wyjaśnień. Podejmuje działania w celu zapewnienia bezpieczeństwa, w tym informuje opiekunów małoletniego, zgłasza podejrzenie krzywdzenia małoletniego do odpowiedniej instytucji (Prokuratury, Policji, Sądu).</li>
+            <li>Proboszcz wyciąga konsekwencje wobec członka personelu zakazując pracy z tą rodziną/dzieckiem lub może polecić, aby czynności były wykonywane wspólnie z innym członkiem personelu.</li>
+          </ol>
+        </div>
+
+        <div id="rozdzial3-5" class="doc-rozdzial">Rozdział V — Postępowanie w sytuacji krzywdzenia dziecka przez osoby trzecie</div>
+        <div id="par15" class="doc-par">
+          <div class="doc-par-header">§ 15</div>
+          <ol>
+            <li>Personel, który powziął informację na temat krzywdzenia dziecka przez osobę trzecią, niespokrewnioną, zobowiązany jest sporządzić Notatkę służbową <em>(Załącznik nr 3)</em> i niezwłocznie powiadamia o tym Proboszcza.</li>
+            <li>Personel informuje opiekuna dziecka o posiadanych informacjach oraz udziela informacji dotyczącej możliwości skorzystania z oferty pomocowej. W przypadku gdy zawarte w zgłoszeniu informacje stanowią uzasadnione podejrzenie popełnienia przestępstwa na szkodę małoletniego, Proboszcz podejmuje decyzję o złożeniu zawiadomienia na Policję lub do Sądu/Prokuratury.</li>
+            <li>W przypadku bezpośredniego zagrożenia życia lub zdrowia należy natychmiast poinformować odpowiednie służby dzwoniąc pod numer <strong>112</strong> lub <strong>998</strong>, <strong>997</strong>.</li>
+          </ol>
+        </div>
+
+        <div id="rozdzial3-6" class="doc-rozdzial">Rozdział VI — Instytucje wspierające małoletnich</div>
+        <div id="par16" class="doc-par">
+          <div class="doc-par-header">§ 16</div>
+          <ul class="doc-instytucje">
+            <li>Centrum Interwencyjne Komitetu Ochrony Praw Dziecka — <span class="tel">22 626-94-19</span></li>
+            <li>Rzecznik Praw Dziecka — <span class="tel">22 696-55-42</span></li>
+            <li>Telefon Zaufania dla Dzieci i Młodzieży — <span class="tel">116 111</span></li>
+            <li>Dziecięcy Telefon Zaufania Rzecznika Praw Dziecka — <span class="tel">800 12 12 12</span></li>
+            <li>Niebieska Linia — <span class="tel">116-123</span> lub <span class="tel">22 668 700</span></li>
+            <li>Lokalne organy wspierania dzieci (pedagodzy/psycholodzy szkół i przedszkoli)</li>
+            <li>Gminny Zespół Interdyscyplinarny ds. Przeciwdziałania Przemocy Domowej w Czerwionce-Leszczynach — <span class="tel">32 43 12 039</span></li>
+            <li>Poradnia Psychologiczno-Pedagogiczna w Czerwionce-Leszczynach — <span class="tel">32 43 11 267</span></li>
+            <li>Ośrodek Pomocy Społecznej w Czerwionce-Leszczynach — <span class="tel">32 43 11 083</span></li>
+            <li>Delegat ds. Ochrony Dzieci i Młodzieży w Archidiecezji Katowickiej — ks. Łukasz Nocoń, ul. Jordana 39, 40-043 Katowice (budynek Kurii Metropolitalnej) — <span class="tel">519 318 959</span></li>
+          </ul>
+        </div>
+
+        <!-- DZIAŁ IV -->
+        <div id="dzial4" class="doc-dzial"><span class="dzial-num">Dział IV</span><h2>REALIZACJA I MONITORING</h2></div>
+
+        <div id="rozdzial4-1" class="doc-rozdzial">Rozdział I — Wdrożenie i monitoring</div>
+        <div id="par17" class="doc-par">
+          <div class="doc-par-header">§ 17</div>
+          <ol>
+            <li>Standardy udostępnia się rodzicom/opiekunom prawnym dzieci objętych działaniami Parafii oraz personelowi na stronie internetowej Parafii.</li>
+            <li>W celu zapoznania dzieci z wiedzą na temat obowiązujących Standardów Ochrony Małoletnich będą przeprowadzone warsztaty.</li>
+            <li>Osobą odpowiedzialną za przygotowanie personelu w zakresie stosowania Standardów jest Proboszcz Parafii. Personel jest zobowiązany do zapoznania się z treścią Standardów i ścisłego przestrzegania ich postanowień.</li>
+            <li>Personel po zapoznaniu się z treścią standardów składa pisemne oświadczenie o stosowaniu się do ich zapisów <em>(Załącznik nr 1)</em>.</li>
+            <li>Rodzice/opiekunowie podpisują stosowne oświadczenie o zapoznaniu się ze Standardami Ochrony Małoletnich <em>(Załącznik nr 4)</em>.</li>
+            <li>Osobą odpowiedzialną za przyjmowanie zgłoszeń o zdarzeniach zagrażających małoletniemu jest Proboszcz Parafii.</li>
+            <li>Proboszcz powołuje <strong>Zespół Monitorujący</strong> odpowiedzialny za wdrażanie, realizację, aktualizację i monitoring Standardów Ochrony Małoletnich.</li>
+            <li>Powołany Zespół Monitorujący jest odpowiedzialny za monitorowanie realizacji polityki, za reagowanie na sygnały jej naruszenia oraz proponowanie zmian w polityce.</li>
+            <li>Zespół Monitorujący prowadzi rejestr zgłoszeń o podejrzeniu krzywdzenia lub krzywdzeniu małoletnich.</li>
+            <li>Zespół Monitorujący przeprowadza wśród personelu, co najmniej raz na dwa lata, ankietę monitorującą poziom realizacji Standardów <em>(Wzór ankiety — Załącznik nr 1)</em>.</li>
+            <li>W ankiecie personel może proponować zmiany do Standardów oraz wskazywać elementy, które należałoby zmienić.</li>
+            <li>Zespół Monitorujący analizuje wypełnione przez personel ankiety, sporządza na tej podstawie raport z monitoringu, który następnie przekazuje Proboszczowi.</li>
+            <li>Zespół Monitorujący analizuje wszystkie zarejestrowane zgłoszenia i przedstawia ewentualne spostrzeżenia oraz propozycje zmian do Standardów i prowadzonej polityki ochrony dzieci.</li>
+          </ol>
+        </div>
+
+        <div id="par18" class="doc-par">
+          <div class="doc-par-header">Sposób dokumentowania i zasady przechowywania incydentów · § 18</div>
+          <ol>
+            <li>Wszelkie dokumenty (notatki służbowe) dotyczące interwencji sporządza się w formie papierowej i przekazuje do Proboszcza Parafii.</li>
+            <li>Dokumenty przechowuje się zgodnie ze sposobem przechowywania dokumentacji Parafii.</li>
+            <li>W odniesieniu do dokumentów i danych pozyskanych i przetwarzanych zgodnie z niniejszymi standardami Proboszcz Parafii zachowuje wszelkie wymogi wynikające z RODO.</li>
+          </ol>
+        </div>
+
+        <div id="rozdzial4-2" class="doc-rozdzial">Rozdział II — Przepisy końcowe</div>
+        <div id="par19" class="doc-par">
+          <div class="doc-par-header">§ 19</div>
+          <ol>
+            <li>Każdy członek personelu stosujący Standardy Ochrony Małoletnich jest zobowiązany do zachowania w tajemnicy wszelkich informacji przetwarzanych w związku z niniejszą procedurą, w szczególności danych zwykłych oraz danych wrażliwych dzieci.</li>
+            <li>Standardy Ochrony Małoletnich wchodzą w życie z dniem ich ogłoszenia.</li>
+          </ol>
+        </div>
+
+        <!-- Załączniki -->
+        <div style="margin-top:36px;margin-bottom:8px"><h3 style="font-size:1.2rem;color:var(--burgundy);border-left:3px solid var(--burgundy);padding-left:12px">Załączniki</h3></div>
+
+        <div class="doc-zalacznik" id="zal1">
+          <div class="doc-zalacznik-header" onclick="toggleZal(this)">Załącznik nr 1 — Monitoring Standardów: ankieta dla pracowników <span class="arrow">▼</span></div>
+          <div class="doc-zalacznik-body">
+            <p>Ankieta monitorująca poziom realizacji Standardów Ochrony Małoletnich przeprowadzana co najmniej raz na dwa lata wśród personelu Parafii.</p>
+            <table style="width:100%;border-collapse:collapse;font-size:.85rem">
+              <thead><tr style="background:var(--beige-deep)"><th style="padding:8px 10px;text-align:left;border:1px solid var(--line)">Lp.</th><th style="padding:8px 10px;text-align:left;border:1px solid var(--line)">Pytanie</th><th style="padding:8px 10px;border:1px solid var(--line)">TAK</th><th style="padding:8px 10px;border:1px solid var(--line)">NIE</th></tr></thead>
+              <tbody>
+                <tr><td style="padding:8px 10px;border:1px solid var(--line)">1.</td><td style="padding:8px 10px;border:1px solid var(--line)">Czy znasz treść dokumentu „Standardy Ochrony Małoletnich" w Parafii NSPJ w Czerwionce-Leszczynach?</td><td style="padding:8px 10px;border:1px solid var(--line);text-align:center">☐</td><td style="padding:8px 10px;border:1px solid var(--line);text-align:center">☐</td></tr>
+                <tr><td style="padding:8px 10px;border:1px solid var(--line)">2.</td><td style="padding:8px 10px;border:1px solid var(--line)">Czy stosujesz w swojej pracy Standardy Ochrony Małoletnich?</td><td style="padding:8px 10px;border:1px solid var(--line);text-align:center">☐</td><td style="padding:8px 10px;border:1px solid var(--line);text-align:center">☐</td></tr>
+                <tr><td style="padding:8px 10px;border:1px solid var(--line)">3.</td><td style="padding:8px 10px;border:1px solid var(--line)">Czy w Twoim miejscu pracy, według Twojej oceny, przestrzegane są Standardy Ochrony Małoletnich?</td><td style="padding:8px 10px;border:1px solid var(--line);text-align:center">☐</td><td style="padding:8px 10px;border:1px solid var(--line);text-align:center">☐</td></tr>
+                <tr><td style="padding:8px 10px;border:1px solid var(--line)">4.</td><td style="padding:8px 10px;border:1px solid var(--line)">Czy zaobserwowałeś naruszenie zasad określonych w Standardach przez innego pracownika? (jeśli TAK — opisz)</td><td style="padding:8px 10px;border:1px solid var(--line);text-align:center">☐</td><td style="padding:8px 10px;border:1px solid var(--line);text-align:center">☐</td></tr>
+                <tr><td style="padding:8px 10px;border:1px solid var(--line)">5.</td><td style="padding:8px 10px;border:1px solid var(--line)">Czy masz uwagi/sugestie związane z funkcjonującymi Standardami Ochrony Małoletnich? (jeśli TAK — opisz)</td><td style="padding:8px 10px;border:1px solid var(--line);text-align:center">☐</td><td style="padding:8px 10px;border:1px solid var(--line);text-align:center">☐</td></tr>
+                <tr><td style="padding:8px 10px;border:1px solid var(--line)">6.</td><td style="padding:8px 10px;border:1px solid var(--line)">Czy jakieś działanie związane z przyjęciem Standardów jest odbierane jako trudne? (jeśli TAK — opisz)</td><td style="padding:8px 10px;border:1px solid var(--line);text-align:center">☐</td><td style="padding:8px 10px;border:1px solid var(--line);text-align:center">☐</td></tr>
+                <tr><td style="padding:8px 10px;border:1px solid var(--line)">7.</td><td style="padding:8px 10px;border:1px solid var(--line)">Czy masz sugestie lub propozycje poprawy obowiązujących standardów? (jeśli TAK — opisz)</td><td style="padding:8px 10px;border:1px solid var(--line);text-align:center">☐</td><td style="padding:8px 10px;border:1px solid var(--line);text-align:center">☐</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="doc-zalacznik" id="zal2">
+          <div class="doc-zalacznik-header" onclick="toggleZal(this)">Załącznik nr 2 — Oświadczenie pracownika o znajomości i przestrzeganiu Standardów <span class="arrow">▼</span></div>
+          <div class="doc-zalacznik-body">
+            <p style="font-style:italic;color:var(--ink-soft)">Imię i nazwisko pracownika / osoby zaangażowanej w działalność duszpastersko-katechetyczną:</p>
+            <p style="border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:18px">............................................................................................................</p>
+            <p><strong>OŚWIADCZENIE O ZNAJOMOŚCI I PRZESTRZEGANIU ZASAD ZAWARTYCH W STANDARDACH OCHRONY MAŁOLETNICH W PARAFII NAJŚWIĘTSZEGO SERCA PANA JEZUSA W CZERWIONCE-LESZCZYNACH</strong></p>
+            <p>Oświadczam, że zapoznałam/em się ze standardami ochrony małoletnich obowiązującym w Parafii Najświętszego Serca Pana Jezusa w Czerwionce-Leszczynach oraz zobowiązuję się do przestrzegania podstawowych zasad ochrony dzieci.</p>
+            <p style="display:flex;justify-content:space-between;margin-top:24px"><span>Data: .................................</span><span>Podpis: .................................</span></p>
+          </div>
+        </div>
+
+        <div class="doc-zalacznik" id="zal3">
+          <div class="doc-zalacznik-header" onclick="toggleZal(this)">Załącznik nr 3 — Notatka służbowa <span class="arrow">▼</span></div>
+          <div class="doc-zalacznik-body">
+            <p>Miejscowość, data: .................................</p>
+            <p style="border:1px solid var(--line);border-radius:6px;padding:16px;min-height:120px;color:var(--ink-soft);font-style:italic">(treść notatki służbowej — opis zdarzenia, zachowania, wypowiedzi małoletniego lub innych okoliczności wskazujących na możliwość krzywdzenia)</p>
+          </div>
+        </div>
+
+        <div class="doc-zalacznik" id="zal4">
+          <div class="doc-zalacznik-header" onclick="toggleZal(this)">Załącznik nr 4 — Oświadczenie rodzica/opiekuna o zapoznaniu się ze Standardami <span class="arrow">▼</span></div>
+          <div class="doc-zalacznik-body">
+            <p>Miejscowość, data: .................................</p>
+            <p><strong>OŚWIADCZENIE RODZICA/OPIEKUNA MAŁOLETNIEGO O ZAPOZNANIU SIĘ Z OBOWIĄZUJĄCYMI STANDARDAMI OCHRONY MAŁOLETNICH W PARAFII NSPJ W CZERWIONCE-LESZCZYNACH</strong></p>
+            <p>Ja, ................................................. opiekun/rodzic małoletniego ................................................. oświadczam, że zapoznałam/em się ze „standardami ochrony małoletnich" stosowanymi w Parafii Najświętszego Serca Pana Jezusa w Czerwionce-Leszczynach.</p>
+            <p style="margin-top:24px">Czytelny podpis: .................................</p>
+          </div>
+        </div>
+
+        <div class="doc-zalacznik" id="zal5">
+          <div class="doc-zalacznik-header" onclick="toggleZal(this)">Załącznik nr 5 — Oświadczenie o niekaralności i zobowiązaniu do przestrzegania zasad <span class="arrow">▼</span></div>
+          <div class="doc-zalacznik-body">
+            <p>Miejscowość, data: .................................</p>
+            <p><strong>OŚWIADCZENIE O NIEKARALNOŚCI I ZOBOWIĄZANIU DO PRZESTRZEGANIA PODSTAWOWYCH ZASAD OCHRONY DZIECI</strong></p>
+            <p>Ja, ................................................. legitymująca/y się dowodem osobistym o nr ................................................. oświadczam, że nie byłam/em skazana/y za przestępstwo przeciwko wolności seksualnej i obyczajności, i przestępstwa z użyciem przemocy na szkodę małoletniego i nie toczy się przeciwko mnie żadne postępowanie karne ani dyscyplinarne w tym zakresie.</p>
+            <p>Oświadczam, że jestem świadoma/-y konsekwencji złożenia nieprawdziwego oświadczenia. Ponadto oświadczam, że zapoznałam/-em się z zasadami ochrony dzieci, które obowiązują w Parafii Najświętszego Serca Pana Jezusa i zobowiązuję się do ich przestrzegania.</p>
+            <p style="margin-top:24px">Podpis: .................................</p>
+          </div>
+        </div>
+
+        <!-- Podstawy prawne -->
+        <div style="margin-top:36px;margin-bottom:8px"><h3 style="font-size:1.1rem;color:var(--burgundy);border-left:3px solid var(--burgundy);padding-left:12px">Podstawy prawne</h3></div>
+
+        <div class="doc-prawo">
+          <strong>Art. 240 k.k. — Karalne niezawiadomienie o czynie zabronionym</strong>
+          § 1. Kto, mając wiarygodną wiadomość o karalnym przygotowaniu albo usiłowaniu lub dokonaniu czynu zabronionego określonego m.in. w art. 148 (zabójstwo), art. 197 § 3–5, art. 200 (obcowanie płciowe z małoletnim), nie zawiadamia niezwłocznie organu powołanego do ścigania przestępstw, podlega karze pozbawienia wolności do lat 3.
+        </div>
+
+        <div class="doc-prawo">
+          <strong>Art. 304 k.p.k. — Obowiązek zawiadomienia o przestępstwie</strong>
+          § 1. Każdy, dowiedziawszy się o popełnieniu przestępstwa ściganego z urzędu, ma społeczny obowiązek zawiadomić o tym prokuratora lub Policję.
+          § 2. Instytucje państwowe i samorządowe, które w związku ze swą działalnością dowiedziały się o popełnieniu przestępstwa ściganego z urzędu, są obowiązane niezwłocznie zawiadomić o tym prokuratora lub Policję.
+        </div>
+
+        <div class="doc-prawo">
+          <strong>Art. 572 k.p.c. — Obowiązek zawiadomienia sądu opiekuńczego</strong>
+          § 1. Każdy, komu znane jest zdarzenie uzasadniające wszczęcie postępowania z urzędu, obowiązany jest zawiadomić o nim sąd opiekuńczy.
+          § 2. Obowiązek ten ciąży przede wszystkim na urzędach stanu cywilnego, sądach, prokuratorach, notariuszach, komornikach, organach samorządu i administracji rządowej, organach Policji, placówkach oświatowych, opiekunach społecznych oraz organizacjach i zakładach zajmujących się opieką nad dziećmi.
+        </div>
+
+      </div><!-- /doc-body -->
+
+      <!-- TOC sidebar -->
+      <div class="doc-toc">
+        <h4>Spis treści</h4>
+        <a href="#dzial1" class="toc-dzial">Dział I — Polityka ochrony</a>
+        <a href="#par1" class="toc-rozdzial">§ 1 Podstawowe terminy</a>
+        <a href="#par2" class="toc-rozdzial">§ 2 Cel polityki</a>
+        <a href="#rozdzial1" class="toc-rozdzial">Rozdz. I — Zasady relacji</a>
+        <a href="#par3" class="toc-rozdzial">§ 3 Zasady</a>
+        <a href="#dzial2" class="toc-dzial">Dział II — Personel</a>
+        <a href="#par5" class="toc-rozdzial">§ 5 Rekrutacja</a>
+        <a href="#par6" class="toc-rozdzial">§ 6 Szkolenia</a>
+        <a href="#par7" class="toc-rozdzial">§ 7 Obszary</a>
+        <a href="#dzial3" class="toc-dzial">Dział III — Interwencje</a>
+        <a href="#par8" class="toc-rozdzial">§ 8 Przepisy ogólne</a>
+        <a href="#par9" class="toc-rozdzial">§ 9 Przemoc domowa</a>
+        <a href="#par13" class="toc-rozdzial">§ 13 Cyberprzemoc</a>
+        <a href="#par14" class="toc-rozdzial">§ 14 Krzywdzenie przez personel</a>
+        <a href="#par15" class="toc-rozdzial">§ 15 Osoby trzecie</a>
+        <a href="#par16" class="toc-rozdzial">§ 16 Instytucje</a>
+        <a href="#dzial4" class="toc-dzial">Dział IV — Monitoring</a>
+        <a href="#par17" class="toc-rozdzial">§ 17 Wdrożenie</a>
+        <a href="#par18" class="toc-rozdzial">§ 18 Dokumentowanie</a>
+        <a href="#par19" class="toc-rozdzial">§ 19 Przepisy końcowe</a>
+        <a href="#zal1" class="toc-rozdzial">Załącznik 1 — Ankieta</a>
+        <a href="#zal2" class="toc-rozdzial">Załącznik 2 — Oświadcz. pracownika</a>
+        <a href="#zal3" class="toc-rozdzial">Załącznik 3 — Notatka służbowa</a>
+        <a href="#zal4" class="toc-rozdzial">Załącznik 4 — Oświadcz. rodzica</a>
+        <a href="#zal5" class="toc-rozdzial">Załącznik 5 — Oświadcz. o niekaralności</a>
+      </div>
+
+    </div>
+  </div><!-- /tab-regulamin -->
+
+</div><!-- /container -->
+
+<footer class="site"><div class="container">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">
+        <img src="../public/img/logo1.png" alt="Logo NSPJ" class="brand-logo" style="width:46px;height:46px;object-fit:contain;border-radius:50%;flex-shrink:0">
+        <div class="brand-name" style="color:#f6e9d3;font-size:1.15rem">Parafia Najświętszego Serca Pana Jezusa<small style="color:var(--copper-light)">Czerwionka-Leszczyny · od 1925</small></div>
+      </div>
+      <p>ul. 3-go Maja 36<br>44-230 Czerwionka-Leszczyny<br>tel. <a href="tel:+48324312992" style="color:var(--copper-light)">32 43 12 992</a></p>
+      <div class="footer-bank"><b>Konto parafii (Bank Spółdzielczy)</b><code>11 8454 1095 2003 0017 7467 0003</code></div>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/profile.php?id=61557137199765" target="_blank" rel="noopener" aria-label="Facebook"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="https://www.instagram.com/parafianspjczerwionka/" target="_blank" rel="noopener" aria-label="Instagram"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      </div>
+    </div>
+    <div><h5>Parafia</h5><ul>
+      <li><a href="historia.html">Historia</a></li>
+      <li><a href="duszpasterstwo.html">Kapłani</a></li>
+      <li><a href="msze.html">Msze święte</a></li>
+      <li><a href="standardy.html" style="color:var(--copper-light)">Standardy ochrony małoletnich</a></li>
+    </ul></div>
+    <div><h5>Sakramenty</h5><ul>
+      <li><a href="sakramenty/chrzest.html">Chrzest</a></li>
+      <li><a href="sakramenty/komunia.html">I Komunia Święta</a></li>
+      <li><a href="sakramenty/bierzmowanie.html">Bierzmowanie</a></li>
+      <li><a href="sakramenty/slub.html">Ślub</a></li>
+      <li><a href="sakramenty/namaszczenie.html">Namaszczenie chorych</a></li>
+      <li><a href="sakramenty/pogrzeb.html">Pogrzeb</a></li>
+      <li><a href="sakramenty/spowiedz.html">Spowiedź</a></li>
+    </ul></div>
+    <div><h5>Kontakt</h5><ul>
+      <li><a href="kontakt.html">Kancelaria</a></li>
+      <li><a href="../index.html#intencje">Intencje mszalne</a></li>
+      <li><a href="#">Cmentarz</a></li>
+      <li><a href="../index.html#budowa">Wsparcie budowy</a></li>
+      <li><a href="../admin/login.html" style="color:var(--copper-light);font-weight:700">→ Panel administracyjny</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Parafia NSPJ Czerwionka-Leszczyny.</span><span>Wersja demonstracyjna · nowy CMS parafialny</span></div>
+</div></footer>
+
+<script>
+  // Dropdown nav
+  document.querySelectorAll('.dropdown > a').forEach(t=>{t.addEventListener('click',e=>{e.preventDefault();const d=t.closest('.dropdown');const w=d.classList.contains('open');document.querySelectorAll('.dropdown.open').forEach(x=>x.classList.remove('open'));if(!w)d.classList.add('open');});});
+  document.addEventListener('click',e=>{if(!e.target.closest('.dropdown'))document.querySelectorAll('.dropdown.open').forEach(d=>d.classList.remove('open'));});
+
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const tab = btn.dataset.tab;
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-'+tab).classList.add('active');
+      window.scrollTo({top: document.querySelector('.page-hero').offsetTop - 90, behavior:'smooth'});
+    });
+  });
+
+  // Załączniki accordion
+  function toggleZal(header){
+    const zal = header.closest('.doc-zalacznik');
+    zal.classList.toggle('open');
+  }
+
+  // Obsługa hash w URL (np. ?tab=regulamin)
+  const params = new URLSearchParams(location.search);
+  if(params.get('tab')==='regulamin'){
+    document.querySelector('[data-tab="regulamin"]').click();
+  }
+</script>
+</body></html>
