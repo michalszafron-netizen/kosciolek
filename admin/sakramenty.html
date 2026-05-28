@@ -44,6 +44,17 @@
   /* Toast */
   .toast{position:fixed;bottom:24px;right:24px;background:var(--burgundy);color:#fff;padding:11px 22px;border-radius:8px;font-size:.88rem;font-weight:600;box-shadow:0 6px 24px rgba(0,0,0,.22);opacity:0;transform:translateY(10px);transition:all .25s;pointer-events:none;z-index:9999}
   .toast.show{opacity:1;transform:translateY(0)}
+
+  /* Scrollable table — sticky first+last column */
+  .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:8px}
+  .tbl-wrap .tbl{border:none;border-radius:0}
+  .tbl-wrap .tbl th,.tbl-wrap .tbl td{white-space:nowrap}
+  .tbl-wrap .tbl th:first-child{position:sticky;left:0;z-index:3;background:var(--bg);box-shadow:2px 0 4px rgba(0,0,0,.05)}
+  .tbl-wrap .tbl td:first-child{position:sticky;left:0;z-index:2;background:var(--white);box-shadow:2px 0 4px rgba(0,0,0,.05)}
+  .tbl-wrap .tbl tr:hover td:first-child{background:var(--bg)}
+  .tbl-wrap .tbl th:last-child{position:sticky;right:0;z-index:3;background:var(--bg);box-shadow:-2px 0 4px rgba(0,0,0,.05)}
+  .tbl-wrap .tbl td:last-child{position:sticky;right:0;z-index:2;background:var(--white);box-shadow:-2px 0 4px rgba(0,0,0,.05)}
+  .tbl-wrap .tbl tr:hover td:last-child{background:var(--bg)}
 </style>
 </head>
 <body>
@@ -283,54 +294,107 @@ function renderTable(tab, query){
     });
   }
 
-  var thead='',tbody='';
+  var thead='',tbody='',cols=7;
   if(tab==='bierzmowanie'){
-    thead='<tr><th>Imię i nazwisko</th><th>Data urodzenia</th><th>Rodzic/Opiekun</th><th>Katecheta</th><th>Status</th><th></th></tr>';
+    cols=10;
+    thead='<tr>'
+      +'<th style="min-width:160px">Imię i nazwisko</th>'
+      +'<th style="min-width:100px">Data ur.</th>'
+      +'<th style="min-width:180px">Rodzic / Opiekun</th>'
+      +'<th style="min-width:140px">Katecheta</th>'
+      +'<th style="min-width:140px">Imię bierzmowania</th>'
+      +'<th style="min-width:170px">Miejsce bierzmowania</th>'
+      +'<th style="min-width:60px">Rok</th>'
+      +'<th style="min-width:110px">Status</th>'
+      +'<th style="min-width:145px"></th>'
+      +'</tr>';
     tbody=rows.map(function(d){return '<tr data-id="'+d.id+'">'
       +'<td><b>'+esc(d.imie)+' '+esc(d.nazwisko)+'</b></td>'
-      +'<td>'+fmtDate(d.dataurodzenia)+'</td>'
-      +'<td>'+esc(d.rodzic)+'</td>'
-      +'<td>'+esc(d.katecheta)+'</td>'
+      +'<td style="font-size:.84rem">'+fmtDate(d.dataurodzenia)+'</td>'
+      +'<td style="font-size:.84rem">'+esc(d.rodzic||'—')+'</td>'
+      +'<td style="font-size:.84rem">'+esc(d.katecheta||'—')+'</td>'
+      +'<td style="font-size:.84rem">'+esc(d.imie_bierzmowania||'—')+'</td>'
+      +'<td style="font-size:.84rem">'+esc(d.miejsce||'—')+'</td>'
+      +'<td style="font-size:.84rem;text-align:center">'+esc(String(d.rok||'—'))+'</td>'
       +'<td>'+badge(d.status)+'</td>'
       +'<td>'+ACT_BTNS+'</td>'
       +'</tr>';}).join('');
   } else if(tab==='chrzciny'){
-    thead='<tr><th>Imię dziecka</th><th>Data urodzenia</th><th>Rodzice</th><th>Data chrztu</th><th>Ks. ochrzcz.</th><th>Status</th><th></th></tr>';
+    cols=11;
+    thead='<tr>'
+      +'<th style="min-width:160px">Imię dziecka</th>'
+      +'<th style="min-width:100px">Data ur.</th>'
+      +'<th style="min-width:200px">Rodzice</th>'
+      +'<th style="min-width:105px">Data chrztu</th>'
+      +'<th style="min-width:75px">Księga rok</th>'
+      +'<th style="min-width:70px">Strona</th>'
+      +'<th style="min-width:70px">Nr wpisu</th>'
+      +'<th style="min-width:60px">Rok</th>'
+      +'<th style="min-width:110px">Status</th>'
+      +'<th style="min-width:145px"></th>'
+      +'</tr>';
     tbody=rows.map(function(d){return '<tr data-id="'+d.id+'">'
       +'<td><b>'+esc(d.imie)+' '+esc(d.nazwisko)+'</b></td>'
-      +'<td>'+fmtDate(d.dataurodzenia)+'</td>'
-      +'<td>'+esc(d.rodzice)+'</td>'
-      +'<td>'+fmtDate(d.datachrztu)+'</td>'
-      +'<td>'+esc(d.ksiega_rok||'')+' / '+esc(d.ksiega_str||'')+' / '+esc(d.ksiega_nr||'')+'</td>'
+      +'<td style="font-size:.84rem">'+fmtDate(d.dataurodzenia)+'</td>'
+      +'<td style="font-size:.84rem">'+esc(d.rodzice||'—')+'</td>'
+      +'<td style="font-size:.84rem">'+fmtDate(d.datachrztu)+'</td>'
+      +'<td style="font-size:.84rem;text-align:center">'+esc(String(d.ksiega_rok||'—'))+'</td>'
+      +'<td style="font-size:.84rem;text-align:center">'+esc(String(d.ksiega_str||'—'))+'</td>'
+      +'<td style="font-size:.84rem;text-align:center">'+esc(String(d.ksiega_nr||'—'))+'</td>'
+      +'<td style="font-size:.84rem;text-align:center">'+esc(String(d.rok||'—'))+'</td>'
       +'<td>'+badge(d.status)+'</td>'
       +'<td>'+ACT_BTNS+'</td>'
       +'</tr>';}).join('');
   } else if(tab==='sluby'){
-    thead='<tr><th>Narzeczeni</th><th>Data ślubu</th><th>Typ</th><th>Zapowiedzi</th><th>Miejsce</th><th>Status</th><th></th></tr>';
+    cols=10;
+    thead='<tr>'
+      +'<th style="min-width:180px">Oblubieniec</th>'
+      +'<th style="min-width:180px">Oblubienica</th>'
+      +'<th style="min-width:105px">Data ślubu</th>'
+      +'<th style="min-width:130px">Typ ślubu</th>'
+      +'<th style="min-width:90px">Zapowiedzi</th>'
+      +'<th style="min-width:160px">Miejsce ślubu</th>'
+      +'<th style="min-width:60px">Rok</th>'
+      +'<th style="min-width:110px">Status</th>'
+      +'<th style="min-width:145px"></th>'
+      +'</tr>';
     tbody=rows.map(function(d){return '<tr data-id="'+d.id+'">'
-      +'<td><b>'+esc(d.oblubieniec)+' &amp; '+esc(d.oblubienica)+'</b></td>'
-      +'<td>'+fmtDate(d.datasl)+'</td>'
-      +'<td>'+esc(d.typ_slubu==='konkordatowy'?'Konkordatowy':'Kościelny')+'</td>'
-      +'<td>'+esc(d.zapowiedzi)+' z 3</td>'
-      +'<td>'+esc(d.miejsce)+'</td>'
+      +'<td><b>'+esc(d.oblubieniec||'—')+'</b></td>'
+      +'<td><b>'+esc(d.oblubienica||'—')+'</b></td>'
+      +'<td style="font-size:.84rem">'+fmtDate(d.datasl)+'</td>'
+      +'<td style="font-size:.84rem">'+esc(d.typ_slubu==='konkordatowy'?'Konkordatowy':'Kościelny')+'</td>'
+      +'<td style="font-size:.84rem;text-align:center">'+esc(String(d.zapowiedzi||0))+' / 3</td>'
+      +'<td style="font-size:.84rem">'+esc(d.miejsce||'—')+'</td>'
+      +'<td style="font-size:.84rem;text-align:center">'+esc(String(d.rok||'—'))+'</td>'
       +'<td>'+badge(d.status)+'</td>'
       +'<td>'+ACT_BTNS+'</td>'
       +'</tr>';}).join('');
   } else if(tab==='komunia'){
-    thead='<tr><th>Imię i nazwisko</th><th>Data urodzenia</th><th>Szkoła / klasa</th><th>Rodzic</th><th>Data komunii</th><th>Status</th><th></th></tr>';
+    cols=10;
+    thead='<tr>'
+      +'<th style="min-width:160px">Imię i nazwisko</th>'
+      +'<th style="min-width:100px">Data ur.</th>'
+      +'<th style="min-width:180px">Szkoła / klasa</th>'
+      +'<th style="min-width:180px">Rodzic / Opiekun</th>'
+      +'<th style="min-width:110px">Data Komunii</th>'
+      +'<th style="min-width:60px">Rok</th>'
+      +'<th style="min-width:110px">Status</th>'
+      +'<th style="min-width:145px"></th>'
+      +'</tr>';
     tbody=rows.map(function(d){return '<tr data-id="'+d.id+'">'
       +'<td><b>'+esc(d.imie)+' '+esc(d.nazwisko)+'</b></td>'
-      +'<td>'+fmtDate(d.dataurodzenia)+'</td>'
-      +'<td>'+esc(d.szkola)+'</td>'
-      +'<td>'+esc(d.rodzic)+'</td>'
-      +'<td>'+fmtDate(d.datakom)+'</td>'
+      +'<td style="font-size:.84rem">'+fmtDate(d.dataurodzenia)+'</td>'
+      +'<td style="font-size:.84rem">'+esc(d.szkola||'—')+'</td>'
+      +'<td style="font-size:.84rem">'+esc(d.rodzic||'—')+'</td>'
+      +'<td style="font-size:.84rem">'+fmtDate(d.datakom)+'</td>'
+      +'<td style="font-size:.84rem;text-align:center">'+esc(String(d.rok||'—'))+'</td>'
       +'<td>'+badge(d.status)+'</td>'
       +'<td>'+ACT_BTNS+'</td>'
       +'</tr>';}).join('');
   }
 
   var filterHtml='<div class="filter-bar"><input type="text" class="search-input" placeholder="Szukaj po nazwisku…" value="'+esc(query)+'"></div>';
-  var tbl='<table class="tbl"><thead>'+thead+'</thead><tbody>'+(tbody||'<tr><td colspan="7" style="text-align:center;color:var(--ink-soft);padding:24px">Brak wyników</td></tr>')+'</tbody></table>';
+  var tbl='<div class="tbl-wrap"><table class="tbl"><thead>'+thead+'</thead><tbody>'+(tbody||'<tr><td colspan="'+cols+'" style="text-align:center;color:var(--ink-soft);padding:24px">Brak wyników</td></tr>')+'</tbody></table></div>';
   document.getElementById('tab-content').innerHTML=filterHtml+tbl;
 
   // search

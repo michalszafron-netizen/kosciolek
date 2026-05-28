@@ -54,6 +54,17 @@
   .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
   .status-dot.aktywny{background:#2e7a3a}
   .status-dot.nieaktywny{background:#b06a1a}
+
+  /* Scrollable table — sticky first+last column */
+  .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:8px}
+  .tbl-wrap .tbl{border:none;border-radius:0}
+  .tbl-wrap .tbl th,.tbl-wrap .tbl td{white-space:nowrap}
+  .tbl-wrap .tbl th:first-child{position:sticky;left:0;z-index:3;background:var(--bg);box-shadow:2px 0 4px rgba(0,0,0,.05)}
+  .tbl-wrap .tbl td:first-child{position:sticky;left:0;z-index:2;background:var(--white);box-shadow:2px 0 4px rgba(0,0,0,.05)}
+  .tbl-wrap .tbl tr:hover td:first-child{background:var(--bg)}
+  .tbl-wrap .tbl th:last-child{position:sticky;right:0;z-index:3;background:var(--bg);box-shadow:-2px 0 4px rgba(0,0,0,.05)}
+  .tbl-wrap .tbl td:last-child{position:sticky;right:0;z-index:2;background:var(--white);box-shadow:-2px 0 4px rgba(0,0,0,.05)}
+  .tbl-wrap .tbl tr:hover td:last-child{background:var(--bg)}
 </style>
 </head>
 <body>
@@ -121,17 +132,23 @@
         <span class="results" id="results-info"></span>
       </div>
 
-      <div style="overflow-x:auto">
+      <div class="tbl-wrap">
         <table class="tbl">
           <thead>
             <tr>
-              <th>Imię i nazwisko</th>
-              <th>Adres</th>
-              <th>Telefon / e-mail</th>
-              <th>Sakramenty</th>
-              <th>Uwagi</th>
-              <th>Status</th>
-              <th></th>
+              <th style="min-width:170px">Imię i nazwisko</th>
+              <th style="min-width:100px">Data ur.</th>
+              <th style="min-width:210px">Adres</th>
+              <th style="min-width:120px">Telefon</th>
+              <th style="min-width:170px">E-mail</th>
+              <th style="min-width:50px;text-align:center" title="Chrzest">Ch</th>
+              <th style="min-width:50px;text-align:center" title="Komunia">K</th>
+              <th style="min-width:50px;text-align:center" title="Bierzmowanie">B</th>
+              <th style="min-width:50px;text-align:center" title="Ślub">Ś</th>
+              <th style="min-width:100px">Status</th>
+              <th style="min-width:105px">Dołączył/a</th>
+              <th style="min-width:200px">Uwagi</th>
+              <th style="min-width:145px"></th>
             </tr>
           </thead>
           <tbody id="table-body"></tbody>
@@ -326,16 +343,17 @@
       }).join('');
       var dotClass = d.status==='aktywny'?'aktywny':'nieaktywny';
       var dotLabel = d.status==='aktywny'?'Aktywny':'Nieaktywny';
-      var kontakt = escHtml(d.telefon||'—');
-      if(d.email) kontakt += '<br><span style="font-size:.78rem;color:var(--ink-soft)">'+escHtml(d.email)+'</span>';
-      var uwagi = d.uwagi ? '<span style="font-size:.78rem;color:var(--ink-soft);font-style:italic">'+escHtml(d.uwagi)+'</span>' : '—';
+      function sakrCell(k){ var yes=d.sakr&&d.sakr[k]; return '<td style="text-align:center"><span class="sakr-icon'+(yes?' yes':'')+'" style="margin:auto">'+{chrzest:'Ch',komunia:'K',bierzmowanie:'B',slub:'Ś'}[k]+'</span></td>'; }
       return '<tr>'+
-        '<td><div class="avatar-cell"><div class="avatar">'+initials+'</div><div><strong>'+escHtml(d.nazwisko)+' '+escHtml(d.imie)+'</strong><div style="font-size:.75rem;color:var(--ink-soft)">ur. '+rokUr+' · dołącz. '+(d.data_dolaczenia||'').slice(0,7)+'</div></div></div></td>'+
-        '<td style="font-size:.85rem;max-width:180px">'+escHtml(d.adres||'—')+'</td>'+
-        '<td style="font-size:.85rem;white-space:nowrap">'+kontakt+'</td>'+
-        '<td><div class="sakr-icons">'+sakrHtml+'</div></td>'+
-        '<td style="max-width:160px">'+uwagi+'</td>'+
-        '<td style="white-space:nowrap"><span class="status-dot '+dotClass+'"></span>'+dotLabel+'</td>'+
+        '<td><div class="avatar-cell"><div class="avatar">'+initials+'</div><div><strong>'+escHtml(d.nazwisko)+' '+escHtml(d.imie)+'</strong></div></div></td>'+
+        '<td style="font-size:.84rem">'+rokUr+'</td>'+
+        '<td style="font-size:.84rem">'+escHtml(d.adres||'—')+'</td>'+
+        '<td style="font-size:.84rem">'+escHtml(d.telefon||'—')+'</td>'+
+        '<td style="font-size:.84rem">'+escHtml(d.email||'—')+'</td>'+
+        sakrCell('chrzest')+sakrCell('komunia')+sakrCell('bierzmowanie')+sakrCell('slub')+
+        '<td><span class="status-dot '+dotClass+'"></span>'+dotLabel+'</td>'+
+        '<td style="font-size:.84rem">'+(d.data_dolaczenia||'—')+'</td>'+
+        '<td style="font-size:.82rem;font-style:italic;color:var(--ink-soft)">'+escHtml(d.uwagi||'—')+'</td>'+
         '<td style="text-align:right">'+
           '<button class="btn btn-secondary" style="padding:5px 10px;font-size:.78rem;margin-right:4px" onclick="openEdit(\''+d.id+'\')">Edytuj</button>'+
           '<button class="btn btn-secondary" style="padding:5px 10px;font-size:.78rem;color:var(--burgundy)" onclick="askDelete(\''+d.id+'\')">Usuń</button>'+

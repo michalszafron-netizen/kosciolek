@@ -40,6 +40,17 @@
   .toast.show{opacity:1;transform:translateY(0)}
 
   .grob-cell{font-size:.78rem;color:var(--ink-soft)}
+
+  /* Scrollable table — sticky first+last column */
+  .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:8px}
+  .tbl-wrap .tbl{border:none;border-radius:0}
+  .tbl-wrap .tbl th:first-child{position:sticky;left:0;z-index:3;background:var(--bg);box-shadow:2px 0 4px rgba(0,0,0,.05)}
+  .tbl-wrap .tbl td:first-child{position:sticky;left:0;z-index:2;background:var(--white);box-shadow:2px 0 4px rgba(0,0,0,.05)}
+  .tbl-wrap .tbl tr:hover td:first-child{background:var(--bg)}
+  .tbl-wrap .tbl th:last-child{position:sticky;right:0;z-index:3;background:var(--bg);box-shadow:-2px 0 4px rgba(0,0,0,.05)}
+  .tbl-wrap .tbl td:last-child{position:sticky;right:0;z-index:2;background:var(--white);box-shadow:-2px 0 4px rgba(0,0,0,.05)}
+  .tbl-wrap .tbl tr:hover td:last-child{background:var(--bg)}
+  .tbl-wrap .tbl th,.tbl-wrap .tbl td{white-space:nowrap}
 </style>
 </head>
 <body>
@@ -108,18 +119,26 @@
         </select>
       </div>
 
-      <div style="overflow-x:auto">
+      <div class="tbl-wrap">
         <table class="tbl">
           <thead>
             <tr>
-              <th>Zmarły/a</th>
-              <th>Daty</th>
-              <th>Miejsce</th>
-              <th>Cmentarz / grób</th>
-              <th>Zamieszkanie</th>
-              <th>Kapłan</th>
-              <th>Status</th>
-              <th></th>
+              <th style="min-width:160px">Imię i nazwisko</th>
+              <th style="min-width:95px">Data ur.</th>
+              <th style="min-width:110px">Miejsce ur.</th>
+              <th style="min-width:210px">Rodzice</th>
+              <th style="min-width:190px">Zamieszkanie</th>
+              <th style="min-width:100px">Data zgonu</th>
+              <th style="min-width:105px">Data pogrzebu</th>
+              <th style="min-width:65px">Godz.</th>
+              <th style="min-width:150px">Miejsce ceremonii</th>
+              <th style="min-width:200px">Cmentarz</th>
+              <th style="min-width:55px">Sektor</th>
+              <th style="min-width:55px">Rząd</th>
+              <th style="min-width:75px">M. grobu</th>
+              <th style="min-width:160px">Kapłan</th>
+              <th style="min-width:110px">Status</th>
+              <th style="min-width:145px"></th>
             </tr>
           </thead>
           <tbody id="table-body">
@@ -267,37 +286,26 @@
       return db.localeCompare(da);
     });
 
+    var badgeMap = {odbylsie:'odbylsie',zaplanowany:'zaplanowany',zgloszony:'zgloszony'};
     tbody.innerHTML = rows.map(function(d){
-      // Daty: zgon + pogrzeb z godziną
-      var daty = '<span style="font-size:.8rem;color:var(--ink-soft)">zgon:</span> '+formatDate(d.data_zgonu);
-      if(d.data_pogrzebu) daty += '<br><span style="font-size:.8rem;color:var(--ink-soft)">pogrzeb:</span> '+formatDate(d.data_pogrzebu)+(d.godz_pogrzebu?' <b>'+d.godz_pogrzebu+'</b>':'');
-
-      // Miejsce ceremonii
-      var miejsce = escHtml(d.miejsce_ceremonii||'—');
-
-      // Cmentarz + grób
-      var grob = (d.sektor||d.rzad||d.miejsce_grobu)
-        ? 'sek.'+escHtml(d.sektor||'?')+', rz.'+escHtml(d.rzad||'?')+', m.'+escHtml(d.miejsce_grobu||'?')
-        : '';
-      var cmentarz = d.cmentarz
-        ? escHtml(d.cmentarz)+(grob?'<br><span class="grob-cell">'+grob+'</span>':'')
-        : '—';
-
-      // Zamieszkanie (adres + dane rodzinne)
-      var zam = d.miejsce_zam ? escHtml(d.miejsce_zam) : '—';
-      if(d.rodzice) zam += '<br><span style="font-size:.78rem;color:var(--ink-soft)">'+escHtml(d.rodzice)+'</span>';
-
-      var badgeClass = d.status==='odbylsie'?'odbylsie':d.status==='zaplanowany'?'zaplanowany':'zgloszony';
+      var badgeClass = badgeMap[d.status]||'zgloszony';
       return '<tr>'+
-        '<td style="white-space:nowrap"><strong>'+escHtml(d.nazwisko)+' '+escHtml(d.imie)+'</strong><br>'+
-          '<small style="color:var(--ink-soft)">ur. '+formatDate(d.data_urodzenia)+(d.miejsce_urodzenia?' · '+escHtml(d.miejsce_urodzenia):'')+' </small></td>'+
-        '<td style="font-size:.84rem;white-space:nowrap">'+daty+'</td>'+
-        '<td style="font-size:.84rem;max-width:160px">'+miejsce+'</td>'+
-        '<td style="font-size:.82rem">'+cmentarz+'</td>'+
-        '<td style="font-size:.82rem;max-width:170px">'+zam+'</td>'+
-        '<td style="font-size:.82rem;white-space:nowrap">'+escHtml(d.ksiadz||'—')+'</td>'+
+        '<td><strong>'+escHtml(d.nazwisko)+' '+escHtml(d.imie)+'</strong></td>'+
+        '<td style="font-size:.84rem">'+formatDate(d.data_urodzenia)+'</td>'+
+        '<td style="font-size:.84rem">'+escHtml(d.miejsce_urodzenia||'—')+'</td>'+
+        '<td style="font-size:.82rem">'+escHtml(d.rodzice||'—')+'</td>'+
+        '<td style="font-size:.82rem">'+escHtml(d.miejsce_zam||'—')+'</td>'+
+        '<td style="font-size:.84rem">'+formatDate(d.data_zgonu)+'</td>'+
+        '<td style="font-size:.84rem">'+formatDate(d.data_pogrzebu)+'</td>'+
+        '<td style="font-size:.84rem">'+escHtml(d.godz_pogrzebu||'—')+'</td>'+
+        '<td style="font-size:.84rem">'+escHtml(d.miejsce_ceremonii||'—')+'</td>'+
+        '<td style="font-size:.82rem">'+escHtml(d.cmentarz||'—')+'</td>'+
+        '<td style="font-size:.84rem;text-align:center">'+escHtml(d.sektor||'—')+'</td>'+
+        '<td style="font-size:.84rem;text-align:center">'+escHtml(d.rzad||'—')+'</td>'+
+        '<td style="font-size:.84rem;text-align:center">'+escHtml(d.miejsce_grobu||'—')+'</td>'+
+        '<td style="font-size:.82rem">'+escHtml(d.ksiadz||'—')+'</td>'+
         '<td><span class="status-badge '+badgeClass+'">'+STATUS_LABELS[d.status]+'</span></td>'+
-        '<td class="row-actions" style="white-space:nowrap">'+
+        '<td>'+
           '<button class="btn btn-secondary" style="padding:5px 10px;font-size:.78rem;margin-right:4px" onclick="openEdit(\''+d.id+'\')">Edytuj</button>'+
           '<button class="btn btn-secondary" style="padding:5px 10px;font-size:.78rem;color:var(--burgundy)" onclick="askDelete(\''+d.id+'\')">Usuń</button>'+
         '</td>'+
