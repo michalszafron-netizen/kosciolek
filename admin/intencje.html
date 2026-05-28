@@ -260,7 +260,12 @@ function getMonday(d) {
   dt.setDate(dt.getDate() + diff); dt.setHours(0,0,0,0); return dt;
 }
 function addDays(d, n) { var dt = new Date(d); dt.setDate(dt.getDate() + n); return dt; }
-function isoDate(d) { return d.toISOString().split('T')[0]; }
+function isoDate(d) {
+  var y = d.getFullYear();
+  var m = String(d.getMonth()+1).padStart(2,'0');
+  var day = String(d.getDate()).padStart(2,'0');
+  return y+'-'+m+'-'+day;
+}
 function timeToNum(t) { var p = t.split(':').map(Number); return p[0]*60+(p[1]||0); }
 function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
