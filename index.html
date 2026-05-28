@@ -643,7 +643,7 @@
         <p id="hp-ogl-excerpt">Bóg zapłać za ofiary na budowę nowego kościoła zebrane w minioną niedzielę — łącznie 14 380 zł. We wtorek o 18:00 zapraszamy na spotkanie Rady Parafialnej. W sobotę o 10:00 sprzątanie cmentarza — prosimy o zabranie rękawic i grabi.</p>
         <div class="actions">
           <a href="strony/aktualnosci.html#ogl-2026-05-10" class="btn-light" id="hp-ogl-link">Czytaj całość</a>
-          <a href="#" class="btn-outline">Pobierz PDF</a>
+          <a href="#" class="btn-outline" id="hp-ogl-download" onclick="downloadOgloszeniaTxt(event)">Pobierz TXT</a>
         </div>
       </div>
 
@@ -1038,6 +1038,73 @@
     // cokolwiek pójdzie nie tak — zostaje fallback hardkodowany
   }
 })();
+</script>
+
+<!-- ── OGŁOSZENIA — pobieranie TXT ── -->
+<script>
+function downloadOgloszeniaTxt(e) {
+  e.preventDefault();
+  try {
+    var raw = localStorage.getItem('nspj_ogloszenia');
+    var ann = null;
+    if (raw) {
+      var data = JSON.parse(raw);
+      if (Array.isArray(data)) {
+        var published = data.filter(function(a) { return a.status === 'published'; });
+        published.sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
+        ann = published.find(function(a) { return a.featured; }) || published[0] || null;
+      }
+    }
+    // Fallback — dane z aktualnie wyświetlonych elementów
+    var title = (ann && ann.title) || document.getElementById('hp-ogl-title').textContent || 'Ogłoszenia';
+    var dateRaw = ann && ann.date ? ann.date : '';
+    var dateStr = '';
+    if (dateRaw) {
+      var d = new Date(dateRaw + 'T12:00:00');
+      dateStr = d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' });
+    } else {
+      dateStr = document.getElementById('hp-ogl-meta').textContent || '';
+    }
+    // Wyciągnij czysty tekst z treści HTML
+    var plainContent = '';
+    if (ann && ann.content) {
+      var tmp = document.createElement('div');
+      tmp.innerHTML = ann.content;
+      plainContent = (tmp.textContent || tmp.innerText || '').replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim();
+    } else {
+      plainContent = document.getElementById('hp-ogl-excerpt').textContent || '';
+    }
+    var today = new Date().toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' });
+    var sep = '====================================';
+    var lines = [
+      'OGŁOSZENIA PARAFIALNE',
+      'Parafia Najświętszego Serca Pana Jezusa',
+      'Czerwionka-Leszczyny',
+      sep,
+      '',
+      title,
+      dateStr,
+      '',
+      '------------------------------------',
+      '',
+      plainContent,
+      '',
+      sep,
+      'Wygenerowano: ' + today
+    ];
+    var txt = lines.join('\n');
+    var blob = new Blob(['﻿' + txt], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'ogloszenia' + (dateRaw ? '-' + dateRaw : '') + '.txt';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function() { document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
+  } catch(err) {
+    alert('Nie udało się pobrać pliku. Spróbuj ponownie.');
+  }
+}
 </script>
 
 <!-- ── INTENCJE MSZALNE DYNAMICZNE ── -->
