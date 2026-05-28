@@ -121,14 +121,15 @@
         <span class="results" id="results-info"></span>
       </div>
 
-      <div class="table-card">
-        <table>
+      <div style="overflow-x:auto">
+        <table class="tbl">
           <thead>
             <tr>
               <th>Imię i nazwisko</th>
               <th>Adres</th>
-              <th>Telefon</th>
+              <th>Telefon / e-mail</th>
               <th>Sakramenty</th>
+              <th>Uwagi</th>
               <th>Status</th>
               <th></th>
             </tr>
@@ -271,10 +272,10 @@
     var zSlubem = allData.filter(function(d){return d.sakr && d.sakr.slub;}).length;
     var nowi2026 = allData.filter(function(d){return d.data_dolaczenia && d.data_dolaczenia.startsWith('202');}).length;
     document.getElementById('stats-bar').innerHTML =
-      '<div class="stat-card"><div class="stat-val">'+total+'</div><div class="stat-label">Parafian w kartotece</div></div>'+
-      '<div class="stat-card"><div class="stat-val">'+aktywni+'</div><div class="stat-label">Aktywnych</div></div>'+
-      '<div class="stat-card"><div class="stat-val">'+zSlubem+'</div><div class="stat-label">W związku małżeńskim</div></div>'+
-      '<div class="stat-card"><div class="stat-val">'+nowi2026+'</div><div class="stat-label">Wpisanych od 2020 r.</div></div>';
+      '<div class="stat"><div class="info"><div class="lbl">Parafianie w kartotece</div><div class="num">'+total+'</div></div></div>'+
+      '<div class="stat"><div class="info"><div class="lbl">Aktywnych</div><div class="num">'+aktywni+'</div><div class="delta"><b>'+aktywni+'</b> z '+total+' łącznie</div></div></div>'+
+      '<div class="stat"><div class="info"><div class="lbl">W związku małżeńskim</div><div class="num">'+zSlubem+'</div><div class="delta">ślub kościelny</div></div></div>'+
+      '<div class="stat"><div class="info"><div class="lbl">Wpisanych od 2020 r.</div><div class="num">'+nowi2026+'</div><div class="delta">aktywna kartoteka</div></div></div>';
   }
 
   // ---- filter ----
@@ -325,12 +326,16 @@
       }).join('');
       var dotClass = d.status==='aktywny'?'aktywny':'nieaktywny';
       var dotLabel = d.status==='aktywny'?'Aktywny':'Nieaktywny';
+      var kontakt = escHtml(d.telefon||'—');
+      if(d.email) kontakt += '<br><span style="font-size:.78rem;color:var(--ink-soft)">'+escHtml(d.email)+'</span>';
+      var uwagi = d.uwagi ? '<span style="font-size:.78rem;color:var(--ink-soft);font-style:italic">'+escHtml(d.uwagi)+'</span>' : '—';
       return '<tr>'+
-        '<td><div class="avatar-cell"><div class="avatar">'+initials+'</div><div><strong>'+escHtml(d.nazwisko)+' '+escHtml(d.imie)+'</strong><div style="font-size:.75rem;color:var(--ink-soft)">ur. '+rokUr+'</div></div></div></td>'+
-        '<td style="font-size:.85rem">'+escHtml(d.adres||'—')+'</td>'+
-        '<td style="font-size:.85rem">'+escHtml(d.telefon||'—')+'</td>'+
+        '<td><div class="avatar-cell"><div class="avatar">'+initials+'</div><div><strong>'+escHtml(d.nazwisko)+' '+escHtml(d.imie)+'</strong><div style="font-size:.75rem;color:var(--ink-soft)">ur. '+rokUr+' · dołącz. '+(d.data_dolaczenia||'').slice(0,7)+'</div></div></div></td>'+
+        '<td style="font-size:.85rem;max-width:180px">'+escHtml(d.adres||'—')+'</td>'+
+        '<td style="font-size:.85rem;white-space:nowrap">'+kontakt+'</td>'+
         '<td><div class="sakr-icons">'+sakrHtml+'</div></td>'+
-        '<td><span class="status-dot '+dotClass+'"></span>'+dotLabel+'</td>'+
+        '<td style="max-width:160px">'+uwagi+'</td>'+
+        '<td style="white-space:nowrap"><span class="status-dot '+dotClass+'"></span>'+dotLabel+'</td>'+
         '<td style="text-align:right">'+
           '<button class="btn btn-secondary" style="padding:5px 10px;font-size:.78rem;margin-right:4px" onclick="openEdit(\''+d.id+'\')">Edytuj</button>'+
           '<button class="btn btn-secondary" style="padding:5px 10px;font-size:.78rem;color:var(--burgundy)" onclick="askDelete(\''+d.id+'\')">Usuń</button>'+

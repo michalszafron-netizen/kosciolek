@@ -39,8 +39,6 @@
   .toast{position:fixed;bottom:24px;right:24px;background:var(--burgundy);color:#fff;padding:11px 22px;border-radius:8px;font-size:.88rem;font-weight:600;box-shadow:0 6px 24px rgba(0,0,0,.22);opacity:0;transform:translateY(10px);transition:all .25s;pointer-events:none;z-index:9999}
   .toast.show{opacity:1;transform:translateY(0)}
 
-  /* Table tweaks */
-  .table-card th:last-child,.table-card td:last-child{text-align:right}
   .grob-cell{font-size:.78rem;color:var(--ink-soft)}
 </style>
 </head>
@@ -110,15 +108,15 @@
         </select>
       </div>
 
-      <div class="table-card">
-        <table>
+      <div style="overflow-x:auto">
+        <table class="tbl">
           <thead>
             <tr>
               <th>Zmarły/a</th>
-              <th>Data zgonu</th>
-              <th>Pogrzeb</th>
-              <th>Miejsce ceremonii</th>
-              <th>Cmentarz</th>
+              <th>Daty</th>
+              <th>Miejsce</th>
+              <th>Cmentarz / grób</th>
+              <th>Zamieszkanie</th>
               <th>Kapłan</th>
               <th>Status</th>
               <th></th>
@@ -235,11 +233,10 @@
     var zgloszenia = allData.filter(function(d){return d.status==='zgloszony';}).length;
     var total = allData.length;
     document.getElementById('stats-bar').innerHTML =
-      '<div class="stat-card"><div class="stat-val">'+rok2026.length+'</div><div class="stat-label">Pogrzeby 2026</div></div>'+
-      '<div class="stat-card"><div class="stat-val">'+odbylsie+'</div><div class="stat-label">Odbyły się (2026)</div></div>'+
-      '<div class="stat-card"><div class="stat-val">'+zaplanowane+'</div><div class="stat-label">Zaplanowane</div></div>'+
-      '<div class="stat-card"><div class="stat-val">'+zgloszenia+'</div><div class="stat-label">Nowe zgłoszenia</div></div>'+
-      '<div class="stat-card"><div class="stat-val">'+total+'</div><div class="stat-label">Wszystkich rekordów</div></div>';
+      '<div class="stat"><div class="info"><div class="lbl">Pogrzeby '+new Date().getFullYear()+'</div><div class="num">'+rok2026.length+'</div><div class="delta">w tym roku</div></div></div>'+
+      '<div class="stat"><div class="info"><div class="lbl">Odbyły się</div><div class="num">'+odbylsie+'</div><div class="delta">w bieżącym roku</div></div></div>'+
+      '<div class="stat"><div class="info"><div class="lbl">Zaplanowane</div><div class="num">'+zaplanowane+'</div><div class="delta">oczekuje na ceremonię</div></div></div>'+
+      '<div class="stat"><div class="info"><div class="lbl">Nowe zgłoszenia</div><div class="num">'+zgloszenia+'</div><div class="delta"><b>'+zgloszenia+'</b> do ustalenia terminu</div></div></div>';
   }
 
   // ---- table ----
@@ -271,20 +268,36 @@
     });
 
     tbody.innerHTML = rows.map(function(d){
-      var pogrzebDate = d.data_pogrzebu ? (formatDate(d.data_pogrzebu)+(d.godz_pogrzebu?' '+d.godz_pogrzebu:'')) : '—';
+      // Daty: zgon + pogrzeb z godziną
+      var daty = '<span style="font-size:.8rem;color:var(--ink-soft)">zgon:</span> '+formatDate(d.data_zgonu);
+      if(d.data_pogrzebu) daty += '<br><span style="font-size:.8rem;color:var(--ink-soft)">pogrzeb:</span> '+formatDate(d.data_pogrzebu)+(d.godz_pogrzebu?' <b>'+d.godz_pogrzebu+'</b>':'');
+
+      // Miejsce ceremonii
+      var miejsce = escHtml(d.miejsce_ceremonii||'—');
+
+      // Cmentarz + grób
       var grob = (d.sektor||d.rzad||d.miejsce_grobu)
-        ? '<span class="grob-cell">'+[d.sektor?'sek.'+d.sektor:'',d.rzad?'rząd '+d.rzad:'',d.miejsce_grobu?'m.'+d.miejsce_grobu:''].filter(Boolean).join(', ')+'</span>'
-        : '<span style="color:var(--ink-soft);font-size:.78rem">—</span>';
+        ? 'sek.'+escHtml(d.sektor||'?')+', rz.'+escHtml(d.rzad||'?')+', m.'+escHtml(d.miejsce_grobu||'?')
+        : '';
+      var cmentarz = d.cmentarz
+        ? escHtml(d.cmentarz)+(grob?'<br><span class="grob-cell">'+grob+'</span>':'')
+        : '—';
+
+      // Zamieszkanie (adres + dane rodzinne)
+      var zam = d.miejsce_zam ? escHtml(d.miejsce_zam) : '—';
+      if(d.rodzice) zam += '<br><span style="font-size:.78rem;color:var(--ink-soft)">'+escHtml(d.rodzice)+'</span>';
+
       var badgeClass = d.status==='odbylsie'?'odbylsie':d.status==='zaplanowany'?'zaplanowany':'zgloszony';
       return '<tr>'+
-        '<td><strong>'+d.nazwisko+' '+d.imie+'</strong><br><small style="color:var(--ink-soft)">ur. '+formatDate(d.data_urodzenia)+'</small></td>'+
-        '<td>'+formatDate(d.data_zgonu)+'</td>'+
-        '<td>'+pogrzebDate+'</td>'+
-        '<td style="max-width:160px;font-size:.85rem">'+escHtml(d.miejsce_ceremonii||'—')+'</td>'+
-        '<td style="font-size:.82rem">'+escHtml(d.cmentarz||'—')+'<br>'+grob+'</td>'+
-        '<td style="font-size:.82rem">'+escHtml(d.ksiadz||'—')+'</td>'+
+        '<td style="white-space:nowrap"><strong>'+escHtml(d.nazwisko)+' '+escHtml(d.imie)+'</strong><br>'+
+          '<small style="color:var(--ink-soft)">ur. '+formatDate(d.data_urodzenia)+(d.miejsce_urodzenia?' · '+escHtml(d.miejsce_urodzenia):'')+' </small></td>'+
+        '<td style="font-size:.84rem;white-space:nowrap">'+daty+'</td>'+
+        '<td style="font-size:.84rem;max-width:160px">'+miejsce+'</td>'+
+        '<td style="font-size:.82rem">'+cmentarz+'</td>'+
+        '<td style="font-size:.82rem;max-width:170px">'+zam+'</td>'+
+        '<td style="font-size:.82rem;white-space:nowrap">'+escHtml(d.ksiadz||'—')+'</td>'+
         '<td><span class="status-badge '+badgeClass+'">'+STATUS_LABELS[d.status]+'</span></td>'+
-        '<td>'+
+        '<td class="row-actions" style="white-space:nowrap">'+
           '<button class="btn btn-secondary" style="padding:5px 10px;font-size:.78rem;margin-right:4px" onclick="openEdit(\''+d.id+'\')">Edytuj</button>'+
           '<button class="btn btn-secondary" style="padding:5px 10px;font-size:.78rem;color:var(--burgundy)" onclick="askDelete(\''+d.id+'\')">Usuń</button>'+
         '</td>'+
