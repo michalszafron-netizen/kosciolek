@@ -680,69 +680,8 @@
       </div>
       <a href="strony/msze.html" class="more">Pełny kalendarz</a>
     </div>
-    <div class="intencje-week-label">Tydzień 18–24 maja 2026</div>
-    <div class="intencje-table">
-      <div class="intencje-row">
-        <div class="i-day">Poniedziałek, 18.05</div>
-        <div class="i-time">18:00</div>
-        <div class="i-int">Za śp. Marię i Józefa Kowalskich w rocznicę śmierci</div>
-        <div class="i-type plusplus">++ za zm.</div>
-      </div>
-      <div class="intencje-row">
-        <div class="i-day">Wtorek, 19.05</div>
-        <div class="i-time">7:00</div>
-        <div class="i-int">W intencji zdrowia dla Anny Nowak</div>
-        <div class="i-type">w int.</div>
-      </div>
-      <div class="intencje-row">
-        <div class="i-day">Środa, 20.05</div>
-        <div class="i-time">18:00</div>
-        <div class="i-int">Za śp. Stanisława Wiśniewskiego</div>
-        <div class="i-type plus">+ za zm.</div>
-      </div>
-      <div class="intencje-row">
-        <div class="i-day">Czwartek, 21.05</div>
-        <div class="i-time">7:00</div>
-        <div class="i-int">O Boże błogosławieństwo dla rodziny Nowaków</div>
-        <div class="i-type">w int.</div>
-      </div>
-      <div class="intencje-row">
-        <div class="i-day">Czwartek, 21.05</div>
-        <div class="i-time">18:00</div>
-        <div class="i-int">Za śp. Jana i Helenę Malinowskich</div>
-        <div class="i-type plusplus">++ za zm.</div>
-      </div>
-      <div class="intencje-row">
-        <div class="i-day">Piątek, 22.05</div>
-        <div class="i-time">18:00</div>
-        <div class="i-int">Za parafian i dobrodziejów parafii</div>
-        <div class="i-type">w int.</div>
-      </div>
-      <div class="intencje-row">
-        <div class="i-day">Sobota, 23.05</div>
-        <div class="i-time">8:00</div>
-        <div class="i-int">Za śp. Zofię Wróblewską z okazji 10. rocznicy śmierci</div>
-        <div class="i-type plus">+ za zm.</div>
-      </div>
-      <div class="intencje-row">
-        <div class="i-day">Niedziela, 24.05</div>
-        <div class="i-time">9:00</div>
-        <div class="i-int">Za parafian</div>
-        <div class="i-type">w int.</div>
-      </div>
-      <div class="intencje-row">
-        <div class="i-day">Niedziela, 24.05</div>
-        <div class="i-time">11:00</div>
-        <div class="i-int">Za śp. Romana Wierzbickiego i rodziców</div>
-        <div class="i-type plusplus">++ za zm.</div>
-      </div>
-      <div class="intencje-row">
-        <div class="i-day">Niedziela, 24.05</div>
-        <div class="i-time">17:00</div>
-        <div class="i-int">W podziękowaniu za otrzymane łaski z prośbą o dalszą opiekę</div>
-        <div class="i-type">w int.</div>
-      </div>
-    </div>
+    <div id="hp-int-week-label" class="intencje-week-label">Tydzień bieżący</div>
+    <div id="hp-int-table" class="intencje-table"></div>
     <p style="font-size:.82rem;color:var(--ink-soft);margin-top:16px;text-align:right">
       <svg width="13" height="13" fill="currentColor" viewBox="0 0 16 16" style="vertical-align:middle;margin-right:4px"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
       Intencje przyjmuje się osobiście w kancelarii: pn, śr 17:30–18:30 · cz 7:30–8:30 i 17:30–18:30
@@ -1098,6 +1037,123 @@
   } catch(e) {
     // cokolwiek pójdzie nie tak — zostaje fallback hardkodowany
   }
+})();
+</script>
+
+<!-- ── INTENCJE MSZALNE DYNAMICZNE ── -->
+<script>
+(function() {
+  var LS_KEY = 'nspj_intencje';
+  var LS_VER_KEY = 'nspj_intencje_v';
+  var DATA_VERSION = 1;
+
+  var MONTHS_PL_SHORT = ['sty','lut','mar','kwi','maj','cze','lip','sie','wrz','paź','lis','gru'];
+  var DOW_SHORT = ['Pon','Wt','Śr','Czw','Pt','Sob','Nd'];
+  var DOW_FULL = ['Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota','Niedziela'];
+
+  var TYPE_MAP = {
+    'za_zm_pp': { label:'++ za zm.', cls:'plusplus' },
+    'za_zm_p':  { label:'+ za zm.',  cls:'plus'     },
+    'w_int':    { label:'w int.',    cls:''          },
+    'dziek':    { label:'dzięk.',    cls:''          }
+  };
+
+  var DEFAULT_INTENCJE = [
+    {id:'int-201',date:'2026-05-18',time:'18:00',intention:'Za śp. Marię i Józefa Kowalskich w rocznicę śmierci',type:'za_zm_pp'},
+    {id:'int-202',date:'2026-05-19',time:'7:00', intention:'W intencji zdrowia dla Anny Nowak',type:'w_int'},
+    {id:'int-203',date:'2026-05-20',time:'18:00',intention:'Za śp. Stanisława Wiśniewskiego',type:'za_zm_p'},
+    {id:'int-204',date:'2026-05-21',time:'7:00', intention:'O Boże błogosławieństwo dla rodziny Nowaków',type:'w_int'},
+    {id:'int-205',date:'2026-05-21',time:'18:00',intention:'Za śp. Jana i Helenę Malinowskich',type:'za_zm_pp'},
+    {id:'int-206',date:'2026-05-22',time:'18:00',intention:'Za parafian i dobrodziejów parafii',type:'w_int'},
+    {id:'int-207',date:'2026-05-23',time:'8:00', intention:'Za śp. Zofię Wróblewską z okazji 10. rocznicy śmierci',type:'za_zm_p'},
+    {id:'int-208',date:'2026-05-24',time:'9:00', intention:'Za parafian',type:'w_int'},
+    {id:'int-209',date:'2026-05-24',time:'11:00',intention:'Za śp. Romana Wierzbickiego i rodziców',type:'za_zm_pp'},
+    {id:'int-210',date:'2026-05-24',time:'17:00',intention:'W podziękowaniu za otrzymane łaski z prośbą o dalszą opiekę',type:'dziek'},
+    {id:'int-301',date:'2026-05-25',time:'7:00', intention:'Za śp. Jana Nowaka — w 1. rocznicę śmierci, prosi rodzina',type:'za_zm_p'},
+    {id:'int-302',date:'2026-05-25',time:'17:00',intention:'W intencji rodziny Kowalskich o zdrowie',type:'w_int'},
+    {id:'int-303',date:'2026-05-26',time:'7:00', intention:'Za parafian o zdrowie i Boże błogosławieństwo',type:'w_int'},
+    {id:'int-304',date:'2026-05-26',time:'17:00',intention:'Za śp. Zofię Mazur — od dzieci i wnuków',type:'za_zm_p'},
+    {id:'int-305',date:'2026-05-27',time:'7:00', intention:'W intencji chorych parafian',type:'w_int'},
+    {id:'int-306',date:'2026-05-27',time:'17:00',intention:'Za śp. Wojciecha Wróblewskiego — od rodziny',type:'za_zm_p'},
+    {id:'int-307',date:'2026-05-28',time:'7:00', intention:'Za parafian o Boże błogosławieństwo',type:'w_int'},
+    {id:'int-308',date:'2026-05-29',time:'7:00', intention:'+ Antonina Mazur — w 5. dniu po pogrzebie',type:'za_zm_p'},
+    {id:'int-309',date:'2026-05-29',time:'17:00',intention:'W intencji dzieci przystępujących do I Komunii Świętej',type:'w_int'},
+    {id:'int-310',date:'2026-05-30',time:'7:00', intention:'Za śp. Stanisława Wiśniewskiego — od rodziny',type:'za_zm_p'},
+    {id:'int-311',date:'2026-05-30',time:'17:00',intention:'Dziękczynna za szczęśliwy powrót do zdrowia',type:'dziek'},
+    {id:'int-312',date:'2026-05-31',time:'8:00', intention:'Za parafian',type:'w_int'},
+    {id:'int-313',date:'2026-05-31',time:'11:00',intention:'W intencji bierzmowanych i ich rodzin',type:'w_int'},
+    {id:'int-314',date:'2026-05-31',time:'17:00',intention:'Za śp. Marię Jabłońską — od rodziny',type:'za_zm_p'}
+  ];
+
+  function getMonday(d) {
+    var dt = new Date(d); var day = dt.getDay();
+    dt.setDate(dt.getDate() + (day === 0 ? -6 : 1 - day));
+    dt.setHours(0,0,0,0); return dt;
+  }
+  function addDays(d, n) { var dt = new Date(d); dt.setDate(dt.getDate() + n); return dt; }
+  function isoDate(d) { return d.toISOString().split('T')[0]; }
+  function timeToNum(t) { var p = t.split(':').map(Number); return p[0]*60+(p[1]||0); }
+  function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function formatWeekRange(monday) {
+    var MONTHS_PL = ['stycznia','lutego','marca','kwietnia','maja','czerwca','lipca','sierpnia','września','października','listopada','grudnia'];
+    var sun = addDays(monday, 6);
+    var mD = monday.getDate(), sD = sun.getDate();
+    var mM = MONTHS_PL[monday.getMonth()], sM = MONTHS_PL[sun.getMonth()];
+    var yr = sun.getFullYear();
+    return monday.getMonth() === sun.getMonth()
+      ? mD + '–' + sD + ' ' + mM + ' ' + yr
+      : mD + ' ' + mM + ' – ' + sD + ' ' + sM + ' ' + yr;
+  }
+
+  try {
+    var storedVer = parseInt(localStorage.getItem(LS_VER_KEY) || '0', 10);
+    var allInt;
+    if (storedVer < DATA_VERSION) {
+      allInt = DEFAULT_INTENCJE.slice();
+    } else {
+      allInt = JSON.parse(localStorage.getItem(LS_KEY)) || DEFAULT_INTENCJE.slice();
+    }
+
+    var monday = getMonday(new Date());
+    var weekDates = [];
+    for (var i = 0; i < 7; i++) weekDates.push(isoDate(addDays(monday, i)));
+
+    var weekInts = allInt.filter(function(it) { return weekDates.indexOf(it.date) >= 0; });
+    weekInts.sort(function(a,b) {
+      if (a.date !== b.date) return a.date < b.date ? -1 : 1;
+      return timeToNum(a.time) - timeToNum(b.time);
+    });
+
+    var labelEl = document.getElementById('hp-int-week-label');
+    var tableEl = document.getElementById('hp-int-table');
+    if (!labelEl || !tableEl) return;
+
+    labelEl.textContent = 'Tydzień ' + formatWeekRange(monday);
+
+    if (weekInts.length === 0) {
+      tableEl.innerHTML = '<div style="padding:20px;text-align:center;color:var(--ink-soft);font-size:.9rem;font-style:italic">Brak intencji na bieżący tydzień — dodaj w panelu admina</div>';
+      return;
+    }
+
+    var MONTHS_SHORT = ['sty','lut','mar','kwi','maj','cze','lip','sie','wrz','paź','lis','gru'];
+    var DAY_PL = ['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota'];
+
+    var html = '';
+    weekInts.forEach(function(it) {
+      var d = new Date(it.date + 'T12:00:00');
+      var dayName = DAY_PL[d.getDay()];
+      var dayLabel = dayName + ', ' + d.getDate() + '.' + String(d.getMonth()+1).padStart(2,'0');
+      var tc = TYPE_MAP[it.type] || { label: it.type, cls: '' };
+      html += '<div class="intencje-row">'
+        + '<div class="i-day">' + esc(dayLabel) + '</div>'
+        + '<div class="i-time">' + esc(it.time) + '</div>'
+        + '<div class="i-int">' + esc(it.intention) + '</div>'
+        + '<div class="i-type' + (tc.cls ? ' ' + tc.cls : '') + '">' + esc(tc.label) + '</div>'
+        + '</div>';
+    });
+    tableEl.innerHTML = html;
+  } catch(e) { /* silent fail — hardcoded fallback stays */ }
 })();
 </script>
 

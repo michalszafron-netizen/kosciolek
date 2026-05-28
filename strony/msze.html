@@ -105,11 +105,19 @@
     max-width: 800px; margin: 0 auto 80px;
   }
   .intentions-header {
-    display: flex; justify-content: space-between; align-items: flex-end; 
+    display: flex; justify-content: space-between; align-items: center;
     margin-bottom: 30px; padding-bottom: 10px; border-bottom: 2px solid var(--copper);
+    flex-wrap: wrap; gap: 12px;
   }
   .intentions-header h2 { font-size: 2.2rem; color: var(--ink); margin: 0; }
   .intentions-week { font-family: 'Lato', sans-serif; font-size: 1rem; color: var(--ink-soft); font-weight: 600; }
+  .week-nav-btns { display: flex; align-items: center; gap: 8px; }
+  .week-nav-btn {
+    background: var(--cream); border: 1px solid var(--line); border-radius: 6px;
+    padding: 6px 13px; cursor: pointer; color: var(--burgundy); font-size: .85rem;
+    font-weight: 700; font-family: 'Lato', sans-serif; transition: background .15s;
+  }
+  .week-nav-btn:hover { background: var(--beige-deep); border-color: var(--copper); }
 
   .day-card {
     background: var(--white);
@@ -142,7 +150,7 @@
   .day-saint {
     font-size: .85rem; color: var(--ink-soft); font-style: italic;
   }
-  
+
   .mass-row {
     display: grid; grid-template-columns: 80px 1fr;
     padding: 16px 24px;
@@ -155,6 +163,9 @@
   }
   .mass-intention {
     font-size: 1.05rem; color: var(--ink); line-height: 1.5;
+  }
+  .no-intentions {
+    padding: 20px 24px; font-size: .95rem; color: var(--ink-soft); font-style: italic; text-align: center;
   }
 
   /* FOOTER */
@@ -253,7 +264,7 @@
 <div class="container">
   
   <div class="schedule-box">
-    <h3>Stałyy Porządek Mszy Świętych</h3>
+    <h3>Stały Porządek Mszy Świętych</h3>
     <div class="schedule-grid">
       <div class="schedule-col">
         <h4>Niedziele i Święta</h4>
@@ -269,114 +280,19 @@
   <div class="intentions-section">
     <div class="intentions-header">
       <h2>Intencje Mszalne</h2>
-      <div class="intentions-week">Tydzień 11–17 maja 2026</div>
-    </div>
-
-    <div class="day-card" tabindex="0">
-      <div class="day-header">
-        <span class="day-date">Poniedziałek, 11 maja</span>
-        <span class="day-saint">św. Filipa i Jakuba</span>
-      </div>
-      <div class="mass-row">
-        <div class="mass-time">7:00</div>
-        <div class="mass-intention">+ Stefania Nowak — w 5. rocznicę śmierci, prosi rodzina</div>
-      </div>
-      <div class="mass-row">
-        <div class="mass-time">17:00</div>
-        <div class="mass-intention">+ Józef Czerwiński, jego żona Maria oraz dusze w czyśćcu cierpiące</div>
+      <div class="week-nav-btns">
+        <button class="week-nav-btn" id="msze-prev">&#9664;</button>
+        <span class="intentions-week" id="msze-week-label">Wczytywanie…</span>
+        <button class="week-nav-btn" id="msze-next">&#9654;</button>
       </div>
     </div>
 
-    <div class="day-card" tabindex="0">
-      <div class="day-header">
-        <span class="day-date">Wtorek, 12 maja</span>
-        <span class="day-saint">św. Pankracego</span>
-      </div>
-      <div class="mass-row">
-        <div class="mass-time">7:00</div>
-        <div class="mass-intention">Za parafian o zdrowie i Boże błogosławieństwo</div>
-      </div>
-      <div class="mass-row">
-        <div class="mass-time">17:00</div>
-        <div class="mass-intention">+ Helena i Władysław Kowalscy — od dzieci i wnuków</div>
-      </div>
-    </div>
+    <div id="msze-intencje-container"></div>
 
-    <div class="day-card today" tabindex="0">
-      <div class="day-header">
-        <span class="day-date">Środa, 13 maja (Dziś)</span>
-        <span class="day-saint">NMP Fatimskiej</span>
-      </div>
-      <div class="mass-row">
-        <div class="mass-time">7:00</div>
-        <div class="mass-intention">+ Edward Mazur — od żony i dzieci</div>
-      </div>
-      <div class="mass-row">
-        <div class="mass-time">17:00</div>
-        <div class="mass-intention">Za parafian o pokój Boży w rodzinach</div>
-      </div>
-    </div>
-
-    <div class="day-card" tabindex="0">
-      <div class="day-header">
-        <span class="day-date">Czwartek, 14 maja</span>
-        <span class="day-saint">św. Macieja Apostoła</span>
-      </div>
-      <div class="mass-row">
-        <div class="mass-time">7:00</div>
-        <div class="mass-intention">+ Anna Kędzierska — w 30. dniu po pogrzebie</div>
-      </div>
-    </div>
-
-    <div class="day-card" tabindex="0">
-      <div class="day-header">
-        <span class="day-date">Piątek, 15 maja</span>
-        <span class="day-saint">św. Zofii</span>
-      </div>
-      <div class="mass-row">
-        <div class="mass-time">7:00</div>
-        <div class="mass-intention">+ Zofia Wójcik — w dniu imienin</div>
-      </div>
-      <div class="mass-row">
-        <div class="mass-time">17:00</div>
-        <div class="mass-intention">+ Krzysztof Brzeziński, w 10. rocznicę śmierci</div>
-      </div>
-    </div>
-
-    <div class="day-card" tabindex="0">
-      <div class="day-header">
-        <span class="day-date">Sobota, 16 maja</span>
-        <span class="day-saint">św. Andrzeja Boboli</span>
-      </div>
-      <div class="mass-row">
-        <div class="mass-time">7:00</div>
-        <div class="mass-intention">Za zmarłych członków Żywego Różańca</div>
-      </div>
-      <div class="mass-row">
-        <div class="mass-time">17:00</div>
-        <div class="mass-intention">+ Władysław Pieczka, jego rodzice i rodzeństwo</div>
-      </div>
-    </div>
-
-    <div class="day-card" tabindex="0">
-      <div class="day-header">
-        <span class="day-date">Niedziela, 17 maja</span>
-        <span class="day-saint">VI Niedziela Wielkanocna · Bierzmowanie</span>
-      </div>
-      <div class="mass-row">
-        <div class="mass-time">8:00</div>
-        <div class="mass-intention">Za parafian</div>
-      </div>
-      <div class="mass-row">
-        <div class="mass-time">11:00</div>
-        <div class="mass-intention">W intencji bierzmowanych, ich rodzin i świadków</div>
-      </div>
-      <div class="mass-row">
-        <div class="mass-time">17:00</div>
-        <div class="mass-intention">+ Małgorzata Janicka — od męża i synów</div>
-      </div>
-    </div>
-
+    <p style="font-size:.82rem;color:var(--ink-soft);margin-top:18px;text-align:right">
+      <svg width="13" height="13" fill="currentColor" viewBox="0 0 16 16" style="vertical-align:middle;margin-right:4px"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
+      Intencje przyjmuje się osobiście w kancelarii: pn, śr 17:30–18:30 · cz 7:30–8:30 i 17:30–18:30
+    </p>
   </div>
 
 </div>
@@ -455,6 +371,149 @@
     t.addEventListener('click',e=>{e.preventDefault();const d=t.closest('.dropdown');const w=d.classList.contains('open');document.querySelectorAll('.dropdown.open').forEach(x=>x.classList.remove('open'));if(!w)d.classList.add('open');});
   });
   document.addEventListener('click',e=>{if(!e.target.closest('.dropdown'))document.querySelectorAll('.dropdown.open').forEach(d=>d.classList.remove('open'));});
+</script>
+
+<!-- ── INTENCJE MSZALNE DYNAMICZNE ── -->
+<script>
+(function() {
+  var LS_KEY = 'nspj_intencje';
+  var LS_VER_KEY = 'nspj_intencje_v';
+  var DATA_VERSION = 1;
+
+  var MONTHS_PL = ['stycznia','lutego','marca','kwietnia','maja','czerwca','lipca','sierpnia','września','października','listopada','grudnia'];
+  var DOW_NAMES_FULL = ['Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota','Niedziela'];
+
+  var DEFAULT_INTENCJE = [
+    {id:'int-101',date:'2026-05-11',time:'7:00', intention:'+ Stefania Nowak — w 5. rocznicę śmierci, prosi rodzina',type:'za_zm_p'},
+    {id:'int-102',date:'2026-05-11',time:'17:00',intention:'+ Józef Czerwiński, jego żona Maria oraz dusze w czyśćcu cierpiące',type:'za_zm_p'},
+    {id:'int-103',date:'2026-05-12',time:'7:00', intention:'Za parafian o zdrowie i Boże błogosławieństwo',type:'w_int'},
+    {id:'int-104',date:'2026-05-12',time:'17:00',intention:'+ Helena i Władysław Kowalscy — od dzieci i wnuków',type:'za_zm_p'},
+    {id:'int-105',date:'2026-05-13',time:'7:00', intention:'+ Edward Mazur — od żony i dzieci',type:'za_zm_p'},
+    {id:'int-106',date:'2026-05-13',time:'17:00',intention:'Za parafian o pokój Boży w rodzinach',type:'w_int'},
+    {id:'int-107',date:'2026-05-14',time:'7:00', intention:'+ Anna Kędzierska — w 30. dniu po pogrzebie',type:'za_zm_p'},
+    {id:'int-108',date:'2026-05-15',time:'7:00', intention:'+ Zofia Wójcik — w dniu imienin',type:'w_int'},
+    {id:'int-109',date:'2026-05-15',time:'17:00',intention:'+ Krzysztof Brzeziński, w 10. rocznicę śmierci',type:'za_zm_p'},
+    {id:'int-110',date:'2026-05-16',time:'7:00', intention:'Za zmarłych członków Żywego Różańca',type:'za_zm_p'},
+    {id:'int-111',date:'2026-05-16',time:'17:00',intention:'+ Władysław Pieczka, jego rodzice i rodzeństwo',type:'za_zm_p'},
+    {id:'int-112',date:'2026-05-17',time:'8:00', intention:'Za parafian',type:'w_int'},
+    {id:'int-113',date:'2026-05-17',time:'11:00',intention:'W intencji bierzmowanych, ich rodzin i świadków',type:'w_int'},
+    {id:'int-114',date:'2026-05-17',time:'17:00',intention:'+ Małgorzata Janicka — od męża i synów',type:'za_zm_p'},
+    {id:'int-201',date:'2026-05-18',time:'18:00',intention:'Za śp. Marię i Józefa Kowalskich w rocznicę śmierci',type:'za_zm_pp'},
+    {id:'int-202',date:'2026-05-19',time:'7:00', intention:'W intencji zdrowia dla Anny Nowak',type:'w_int'},
+    {id:'int-203',date:'2026-05-20',time:'18:00',intention:'Za śp. Stanisława Wiśniewskiego',type:'za_zm_p'},
+    {id:'int-204',date:'2026-05-21',time:'7:00', intention:'O Boże błogosławieństwo dla rodziny Nowaków',type:'w_int'},
+    {id:'int-205',date:'2026-05-21',time:'18:00',intention:'Za śp. Jana i Helenę Malinowskich',type:'za_zm_pp'},
+    {id:'int-206',date:'2026-05-22',time:'18:00',intention:'Za parafian i dobrodziejów parafii',type:'w_int'},
+    {id:'int-207',date:'2026-05-23',time:'8:00', intention:'Za śp. Zofię Wróblewską z okazji 10. rocznicy śmierci',type:'za_zm_p'},
+    {id:'int-208',date:'2026-05-24',time:'9:00', intention:'Za parafian',type:'w_int'},
+    {id:'int-209',date:'2026-05-24',time:'11:00',intention:'Za śp. Romana Wierzbickiego i rodziców',type:'za_zm_pp'},
+    {id:'int-210',date:'2026-05-24',time:'17:00',intention:'W podziękowaniu za otrzymane łaski z prośbą o dalszą opiekę',type:'dziek'},
+    {id:'int-301',date:'2026-05-25',time:'7:00', intention:'Za śp. Jana Nowaka — w 1. rocznicę śmierci, prosi rodzina',type:'za_zm_p'},
+    {id:'int-302',date:'2026-05-25',time:'17:00',intention:'W intencji rodziny Kowalskich o zdrowie',type:'w_int'},
+    {id:'int-303',date:'2026-05-26',time:'7:00', intention:'Za parafian o zdrowie i Boże błogosławieństwo',type:'w_int'},
+    {id:'int-304',date:'2026-05-26',time:'17:00',intention:'Za śp. Zofię Mazur — od dzieci i wnuków',type:'za_zm_p'},
+    {id:'int-305',date:'2026-05-27',time:'7:00', intention:'W intencji chorych parafian',type:'w_int'},
+    {id:'int-306',date:'2026-05-27',time:'17:00',intention:'Za śp. Wojciecha Wróblewskiego — od rodziny',type:'za_zm_p'},
+    {id:'int-307',date:'2026-05-28',time:'7:00', intention:'Za parafian o Boże błogosławieństwo',type:'w_int'},
+    {id:'int-308',date:'2026-05-29',time:'7:00', intention:'+ Antonina Mazur — w 5. dniu po pogrzebie',type:'za_zm_p'},
+    {id:'int-309',date:'2026-05-29',time:'17:00',intention:'W intencji dzieci przystępujących do I Komunii Świętej',type:'w_int'},
+    {id:'int-310',date:'2026-05-30',time:'7:00', intention:'Za śp. Stanisława Wiśniewskiego — od rodziny',type:'za_zm_p'},
+    {id:'int-311',date:'2026-05-30',time:'17:00',intention:'Dziękczynna za szczęśliwy powrót do zdrowia',type:'dziek'},
+    {id:'int-312',date:'2026-05-31',time:'8:00', intention:'Za parafian',type:'w_int'},
+    {id:'int-313',date:'2026-05-31',time:'11:00',intention:'W intencji bierzmowanych i ich rodzin',type:'w_int'},
+    {id:'int-314',date:'2026-05-31',time:'17:00',intention:'Za śp. Marię Jabłońską — od rodziny',type:'za_zm_p'}
+  ];
+
+  function getMonday(d) {
+    var dt = new Date(d); var day = dt.getDay();
+    var diff = day === 0 ? -6 : 1 - day;
+    dt.setDate(dt.getDate() + diff); dt.setHours(0,0,0,0); return dt;
+  }
+  function addDays(d, n) { var dt = new Date(d); dt.setDate(dt.getDate() + n); return dt; }
+  function isoDate(d) { return d.toISOString().split('T')[0]; }
+  function timeToNum(t) { var p = t.split(':').map(Number); return p[0]*60+(p[1]||0); }
+  function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function formatWeekRange(monday) {
+    var sun = addDays(monday, 6);
+    var mD = monday.getDate(), sD = sun.getDate();
+    var mM = MONTHS_PL[monday.getMonth()], sM = MONTHS_PL[sun.getMonth()];
+    var yr = sun.getFullYear();
+    return monday.getMonth() === sun.getMonth()
+      ? mD + '–' + sD + ' ' + mM + ' ' + yr
+      : mD + ' ' + mM + ' – ' + sD + ' ' + sM + ' ' + yr;
+  }
+
+  function loadIntencje() {
+    try {
+      var storedVer = parseInt(localStorage.getItem(LS_VER_KEY) || '0', 10);
+      if (storedVer < DATA_VERSION) return DEFAULT_INTENCJE.slice();
+      return JSON.parse(localStorage.getItem(LS_KEY)) || DEFAULT_INTENCJE.slice();
+    } catch(e) { return DEFAULT_INTENCJE.slice(); }
+  }
+
+  function renderWeek(monday) {
+    var todayStr = isoDate(new Date());
+    var allInt = loadIntencje();
+    var days = [];
+    for (var i = 0; i < 7; i++) days.push(addDays(monday, i));
+
+    var byDate = {};
+    allInt.forEach(function(item) {
+      if (!byDate[item.date]) byDate[item.date] = [];
+      byDate[item.date].push(item);
+    });
+    Object.keys(byDate).forEach(function(d) {
+      byDate[d].sort(function(a,b){ return timeToNum(a.time) - timeToNum(b.time); });
+    });
+
+    document.getElementById('msze-week-label').textContent = 'Tydzień ' + formatWeekRange(monday);
+
+    var html = '';
+    days.forEach(function(day, idx) {
+      var dateStr = isoDate(day);
+      var isToday = dateStr === todayStr;
+      var dayInts = byDate[dateStr] || [];
+      var dow = DOW_NAMES_FULL[idx];
+      var dayNum = day.getDate();
+      var monthName = MONTHS_PL[day.getMonth()];
+      var dateLabel = dow + ', ' + dayNum + ' ' + monthName + (isToday ? ' (Dziś)' : '');
+
+      var rowsHtml = '';
+      if (dayInts.length === 0) {
+        rowsHtml = '<div class="no-intentions">Brak intencji na ten dzień</div>';
+      } else {
+        rowsHtml = dayInts.map(function(m) {
+          return '<div class="mass-row">'
+            + '<div class="mass-time">' + esc(m.time) + '</div>'
+            + '<div class="mass-intention">' + esc(m.intention) + '</div>'
+            + '</div>';
+        }).join('');
+      }
+
+      html += '<div class="day-card' + (isToday ? ' today' : '') + '" tabindex="0">'
+        + '<div class="day-header">'
+        + '<span class="day-date">' + esc(dateLabel) + '</span>'
+        + '</div>'
+        + rowsHtml
+        + '</div>';
+    });
+
+    document.getElementById('msze-intencje-container').innerHTML = html;
+  }
+
+  var currentMonday = getMonday(new Date());
+  renderWeek(currentMonday);
+
+  document.getElementById('msze-prev').addEventListener('click', function() {
+    currentMonday = addDays(currentMonday, -7);
+    renderWeek(currentMonday);
+  });
+  document.getElementById('msze-next').addEventListener('click', function() {
+    currentMonday = addDays(currentMonday, 7);
+    renderWeek(currentMonday);
+  });
+})();
 </script>
 </body>
 </html>
