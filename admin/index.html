@@ -143,24 +143,24 @@
         <div class="stat">
           <div class="info">
             <div class="lbl">Aktualności</div>
-            <div class="num">47</div>
-            <div class="delta"><b>+3</b> w tym miesiącu</div>
+            <div class="num" id="stat-akt-num">—</div>
+            <div class="delta" id="stat-akt-delta">ładowanie…</div>
           </div>
           <div class="ic"><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/></svg></div>
         </div>
         <div class="stat">
           <div class="info">
-            <div class="lbl">Zdjęć w galerii</div>
-            <div class="num">244</div>
-            <div class="delta">w <b>32</b> galeriach</div>
+            <div class="lbl">Parafianie</div>
+            <div class="num" id="stat-par-num">—</div>
+            <div class="delta" id="stat-par-delta">w rejestrze</div>
           </div>
-          <div class="ic"><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M14.002 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/><path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1 12.45V3a1 1 0 0 1 1-1z"/></svg></div>
+          <div class="ic"><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4"/></svg></div>
         </div>
         <div class="stat">
           <div class="info">
             <div class="lbl">Intencje na ten tydzień</div>
-            <div class="num">42</div>
-            <div class="delta">brakuje 8 — <b>Czw. wieczorna</b></div>
+            <div class="num" id="stat-int-num">—</div>
+            <div class="delta" id="stat-int-delta">ładowanie…</div>
           </div>
           <div class="ic"><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/></svg></div>
         </div>
@@ -181,42 +181,8 @@
             <h3>Ostatnia aktywność</h3>
             <a href="#" class="btn btn-ghost sm">Pełny dziennik →</a>
           </div>
-          <ul class="timeline">
-            <li>
-              <div class="dot"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/></svg></div>
-              <div class="info">
-                <div><b>ks. Tomasz Żołna</b> opublikował nową aktualność: <i>„Wizytacja kanoniczna abp. Galbasa"</i></div>
-                <div class="when">2 godz. temu · Aktualności</div>
-              </div>
-            </li>
-            <li>
-              <div class="dot"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M14.002 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/></svg></div>
-              <div class="info">
-                <div><b>Anna M.</b> dodała 14 zdjęć do galerii <i>„Wizytacja kanoniczna 2025"</i></div>
-                <div class="when">3 godz. temu · Galeria</div>
-              </div>
-            </li>
-            <li>
-              <div class="dot"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5"/></svg></div>
-              <div class="info">
-                <div><b>ks. Paweł O.</b> zaktualizował intencję mszalną na <i>16.05.2026, godz. 18:00</i></div>
-                <div class="when">wczoraj, 19:42 · Intencje</div>
-              </div>
-            </li>
-            <li>
-              <div class="dot"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M11.5 2v4.793l3.347 7.36a.75.75 0 0 1-.682 1.06H1.835a.75.75 0 0 1-.682-1.06l3.347-7.36V2H4a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1z"/></svg></div>
-              <div class="info">
-                <div><b>ks. Tomasz Żołna</b> opublikował ogłoszenia parafialne na V Niedzielę Wielkanocną</div>
-                <div class="when">2 dni temu · Ogłoszenia</div>
-              </div>
-            </li>
-            <li>
-              <div class="dot"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg></div>
-              <div class="info">
-                <div>Wygenerowano PDF z intencjami na <i>11–17 maja</i> · gotowy do druku</div>
-                <div class="when">3 dni temu · System</div>
-              </div>
-            </li>
+          <ul class="timeline" id="timeline">
+            <li style="padding:14px 0;color:var(--ink-soft);font-size:.88rem">Wczytywanie aktywności…</li>
           </ul>
         </div>
 
@@ -250,23 +216,8 @@
 
           <div class="card">
             <div class="card-head"><h3>Nadchodzące wydarzenia</h3></div>
-            <ul class="upcoming">
-              <li>
-                <div class="day"><div class="d">17</div><div class="m">Maj</div></div>
-                <div class="det"><b>Bierzmowanie</b><div class="t">godz. 11:00 · ks. Biskup</div></div>
-              </li>
-              <li>
-                <div class="day"><div class="d">19</div><div class="m">Maj</div></div>
-                <div class="det"><b>Spotkanie Rady Parafialnej</b><div class="t">godz. 18:00 · salka</div></div>
-              </li>
-              <li>
-                <div class="day"><div class="d">24</div><div class="m">Maj</div></div>
-                <div class="det"><b>Wczesna komunia święta</b><div class="t">godz. 10:00 · Msza</div></div>
-              </li>
-              <li>
-                <div class="day"><div class="d">9</div><div class="m">Cze</div></div>
-                <div class="det"><b>Odpust parafialny</b><div class="t">cały dzień</div></div>
-              </li>
+            <ul class="upcoming" id="upcoming">
+              <li style="padding:14px 0;color:var(--ink-soft);font-size:.88rem">Wczytywanie…</li>
             </ul>
           </div>
         </div>
@@ -275,5 +226,180 @@
     </div>
   </div>
 </div>
+
+<script>
+(function(){
+  'use strict';
+  var today = new Date();
+  var todayStr = today.toISOString().slice(0,10);
+
+  var DOW    = ['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota'];
+  var MGEN   = ['stycznia','lutego','marca','kwietnia','maja','czerwca','lipca','sierpnia','września','października','listopada','grudnia'];
+  var MSHORT = ['Sty','Lut','Mar','Kwi','Maj','Cze','Lip','Sie','Wrz','Paź','Lis','Gru'];
+
+  /* ── nagłówek – data ── */
+  var leadEl = document.querySelector('.lead');
+  if(leadEl) leadEl.textContent = DOW[today.getDay()]+', '+today.getDate()+' '+MGEN[today.getMonth()]+' '+today.getFullYear();
+
+  /* ── helpers ── */
+  function ls(key){ try{ var r=localStorage.getItem(key); return r?JSON.parse(r):null; }catch(e){ return null; } }
+  function relTime(ds){
+    if(!ds) return '';
+    try{
+      var d=new Date(ds.length===10?ds+'T12:00:00':ds);
+      var diff=Math.floor((today-d)/86400000);
+      if(diff<0)  return 'za '+Math.abs(diff)+' dni';
+      if(diff===0) return 'dzisiaj';
+      if(diff===1) return 'wczoraj';
+      if(diff<7)   return diff+' dni temu';
+      if(diff<30)  return Math.floor(diff/7)+' tyg. temu';
+      return d.toLocaleDateString('pl-PL',{day:'numeric',month:'short',year:'numeric'});
+    }catch(e){ return ''; }
+  }
+  function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  var ICO={
+    news:'<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/><path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm10 1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/></svg>',
+    ann: '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M11.5 2v4.793l3.347 7.36a.75.75 0 0 1-.682 1.06H1.835a.75.75 0 0 1-.682-1.06l3.347-7.36V2H4a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1zM5.5 2v4.901a.5.5 0 0 1-.045.207L2.434 13.5h11.132l-3.021-6.392a.5.5 0 0 1-.045-.207V2z"/></svg>',
+    cal: '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/></svg>',
+    sakr:'<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M6 1h6v7l-2-1-2 1V1z"/><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/></svg>',
+    pogr:'<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>',
+    par: '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4"/></svg>'
+  };
+
+  /* ── dane z localStorage ── */
+  var akt  = ls('nspj_aktualnosci');
+  var ogl  = ls('nspj_ogloszenia');
+  var intt = ls('nspj_intencje');
+  var pogr = ls('nspj_pogrzeby');
+  var sakr = ls('nspj_sakramenty');
+  var para = ls('nspj_parafianie');
+
+  /* ══ STATS ══════════════════════════════════════ */
+  // Aktualności
+  if(Array.isArray(akt)){
+    var mo=todayStr.slice(0,7);
+    var moCnt=akt.filter(function(a){ return (a.date||'').startsWith(mo); }).length;
+    var n=document.getElementById('stat-akt-num');   if(n) n.textContent=akt.length;
+    var d=document.getElementById('stat-akt-delta'); if(d) d.innerHTML='<b>+'+moCnt+'</b> w tym miesiącu';
+  }
+  // Parafianie
+  if(Array.isArray(para)){
+    var active=para.filter(function(p){ return p.status!=='Nieaktywny'&&p.status!=='nieaktywny'; });
+    var yr=todayStr.slice(0,4);
+    var newYr=para.filter(function(p){ return (p.data_dolaczenia||'').startsWith(yr); }).length;
+    var n=document.getElementById('stat-par-num');   if(n) n.textContent=active.length;
+    var d=document.getElementById('stat-par-delta'); if(d) d.innerHTML='<b>+'+newYr+'</b> w tym roku';
+  }
+  // Intencje – bieżący tydzień
+  if(Array.isArray(intt)){
+    var mon=new Date(today); var dow=today.getDay()===0?6:today.getDay()-1; mon.setDate(today.getDate()-dow);
+    var sun=new Date(mon); sun.setDate(mon.getDate()+6);
+    var monS=mon.toISOString().slice(0,10); var sunS=sun.toISOString().slice(0,10);
+    var wk=intt.filter(function(a){ return a.date&&a.date>=monS&&a.date<=sunS; });
+    var n=document.getElementById('stat-int-num');   if(n) n.textContent=wk.length;
+    var d=document.getElementById('stat-int-delta'); if(d) d.textContent='w bieżącym tygodniu';
+  }
+
+  /* ══ OSTATNIA AKTYWNOŚĆ ════════════════════════ */
+  var acts=[];
+  // Aktualności
+  if(Array.isArray(akt)){
+    akt.filter(function(a){return a.date;}).sort(function(a,b){return(b.date||'').localeCompare(a.date||'');}).slice(0,2).forEach(function(a){
+      acts.push({date:a.date,mod:'Aktualności',ico:'news',
+        html:'<b>ks. Tomasz Żołna</b> opublikował aktualność: <i>„'+esc(a.title||'—')+'"</i>'});
+    });
+  }
+  // Ogłoszenia
+  if(Array.isArray(ogl)){
+    ogl.filter(function(a){return a.date&&a.status==='published';}).sort(function(a,b){return(b.date||'').localeCompare(a.date||'');}).slice(0,1).forEach(function(a){
+      acts.push({date:a.date,mod:'Ogłoszenia',ico:'ann',
+        html:'<b>ks. Tomasz Żołna</b> opublikował ogłoszenia: <i>„'+esc(a.title||'—')+'"</i>'});
+    });
+  }
+  // Intencje
+  if(Array.isArray(intt)){
+    intt.filter(function(a){return a.date;}).sort(function(a,b){return(b.date||'').localeCompare(a.date||'');}).slice(0,1).forEach(function(a){
+      var ds=new Date(a.date+'T12:00:00').toLocaleDateString('pl-PL',{day:'numeric',month:'long'});
+      acts.push({date:a.date,mod:'Intencje',ico:'cal',
+        html:'Dodano intencję mszalną na <i>'+esc(ds)+(a.time?', godz. '+esc(a.time):'')+' — '+esc(a.intention||'')+'</i>'});
+    });
+  }
+  // Pogrzeby
+  if(Array.isArray(pogr)){
+    pogr.filter(function(p){return p.data_pogrzebu||p.data_zgonu;}).sort(function(a,b){
+      return((b.data_pogrzebu||b.data_zgonu||'').localeCompare(a.data_pogrzebu||a.data_zgonu||''));
+    }).slice(0,1).forEach(function(p){
+      var name=esc(((p.imie||'')+' '+(p.nazwisko||'')).trim());
+      acts.push({date:p.data_pogrzebu||p.data_zgonu,mod:'Pogrzeby',ico:'pogr',
+        html:'Zarejestrowano zgłoszenie pogrzebu: <b>'+name+'</b>'});
+    });
+  }
+  // Sakramenty
+  if(sakr){
+    var allS=[];
+    if(Array.isArray(sakr.bierzmowanie)) sakr.bierzmowanie.forEach(function(s){allS.push({d:s.data,type:'Bierzmowanie',name:((s.imie||'')+' '+(s.nazwisko||'')).trim()});});
+    if(Array.isArray(sakr.chrzciny))     sakr.chrzciny.forEach(function(s){    allS.push({d:s.data_chrztu,type:'Chrzest',name:((s.imie||'')+' '+(s.nazwisko||'')).trim()});});
+    if(Array.isArray(sakr.sluby))        sakr.sluby.forEach(function(s){       allS.push({d:s.data_slubu,type:'Ślub',name:esc((s.oblubieniec||'')+(s.oblubienica?' i '+s.oblubienica:''))});});
+    if(Array.isArray(sakr.komunia))      sakr.komunia.forEach(function(s){     allS.push({d:s.data,type:'Komunia',name:((s.imie||'')+' '+(s.nazwisko||'')).trim()});});
+    allS.filter(function(s){return s.d;}).sort(function(a,b){return(b.d||'').localeCompare(a.d||'');}).slice(0,1).forEach(function(s){
+      acts.push({date:s.d,mod:'Sakramenty',ico:'sakr',
+        html:'Zarejestrowano sakrament — <b>'+s.type+'</b>: '+esc(s.name)});
+    });
+  }
+  // Parafianie
+  if(Array.isArray(para)){
+    para.filter(function(p){return p.data_dolaczenia;}).sort(function(a,b){return(b.data_dolaczenia||'').localeCompare(a.data_dolaczenia||'');}).slice(0,1).forEach(function(p){
+      var name=esc(((p.imie||'')+' '+(p.nazwisko||'')).trim());
+      acts.push({date:p.data_dolaczenia,mod:'Parafianie',ico:'par',
+        html:'Dodano parafianina: <b>'+name+'</b>'});
+    });
+  }
+  acts.sort(function(a,b){return(b.date||'').localeCompare(a.date||'');});
+  acts=acts.slice(0,5);
+  var tlEl=document.getElementById('timeline');
+  if(tlEl){
+    tlEl.innerHTML=acts.length?acts.map(function(a){
+      return '<li><div class="dot">'+ICO[a.ico]+'</div><div class="info"><div>'+a.html+'</div><div class="when">'+relTime(a.date)+' · '+a.mod+'</div></div></li>';
+    }).join(''):'<li style="padding:14px 0;color:var(--ink-soft)">Brak aktywności w rejestrach</li>';
+  }
+
+  /* ══ NADCHODZĄCE WYDARZENIA ════════════════════ */
+  var evts=[];
+  if(sakr){
+    if(Array.isArray(sakr.bierzmowanie)) sakr.bierzmowanie.filter(function(s){return s.data&&s.data>=todayStr;}).forEach(function(s){
+      evts.push({date:s.data,label:'Bierzmowanie',sub:esc(((s.imie||'')+' '+(s.nazwisko||'')).trim())+(s.kaplan?' · '+esc(s.kaplan):'')});
+    });
+    if(Array.isArray(sakr.komunia)) sakr.komunia.filter(function(s){return s.data&&s.data>=todayStr;}).forEach(function(s){
+      evts.push({date:s.data,label:'Pierwsza Komunia',sub:esc(((s.imie||'')+' '+(s.nazwisko||'')).trim())+(s.kaplan?' · '+esc(s.kaplan):'')});
+    });
+    if(Array.isArray(sakr.sluby)) sakr.sluby.filter(function(s){return s.data_slubu&&s.data_slubu>=todayStr;}).forEach(function(s){
+      var nm=esc([s.oblubieniec,s.oblubienica].filter(Boolean).join(' & '));
+      evts.push({date:s.data_slubu,label:'Ślub',sub:nm+(s.kaplan?' · '+esc(s.kaplan):'')});
+    });
+    if(Array.isArray(sakr.chrzciny)) sakr.chrzciny.filter(function(s){return s.data_chrztu&&s.data_chrztu>=todayStr;}).forEach(function(s){
+      evts.push({date:s.data_chrztu,label:'Chrzest',sub:esc(((s.imie||'')+' '+(s.nazwisko||'')).trim())+(s.kaplan?' · '+esc(s.kaplan):'')});
+    });
+  }
+  if(Array.isArray(pogr)){
+    pogr.filter(function(p){return p.data_pogrzebu&&p.data_pogrzebu>=todayStr;}).forEach(function(p){
+      var name=esc(((p.imie||'')+' '+(p.nazwisko||'')).trim());
+      evts.push({date:p.data_pogrzebu,label:'Pogrzeb',
+        sub:name+(p.godzina?' · godz. '+esc(p.godzina):'')+(p.kaplan?' · '+esc(p.kaplan):'')});
+    });
+  }
+  evts.sort(function(a,b){return(a.date||'').localeCompare(b.date||'');});
+  evts=evts.slice(0,5);
+  var upEl=document.getElementById('upcoming');
+  if(upEl){
+    upEl.innerHTML=evts.length?evts.map(function(ev){
+      var d=new Date(ev.date+'T12:00:00');
+      return '<li><div class="day"><div class="d">'+d.getDate()+'</div><div class="m">'+MSHORT[d.getMonth()]+'</div></div>'+
+        '<div class="det"><b>'+ev.label+'</b><div class="t">'+ev.sub+'</div></div></li>';
+    }).join(''):'<li style="padding:14px 0;color:var(--ink-soft);font-size:.88rem">Brak nadchodzących wydarzeń w rejestrach</li>';
+  }
+})();
+</script>
+
 </body>
 </html>
