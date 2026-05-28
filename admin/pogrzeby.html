@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pogrzeby · Panel Parafii NSPJ</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/admin.css">
+<style>
+  .status-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:11px;font-size:.74rem;font-weight:700}
+  .status-badge.zgloszony{background:#e8f0f8;color:#3a6ea8}
+  .status-badge.zaplanowany{background:#fef3cd;color:#856404}
+  .status-badge.odbylsie{background:#e2f0e6;color:#2e7a3a}
+
+  .filter-bar{display:flex;gap:10px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
+  .filter-bar input{padding:8px 12px;border:1px solid var(--line);border-radius:6px;font-size:.88rem;background:var(--white);color:var(--ink);width:260px}
+  .filter-bar select{padding:8px 12px;border:1px solid var(--line);border-radius:6px;font-size:.88rem;background:var(--white);color:var(--ink)}
+
+  /* Modal */
+  .modal-overlay{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center}
+  .modal-box{background:var(--white);border-radius:12px;padding:28px;width:580px;max-width:96vw;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+  .modal-box h3{margin:0 0 20px;font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--ink)}
+  .modal-form{display:grid;gap:12px}
+  .modal-form .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .modal-form .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .modal-form label{font-size:.78rem;font-weight:600;color:var(--ink-soft);display:block;margin-bottom:3px}
+  .modal-form input,.modal-form select,.modal-form textarea{padding:9px 12px;border:1px solid var(--line);border-radius:6px;font-size:.88rem;width:100%;background:var(--white);box-sizing:border-box}
+  .modal-form input:focus,.modal-form select:focus,.modal-form textarea:focus{border-color:var(--copper);outline:none;box-shadow:0 0 0 2px rgba(184,122,74,.18)}
+  .modal-form .section-divider{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);padding:4px 0 2px;border-bottom:1px solid var(--line);margin-top:4px}
+  .modal-btns{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+
+  /* Del banner */
+  .del-banner{position:fixed;bottom:0;left:0;right:0;z-index:998;background:var(--white);border-top:2px solid var(--burgundy);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 -4px 20px rgba(0,0,0,.12)}
+  .del-banner p{margin:0;font-size:.9rem;color:var(--ink)}
+  .del-banner p b{color:var(--burgundy)}
+  .del-banner-btns{display:flex;gap:10px}
+
+  /* Toast */
+  .toast{position:fixed;bottom:24px;right:24px;background:var(--burgundy);color:#fff;padding:11px 22px;border-radius:8px;font-size:.88rem;font-weight:600;box-shadow:0 6px 24px rgba(0,0,0,.22);opacity:0;transform:translateY(10px);transition:all .25s;pointer-events:none;z-index:9999}
+  .toast.show{opacity:1;transform:translateY(0)}
+
+  /* Table tweaks */
+  .table-card th:last-child,.table-card td:last-child{text-align:right}
+  .grob-cell{font-size:.78rem;color:var(--ink-soft)}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><img src="../public/img/logo1.png" alt="NSPJ" style="width:38px;height:38px;border-radius:50%;object-fit:contain;flex-shrink:0"><div class="brand-name">Parafia NSPJ<small>Czerwionka-Leszczyny</small></div></div>
+    <nav>
+      <a href="index.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/></svg>Pulpit</a>
+      <div class="nav-section">Strona WWW</div>
+      <a href="aktualnosci.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/><path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2zm10 1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/></svg>Aktualności<span class="badge">3</span></a>
+      <a href="ogloszenia.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M11.5 2v4.793l3.347 7.36a.75.75 0 0 1-.682 1.06H1.835a.75.75 0 0 1-.682-1.06l3.347-7.36V2H4a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1z"/></svg>Ogłoszenia parafialne</a>
+      <a href="galeria.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M14.002 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2z"/></svg>Galeria</a>
+      <a href="#"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 0 0-1H5a.5.5 0 0 0-.5.5M5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/><path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/></svg>Strony statyczne</a>
+      <div class="nav-section">Wspólnota</div>
+      <a href="intencje.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z"/></svg>Intencje mszalne</a>
+      <a href="sakramenty.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6 1h6v7l-2-1-2 1V1z"/><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/></svg>Sakramenty</a>
+      <a href="pogrzeby.html" class="active"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>Pogrzeby</a>
+      <a href="parafianie.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>Parafianie</a>
+      <div class="nav-section">System</div>
+      <a href="#"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H6zM1 11a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H1z"/></svg>Raporty</a>
+      <a href="ustawienia.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/></svg>Ustawienia parafii</a>
+    </nav>
+    <div class="user"><div class="user-avatar">TŻ</div><div class="user-name">ks. Tomasz Żołna<small>Proboszcz · <a href="login.html">Wyloguj</a></small></div></div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="crumbs"><a href="index.html">Pulpit</a><span>/</span><b>Pogrzeby</b></div>
+      <div class="actions">
+        <button class="btn btn-secondary" onclick="window.print()">
+          <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8.5 1.5a.5.5 0 0 0-1 0v9.293L4.354 7.646a.5.5 0 1 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0-.708-.708L8.5 10.793V1.5z"/></svg>
+          Eksport PDF
+        </button>
+        <button class="btn btn-primary" id="btn-add-top">
+          <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg>
+          Dodaj pogrzeb
+        </button>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="page-head">
+        <div>
+          <h1>Pogrzeby</h1>
+          <div class="lead">Rejestr liturgii pogrzebowych parafii NSPJ</div>
+        </div>
+      </div>
+
+      <div class="stats" id="stats-bar">
+        <!-- rendered by JS -->
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" id="search-input" placeholder="Szukaj po nazwisku, imieniu…" oninput="renderTable()">
+        <select id="filter-status" onchange="renderTable()">
+          <option value="">Wszystkie statusy</option>
+          <option value="zgloszony">Zgłoszony</option>
+          <option value="zaplanowany">Zaplanowany</option>
+          <option value="odbylsie">Odbył się</option>
+        </select>
+        <select id="filter-rok" onchange="renderTable()">
+          <option value="">Wszystkie lata</option>
+          <option value="2026" selected>2026</option>
+          <option value="2025">2025</option>
+          <option value="2024">2024</option>
+        </select>
+      </div>
+
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>Zmarły/a</th>
+              <th>Data zgonu</th>
+              <th>Pogrzeb</th>
+              <th>Miejsce ceremonii</th>
+              <th>Cmentarz</th>
+              <th>Kapłan</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+          </tbody>
+        </table>
+      </div>
+
+      <div id="empty-state" style="display:none;text-align:center;padding:48px 20px;color:var(--ink-soft)">
+        <svg fill="currentColor" viewBox="0 0 16 16" style="width:40px;height:40px;margin-bottom:12px;opacity:.3"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+        <div>Brak wpisów spełniających kryteria</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal-overlay" style="display:none" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <h3 id="modal-title">Nowy wpis</h3>
+    <div class="modal-form" id="modal-form-body"></div>
+    <div class="modal-btns">
+      <button class="btn btn-secondary" onclick="closeModal()">Anuluj</button>
+      <button class="btn btn-primary" onclick="saveFromModal()">Zapisz</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete banner -->
+<div class="del-banner" id="del-banner" style="display:none">
+  <p>Usunąć wpis: <b id="del-name"></b>?</p>
+  <div class="del-banner-btns">
+    <button class="btn btn-secondary" onclick="cancelDelete()">Anuluj</button>
+    <button class="btn btn-primary" style="background:var(--burgundy)" onclick="confirmDelete()">Usuń</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  var LS_KEY = 'nspj_pogrzeby';
+  var LS_VER_KEY = 'nspj_pogrzeby_v';
+  var DATA_VERSION = 1;
+
+  var KSIEZA = [
+    'ks. Tomasz Żołna',
+    'ks. Marek Woźniak',
+    'ks. Józef Kaczmarek',
+    'ks. Paweł Nowak'
+  ];
+
+  var STATUS_LABELS = {
+    'zgloszony':  'Zgłoszony',
+    'zaplanowany':'Zaplanowany',
+    'odbylsie':   'Odbył się'
+  };
+
+  var DEFAULT_DATA = [
+    // 2026 — odbył się
+    {id:'p1', imie:'Jan',        nazwisko:'Kowalski',    data_zgonu:'2026-01-08', data_pogrzebu:'2026-01-11', godz_pogrzebu:'10:00', miejsce_ceremonii:'Kościół NSPJ', miejsce_zam:'ul. Różana 4, Czerwionka-Leszczyny', data_urodzenia:'1942-03-15', miejsce_urodzenia:'Rybnik', rodzice:'Józef Kowalski, Maria z d. Wiśniewska', cmentarz:'Cmentarz Komunalny Czerwionka', sektor:'A', rzad:'3', miejsce_grobu:'12', ksiadz:'ks. Tomasz Żołna', rok:2026, status:'odbylsie'},
+    {id:'p2', imie:'Helena',     nazwisko:'Nowak',       data_zgonu:'2026-01-19', data_pogrzebu:'2026-01-22', godz_pogrzebu:'11:00', miejsce_ceremonii:'Kościół NSPJ', miejsce_zam:'ul. Słoneczna 18, Leszczyny', data_urodzenia:'1938-07-22', miejsce_urodzenia:'Katowice', rodzice:'Stanisław Piątek, Anna z d. Baran', cmentarz:'Cmentarz Parafialny NSPJ', sektor:'B', rzad:'7', miejsce_grobu:'4', ksiadz:'ks. Marek Woźniak', rok:2026, status:'odbylsie'},
+    {id:'p3', imie:'Tadeusz',    nazwisko:'Wiśniewski',  data_zgonu:'2026-02-03', data_pogrzebu:'2026-02-06', godz_pogrzebu:'09:00', miejsce_ceremonii:'Dom pogrzebowy "Wieczność"', miejsce_zam:'ul. Parkowa 2, Czerwionka', data_urodzenia:'1950-11-30', miejsce_urodzenia:'Czerwionka', rodzice:'Władysław Wiśniewski, Zofia z d. Kowalczyk', cmentarz:'Cmentarz Komunalny Czerwionka', sektor:'C', rzad:'1', miejsce_grobu:'8', ksiadz:'ks. Józef Kaczmarek', rok:2026, status:'odbylsie'},
+    {id:'p4', imie:'Władysława', nazwisko:'Zając',       data_zgonu:'2026-02-14', data_pogrzebu:'2026-02-17', godz_pogrzebu:'10:00', miejsce_ceremonii:'Kościół NSPJ', miejsce_zam:'ul. Wiosenna 9, Leszczyny', data_urodzenia:'1931-04-05', miejsce_urodzenia:'Wodzisław Śląski', rodzice:'Kazimierz Sobota, Irena z d. Majewska', cmentarz:'Cmentarz Parafialny NSPJ', sektor:'A', rzad:'12', miejsce_grobu:'2', ksiadz:'ks. Tomasz Żołna', rok:2026, status:'odbylsie'},
+    {id:'p5', imie:'Stanisław',  nazwisko:'Piotrowski',  data_zgonu:'2026-03-01', data_pogrzebu:'2026-03-04', godz_pogrzebu:'11:00', miejsce_ceremonii:'Kościół NSPJ', miejsce_zam:'ul. Lipowa 33, Czerwionka', data_urodzenia:'1955-08-19', miejsce_urodzenia:'Rybnik', rodzice:'Henryk Piotrowski, Krystyna z d. Duda', cmentarz:'Cmentarz Komunalny Czerwionka', sektor:'D', rzad:'5', miejsce_grobu:'15', ksiadz:'ks. Marek Woźniak', rok:2026, status:'odbylsie'},
+    {id:'p6', imie:'Genowefa',   nazwisko:'Kubik',       data_zgonu:'2026-03-22', data_pogrzebu:'2026-03-25', godz_pogrzebu:'10:00', miejsce_ceremonii:'Kościół NSPJ', miejsce_zam:'ul. Górnicza 5, Leszczyny', data_urodzenia:'1944-12-01', miejsce_urodzenia:'Leszczyny', rodzice:'Franciszek Głowacki, Wanda z d. Sikora', cmentarz:'Cmentarz Parafialny NSPJ', sektor:'B', rzad:'2', miejsce_grobu:'9', ksiadz:'ks. Józef Kaczmarek', rok:2026, status:'odbylsie'},
+    {id:'p7', imie:'Roman',      nazwisko:'Dąbrowski',   data_zgonu:'2026-04-10', data_pogrzebu:'2026-04-13', godz_pogrzebu:'09:00', miejsce_ceremonii:'Kościół NSPJ', miejsce_zam:'ul. Kasztanowa 11, Czerwionka', data_urodzenia:'1948-02-28', miejsce_urodzenia:'Gliwice', rodzice:'Bronisław Dąbrowski, Maria z d. Nowak', cmentarz:'Cmentarz Komunalny Czerwionka', sektor:'A', rzad:'8', miejsce_grobu:'6', ksiadz:'ks. Tomasz Żołna', rok:2026, status:'odbylsie'},
+    {id:'p8', imie:'Zofia',      nazwisko:'Kamińska',    data_zgonu:'2026-04-27', data_pogrzebu:'2026-04-30', godz_pogrzebu:'10:00', miejsce_ceremonii:'Kościół NSPJ', miejsce_zam:'ul. Kolejowa 7, Czerwionka-Leszczyny', data_urodzenia:'1939-06-14', miejsce_urodzenia:'Tychy', rodzice:'Edward Tomczyk, Janina z d. Lis', cmentarz:'Cmentarz Parafialny NSPJ', sektor:'C', rzad:'4', miejsce_grobu:'3', ksiadz:'ks. Paweł Nowak', rok:2026, status:'odbylsie'},
+    // 2026 — zaplanowany
+    {id:'p9',  imie:'Marian',  nazwisko:'Szczepański', data_zgonu:'2026-05-24', data_pogrzebu:'2026-05-30', godz_pogrzebu:'10:00', miejsce_ceremonii:'Kościół NSPJ', miejsce_zam:'ul. Tulipanów 3, Czerwionka', data_urodzenia:'1952-09-10', miejsce_urodzenia:'Czerwionka', rodzice:'Zygmunt Szczepański, Barbara z d. Wróbel', cmentarz:'Cmentarz Komunalny Czerwionka', sektor:'', rzad:'', miejsce_grobu:'', ksiadz:'ks. Tomasz Żołna', rok:2026, status:'zaplanowany'},
+    {id:'p10', imie:'Irena',   nazwisko:'Lewandowska', data_zgonu:'2026-05-26', data_pogrzebu:'2026-06-02', godz_pogrzebu:'11:00', miejsce_ceremonii:'Kościół NSPJ', miejsce_zam:'ul. Cisowa 22, Leszczyny', data_urodzenia:'1947-01-30', miejsce_urodzenia:'Rybnik', rodzice:'Mieczysław Krawczyk, Danuta z d. Mucha', cmentarz:'Cmentarz Parafialny NSPJ', sektor:'', rzad:'', miejsce_grobu:'', ksiadz:'ks. Marek Woźniak', rok:2026, status:'zaplanowany'},
+    // 2026 — zgłoszony
+    {id:'p11', imie:'Józef',   nazwisko:'Mazur',       data_zgonu:'2026-05-27', data_pogrzebu:'', godz_pogrzebu:'', miejsce_ceremonii:'', miejsce_zam:'ul. Magnolii 6, Czerwionka', data_urodzenia:'1960-05-03', miejsce_urodzenia:'Czerwionka', rodzice:'Andrzej Mazur, Teresa z d. Głowacka', cmentarz:'', sektor:'', rzad:'', miejsce_grobu:'', ksiadz:'', rok:2026, status:'zgloszony'},
+    // 2025
+    {id:'p12', imie:'Bronisław', nazwisko:'Woźniak',   data_zgonu:'2025-11-02', data_pogrzebu:'2025-11-05', godz_pogrzebu:'10:00', miejsce_ceremonii:'Kościół NSPJ', miejsce_zam:'ul. Lipowa 14, Czerwionka', data_urodzenia:'1935-07-11', miejsce_urodzenia:'Żory', rodzice:'Józef Woźniak, Helena z d. Kowal', cmentarz:'Cmentarz Komunalny Czerwionka', sektor:'B', rzad:'9', miejsce_grobu:'1', ksiadz:'ks. Tomasz Żołna', rok:2025, status:'odbylsie'},
+    {id:'p13', imie:'Cecylia',   nazwisko:'Grabowska', data_zgonu:'2025-08-18', data_pogrzebu:'2025-08-21', godz_pogrzebu:'09:00', miejsce_ceremonii:'Kościół NSPJ', miejsce_zam:'ul. Akacjowa 3, Leszczyny', data_urodzenia:'1941-10-22', miejsce_urodzenia:'Leszczyny', rodzice:'Kazimierz Grabowski, Zofia z d. Bąk', cmentarz:'Cmentarz Parafialny NSPJ', sektor:'A', rzad:'5', miejsce_grobu:'7', ksiadz:'ks. Józef Kaczmarek', rok:2025, status:'odbylsie'},
+    {id:'p14', imie:'Władysław', nazwisko:'Michalak',  data_zgonu:'2025-03-14', data_pogrzebu:'2025-03-17', godz_pogrzebu:'11:00', miejsce_ceremonii:'Kościół NSPJ', miejsce_zam:'ul. Różana 28, Czerwionka', data_urodzenia:'1929-01-06', miejsce_urodzenia:'Rybnik', rodzice:'Franciszek Michalak, Anna z d. Wiśniewska', cmentarz:'Cmentarz Komunalny Czerwionka', sektor:'D', rzad:'2', miejsce_grobu:'11', ksiadz:'ks. Marek Woźniak', rok:2025, status:'odbylsie'},
+    // 2024
+    {id:'p15', imie:'Halina',    nazwisko:'Jabłońska',  data_zgonu:'2024-12-29', data_pogrzebu:'2025-01-02', godz_pogrzebu:'10:00', miejsce_ceremonii:'Kościół NSPJ', miejsce_zam:'ul. Ogrodowa 9, Leszczyny', data_urodzenia:'1946-05-17', miejsce_urodzenia:'Bytom', rodzice:'Stanisław Jabłoński, Regina z d. Kwiatkowska', cmentarz:'Cmentarz Parafialny NSPJ', sektor:'C', rzad:'6', miejsce_grobu:'5', ksiadz:'ks. Tomasz Żołna', rok:2025, status:'odbylsie'},
+    {id:'p16', imie:'Eugeniusz', nazwisko:'Pietrzak',   data_zgonu:'2024-06-03', data_pogrzebu:'2024-06-06', godz_pogrzebu:'10:00', miejsce_ceremonii:'Kościół NSPJ', miejsce_zam:'ul. Szkolna 17, Czerwionka', data_urodzenia:'1943-03-29', miejsce_urodzenia:'Czerwionka', rodzice:'Marian Pietrzak, Irena z d. Stępień', cmentarz:'Cmentarz Komunalny Czerwionka', sektor:'A', rzad:'11', miejsce_grobu:'3', ksiadz:'ks. Tomasz Żołna', rok:2024, status:'odbylsie'}
+  ];
+
+  // ---- state ----
+  var allData = [];
+  var pendingDeleteId = null;
+  var editingId = null;
+
+  function genId(){return 'p'+Date.now()+Math.random().toString(36).slice(2,6);}
+
+  function load(){
+    var storedVer = parseInt(localStorage.getItem(LS_VER_KEY)||'0',10);
+    if(storedVer < DATA_VERSION){
+      allData = DEFAULT_DATA.map(function(d){return Object.assign({},d);});
+      save();
+    } else {
+      try{ allData = JSON.parse(localStorage.getItem(LS_KEY)||'[]'); }
+      catch(e){ allData = DEFAULT_DATA.map(function(d){return Object.assign({},d);}); }
+    }
+  }
+
+  function save(){
+    localStorage.setItem(LS_KEY, JSON.stringify(allData));
+    localStorage.setItem(LS_VER_KEY, String(DATA_VERSION));
+  }
+
+  // ---- stats ----
+  function renderStats(){
+    var rok2026 = allData.filter(function(d){return d.rok===2026;});
+    var odbylsie = rok2026.filter(function(d){return d.status==='odbylsie';}).length;
+    var zaplanowane = allData.filter(function(d){return d.status==='zaplanowany';}).length;
+    var zgloszenia = allData.filter(function(d){return d.status==='zgloszony';}).length;
+    var total = allData.length;
+    document.getElementById('stats-bar').innerHTML =
+      '<div class="stat-card"><div class="stat-val">'+rok2026.length+'</div><div class="stat-label">Pogrzeby 2026</div></div>'+
+      '<div class="stat-card"><div class="stat-val">'+odbylsie+'</div><div class="stat-label">Odbyły się (2026)</div></div>'+
+      '<div class="stat-card"><div class="stat-val">'+zaplanowane+'</div><div class="stat-label">Zaplanowane</div></div>'+
+      '<div class="stat-card"><div class="stat-val">'+zgloszenia+'</div><div class="stat-label">Nowe zgłoszenia</div></div>'+
+      '<div class="stat-card"><div class="stat-val">'+total+'</div><div class="stat-label">Wszystkich rekordów</div></div>';
+  }
+
+  // ---- table ----
+  function filtered(){
+    var q = document.getElementById('search-input').value.trim().toLowerCase();
+    var st = document.getElementById('filter-status').value;
+    var rok = document.getElementById('filter-rok').value;
+    return allData.filter(function(d){
+      var name = (d.imie+' '+d.nazwisko).toLowerCase();
+      if(q && name.indexOf(q)===-1) return false;
+      if(st && d.status!==st) return false;
+      if(rok && String(d.rok)!==rok) return false;
+      return true;
+    });
+  }
+
+  function renderTable(){
+    var rows = filtered();
+    var tbody = document.getElementById('table-body');
+    var empty = document.getElementById('empty-state');
+    if(!rows.length){tbody.innerHTML='';empty.style.display='block';return;}
+    empty.style.display='none';
+
+    // sort: most recent pogrzeb first
+    rows.sort(function(a,b){
+      var da = a.data_pogrzebu||a.data_zgonu||'';
+      var db = b.data_pogrzebu||b.data_zgonu||'';
+      return db.localeCompare(da);
+    });
+
+    tbody.innerHTML = rows.map(function(d){
+      var pogrzebDate = d.data_pogrzebu ? (formatDate(d.data_pogrzebu)+(d.godz_pogrzebu?' '+d.godz_pogrzebu:'')) : '—';
+      var grob = (d.sektor||d.rzad||d.miejsce_grobu)
+        ? '<span class="grob-cell">'+[d.sektor?'sek.'+d.sektor:'',d.rzad?'rząd '+d.rzad:'',d.miejsce_grobu?'m.'+d.miejsce_grobu:''].filter(Boolean).join(', ')+'</span>'
+        : '<span style="color:var(--ink-soft);font-size:.78rem">—</span>';
+      var badgeClass = d.status==='odbylsie'?'odbylsie':d.status==='zaplanowany'?'zaplanowany':'zgloszony';
+      return '<tr>'+
+        '<td><strong>'+d.nazwisko+' '+d.imie+'</strong><br><small style="color:var(--ink-soft)">ur. '+formatDate(d.data_urodzenia)+'</small></td>'+
+        '<td>'+formatDate(d.data_zgonu)+'</td>'+
+        '<td>'+pogrzebDate+'</td>'+
+        '<td style="max-width:160px;font-size:.85rem">'+escHtml(d.miejsce_ceremonii||'—')+'</td>'+
+        '<td style="font-size:.82rem">'+escHtml(d.cmentarz||'—')+'<br>'+grob+'</td>'+
+        '<td style="font-size:.82rem">'+escHtml(d.ksiadz||'—')+'</td>'+
+        '<td><span class="status-badge '+badgeClass+'">'+STATUS_LABELS[d.status]+'</span></td>'+
+        '<td>'+
+          '<button class="btn btn-secondary" style="padding:5px 10px;font-size:.78rem;margin-right:4px" onclick="openEdit(\''+d.id+'\')">Edytuj</button>'+
+          '<button class="btn btn-secondary" style="padding:5px 10px;font-size:.78rem;color:var(--burgundy)" onclick="askDelete(\''+d.id+'\')">Usuń</button>'+
+        '</td>'+
+      '</tr>';
+    }).join('');
+  }
+
+  function formatDate(str){
+    if(!str) return '—';
+    var p = str.split('-');
+    if(p.length!==3) return str;
+    return p[2]+'.'+p[1]+'.'+p[0];
+  }
+  function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+  // ---- modal ----
+  var FORM_TEMPLATE =
+    '<div class="section-divider">Dane osoby zmarłej</div>'+
+    '<div class="row2">'+
+      '<div><label>Imię</label><input id="f-imie" type="text"></div>'+
+      '<div><label>Nazwisko</label><input id="f-nazwisko" type="text"></div>'+
+    '</div>'+
+    '<div class="row2">'+
+      '<div><label>Data urodzenia</label><input id="f-dataurodzenia" type="date"></div>'+
+      '<div><label>Miejsce urodzenia</label><input id="f-miejsceurodzenia" type="text" placeholder="Miasto"></div>'+
+    '</div>'+
+    '<div><label>Imiona rodziców</label><input id="f-rodzice" type="text" placeholder="Ojciec …, Matka …"></div>'+
+    '<div><label>Ostatnie miejsce zamieszkania</label><input id="f-miejscezam" type="text" placeholder="ul. …, miasto"></div>'+
+    '<div class="section-divider">Liturgia pogrzebowa</div>'+
+    '<div class="row2">'+
+      '<div><label>Data zgonu</label><input id="f-datazgonu" type="date" required></div>'+
+      '<div><label>Data pogrzebu</label><input id="f-datapogrzebu" type="date"></div>'+
+    '</div>'+
+    '<div class="row2">'+
+      '<div><label>Godzina pogrzebu</label><input id="f-godzina" type="time"></div>'+
+      '<div><label>Miejsce ceremonii</label><input id="f-miejscecer" type="text" placeholder="Kościół NSPJ…"></div>'+
+    '</div>'+
+    '<div class="row2">'+
+      '<div><label>Kapłan odprawiający</label><select id="f-ksiadz"><option value="">— wybierz —</option>'+
+        KSIEZA.map(function(k){return '<option>'+k+'</option>';}).join('')+
+      '</select></div>'+
+      '<div><label>Status</label><select id="f-status">'+
+        '<option value="zgloszony">Zgłoszony</option>'+
+        '<option value="zaplanowany">Zaplanowany</option>'+
+        '<option value="odbylsie">Odbył się</option>'+
+      '</select></div>'+
+    '</div>'+
+    '<div class="section-divider">Miejsce pochówku</div>'+
+    '<div><label>Cmentarz</label><input id="f-cmentarz" type="text" placeholder="Cmentarz Komunalny Czerwionka…"></div>'+
+    '<div class="row3">'+
+      '<div><label>Sektor</label><input id="f-sektor" type="text" placeholder="np. A"></div>'+
+      '<div><label>Rząd</label><input id="f-rzad" type="text" placeholder="np. 3"></div>'+
+      '<div><label>Miejsce grobu</label><input id="f-miejscegrobu" type="text" placeholder="np. 12"></div>'+
+    '</div>';
+
+  function openModal(){
+    editingId = null;
+    document.getElementById('modal-title').textContent = 'Nowy pogrzeb';
+    document.getElementById('modal-form-body').innerHTML = FORM_TEMPLATE;
+    // default rok
+    document.getElementById('modal-overlay').style.display='flex';
+    document.getElementById('f-imie').focus();
+  }
+
+  function openEdit(id){
+    editingId = id;
+    var d = allData.filter(function(x){return x.id===id;})[0];
+    if(!d) return;
+    document.getElementById('modal-title').textContent = 'Edytuj — '+d.imie+' '+d.nazwisko;
+    document.getElementById('modal-form-body').innerHTML = FORM_TEMPLATE;
+    document.getElementById('f-imie').value = d.imie||'';
+    document.getElementById('f-nazwisko').value = d.nazwisko||'';
+    document.getElementById('f-dataurodzenia').value = d.data_urodzenia||'';
+    document.getElementById('f-miejsceurodzenia').value = d.miejsce_urodzenia||'';
+    document.getElementById('f-rodzice').value = d.rodzice||'';
+    document.getElementById('f-miejscezam').value = d.miejsce_zam||'';
+    document.getElementById('f-datazgonu').value = d.data_zgonu||'';
+    document.getElementById('f-datapogrzebu').value = d.data_pogrzebu||'';
+    document.getElementById('f-godzina').value = d.godz_pogrzebu||'';
+    document.getElementById('f-miejscecer').value = d.miejsce_ceremonii||'';
+    document.getElementById('f-ksiadz').value = d.ksiadz||'';
+    document.getElementById('f-status').value = d.status||'zgloszony';
+    document.getElementById('f-cmentarz').value = d.cmentarz||'';
+    document.getElementById('f-sektor').value = d.sektor||'';
+    document.getElementById('f-rzad').value = d.rzad||'';
+    document.getElementById('f-miejscegrobu').value = d.miejsce_grobu||'';
+    document.getElementById('modal-overlay').style.display='flex';
+  }
+
+  function closeModal(){
+    document.getElementById('modal-overlay').style.display='none';
+    editingId=null;
+  }
+
+  function saveFromModal(){
+    var datazgonu = document.getElementById('f-datazgonu').value.trim();
+    if(!datazgonu){alert('Data zgonu jest wymagana.');return;}
+    var imie = document.getElementById('f-imie').value.trim();
+    var nazwisko = document.getElementById('f-nazwisko').value.trim();
+    if(!imie&&!nazwisko){alert('Podaj przynajmniej imię lub nazwisko.');return;}
+
+    var dataPogrzebu = document.getElementById('f-datapogrzebu').value;
+    var rok = dataPogrzebu ? parseInt(dataPogrzebu.split('-')[0],10) : parseInt(datazgonu.split('-')[0],10);
+
+    var rec = {
+      id: editingId || genId(),
+      imie: imie,
+      nazwisko: nazwisko,
+      data_urodzenia: document.getElementById('f-dataurodzenia').value,
+      miejsce_urodzenia: document.getElementById('f-miejsceurodzenia').value.trim(),
+      rodzice: document.getElementById('f-rodzice').value.trim(),
+      miejsce_zam: document.getElementById('f-miejscezam').value.trim(),
+      data_zgonu: datazgonu,
+      data_pogrzebu: dataPogrzebu,
+      godz_pogrzebu: document.getElementById('f-godzina').value,
+      miejsce_ceremonii: document.getElementById('f-miejscecer').value.trim(),
+      ksiadz: document.getElementById('f-ksiadz').value,
+      status: document.getElementById('f-status').value,
+      cmentarz: document.getElementById('f-cmentarz').value.trim(),
+      sektor: document.getElementById('f-sektor').value.trim(),
+      rzad: document.getElementById('f-rzad').value.trim(),
+      miejsce_grobu: document.getElementById('f-miejscegrobu').value.trim(),
+      rok: rok
+    };
+
+    if(editingId){
+      var idx = allData.findIndex(function(x){return x.id===editingId;});
+      if(idx!==-1) allData[idx]=rec;
+    } else {
+      allData.unshift(rec);
+    }
+    save();
+    closeModal();
+    renderStats();
+    renderTable();
+    showToast(editingId?'Zaktualizowano wpis.':'Dodano nowy pogrzeb.');
+  }
+
+  // ---- delete ----
+  function askDelete(id){
+    pendingDeleteId = id;
+    var d = allData.filter(function(x){return x.id===id;})[0];
+    document.getElementById('del-name').textContent = d ? d.imie+' '+d.nazwisko : '?';
+    document.getElementById('del-banner').style.display='flex';
+  }
+  function cancelDelete(){
+    pendingDeleteId=null;
+    document.getElementById('del-banner').style.display='none';
+  }
+  function confirmDelete(){
+    allData = allData.filter(function(x){return x.id!==pendingDeleteId;});
+    save();
+    cancelDelete();
+    renderStats();
+    renderTable();
+    showToast('Wpis usunięty.');
+  }
+
+  // ---- toast ----
+  function showToast(msg){
+    var t=document.getElementById('toast');
+    t.textContent=msg;
+    t.classList.add('show');
+    setTimeout(function(){t.classList.remove('show');},2800);
+  }
+
+  // ---- init ----
+  document.getElementById('btn-add-top').addEventListener('click',openModal);
+  window.openEdit=openEdit;
+  window.askDelete=askDelete;
+  window.cancelDelete=cancelDelete;
+  window.confirmDelete=confirmDelete;
+  window.closeModal=closeModal;
+  window.saveFromModal=saveFromModal;
+  window.renderTable=renderTable;
+
+  load();
+  renderStats();
+  renderTable();
+})();
+</script>
+</body>
+</html>
