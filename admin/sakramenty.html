@@ -8,40 +8,42 @@
 <link rel="stylesheet" href="assets/admin.css">
 <style>
   .tabs{display:flex;gap:4px;border-bottom:2px solid var(--line);margin-bottom:24px}
-  .tab{
-    padding:10px 20px;font-size:.88rem;font-weight:600;color:var(--ink-soft);
-    border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;
-    margin-bottom:-2px;border-radius:6px 6px 0 0;transition:all .15s
-  }
+  .tab{padding:10px 20px;font-size:.88rem;font-weight:600;color:var(--ink-soft);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;border-radius:6px 6px 0 0;transition:all .15s}
   .tab:hover{color:var(--ink);background:var(--bg)}
   .tab.active{color:var(--burgundy);border-bottom-color:var(--burgundy);background:var(--white)}
-  .tab .count{
-    margin-left:7px;background:var(--beige-deep);color:var(--ink-soft);
-    padding:1px 7px;border-radius:9px;font-size:.72rem;font-weight:700
-  }
+  .tab .count{margin-left:7px;background:var(--beige-deep);color:var(--ink-soft);padding:1px 7px;border-radius:9px;font-size:.72rem;font-weight:700}
   .tab.active .count{background:var(--burgundy);color:#fff}
 
   .status-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:11px;font-size:.74rem;font-weight:700}
-  .status-badge.kandydat{background:#e8f0f8;color:var(--blue)}
-  .status-badge.gotowy{background:#f5e8d4;color:var(--amber)}
-  .status-badge.przyjal{background:#e2f0e6;color:var(--green)}
-
-  .demo-note{
-    background:#fdf6ec;border:1px dashed var(--copper);border-radius:6px;
-    padding:10px 14px;font-size:.82rem;color:var(--ink-soft);margin-bottom:22px;
-    display:flex;align-items:center;gap:10px
-  }
-  .demo-note svg{flex-shrink:0;color:var(--copper)}
+  .status-badge.kandydat{background:#e8f0f8;color:#3a6ea8}
+  .status-badge.gotowy{background:#f5e8d4;color:#b06a1a}
+  .status-badge.przyjal{background:#e2f0e6;color:#2e7a3a}
 
   .filter-bar{display:flex;gap:10px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
-  .filter-bar input{
-    padding:8px 12px;border:1px solid var(--line);border-radius:6px;
-    font-size:.88rem;background:var(--white);color:var(--ink);width:260px
-  }
-  .filter-bar select{
-    padding:8px 12px;border:1px solid var(--line);border-radius:6px;
-    font-size:.88rem;background:var(--white);color:var(--ink)
-  }
+  .filter-bar input{padding:8px 12px;border:1px solid var(--line);border-radius:6px;font-size:.88rem;background:var(--white);color:var(--ink);width:260px}
+  .filter-bar select{padding:8px 12px;border:1px solid var(--line);border-radius:6px;font-size:.88rem;background:var(--white);color:var(--ink)}
+
+  /* Modal */
+  .modal-overlay{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center}
+  .modal-box{background:var(--white);border-radius:12px;padding:28px;width:540px;max-width:96vw;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+  .modal-box h3{margin:0 0 20px;font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--ink)}
+  .modal-form{display:grid;gap:12px}
+  .modal-form .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .modal-form .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .modal-form label{font-size:.78rem;font-weight:600;color:var(--ink-soft);display:block;margin-bottom:3px}
+  .modal-form input,.modal-form select,.modal-form textarea{padding:9px 12px;border:1px solid var(--line);border-radius:6px;font-size:.88rem;width:100%;background:var(--white);box-sizing:border-box}
+  .modal-form input:focus,.modal-form select:focus,.modal-form textarea:focus{border-color:var(--copper);outline:none;box-shadow:0 0 0 2px rgba(184,122,74,.18)}
+  .modal-btns{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+
+  /* Del banner */
+  .del-banner{position:fixed;bottom:0;left:0;right:0;z-index:998;background:var(--white);border-top:2px solid var(--burgundy);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 -4px 20px rgba(0,0,0,.12)}
+  .del-banner p{margin:0;font-size:.9rem;color:var(--ink)}
+  .del-banner p b{color:var(--burgundy)}
+  .del-banner-btns{display:flex;gap:10px}
+
+  /* Toast */
+  .toast{position:fixed;bottom:24px;right:24px;background:var(--burgundy);color:#fff;padding:11px 22px;border-radius:8px;font-size:.88rem;font-weight:600;box-shadow:0 6px 24px rgba(0,0,0,.22);opacity:0;transform:translateY(10px);transition:all .25s;pointer-events:none;z-index:9999}
+  .toast.show{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
@@ -57,8 +59,9 @@
       <a href="#"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 0 0-1H5a.5.5 0 0 0-.5.5M5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/><path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/></svg>Strony statyczne</a>
       <div class="nav-section">Wspólnota</div>
       <a href="intencje.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z"/></svg>Intencje mszalne</a>
-      <a href="sakramenty.html" class="active"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6 1h6v7l-2-1-2 1V1z"/><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/></svg>Sakramenty<span class="badge" style="background:var(--ink-soft)">Pkt 2</span></a>
-      <a href="parafianie.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>Parafianie<span class="badge" style="background:var(--ink-soft)">Pkt 2</span></a>
+      <a href="sakramenty.html" class="active"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6 1h6v7l-2-1-2 1V1z"/><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/></svg>Sakramenty</a>
+      <a href="pogrzeby.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>Pogrzeby</a>
+      <a href="parafianie.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>Parafianie</a>
       <div class="nav-section">System</div>
       <a href="#"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H6zM1 11a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H1z"/></svg>Raporty</a>
       <a href="ustawienia.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/></svg>Ustawienia parafii</a>
@@ -70,13 +73,13 @@
     <div class="topbar">
       <div class="crumbs"><a href="index.html">Pulpit</a><span>/</span><b>Sakramenty</b></div>
       <div class="actions">
-        <button class="btn btn-secondary">
+        <button class="btn btn-secondary" onclick="window.print()">
           <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8.5 1.5a.5.5 0 0 0-1 0v9.293L4.354 7.646a.5.5 0 1 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0-.708-.708L8.5 10.793V1.5z"/></svg>
           Eksport PDF
         </button>
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" id="btn-add-top">
           <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg>
-          Dodaj kandydata
+          Dodaj wpis
         </button>
       </div>
     </div>
@@ -89,161 +92,409 @@
         </div>
       </div>
 
-      <div class="demo-note">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
-        Wersja demonstracyjna — dane są przykładowe, przyciski nieaktywne. W pełnej wersji wszystko będzie można edytować.
+      <div class="stats" id="stats-bar">
+        <!-- rendered by JS -->
       </div>
 
-      <div class="stats">
-        <div class="stat">
-          <div class="info"><div class="lbl">Bierzmowanie 2026</div><div class="num">24</div><div class="delta">kandydatów · <b>18 gotowych</b></div></div>
-          <div class="ic"><svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg></div>
-        </div>
-        <div class="stat">
-          <div class="info"><div class="lbl">Chrzciny (rok 2026)</div><div class="num">7</div><div class="delta">zaplanowanych chrzcin</div></div>
-          <div class="ic"><svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16a6 6 0 0 0 6-6c0-1.655-.425-2.81-1.483-3.982C11.007 4.842 9.502 3.855 8 2c-1.502 1.855-3.007 2.842-4.517 4.018C2.425 7.19 2 8.345 2 10a6 6 0 0 0 6 6z"/></svg></div>
-        </div>
-        <div class="stat">
-          <div class="info"><div class="lbl">Śluby (rok 2026)</div><div class="num">3</div><div class="delta">zapowiedzi w toku</div></div>
-          <div class="ic"><svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg></div>
-        </div>
-        <div class="stat">
-          <div class="info"><div class="lbl">Pierwsza Komunia 2026</div><div class="num">31</div><div class="delta">dzieci zapisanych</div></div>
-          <div class="ic"><svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/></svg></div>
-        </div>
+      <div class="tabs" id="tabs-bar">
+        <button class="tab active" data-tab="bierzmowanie">Bierzmowanie <span class="count" id="cnt-bierzmowanie">0</span></button>
+        <button class="tab" data-tab="chrzciny">Chrzciny <span class="count" id="cnt-chrzciny">0</span></button>
+        <button class="tab" data-tab="sluby">Śluby <span class="count" id="cnt-sluby">0</span></button>
+        <button class="tab" data-tab="komunia">Pierwsza Komunia <span class="count" id="cnt-komunia">0</span></button>
       </div>
 
-      <div class="tabs">
-        <button class="tab active" onclick="switchTab(this,'bierzmowanie')">Bierzmowanie <span class="count">24</span></button>
-        <button class="tab" onclick="switchTab(this,'chrzciny')">Chrzciny <span class="count">7</span></button>
-        <button class="tab" onclick="switchTab(this,'sluby')">Śluby <span class="count">3</span></button>
-        <button class="tab" onclick="switchTab(this,'komunia')">Pierwsza Komunia <span class="count">31</span></button>
+      <div id="tab-content">
+        <!-- rendered by JS -->
       </div>
-
-      <div id="tab-bierzmowanie">
-        <div class="filter-bar">
-          <input type="text" placeholder="Szukaj po nazwisku…">
-          <select><option>Wszyscy kandydaci</option><option>Gotowi</option><option>W trakcie przygotowania</option></select>
-          <select><option>Rok 2026</option><option>Rok 2025</option><option>Rok 2024</option></select>
-        </div>
-        <table class="tbl">
-          <thead>
-            <tr>
-              <th>Imię i nazwisko</th>
-              <th>Data urodzenia</th>
-              <th>Rodzic / Opiekun</th>
-              <th>Katecheta</th>
-              <th>Status</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><b>Aleksandra Nowak</b></td>
-              <td>14.03.2010</td>
-              <td>Anna Nowak</td>
-              <td>s. Maria</td>
-              <td><span class="status-badge przyjal">● Gotowa</span></td>
-              <td><div class="row-actions">
-                <button title="Edytuj"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10z"/></svg></button>
-                <button title="Usuń"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1z"/></svg></button>
-              </div></td>
-            </tr>
-            <tr>
-              <td><b>Piotr Kowalski</b></td>
-              <td>22.07.2009</td>
-              <td>Marek Kowalski</td>
-              <td>ks. Tomasz</td>
-              <td><span class="status-badge gotowy">● W trakcie</span></td>
-              <td><div class="row-actions">
-                <button title="Edytuj"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10z"/></svg></button>
-                <button title="Usuń"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1z"/></svg></button>
-              </div></td>
-            </tr>
-            <tr>
-              <td><b>Zofia Wiśniewska</b></td>
-              <td>05.11.2009</td>
-              <td>Katarzyna Wiśniewska</td>
-              <td>s. Maria</td>
-              <td><span class="status-badge przyjal">● Gotowa</span></td>
-              <td><div class="row-actions">
-                <button title="Edytuj"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10z"/></svg></button>
-                <button title="Usuń"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1z"/></svg></button>
-              </div></td>
-            </tr>
-            <tr>
-              <td><b>Tomasz Jabłoński</b></td>
-              <td>18.02.2010</td>
-              <td>Robert Jabłoński</td>
-              <td>ks. Tomasz</td>
-              <td><span class="status-badge kandydat">● Kandydat</span></td>
-              <td><div class="row-actions">
-                <button title="Edytuj"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10z"/></svg></button>
-                <button title="Usuń"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1z"/></svg></button>
-              </div></td>
-            </tr>
-            <tr>
-              <td><b>Maria Krawczyk</b></td>
-              <td>30.09.2009</td>
-              <td>Ewa Krawczyk</td>
-              <td>s. Maria</td>
-              <td><span class="status-badge gotowy">● W trakcie</span></td>
-              <td><div class="row-actions">
-                <button title="Edytuj"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10z"/></svg></button>
-                <button title="Usuń"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1z"/></svg></button>
-              </div></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="tab-chrzciny" style="display:none">
-        <div class="filter-bar">
-          <input type="text" placeholder="Szukaj po nazwisku dziecka…">
-        </div>
-        <table class="tbl">
-          <thead><tr><th>Imię dziecka</th><th>Data urodzenia</th><th>Rodzice</th><th>Data chrztu</th><th>Status</th><th></th></tr></thead>
-          <tbody>
-            <tr><td><b>Jan Witek</b></td><td>02.04.2026</td><td>Paweł i Marta Witek</td><td>18.05.2026</td><td><span class="status-badge gotowy">● Zaplanowany</span></td><td><div class="row-actions"><button title="Edytuj"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10z"/></svg></button></div></td></tr>
-            <tr><td><b>Hanna Brzezińska</b></td><td>15.03.2026</td><td>Artur i Joanna Brzezińscy</td><td>25.05.2026</td><td><span class="status-badge kandydat">● Oczekuje</span></td><td><div class="row-actions"><button title="Edytuj"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10z"/></svg></button></div></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="tab-sluby" style="display:none">
-        <table class="tbl">
-          <thead><tr><th>Narzeczeni</th><th>Data ślubu</th><th>Zapowiedzi</th><th>Status</th><th></th></tr></thead>
-          <tbody>
-            <tr><td><b>Kamil Nowak &amp; Anna Zając</b></td><td>14.06.2026</td><td>3 z 3 ogłoszonych</td><td><span class="status-badge przyjal">● Gotowe</span></td><td><div class="row-actions"><button title="Edytuj"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10z"/></svg></button></div></td></tr>
-            <tr><td><b>Michał Lis &amp; Paulina Wróbel</b></td><td>28.08.2026</td><td>1 z 3 ogłoszonych</td><td><span class="status-badge kandydat">● W toku</span></td><td><div class="row-actions"><button title="Edytuj"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10z"/></svg></button></div></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="tab-komunia" style="display:none">
-        <div class="filter-bar">
-          <input type="text" placeholder="Szukaj po nazwisku…">
-        </div>
-        <table class="tbl">
-          <thead><tr><th>Imię i nazwisko</th><th>Data urodzenia</th><th>Szkoła / klasa</th><th>Rodzic</th><th>Status</th><th></th></tr></thead>
-          <tbody>
-            <tr><td><b>Maja Kowalczyk</b></td><td>12.05.2017</td><td>SP nr 3, kl. 3a</td><td>Dorota Kowalczyk</td><td><span class="status-badge przyjal">● Gotowa</span></td><td><div class="row-actions"><button title="Edytuj"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10z"/></svg></button></div></td></tr>
-            <tr><td><b>Filip Dąbrowski</b></td><td>08.09.2016</td><td>SP nr 1, kl. 3b</td><td>Marcin Dąbrowski</td><td><span class="status-badge gotowy">● W trakcie</span></td><td><div class="row-actions"><button title="Edytuj"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10z"/></svg></button></div></td></tr>
-          </tbody>
-        </table>
-      </div>
-
     </div>
   </div>
 </div>
+
+<!-- Modal dodaj/edytuj -->
+<div id="sak-modal" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <h3 id="modal-title">Dodaj wpis</h3>
+    <div class="modal-form" id="modal-form-body">
+      <!-- generated by JS per type -->
+    </div>
+    <div class="modal-btns">
+      <button id="modal-cancel" class="btn btn-secondary">Anuluj</button>
+      <button id="modal-save" class="btn btn-primary">Zapisz</button>
+    </div>
+  </div>
+</div>
+
+<!-- Del banner -->
+<div id="del-banner" class="del-banner" style="display:none">
+  <p>Usunąć wpis: <b id="del-name"></b>?</p>
+  <div class="del-banner-btns">
+    <button class="btn btn-secondary" id="del-cancel">Anuluj</button>
+    <button class="btn btn-primary" id="del-confirm" style="background:var(--burgundy)">Tak, usuń</button>
+  </div>
+</div>
+
+<div id="sak-toast" class="toast"></div>
+
 <script>
-  function switchTab(btn, id) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    btn.classList.add('active');
-    ['bierzmowanie','chrzciny','sluby','komunia'].forEach(t => {
-      document.getElementById('tab-'+t).style.display = t === id ? 'block' : 'none';
+// ─── Data ──────────────────────────────────────────────────────────────────
+const LS_KEY = 'nspj_sakramenty';
+const LS_VER_KEY = 'nspj_sakramenty_v';
+const DATA_VERSION = 1;
+
+const DEFAULT_DATA = [
+  // ── BIERZMOWANIE 2026 (24 total: 18 gotowy, 6 kandydat) ─────────────────
+  {id:'bierz-01',type:'bierzmowanie',rok:2026,imie:'Aleksandra',nazwisko:'Nowak',       dataurodzenia:'2010-03-14',rodzic:'Anna Nowak',        katecheta:'s. Maria',  imie_bierzmowania:'Teresa',  miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-02',type:'bierzmowanie',rok:2026,imie:'Zofia',     nazwisko:'Wiśniewska',  dataurodzenia:'2009-11-05',rodzic:'Katarzyna Wiśniewska',katecheta:'s. Maria', imie_bierzmowania:'Faustyna',miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-03',type:'bierzmowanie',rok:2026,imie:'Karolina',  nazwisko:'Marek',       dataurodzenia:'2010-01-22',rodzic:'Joanna Marek',       katecheta:'ks. Paweł', imie_bierzmowania:'Maria',   miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-04',type:'bierzmowanie',rok:2026,imie:'Bartłomiej',nazwisko:'Kowal',       dataurodzenia:'2009-07-08',rodzic:'Józef Kowal',         katecheta:'ks. Paweł', imie_bierzmowania:'Jan',     miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-05',type:'bierzmowanie',rok:2026,imie:'Natalia',   nazwisko:'Zając',       dataurodzenia:'2010-04-17',rodzic:'Elżbieta Zając',      katecheta:'s. Maria',  imie_bierzmowania:'Anna',    miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-06',type:'bierzmowanie',rok:2026,imie:'Dawid',     nazwisko:'Piotrowski',  dataurodzenia:'2009-06-29',rodzic:'Andrzej Piotrowski',  katecheta:'ks. Tomasz',imie_bierzmowania:'Paweł',   miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-07',type:'bierzmowanie',rok:2026,imie:'Wiktoria',  nazwisko:'Jabłońska',   dataurodzenia:'2010-02-12',rodzic:'Teresa Jabłońska',    katecheta:'s. Maria',  imie_bierzmowania:'Małgorzata',miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-08',type:'bierzmowanie',rok:2026,imie:'Kamil',     nazwisko:'Mróz',        dataurodzenia:'2009-08-03',rodzic:'Stanisław Mróz',      katecheta:'ks. Tomasz',imie_bierzmowania:'Józef',   miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-09',type:'bierzmowanie',rok:2026,imie:'Paulina',   nazwisko:'Baran',       dataurodzenia:'2009-09-25',rodzic:'Monika Baran',        katecheta:'s. Maria',  imie_bierzmowania:'Katarzyna',miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-10',type:'bierzmowanie',rok:2026,imie:'Mateusz',   nazwisko:'Szymański',   dataurodzenia:'2009-11-14',rodzic:'Piotr Szymański',     katecheta:'ks. Tomasz',imie_bierzmowania:'Piotr',   miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-11',type:'bierzmowanie',rok:2026,imie:'Agata',     nazwisko:'Wróbel',      dataurodzenia:'2010-03-07',rodzic:'Beata Wróbel',        katecheta:'ks. Paweł', imie_bierzmowania:'Agnieszka',miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-12',type:'bierzmowanie',rok:2026,imie:'Krzysztof', nazwisko:'Olszewski',   dataurodzenia:'2009-05-30',rodzic:'Tadeusz Olszewski',   katecheta:'ks. Tomasz',imie_bierzmowania:'Krzysztof',miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-13',type:'bierzmowanie',rok:2026,imie:'Dominika',  nazwisko:'Czajka',      dataurodzenia:'2009-12-18',rodzic:'Maria Czajka',        katecheta:'s. Maria',  imie_bierzmowania:'Dominika',miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-14',type:'bierzmowanie',rok:2026,imie:'Łukasz',    nazwisko:'Pawlak',      dataurodzenia:'2009-10-06',rodzic:'Zbigniew Pawlak',     katecheta:'ks. Paweł', imie_bierzmowania:'Łukasz',  miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-15',type:'bierzmowanie',rok:2026,imie:'Weronika',  nazwisko:'Mazur',       dataurodzenia:'2009-08-20',rodzic:'Halina Mazur',        katecheta:'s. Maria',  imie_bierzmowania:'Weronika',miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-16',type:'bierzmowanie',rok:2026,imie:'Patryk',    nazwisko:'Witkowski',   dataurodzenia:'2010-05-11',rodzic:'Grzegorz Witkowski',  katecheta:'ks. Tomasz',imie_bierzmowania:'Stanisław',miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-17',type:'bierzmowanie',rok:2026,imie:'Julia',     nazwisko:'Chmiel',      dataurodzenia:'2010-01-28',rodzic:'Irena Chmiel',        katecheta:'s. Maria',  imie_bierzmowania:'Julia',   miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-18',type:'bierzmowanie',rok:2026,imie:'Szymon',    nazwisko:'Górecki',     dataurodzenia:'2009-07-15',rodzic:'Marek Górecki',       katecheta:'ks. Paweł', imie_bierzmowania:'Szymon',  miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'bierz-19',type:'bierzmowanie',rok:2026,imie:'Piotr',     nazwisko:'Kowalski',    dataurodzenia:'2009-07-22',rodzic:'Marek Kowalski',      katecheta:'ks. Tomasz',imie_bierzmowania:'',        miejsce:'par. NSPJ Czerwionka',status:'kandydat'},
+  {id:'bierz-20',type:'bierzmowanie',rok:2026,imie:'Tomasz',    nazwisko:'Jabłoński',   dataurodzenia:'2010-02-18',rodzic:'Robert Jabłoński',    katecheta:'ks. Tomasz',imie_bierzmowania:'',        miejsce:'par. NSPJ Czerwionka',status:'kandydat'},
+  {id:'bierz-21',type:'bierzmowanie',rok:2026,imie:'Maria',     nazwisko:'Krawczyk',    dataurodzenia:'2009-09-30',rodzic:'Ewa Krawczyk',        katecheta:'s. Maria',  imie_bierzmowania:'',        miejsce:'par. NSPJ Czerwionka',status:'kandydat'},
+  {id:'bierz-22',type:'bierzmowanie',rok:2026,imie:'Anna',      nazwisko:'Lewandowska', dataurodzenia:'2010-04-04',rodzic:'Bogdan Lewandowski',  katecheta:'ks. Paweł', imie_bierzmowania:'',        miejsce:'par. NSPJ Czerwionka',status:'kandydat'},
+  {id:'bierz-23',type:'bierzmowanie',rok:2026,imie:'Robert',    nazwisko:'Nowicki',     dataurodzenia:'2009-12-22',rodzic:'Jan Nowicki',         katecheta:'ks. Tomasz',imie_bierzmowania:'',        miejsce:'par. NSPJ Czerwionka',status:'kandydat'},
+  {id:'bierz-24',type:'bierzmowanie',rok:2026,imie:'Katarzyna', nazwisko:'Zielińska',   dataurodzenia:'2010-06-09',rodzic:'Krzysztof Zieliński', katecheta:'s. Maria',  imie_bierzmowania:'',        miejsce:'par. NSPJ Czerwionka',status:'kandydat'},
+
+  // ── CHRZCINY 2026 (7 total) ──────────────────────────────────────────────
+  {id:'chrzest-01',type:'chrzciny',rok:2026,imie:'Jan',       nazwisko:'Witek',       dataurodzenia:'2026-04-02',rodzice:'Paweł i Marta Witek',        datachrztu:'2026-06-08',ksiega_rok:2026,ksiega_str:12,ksiega_nr:1,status:'zaplanowany'},
+  {id:'chrzest-02',type:'chrzciny',rok:2026,imie:'Hanna',     nazwisko:'Brzezińska',  dataurodzenia:'2026-03-15',rodzice:'Artur i Joanna Brzezińscy',   datachrztu:'2026-06-08',ksiega_rok:2026,ksiega_str:12,ksiega_nr:2,status:'zaplanowany'},
+  {id:'chrzest-03',type:'chrzciny',rok:2026,imie:'Emilia',    nazwisko:'Szymańska',   dataurodzenia:'2026-04-22',rodzice:'Rafał i Monika Szymańscy',    datachrztu:'2026-06-08',ksiega_rok:2026,ksiega_str:12,ksiega_nr:3,status:'zaplanowany'},
+  {id:'chrzest-04',type:'chrzciny',rok:2026,imie:'Zuzanna',   nazwisko:'Kowalczyk',   dataurodzenia:'2026-01-10',rodzice:'Marek i Agata Kowalczykowie',  datachrztu:'2026-03-09',ksiega_rok:2026,ksiega_str:3, ksiega_nr:1,status:'odbyl_sie'},
+  {id:'chrzest-05',type:'chrzciny',rok:2026,imie:'Antoni',    nazwisko:'Wróbel',      dataurodzenia:'2026-02-05',rodzice:'Tomasz i Katarzyna Wróblowie', datachrztu:'2026-04-12',ksiega_rok:2026,ksiega_str:5, ksiega_nr:1,status:'odbyl_sie'},
+  {id:'chrzest-06',type:'chrzciny',rok:2026,imie:'Lena',      nazwisko:'Mazur',       dataurodzenia:'2026-02-28',rodzice:'Jakub i Marta Mazur',          datachrztu:'2026-04-13',ksiega_rok:2026,ksiega_str:5, ksiega_nr:2,status:'odbyl_sie'},
+  {id:'chrzest-07',type:'chrzciny',rok:2026,imie:'Mikołaj',   nazwisko:'Nowak',       dataurodzenia:'2026-03-18',rodzice:'Piotr i Jolanta Nowak',        datachrztu:'2026-05-11',ksiega_rok:2026,ksiega_str:8, ksiega_nr:1,status:'odbyl_sie'},
+
+  // ── ŚLUBY 2026 (3 total) ─────────────────────────────────────────────────
+  {id:'slub-01',type:'sluby',rok:2026,oblubieniec:'Kamil Nowak',   oblubienica:'Anna Zając',    datasl:'2026-06-14',typ_slubu:'konkordatowy',zapowiedzi:3,miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
+  {id:'slub-02',type:'sluby',rok:2026,oblubieniec:'Michał Lis',    oblubienica:'Paulina Wróbel',datasl:'2026-08-28',typ_slubu:'koscielny',    zapowiedzi:1,miejsce:'par. NSPJ Czerwionka',status:'kandydat'},
+  {id:'slub-03',type:'sluby',rok:2026,oblubieniec:'Adam Kowalczyk',oblubienica:'Ewelina Marek', datasl:'2026-09-12',typ_slubu:'konkordatowy',zapowiedzi:0,miejsce:'par. NSPJ Czerwionka',status:'kandydat'},
+
+  // ── KOMUNIA 2026 (31 total) ───────────────────────────────────────────────
+  {id:'kom-01',type:'komunia',rok:2026,imie:'Maja',       nazwisko:'Kowalczyk',  dataurodzenia:'2017-05-12',szkola:'SP nr 3, kl. 3a',rodzic:'Dorota Kowalczyk', datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-02',type:'komunia',rok:2026,imie:'Filip',      nazwisko:'Dąbrowski',  dataurodzenia:'2016-09-08',szkola:'SP nr 1, kl. 3b',rodzic:'Marcin Dąbrowski', datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-03',type:'komunia',rok:2026,imie:'Zofia',      nazwisko:'Adamczyk',   dataurodzenia:'2017-03-15',szkola:'SP nr 3, kl. 3a',rodzic:'Beata Adamczyk',   datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-04',type:'komunia',rok:2026,imie:'Jan',        nazwisko:'Wierzbicki', dataurodzenia:'2016-07-22',szkola:'SP nr 2, kl. 3c',rodzic:'Piotr Wierzbicki', datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-05',type:'komunia',rok:2026,imie:'Anna',       nazwisko:'Kaczmarek',  dataurodzenia:'2016-11-04',szkola:'SP nr 1, kl. 3b',rodzic:'Elżbieta Kaczmarek',datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-06',type:'komunia',rok:2026,imie:'Łukasz',     nazwisko:'Bąk',        dataurodzenia:'2017-02-17',szkola:'SP nr 3, kl. 3a',rodzic:'Tomasz Bąk',       datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-07',type:'komunia',rok:2026,imie:'Natalia',    nazwisko:'Ciesielska', dataurodzenia:'2016-08-30',szkola:'SP nr 2, kl. 3c',rodzic:'Monika Ciesielska',datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-08',type:'komunia',rok:2026,imie:'Dawid',      nazwisko:'Górecki',    dataurodzenia:'2017-04-11',szkola:'SP nr 1, kl. 3a',rodzic:'Andrzej Górecki',  datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-09',type:'komunia',rok:2026,imie:'Wiktoria',   nazwisko:'Malinowska', dataurodzenia:'2016-06-25',szkola:'SP nr 3, kl. 3b',rodzic:'Anna Malinowska',  datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-10',type:'komunia',rok:2026,imie:'Szymon',     nazwisko:'Woźniak',    dataurodzenia:'2016-10-03',szkola:'SP nr 2, kl. 3c',rodzic:'Krzysztof Woźniak',datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-11',type:'komunia',rok:2026,imie:'Julia',      nazwisko:'Kamińska',   dataurodzenia:'2016-12-18',szkola:'SP nr 1, kl. 3b',rodzic:'Barbara Kamińska', datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-12',type:'komunia',rok:2026,imie:'Maciej',     nazwisko:'Lewandowski',dataurodzenia:'2017-05-07',szkola:'SP nr 3, kl. 3a',rodzic:'Jacek Lewandowski',datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-13',type:'komunia',rok:2026,imie:'Klaudia',    nazwisko:'Olejnik',    dataurodzenia:'2017-01-29',szkola:'SP nr 2, kl. 3c',rodzic:'Grażyna Olejnik',  datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-14',type:'komunia',rok:2026,imie:'Paweł',      nazwisko:'Szewczyk',   dataurodzenia:'2016-08-14',szkola:'SP nr 1, kl. 3b',rodzic:'Stanisław Szewczyk',datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-15',type:'komunia',rok:2026,imie:'Karolina',   nazwisko:'Wysocka',    dataurodzenia:'2017-03-02',szkola:'SP nr 3, kl. 3a',rodzic:'Iwona Wysocka',    datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-16',type:'komunia',rok:2026,imie:'Michał',     nazwisko:'Krajewski',  dataurodzenia:'2016-09-20',szkola:'SP nr 2, kl. 3c',rodzic:'Henryk Krajewski', datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-17',type:'komunia',rok:2026,imie:'Agnieszka',  nazwisko:'Pałka',      dataurodzenia:'2016-07-08',szkola:'SP nr 1, kl. 3a',rodzic:'Teresa Pałka',     datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-18',type:'komunia',rok:2026,imie:'Bartosz',    nazwisko:'Nowicki',    dataurodzenia:'2016-11-26',szkola:'SP nr 3, kl. 3b',rodzic:'Mirosław Nowicki',  datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-19',type:'komunia',rok:2026,imie:'Oliwia',     nazwisko:'Czekalska',  dataurodzenia:'2017-04-13',szkola:'SP nr 2, kl. 3c',rodzic:'Renata Czekalska', datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-20',type:'komunia',rok:2026,imie:'Krzysztof',  nazwisko:'Markiewicz', dataurodzenia:'2016-06-01',szkola:'SP nr 1, kl. 3b',rodzic:'Zbigniew Markiewicz',datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-21',type:'komunia',rok:2026,imie:'Marta',      nazwisko:'Sobieraj',   dataurodzenia:'2016-10-19',szkola:'SP nr 3, kl. 3a',rodzic:'Halina Sobieraj',   datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-22',type:'komunia',rok:2026,imie:'Dominik',    nazwisko:'Zając',      dataurodzenia:'2017-02-06',szkola:'SP nr 2, kl. 3c',rodzic:'Tadeusz Zając',     datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-23',type:'komunia',rok:2026,imie:'Weronika',   nazwisko:'Piasecka',   dataurodzenia:'2016-08-23',szkola:'SP nr 1, kl. 3b',rodzic:'Bożena Piasecka',   datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-24',type:'komunia',rok:2026,imie:'Oskar',      nazwisko:'Sikora',     dataurodzenia:'2016-12-10',szkola:'SP nr 3, kl. 3a',rodzic:'Janusz Sikora',     datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-25',type:'komunia',rok:2026,imie:'Patrycja',   nazwisko:'Wrona',      dataurodzenia:'2017-03-27',szkola:'SP nr 2, kl. 3c',rodzic:'Katarzyna Wrona',   datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-26',type:'komunia',rok:2026,imie:'Rafał',      nazwisko:'Kowalik',    dataurodzenia:'2016-05-15',szkola:'SP nr 1, kl. 3b',rodzic:'Dariusz Kowalik',   datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-27',type:'komunia',rok:2026,imie:'Aleksandra', nazwisko:'Rutkowska',  dataurodzenia:'2017-01-03',szkola:'SP nr 3, kl. 3a',rodzic:'Lidia Rutkowska',   datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-28',type:'komunia',rok:2026,imie:'Hubert',     nazwisko:'Świątek',    dataurodzenia:'2016-07-21',szkola:'SP nr 2, kl. 3c',rodzic:'Ryszard Świątek',   datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-29',type:'komunia',rok:2026,imie:'Emilia',     nazwisko:'Korzeń',     dataurodzenia:'2016-09-09',szkola:'SP nr 1, kl. 3b',rodzic:'Zofia Korzeń',      datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-30',type:'komunia',rok:2026,imie:'Tomasz',     nazwisko:'Biały',      dataurodzenia:'2016-06-16',szkola:'SP nr 3, kl. 3a',rodzic:'Eugeniusz Biały',   datakom:'2026-05-17',status:'przyjal'},
+  {id:'kom-31',type:'komunia',rok:2026,imie:'Natalia',    nazwisko:'Gałka',      dataurodzenia:'2017-02-28',szkola:'SP nr 2, kl. 3c',rodzic:'Wanda Gałka',       datakom:'2026-05-17',status:'przyjal'}
+];
+
+// ─── Helpers ──────────────────────────────────────────────────────────────
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function fmtDate(iso){if(!iso)return'—';try{var d=new Date(iso+'T12:00:00');return d.getDate()+'.'+(d.getMonth()+1<10?'0':'')+(d.getMonth()+1)+'.'+d.getFullYear();}catch(e){return iso;}}
+
+// ─── Storage ──────────────────────────────────────────────────────────────
+function loadData(){
+  try{
+    var v=parseInt(localStorage.getItem(LS_VER_KEY)||'0',10);
+    if(v<DATA_VERSION){localStorage.setItem(LS_KEY,JSON.stringify(DEFAULT_DATA));localStorage.setItem(LS_VER_KEY,String(DATA_VERSION));}
+    return JSON.parse(localStorage.getItem(LS_KEY))||DEFAULT_DATA.slice();
+  }catch(e){return DEFAULT_DATA.slice();}
+}
+function saveData(){localStorage.setItem(LS_KEY,JSON.stringify(allData));}
+
+// ─── Toast ────────────────────────────────────────────────────────────────
+function showToast(msg){var t=document.getElementById('sak-toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show');},2500);}
+
+// ─── Stats ────────────────────────────────────────────────────────────────
+function renderStats(){
+  var rok=2026;
+  var bierz=allData.filter(function(d){return d.type==='bierzmowanie'&&d.rok===rok;});
+  var gotowych=bierz.filter(function(d){return d.status==='gotowy';}).length;
+  var chrz=allData.filter(function(d){return d.type==='chrzciny'&&d.rok===rok;});
+  var sl=allData.filter(function(d){return d.type==='sluby'&&d.rok===rok;});
+  var kom=allData.filter(function(d){return d.type==='komunia'&&d.rok===rok;});
+
+  var iconPeople='<svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg>';
+  var iconDrop='<svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16a6 6 0 0 0 6-6c0-1.655-.425-2.81-1.483-3.982C11.007 4.842 9.502 3.855 8 2c-1.502 1.855-3.007 2.842-4.517 4.018C2.425 7.19 2 8.345 2 10a6 6 0 0 0 6 6z"/></svg>';
+  var iconRing='<svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm7 5H5V3h6v2zm0 2H5V5h6v2z"/></svg>';
+  var iconStar='<svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>';
+
+  document.getElementById('stats-bar').innerHTML=
+    '<div class="stat"><div class="info"><div class="lbl">Bierzmowanie '+rok+'</div><div class="num">'+bierz.length+'</div><div class="delta">kandydatów &nbsp;·&nbsp; <b>'+gotowych+' gotowych</b></div></div><div class="ic">'+iconPeople+'</div></div>'+
+    '<div class="stat"><div class="info"><div class="lbl">Chrzciny '+rok+'</div><div class="num">'+chrz.length+'</div><div class="delta">chrzcin w tym roku</div></div><div class="ic">'+iconDrop+'</div></div>'+
+    '<div class="stat"><div class="info"><div class="lbl">Śluby '+rok+'</div><div class="num">'+sl.length+'</div><div class="delta">ślubów</div></div><div class="ic">'+iconRing+'</div></div>'+
+    '<div class="stat"><div class="info"><div class="lbl">I Komunia '+rok+'</div><div class="num">'+kom.length+'</div><div class="delta">dzieci zapisanych</div></div><div class="ic">'+iconStar+'</div></div>';
+
+  document.getElementById('cnt-bierzmowanie').textContent=bierz.length;
+  document.getElementById('cnt-chrzciny').textContent=chrz.length;
+  document.getElementById('cnt-sluby').textContent=sl.length;
+  document.getElementById('cnt-komunia').textContent=kom.length;
+}
+
+// ─── Status badge ─────────────────────────────────────────────────────────
+var STATUS_LABELS={
+  kandydat:{l:'Kandydat',c:'kandydat'},
+  gotowy:{l:'Gotowy',c:'gotowy'},
+  przyjal:{l:'Przyjął',c:'przyjal'},
+  zaplanowany:{l:'Zaplanowany',c:'gotowy'},
+  odbyl_sie:{l:'Odbył się',c:'przyjal'}
+};
+function badge(s){var x=STATUS_LABELS[s]||{l:s,c:'kandydat'};return '<span class="status-badge '+x.c+'">● '+esc(x.l)+'</span>';}
+
+var ACT_BTNS='<div class="row-actions"><button class="btn-edit" title="Edytuj"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10z"/></svg></button><button class="btn-del" title="Usuń"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1z"/></svg></button></div>';
+
+// ─── Render tables ────────────────────────────────────────────────────────
+function renderTable(tab, query){
+  query=(query||'').toLowerCase();
+  var rok=2026;
+  var rows=allData.filter(function(d){return d.type===tab&&d.rok===rok;});
+  if(query){
+    rows=rows.filter(function(d){
+      return (d.nazwisko||'').toLowerCase().includes(query)||(d.imie||'').toLowerCase().includes(query)||
+             (d.oblubieniec||'').toLowerCase().includes(query)||(d.oblubienica||'').toLowerCase().includes(query);
     });
   }
+
+  var thead='',tbody='';
+  if(tab==='bierzmowanie'){
+    thead='<tr><th>Imię i nazwisko</th><th>Data urodzenia</th><th>Rodzic/Opiekun</th><th>Katecheta</th><th>Status</th><th></th></tr>';
+    tbody=rows.map(function(d){return '<tr data-id="'+d.id+'">'
+      +'<td><b>'+esc(d.imie)+' '+esc(d.nazwisko)+'</b></td>'
+      +'<td>'+fmtDate(d.dataurodzenia)+'</td>'
+      +'<td>'+esc(d.rodzic)+'</td>'
+      +'<td>'+esc(d.katecheta)+'</td>'
+      +'<td>'+badge(d.status)+'</td>'
+      +'<td>'+ACT_BTNS+'</td>'
+      +'</tr>';}).join('');
+  } else if(tab==='chrzciny'){
+    thead='<tr><th>Imię dziecka</th><th>Data urodzenia</th><th>Rodzice</th><th>Data chrztu</th><th>Ks. ochrzcz.</th><th>Status</th><th></th></tr>';
+    tbody=rows.map(function(d){return '<tr data-id="'+d.id+'">'
+      +'<td><b>'+esc(d.imie)+' '+esc(d.nazwisko)+'</b></td>'
+      +'<td>'+fmtDate(d.dataurodzenia)+'</td>'
+      +'<td>'+esc(d.rodzice)+'</td>'
+      +'<td>'+fmtDate(d.datachrztu)+'</td>'
+      +'<td>'+esc(d.ksiega_rok||'')+' / '+esc(d.ksiega_str||'')+' / '+esc(d.ksiega_nr||'')+'</td>'
+      +'<td>'+badge(d.status)+'</td>'
+      +'<td>'+ACT_BTNS+'</td>'
+      +'</tr>';}).join('');
+  } else if(tab==='sluby'){
+    thead='<tr><th>Narzeczeni</th><th>Data ślubu</th><th>Typ</th><th>Zapowiedzi</th><th>Miejsce</th><th>Status</th><th></th></tr>';
+    tbody=rows.map(function(d){return '<tr data-id="'+d.id+'">'
+      +'<td><b>'+esc(d.oblubieniec)+' &amp; '+esc(d.oblubienica)+'</b></td>'
+      +'<td>'+fmtDate(d.datasl)+'</td>'
+      +'<td>'+esc(d.typ_slubu==='konkordatowy'?'Konkordatowy':'Kościelny')+'</td>'
+      +'<td>'+esc(d.zapowiedzi)+' z 3</td>'
+      +'<td>'+esc(d.miejsce)+'</td>'
+      +'<td>'+badge(d.status)+'</td>'
+      +'<td>'+ACT_BTNS+'</td>'
+      +'</tr>';}).join('');
+  } else if(tab==='komunia'){
+    thead='<tr><th>Imię i nazwisko</th><th>Data urodzenia</th><th>Szkoła / klasa</th><th>Rodzic</th><th>Data komunii</th><th>Status</th><th></th></tr>';
+    tbody=rows.map(function(d){return '<tr data-id="'+d.id+'">'
+      +'<td><b>'+esc(d.imie)+' '+esc(d.nazwisko)+'</b></td>'
+      +'<td>'+fmtDate(d.dataurodzenia)+'</td>'
+      +'<td>'+esc(d.szkola)+'</td>'
+      +'<td>'+esc(d.rodzic)+'</td>'
+      +'<td>'+fmtDate(d.datakom)+'</td>'
+      +'<td>'+badge(d.status)+'</td>'
+      +'<td>'+ACT_BTNS+'</td>'
+      +'</tr>';}).join('');
+  }
+
+  var filterHtml='<div class="filter-bar"><input type="text" class="search-input" placeholder="Szukaj po nazwisku…" value="'+esc(query)+'"></div>';
+  var tbl='<table class="tbl"><thead>'+thead+'</thead><tbody>'+(tbody||'<tr><td colspan="7" style="text-align:center;color:var(--ink-soft);padding:24px">Brak wyników</td></tr>')+'</tbody></table>';
+  document.getElementById('tab-content').innerHTML=filterHtml+tbl;
+
+  // search
+  document.querySelector('.search-input').addEventListener('input',function(){renderTable(currentTab,this.value);});
+
+  // edit / delete buttons
+  document.querySelectorAll('.btn-edit').forEach(function(btn){
+    btn.addEventListener('click',function(){var id=btn.closest('tr').dataset.id;openModal(currentTab,id);});
+  });
+  document.querySelectorAll('.btn-del').forEach(function(btn){
+    btn.addEventListener('click',function(){var id=btn.closest('tr').dataset.id;askDelete(id);});
+  });
+}
+
+// ─── Tab switching ────────────────────────────────────────────────────────
+var currentTab='bierzmowanie';
+function switchTab(tab){
+  currentTab=tab;
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelector('[data-tab="'+tab+'"]').classList.add('active');
+  renderTable(tab);
+}
+
+document.querySelectorAll('.tab').forEach(function(btn){
+  btn.addEventListener('click',function(){switchTab(btn.dataset.tab);});
+});
+
+// ─── Modal ────────────────────────────────────────────────────────────────
+var editingId=null;
+
+function fieldHtml(f){
+  var lbl='<label>'+esc(f.label)+'</label>';
+  if(f.type==='select'){
+    return '<div><'+lbl+'<select id="f-'+f.id+'">'+f.options.map(function(o){return '<option value="'+esc(o.v)+'">'+esc(o.l)+'</option>';}).join('')+'</select></div>';
+  }
+  return '<div><'+lbl+'<input type="'+(f.type||'text')+'" id="f-'+f.id+'" placeholder="'+(f.ph||'')+'">'+'</div>';
+}
+
+var FIELDS={
+  bierzmowanie:[
+    {id:'imie',         label:'Imię',                  type:'text', ph:'np. Anna'},
+    {id:'nazwisko',     label:'Nazwisko',               type:'text', ph:'np. Kowalska'},
+    {id:'dataurodzenia',label:'Data urodzenia',         type:'date'},
+    {id:'rodzic',       label:'Rodzic / Opiekun',       type:'text', ph:'np. Jan Kowalski'},
+    {id:'katecheta',    label:'Katecheta',               type:'text', ph:'np. s. Maria'},
+    {id:'imie_bierzmowania',label:'Imię bierzmowania',  type:'text', ph:'np. Teresa'},
+    {id:'miejsce',      label:'Miejsce bierzmowania',   type:'text', ph:'np. par. NSPJ Czerwionka'},
+    {id:'rok',          label:'Rok',                    type:'number',ph:'2026'},
+    {id:'status',       label:'Status',                  type:'select',options:[{v:'kandydat',l:'Kandydat'},{v:'gotowy',l:'Gotowy'},{v:'przyjal',l:'Przyjął sakrament'}]}
+  ],
+  chrzciny:[
+    {id:'imie',         label:'Imię dziecka',           type:'text'},
+    {id:'nazwisko',     label:'Nazwisko',               type:'text'},
+    {id:'dataurodzenia',label:'Data urodzenia',         type:'date'},
+    {id:'rodzice',      label:'Rodzice (imiona i nazwisko)',type:'text',ph:'np. Jan i Maria Nowak'},
+    {id:'datachrztu',   label:'Data chrztu',            type:'date'},
+    {id:'ksiega_rok',   label:'Rok księgi',             type:'number',ph:'2026'},
+    {id:'ksiega_str',   label:'Strona',                 type:'number',ph:'np. 12'},
+    {id:'ksiega_nr',    label:'Nr wpisu',               type:'number',ph:'np. 3'},
+    {id:'rok',          label:'Rok (system)',           type:'number',ph:'2026'},
+    {id:'status',       label:'Status',                  type:'select',options:[{v:'zaplanowany',l:'Zaplanowany'},{v:'odbyl_sie',l:'Odbył się'}]}
+  ],
+  sluby:[
+    {id:'oblubieniec',  label:'Oblubieniec (imię i nazwisko)',type:'text'},
+    {id:'oblubienica',  label:'Oblubienica (imię i nazwisko)',type:'text'},
+    {id:'datasl',       label:'Data ślubu',             type:'date'},
+    {id:'typ_slubu',    label:'Typ ślubu',               type:'select',options:[{v:'konkordatowy',l:'Konkordatowy'},{v:'koscielny',l:'Kościelny (bez USC)'}]},
+    {id:'zapowiedzi',   label:'Liczba zapowiedzi (0–3)',type:'number',ph:'0'},
+    {id:'miejsce',      label:'Miejsce ślubu',           type:'text'},
+    {id:'rok',          label:'Rok (system)',           type:'number',ph:'2026'},
+    {id:'status',       label:'Status',                  type:'select',options:[{v:'kandydat',l:'W trakcie'},{v:'gotowy',l:'Gotowy'},{v:'przyjal',l:'Ślub odbył się'}]}
+  ],
+  komunia:[
+    {id:'imie',         label:'Imię',                  type:'text'},
+    {id:'nazwisko',     label:'Nazwisko',               type:'text'},
+    {id:'dataurodzenia',label:'Data urodzenia',         type:'date'},
+    {id:'szkola',       label:'Szkoła i klasa',         type:'text',ph:'np. SP nr 3, kl. 3a'},
+    {id:'rodzic',       label:'Rodzic / Opiekun',       type:'text'},
+    {id:'datakom',      label:'Data Komunii',           type:'date'},
+    {id:'rok',          label:'Rok (system)',           type:'number',ph:'2026'},
+    {id:'status',       label:'Status',                  type:'select',options:[{v:'kandydat',l:'Zapisany'},{v:'gotowy',l:'Gotowy'},{v:'przyjal',l:'Przyjął Komunię'}]}
+  ]
+};
+
+function openModal(type,id){
+  editingId=id||null;
+  var fields=FIELDS[type]||[];
+  var html=fields.map(fieldHtml).join('');
+  document.getElementById('modal-form-body').innerHTML=html;
+  document.getElementById('modal-title').textContent=id?'Edytuj wpis':'Dodaj wpis';
+
+  if(id){
+    var rec=allData.find(function(d){return d.id===id;});
+    if(rec){
+      fields.forEach(function(f){
+        var el=document.getElementById('f-'+f.id);
+        if(el&&rec[f.id]!==undefined)el.value=rec[f.id];
+      });
+    }
+  } else {
+    var rokEl=document.getElementById('f-rok');
+    if(rokEl)rokEl.value=2026;
+  }
+  document.getElementById('sak-modal').style.display='flex';
+}
+
+function closeModal(){document.getElementById('sak-modal').style.display='none';editingId=null;}
+
+function saveFromModal(){
+  var fields=FIELDS[currentTab]||[];
+  var data={};
+  var ok=true;
+  fields.forEach(function(f){
+    var el=document.getElementById('f-'+f.id);
+    if(el)data[f.id]=el.value;
+    if(f.required&&el&&!el.value){ok=false;el.style.borderColor='var(--burgundy)';}
+  });
+  if(!ok){showToast('Wypełnij wymagane pola');return;}
+  data.type=currentTab;
+  data.rok=parseInt(data.rok)||2026;
+
+  if(editingId){
+    var idx=allData.findIndex(function(d){return d.id===editingId;});
+    if(idx>=0){allData[idx]=Object.assign(allData[idx],data);}
+  } else {
+    data.id=currentTab+'-'+Date.now();
+    allData.push(data);
+  }
+  saveData();
+  renderStats();
+  renderTable(currentTab);
+  closeModal();
+  showToast(editingId?'Wpis zaktualizowany ✓':'Wpis dodany ✓');
+}
+
+// ─── Delete ───────────────────────────────────────────────────────────────
+var pendingDeleteId=null;
+function askDelete(id){
+  pendingDeleteId=id;
+  var rec=allData.find(function(d){return d.id===id;});
+  var name=rec?(rec.imie&&rec.nazwisko?(rec.imie+' '+rec.nazwisko):(rec.oblubieniec||id)):id;
+  document.getElementById('del-name').textContent=name;
+  document.getElementById('del-banner').style.display='flex';
+}
+
+// ─── Init ────────────────────────────────────────────────────────────────
+var allData=loadData();
+renderStats();
+renderTable('bierzmowanie');
+
+document.getElementById('btn-add-top').addEventListener('click',function(){openModal(currentTab,null);});
+document.getElementById('modal-cancel').addEventListener('click',closeModal);
+document.getElementById('modal-save').addEventListener('click',saveFromModal);
+document.getElementById('sak-modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+document.getElementById('del-cancel').addEventListener('click',function(){pendingDeleteId=null;document.getElementById('del-banner').style.display='none';});
+document.getElementById('del-confirm').addEventListener('click',function(){
+  if(!pendingDeleteId)return;
+  allData=allData.filter(function(d){return d.id!==pendingDeleteId;});
+  saveData();renderStats();renderTable(currentTab);
+  document.getElementById('del-banner').style.display='none';
+  pendingDeleteId=null;
+  showToast('Wpis usunięty');
+});
 </script>
 </body>
 </html>
