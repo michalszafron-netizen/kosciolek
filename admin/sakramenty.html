@@ -150,7 +150,7 @@
 // ─── Data ──────────────────────────────────────────────────────────────────
 const LS_KEY = 'nspj_sakramenty';
 const LS_VER_KEY = 'nspj_sakramenty_v';
-const DATA_VERSION = 1;
+const DATA_VERSION = 2; // v2: chrzciny — rozdzielono rodzice na imie/nazwisko ojca/matki + pole uwagi
 
 const DEFAULT_DATA = [
   // ── BIERZMOWANIE 2026 (24 total: 18 gotowy, 6 kandydat) ─────────────────
@@ -179,14 +179,14 @@ const DEFAULT_DATA = [
   {id:'bierz-23',type:'bierzmowanie',rok:2026,imie:'Robert',    nazwisko:'Nowicki',     dataurodzenia:'2009-12-22',rodzic:'Jan Nowicki',         katecheta:'ks. Tomasz',imie_bierzmowania:'',        miejsce:'par. NSPJ Czerwionka',status:'kandydat'},
   {id:'bierz-24',type:'bierzmowanie',rok:2026,imie:'Katarzyna', nazwisko:'Zielińska',   dataurodzenia:'2010-06-09',rodzic:'Krzysztof Zieliński', katecheta:'s. Maria',  imie_bierzmowania:'',        miejsce:'par. NSPJ Czerwionka',status:'kandydat'},
 
-  // ── CHRZCINY 2026 (7 total) ──────────────────────────────────────────────
-  {id:'chrzest-01',type:'chrzciny',rok:2026,imie:'Jan',       nazwisko:'Witek',       dataurodzenia:'2026-04-02',rodzice:'Paweł i Marta Witek',        datachrztu:'2026-06-08',ksiega_rok:2026,ksiega_str:12,ksiega_nr:1,status:'zaplanowany'},
-  {id:'chrzest-02',type:'chrzciny',rok:2026,imie:'Hanna',     nazwisko:'Brzezińska',  dataurodzenia:'2026-03-15',rodzice:'Artur i Joanna Brzezińscy',   datachrztu:'2026-06-08',ksiega_rok:2026,ksiega_str:12,ksiega_nr:2,status:'zaplanowany'},
-  {id:'chrzest-03',type:'chrzciny',rok:2026,imie:'Emilia',    nazwisko:'Szymańska',   dataurodzenia:'2026-04-22',rodzice:'Rafał i Monika Szymańscy',    datachrztu:'2026-06-08',ksiega_rok:2026,ksiega_str:12,ksiega_nr:3,status:'zaplanowany'},
-  {id:'chrzest-04',type:'chrzciny',rok:2026,imie:'Zuzanna',   nazwisko:'Kowalczyk',   dataurodzenia:'2026-01-10',rodzice:'Marek i Agata Kowalczykowie',  datachrztu:'2026-03-09',ksiega_rok:2026,ksiega_str:3, ksiega_nr:1,status:'odbyl_sie'},
-  {id:'chrzest-05',type:'chrzciny',rok:2026,imie:'Antoni',    nazwisko:'Wróbel',      dataurodzenia:'2026-02-05',rodzice:'Tomasz i Katarzyna Wróblowie', datachrztu:'2026-04-12',ksiega_rok:2026,ksiega_str:5, ksiega_nr:1,status:'odbyl_sie'},
-  {id:'chrzest-06',type:'chrzciny',rok:2026,imie:'Lena',      nazwisko:'Mazur',       dataurodzenia:'2026-02-28',rodzice:'Jakub i Marta Mazur',          datachrztu:'2026-04-13',ksiega_rok:2026,ksiega_str:5, ksiega_nr:2,status:'odbyl_sie'},
-  {id:'chrzest-07',type:'chrzciny',rok:2026,imie:'Mikołaj',   nazwisko:'Nowak',       dataurodzenia:'2026-03-18',rodzice:'Piotr i Jolanta Nowak',        datachrztu:'2026-05-11',ksiega_rok:2026,ksiega_str:8, ksiega_nr:1,status:'odbyl_sie'},
+  // ── CHRZCINY 2026 (7 total) — v2: imie_ojca/nazwisko_ojca/imie_matki/nazwisko_matki/uwagi ──
+  {id:'chrzest-01',type:'chrzciny',rok:2026,imie:'Jan',       nazwisko:'Witek',       dataurodzenia:'2026-04-02',imie_ojca:'Paweł',  nazwisko_ojca:'Witek',       imie_matki:'Marta',     nazwisko_matki:'Witek',       datachrztu:'2026-06-08',ksiega_rok:2026,ksiega_str:12,ksiega_nr:1,uwagi:'',status:'zaplanowany'},
+  {id:'chrzest-02',type:'chrzciny',rok:2026,imie:'Hanna',     nazwisko:'Brzezińska',  dataurodzenia:'2026-03-15',imie_ojca:'Artur',  nazwisko_ojca:'Brzeziński',  imie_matki:'Joanna',    nazwisko_matki:'Brzezińska',  datachrztu:'2026-06-08',ksiega_rok:2026,ksiega_str:12,ksiega_nr:2,uwagi:'',status:'zaplanowany'},
+  {id:'chrzest-03',type:'chrzciny',rok:2026,imie:'Emilia',    nazwisko:'Szymańska',   dataurodzenia:'2026-04-22',imie_ojca:'Rafał',  nazwisko_ojca:'Szymański',   imie_matki:'Monika',    nazwisko_matki:'Szymańska',   datachrztu:'2026-06-08',ksiega_rok:2026,ksiega_str:12,ksiega_nr:3,uwagi:'',status:'zaplanowany'},
+  {id:'chrzest-04',type:'chrzciny',rok:2026,imie:'Zuzanna',   nazwisko:'Kowalczyk',   dataurodzenia:'2026-01-10',imie_ojca:'Marek',  nazwisko_ojca:'Kowalczyk',   imie_matki:'Agata',     nazwisko_matki:'Kowalczyk',   datachrztu:'2026-03-09',ksiega_rok:2026,ksiega_str:3, ksiega_nr:1,uwagi:'',status:'odbyl_sie'},
+  {id:'chrzest-05',type:'chrzciny',rok:2026,imie:'Antoni',    nazwisko:'Wróbel',      dataurodzenia:'2026-02-05',imie_ojca:'Tomasz', nazwisko_ojca:'Wróbel',      imie_matki:'Katarzyna', nazwisko_matki:'Wróbel',      datachrztu:'2026-04-12',ksiega_rok:2026,ksiega_str:5, ksiega_nr:1,uwagi:'',status:'odbyl_sie'},
+  {id:'chrzest-06',type:'chrzciny',rok:2026,imie:'Lena',      nazwisko:'Mazur',       dataurodzenia:'2026-02-28',imie_ojca:'Jakub',  nazwisko_ojca:'Mazur',       imie_matki:'Marta',     nazwisko_matki:'Mazur',       datachrztu:'2026-04-13',ksiega_rok:2026,ksiega_str:5, ksiega_nr:2,uwagi:'',status:'odbyl_sie'},
+  {id:'chrzest-07',type:'chrzciny',rok:2026,imie:'Mikołaj',   nazwisko:'Nowak',       dataurodzenia:'2026-03-18',imie_ojca:'Piotr',  nazwisko_ojca:'Nowak',       imie_matki:'Jolanta',   nazwisko_matki:'Nowak',       datachrztu:'2026-05-11',ksiega_rok:2026,ksiega_str:8, ksiega_nr:1,uwagi:'',status:'odbyl_sie'},
 
   // ── ŚLUBY 2026 (3 total) ─────────────────────────────────────────────────
   {id:'slub-01',type:'sluby',rok:2026,oblubieniec:'Kamil Nowak',   oblubienica:'Anna Zając',    datasl:'2026-06-14',typ_slubu:'konkordatowy',zapowiedzi:3,miejsce:'par. NSPJ Czerwionka',status:'gotowy'},
@@ -320,30 +320,38 @@ function renderTable(tab, query){
       +'<td>'+ACT_BTNS+'</td>'
       +'</tr>';}).join('');
   } else if(tab==='chrzciny'){
-    cols=11;
+    cols=13;
     thead='<tr>'
       +'<th style="min-width:160px">Imię dziecka</th>'
-      +'<th style="min-width:100px">Data ur.</th>'
-      +'<th style="min-width:200px">Rodzice</th>'
+      +'<th style="min-width:95px">Data ur.</th>'
+      +'<th style="min-width:160px">Ojciec</th>'
+      +'<th style="min-width:160px">Matka</th>'
       +'<th style="min-width:105px">Data chrztu</th>'
-      +'<th style="min-width:75px">Księga rok</th>'
-      +'<th style="min-width:70px">Strona</th>'
-      +'<th style="min-width:70px">Nr wpisu</th>'
-      +'<th style="min-width:60px">Rok</th>'
+      +'<th style="min-width:75px">Ks. rok</th>'
+      +'<th style="min-width:60px">Str.</th>'
+      +'<th style="min-width:55px">Nr</th>'
+      +'<th style="min-width:55px">Rok</th>'
+      +'<th style="min-width:150px">Uwagi</th>'
       +'<th style="min-width:110px">Status</th>'
-      +'<th style="min-width:145px"></th>'
+      +'<th style="min-width:155px"></th>'
       +'</tr>';
-    tbody=rows.map(function(d){return '<tr data-id="'+d.id+'">'
+    var PRINT_BTN_CHRZEST='<button class="btn-print-chrzest" title="Drukuj Świadectwo Chrztu" style="background:none;border:1px solid var(--line);border-radius:5px;padding:4px 7px;cursor:pointer;color:var(--burgundy);margin-right:4px"><svg fill="currentColor" viewBox="0 0 16 16" style="width:13px;height:13px;vertical-align:middle"><path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/><path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/></svg></button>';
+    tbody=rows.map(function(d){
+      var ojciec=[d.imie_ojca,d.nazwisko_ojca].filter(Boolean).join(' ')||'—';
+      var matka=[d.imie_matki,d.nazwisko_matki].filter(Boolean).join(' ')||'—';
+      return '<tr data-id="'+d.id+'">'
       +'<td><b>'+esc(d.imie)+' '+esc(d.nazwisko)+'</b></td>'
       +'<td style="font-size:.84rem">'+fmtDate(d.dataurodzenia)+'</td>'
-      +'<td style="font-size:.84rem">'+esc(d.rodzice||'—')+'</td>'
+      +'<td style="font-size:.84rem">'+esc(ojciec)+'</td>'
+      +'<td style="font-size:.84rem">'+esc(matka)+'</td>'
       +'<td style="font-size:.84rem">'+fmtDate(d.datachrztu)+'</td>'
       +'<td style="font-size:.84rem;text-align:center">'+esc(String(d.ksiega_rok||'—'))+'</td>'
       +'<td style="font-size:.84rem;text-align:center">'+esc(String(d.ksiega_str||'—'))+'</td>'
       +'<td style="font-size:.84rem;text-align:center">'+esc(String(d.ksiega_nr||'—'))+'</td>'
       +'<td style="font-size:.84rem;text-align:center">'+esc(String(d.rok||'—'))+'</td>'
+      +'<td style="font-size:.82rem;max-width:150px;overflow:hidden;text-overflow:ellipsis">'+esc(d.uwagi||'—')+'</td>'
       +'<td>'+badge(d.status)+'</td>'
-      +'<td>'+ACT_BTNS+'</td>'
+      +'<td><div class="row-actions" style="display:flex;align-items:center">'+PRINT_BTN_CHRZEST+'<button class="btn-edit" title="Edytuj"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10z"/></svg></button><button class="btn-del" title="Usuń"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1z"/></svg></button></div></td>'
       +'</tr>';}).join('');
   } else if(tab==='sluby'){
     cols=10;
@@ -400,12 +408,15 @@ function renderTable(tab, query){
   // search
   document.querySelector('.search-input').addEventListener('input',function(){renderTable(currentTab,this.value);});
 
-  // edit / delete buttons
+  // edit / delete / print buttons
   document.querySelectorAll('.btn-edit').forEach(function(btn){
     btn.addEventListener('click',function(){var id=btn.closest('tr').dataset.id;openModal(currentTab,id);});
   });
   document.querySelectorAll('.btn-del').forEach(function(btn){
     btn.addEventListener('click',function(){var id=btn.closest('tr').dataset.id;askDelete(id);});
+  });
+  document.querySelectorAll('.btn-print-chrzest').forEach(function(btn){
+    btn.addEventListener('click',function(){var id=btn.closest('tr').dataset.id;printSwiadectwoChrztu(id);});
   });
 }
 
@@ -446,16 +457,20 @@ var FIELDS={
     {id:'status',       label:'Status',                  type:'select',options:[{v:'kandydat',l:'Kandydat'},{v:'gotowy',l:'Gotowy'},{v:'przyjal',l:'Przyjął sakrament'}]}
   ],
   chrzciny:[
-    {id:'imie',         label:'Imię dziecka',           type:'text'},
-    {id:'nazwisko',     label:'Nazwisko',               type:'text'},
-    {id:'dataurodzenia',label:'Data urodzenia',         type:'date'},
-    {id:'rodzice',      label:'Rodzice (imiona i nazwisko)',type:'text',ph:'np. Jan i Maria Nowak'},
-    {id:'datachrztu',   label:'Data chrztu',            type:'date'},
-    {id:'ksiega_rok',   label:'Rok księgi',             type:'number',ph:'2026'},
-    {id:'ksiega_str',   label:'Strona',                 type:'number',ph:'np. 12'},
-    {id:'ksiega_nr',    label:'Nr wpisu',               type:'number',ph:'np. 3'},
-    {id:'rok',          label:'Rok (system)',           type:'number',ph:'2026'},
-    {id:'status',       label:'Status',                  type:'select',options:[{v:'zaplanowany',l:'Zaplanowany'},{v:'odbyl_sie',l:'Odbył się'}]}
+    {id:'imie',           label:'Imię dziecka',              type:'text', ph:'np. Jan'},
+    {id:'nazwisko',       label:'Nazwisko dziecka',          type:'text', ph:'np. Kowalski'},
+    {id:'dataurodzenia',  label:'Data urodzenia',            type:'date'},
+    {id:'imie_ojca',      label:'Imię ojca',                 type:'text', ph:'np. Piotr'},
+    {id:'nazwisko_ojca',  label:'Nazwisko ojca',             type:'text', ph:'np. Kowalski'},
+    {id:'imie_matki',     label:'Imię matki',                type:'text', ph:'np. Anna'},
+    {id:'nazwisko_matki', label:'Nazwisko matki (z domu)',   type:'text', ph:'np. Wiśniewska'},
+    {id:'datachrztu',     label:'Data chrztu',               type:'date'},
+    {id:'ksiega_rok',     label:'Rok księgi',                type:'number', ph:'2026'},
+    {id:'ksiega_str',     label:'Strona',                    type:'number', ph:'np. 12'},
+    {id:'ksiega_nr',      label:'Nr wpisu',                  type:'number', ph:'np. 3'},
+    {id:'uwagi',          label:'Uwagi w księdze',           type:'text', ph:'np. chrzcielnica boczna'},
+    {id:'rok',            label:'Rok (system)',              type:'number', ph:'2026'},
+    {id:'status',         label:'Status',                    type:'select', options:[{v:'zaplanowany',l:'Zaplanowany'},{v:'odbyl_sie',l:'Odbył się'}]}
   ],
   sluby:[
     {id:'oblubieniec',  label:'Oblubieniec (imię i nazwisko)',type:'text'},
@@ -559,6 +574,211 @@ document.getElementById('del-confirm').addEventListener('click',function(){
   pendingDeleteId=null;
   showToast('Wpis usunięty');
 });
+
+// ─── Świadectwo Chrztu — druk ─────────────────────────────────────────────
+function printSwiadectwoChrztu(id){
+  var d=allData.filter(function(x){return x.id===id;})[0];
+  if(!d) return;
+  var base=window.location.href.split('/admin/')[0];
+  var logoSrc=base+'/public/img/logo1.png';
+
+  function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function fmtD(str){if(!str)return'';var p=str.split('-');if(p.length!==3)return str;return p[2]+'.'+p[1]+'.'+p[0];}
+  function v(s){return esc(s||'');}
+  function dotLine(val,width){
+    // Wartość + linia kropkowana; jeśli val pusty — sama linia
+    return val
+      ? '<span style="border-bottom:1.2pt dotted #555;display:inline-block;min-width:'+width+';padding:0 2mm 1mm;font-size:11pt">'+esc(val)+'</span>'
+      : '<span style="border-bottom:1.2pt dotted #555;display:inline-block;min-width:'+width+';padding:0 2mm 1mm">&nbsp;</span>';
+  }
+
+  var ksiegaRef='';
+  if(d.ksiega_rok||d.ksiega_nr){
+    ksiegaRef=[d.ksiega_rok?'rok '+d.ksiega_rok:'',d.ksiega_str?'str. '+d.ksiega_str:'',d.ksiega_nr?'nr '+d.ksiega_nr:''].filter(Boolean).join(', ');
+  }
+
+  var today=new Date();
+  var todayStr=today.getDate()+'.'+(today.getMonth()+1)+'.'+today.getFullYear();
+  var miejsceData='Czerwionka-Leszczyny, '+todayStr;
+
+  var css=
+    '@page{size:A4 landscape;margin:7mm 10mm}'+
+    'body{font-family:"Times New Roman",Times,serif;font-size:9pt;color:#000;background:#fff;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}'+
+    '.cert{width:100%;box-sizing:border-box;border:2.5pt double #7a1f2b;padding:0}'+
+    '.cert-inner{border:1pt solid #b87a4a;margin:2.5pt;padding:4mm 6mm 3.5mm}'+
+    /* nagłówek */
+    '.cert-head{display:flex;align-items:flex-start;gap:5mm;margin-bottom:3mm;padding-bottom:2.5mm;border-bottom:1pt solid #7a1f2b}'+
+    '.seal-box{flex-shrink:0;width:30mm;min-height:26mm;border:1pt solid #aaa;border-radius:3pt;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2mm;padding:2mm;text-align:center}'+
+    '.seal-box img{width:28px;height:28px;object-fit:contain}'+
+    '.seal-box small{font-size:6.5pt;color:#888;letter-spacing:.3px}'+
+    '.title-block{flex:1}'+
+    '.title-block .main-title{font-family:Georgia,"Times New Roman",serif;font-size:16pt;font-weight:bold;letter-spacing:.8px;color:#7a1f2b;line-height:1;margin-bottom:1mm}'+
+    '.title-block .subtitle{font-size:7pt;color:#555;font-style:italic;margin-bottom:2.5mm;line-height:1.3}'+
+    '.title-block .ksiega-row{font-size:8.5pt;display:flex;align-items:baseline;gap:2mm}'+
+    '.title-block .ksiega-row span{font-weight:bold}'+
+    /* pola */
+    '.fields{margin-top:0}'+
+    '.frow{display:flex;align-items:baseline;margin-bottom:2.5mm;gap:2mm}'+
+    '.fnum{font-size:9pt;font-weight:bold;min-width:5.5mm;flex-shrink:0}'+
+    '.fcontent{flex:1}'+
+    '.flabel{font-size:9pt;font-weight:bold;display:inline}'+
+    '.fsub{font-size:6pt;color:#666;font-style:italic;display:block;margin-top:.3mm;line-height:1.2}'+
+    '.fval{display:block;margin-top:1mm}'+
+    '.wyznanie-block{flex-shrink:0;min-width:33mm}'+
+    '.wyznanie-block .flabel{font-size:8.5pt}'+
+    /* stopka */
+    '.cert-footer{margin-top:3mm;padding-top:2.5mm;border-top:1pt solid #7a1f2b;display:flex;align-items:flex-end;gap:5mm}'+
+    '.footer-confirm{flex:1;font-size:7pt;font-style:italic;color:#333;line-height:1.3}'+
+    '.footer-confirm strong{font-size:8.5pt;font-style:normal;font-weight:bold;color:#000}'+
+    '.footer-miejsce{flex:1}'+
+    '.footer-miejsce .lbl{font-size:8pt;font-weight:bold}'+
+    '.footer-ls{flex-shrink:0;width:22mm;height:22mm;border:1pt solid #aaa;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8pt;color:#aaa;font-style:italic}'+
+    '.footer-sig{flex:1;text-align:center}'+
+    '.footer-sig .sig-line{border-top:1pt solid #000;margin:0 auto 1.5mm;width:50mm}'+
+    '.footer-sig .sig-lbl{font-size:7.5pt}'+
+    '.print-btn{position:fixed;top:14px;right:14px;background:#7a1f2b;color:#fff;border:none;padding:9px 18px;border-radius:6px;font-size:13px;cursor:pointer;font-family:Arial,sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.3);z-index:999}'+
+    '@media print{.print-btn{display:none!important}}';
+
+  var html=
+    '<!DOCTYPE html><html lang="pl"><head><meta charset="utf-8">'+
+    '<title>Świadectwo Chrztu — '+v(d.imie)+' '+v(d.nazwisko)+'</title>'+
+    '<style>'+css+'</style></head><body>'+
+    '<button class="print-btn" onclick="window.print()">🖨️ Drukuj / PDF</button>'+
+
+    '<div class="cert"><div class="cert-inner">'+
+
+    // ── NAGŁÓWEK ──
+    '<div class="cert-head">'+
+      '<div class="seal-box">'+
+        '<img src="'+esc(logoSrc)+'" alt="herb">'+
+        '<small>Pieczęć parafii</small>'+
+      '</div>'+
+      '<div class="title-block">'+
+        '<div class="main-title">ŚWIADECTWO CHRZTU</div>'+
+        '<div class="subtitle">Testimonium baptismi&nbsp;/&nbsp;Certificate of Baptism&nbsp;/&nbsp;Taufzeugnis</div>'+
+        '<div class="ksiega-row">'+
+          '<span>Rok i numer w księdze chrztów</span>'+
+          dotLine(ksiegaRef,'90mm')+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+
+    // ── POLA ──
+    '<div class="fields">'+
+
+    // 1. Imię i nazwisko
+    '<div class="frow">'+
+      '<div class="fnum">1.</div>'+
+      '<div class="fcontent" style="flex:1">'+
+        '<span class="flabel">Imię i nazwisko</span>'+
+        '<span class="fsub">Nomen, cognomen&nbsp;/&nbsp;First and last name&nbsp;/&nbsp;Vorname(n), Name</span>'+
+        '<div class="fval">'+dotLine(d.imie&&d.nazwisko?d.imie+' '+d.nazwisko:'','200mm')+'</div>'+
+      '</div>'+
+    '</div>'+
+
+    // 2. Imię ojca + wyznanie
+    '<div class="frow" style="align-items:flex-start;gap:2mm">'+
+      '<div class="fnum">2.</div>'+
+      '<div class="fcontent" style="flex:2">'+
+        '<span class="flabel">Imię ojca</span>'+
+        '<span class="fsub">Nomen patris&nbsp;/&nbsp;Father\'s name&nbsp;/&nbsp;Name des Vaters</span>'+
+        '<div class="fval">'+dotLine([d.imie_ojca,d.nazwisko_ojca].filter(Boolean).join(' '),'100mm')+'</div>'+
+      '</div>'+
+      '<div class="wyznanie-block">'+
+        '<span class="flabel" style="font-size:8.5pt">wyznanie</span>'+
+        '<span class="fsub">religio&nbsp;/&nbsp;religion&nbsp;/&nbsp;Konfession</span>'+
+        '<div class="fval">'+dotLine('','33mm')+'</div>'+
+      '</div>'+
+    '</div>'+
+
+    // 3. Imię matki z domu + wyznanie
+    '<div class="frow" style="align-items:flex-start;gap:2mm">'+
+      '<div class="fnum">3.</div>'+
+      '<div class="fcontent" style="flex:1.4">'+
+        '<span class="flabel">Imię matki</span>'+
+        '<span class="fsub">Nomen matris&nbsp;/&nbsp;Mother\'s name&nbsp;/&nbsp;Name der Mutter</span>'+
+        '<div class="fval">'+dotLine(v(d.imie_matki),'65mm')+'</div>'+
+      '</div>'+
+      '<div style="flex-shrink:0">'+
+        '<span class="flabel" style="font-size:8.5pt">z domu</span>'+
+        '<span class="fsub">nata&nbsp;/&nbsp;née&nbsp;/&nbsp;Geburtsname</span>'+
+        '<div class="fval">'+dotLine(v(d.nazwisko_matki),'45mm')+'</div>'+
+      '</div>'+
+      '<div class="wyznanie-block">'+
+        '<span class="flabel" style="font-size:8.5pt">wyznanie</span>'+
+        '<span class="fsub">religio&nbsp;/&nbsp;religion&nbsp;/&nbsp;Konfession</span>'+
+        '<div class="fval">'+dotLine('','33mm')+'</div>'+
+      '</div>'+
+    '</div>'+
+
+    // 4. Data i miejsce urodzenia
+    '<div class="frow">'+
+      '<div class="fnum">4.</div>'+
+      '<div class="fcontent">'+
+        '<span class="flabel">Data i miejsce urodzenia</span>'+
+        '<span class="fsub">Dies et locus nativitatis&nbsp;/&nbsp;Date and place of birth&nbsp;/&nbsp;Geburts Datum und Geburts Ort</span>'+
+        '<div class="fval">'+dotLine(fmtD(d.dataurodzenia),'200mm')+'</div>'+
+      '</div>'+
+    '</div>'+
+
+    // 5. Data i miejsce chrztu
+    '<div class="frow">'+
+      '<div class="fnum">5.</div>'+
+      '<div class="fcontent">'+
+        '<span class="flabel">Data i miejsce chrztu</span>'+
+        '<span class="fsub">Dies et locus baptismi&nbsp;/&nbsp;Date and place of Baptism&nbsp;/&nbsp;Tauf Datum und Tauf Ort</span>'+
+        '<div class="fval">'+dotLine(fmtD(d.datachrztu)+(d.datachrztu?' · Parafia Najświętszego Serca Pana Jezusa, Czerwionka-Leszczyny':''),'200mm')+'</div>'+
+      '</div>'+
+    '</div>'+
+
+    // 6. Data i parafia bierzmowania
+    '<div class="frow">'+
+      '<div class="fnum">6.</div>'+
+      '<div class="fcontent">'+
+        '<span class="flabel">Data i parafia bierzmowania</span>'+
+        '<span class="fsub">Dies et parochia confirmationis&nbsp;/&nbsp;Date and parish of Confirmation&nbsp;/&nbsp;Firmung (Datum und Pfarrei)</span>'+
+        '<div class="fval">'+dotLine('','200mm')+'</div>'+
+      '</div>'+
+    '</div>'+
+
+    // 7. Uwagi
+    '<div class="frow" style="margin-bottom:0">'+
+      '<div class="fnum">7.</div>'+
+      '<div class="fcontent">'+
+        '<span class="flabel">Uwagi w księdze chrztów</span>'+
+        '<span class="fsub">Adnotationes in libro bapt.&nbsp;/&nbsp;Notes in the Register of Baptisms&nbsp;/&nbsp;Bemerkungen</span>'+
+        '<div class="fval">'+dotLine(v(d.uwagi),'200mm')+'</div>'+
+      '</div>'+
+    '</div>'+
+
+    '</div>'+ // .fields
+
+    // ── STOPKA ──
+    '<div class="cert-footer">'+
+      '<div class="footer-miejsce">'+
+        '<div class="lbl">Miejsce i data</div>'+
+        '<div style="font-size:7.5pt;color:#666;font-style:italic;margin-bottom:1mm">Locus et dies&nbsp;/&nbsp;The place and date&nbsp;/&nbsp;Ort, Datum</div>'+
+        dotLine(miejsceData,'70mm')+
+      '</div>'+
+      '<div class="footer-confirm">'+
+        '<strong>Potwierdzam zgodność z księgą chrztów</strong><br>'+
+        '<em>Concordat cum libro baptisatorum&nbsp;/&nbsp;I confirm that the information is in accordance with the Register of Baptisms&nbsp;/&nbsp;Ich bestätige die Übereinstimmung mit dem Taufbuch</em>'+
+      '</div>'+
+      '<div class="footer-ls">( L.S. )</div>'+
+      '<div class="footer-sig">'+
+        '<div class="sig-line"></div>'+
+        '<div class="sig-lbl">Proboszcz&nbsp;/&nbsp;Parochus&nbsp;/&nbsp;Parish priest&nbsp;/&nbsp;Pfarrer</div>'+
+      '</div>'+
+    '</div>'+
+
+    '</div></div>'+ // .cert-inner .cert
+    '<script>window.onload=function(){window.print();};<\/script>'+
+    '</body></html>';
+
+  var w=window.open('','_blank','width=1000,height=750,scrollbars=yes');
+  if(w){w.document.open();w.document.write(html);w.document.close();}
+  else{alert('Zablokowano otwieranie okna. Zezwól na pop-upy dla tej strony.');}
+}
 </script>
 </body>
 </html>
