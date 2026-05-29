@@ -4,6 +4,44 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ogłoszenia i aktualności · Parafia NSPJ Czerwionka-Leszczyny</title>
+<meta name="description" content="Cotygodniowe ogłoszenia duszpasterskie, aktualności z życia parafii i informacje o ważnych wydarzeniach.">
+<link rel="canonical" href="https://www.nspjczerwionka.pl/strony/aktualnosci.html">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.nspjczerwionka.pl/strony/aktualnosci.html">
+<meta property="og:title" content="Ogłoszenia i aktualności · Parafia NSPJ Czerwionka-Leszczyny">
+<meta property="og:description" content="Cotygodniowe ogłoszenia duszpasterskie, aktualności z życia parafii i informacje o ważnych wydarzeniach.">
+<meta property="og:image" content="https://www.nspjczerwionka.pl/public/img/23-05-08-12-24-43-kosciol_nspj_01-large.jpg">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://www.nspjczerwionka.pl/strony/aktualnosci.html">
+<meta property="twitter:title" content="Ogłoszenia i aktualności · Parafia NSPJ Czerwionka-Leszczyny">
+<meta property="twitter:description" content="Cotygodniowe ogłoszenia duszpasterskie, aktualności z życia parafii i informacje o ważnych wydarzeniach.">
+<meta property="twitter:image" content="https://www.nspjczerwionka.pl/public/img/23-05-08-12-24-43-kosciol_nspj_01-large.jpg">
+
+<!-- JSON-LD Breadcrumbs -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Strona główna",
+      "item": "https://www.nspjczerwionka.pl/index.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Ogłoszenia i aktualności",
+      "item": "https://www.nspjczerwionka.pl/strony/aktualnosci.html"
+    }
+  ]
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
   :root{--beige:#f4ede0;--beige-deep:#ebe1cd;--cream:#faf6ee;--burgundy:#7a1f2b;--burgundy-dark:#5e1620;--copper:#b87a4a;--copper-light:#d6a572;--ink:#2b2520;--ink-soft:#5a5048;--line:#d8cdb6;--white:#ffffff}
@@ -544,6 +582,7 @@ document.querySelectorAll('.page-tab-btn').forEach(btn => {
     } else {
       history.replaceState(null,'','#aktualnosci');
     }
+    if (typeof syncSEOFromView === 'function') syncSEOFromView();
   });
 });
 
@@ -564,6 +603,7 @@ function showOgl(id) {
   document.querySelectorAll('.page-tab-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.tab === 'ogloszenia');
   });
+  if (typeof syncSEOFromView === 'function') syncSEOFromView();
 }
 
 // ── News articles — obsługiwane przez nowy dynamiczny renderer poniżej ──────
@@ -740,6 +780,7 @@ function showArticle(id) {
   document.getElementById('article-views').style.display = '';
   history.replaceState(null, '', '#' + id);
   window.scrollTo({top: document.getElementById('tab-aktualnosci').offsetTop - 100, behavior: 'smooth'});
+  syncSEOFromView();
 }
 
 // ── Back to list ──────────────────────────────────────
@@ -748,12 +789,101 @@ document.getElementById('back-to-list').addEventListener('click', e => {
   document.getElementById('article-views').style.display = 'none';
   document.getElementById('news-list-view').style.display = '';
   history.replaceState(null, '', location.pathname + '#aktualnosci');
+  syncSEOFromView();
 });
 
 // ── Init news tab ─────────────────────────────────────
 renderNewsCards();
 
-// Check hash for direct article link (e.g. #news-wizytacja)
+// ── SEO & Meta tags management ────────────────────────
+function updateSEOMeta(type, data) {
+  var baseUrl = 'https://www.nspjczerwionka.pl/strony/aktualnosci.html';
+  var defaultTitle = 'Ogłoszenia i aktualności · Parafia NSPJ Czerwionka-Leszczyny';
+  var defaultDesc = 'Cotygodniowe ogłoszenia duszpasterskie, aktualności z życia parafii i informacje o ważnych wydarzeniach.';
+  var defaultImage = 'https://www.nspjczerwionka.pl/public/img/23-05-08-12-24-43-kosciol_nspj_01-large.jpg';
+
+  var title = defaultTitle;
+  var desc = defaultDesc;
+  var image = defaultImage;
+  var canonicalUrl = baseUrl;
+
+  if (type === 'article' && data) {
+    title = (data.seoTitle || data.title) + ' · Parafia NSPJ Czerwionka-Leszczyny';
+    desc = data.excerpt || defaultDesc;
+    if (desc.length > 200) desc = desc.slice(0, 197) + '...';
+    if (data.image) {
+      var img = data.image;
+      if (img.startsWith('../')) {
+        img = img.replace('../', 'https://www.nspjczerwionka.pl/');
+      } else if (img.startsWith('public/')) {
+        img = 'https://www.nspjczerwionka.pl/' + img;
+      }
+      image = img;
+    }
+    canonicalUrl = baseUrl + '#' + data.id;
+  } else if (type === 'announcement' && data) {
+    title = 'Ogłoszenia: ' + data.title + ' · Parafia NSPJ Czerwionka-Leszczyny';
+    var tmp = document.createElement('div');
+    tmp.innerHTML = data.content || '';
+    var text = tmp.textContent || tmp.innerText || '';
+    desc = text.replace(/\s+/g, ' ').trim();
+    if (desc.length > 200) desc = desc.slice(0, 197) + '...';
+    canonicalUrl = baseUrl + '#' + data.id;
+  }
+
+  document.title = title;
+
+  var metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) metaDesc.setAttribute('content', desc);
+
+  var ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle) ogTitle.setAttribute('content', title);
+
+  var ogDesc = document.querySelector('meta[property="og:description"]');
+  if (ogDesc) ogDesc.setAttribute('content', desc);
+
+  var ogImage = document.querySelector('meta[property="og:image"]');
+  if (ogImage) ogImage.setAttribute('content', image);
+
+  var ogUrl = document.querySelector('meta[property="og:url"]');
+  if (ogUrl) ogUrl.setAttribute('content', canonicalUrl);
+
+  var twitterTitle = document.querySelector('meta[name="twitter:title"]');
+  if (twitterTitle) twitterTitle.setAttribute('content', title);
+
+  var twitterDesc = document.querySelector('meta[name="twitter:description"]');
+  if (twitterDesc) twitterDesc.setAttribute('content', desc);
+
+  var twitterImage = document.querySelector('meta[name="twitter:image"]');
+  if (twitterImage) twitterImage.setAttribute('content', image);
+
+  var twitterUrl = document.querySelector('meta[name="twitter:url"]');
+  if (twitterUrl) twitterUrl.setAttribute('content', canonicalUrl);
+
+  var canonical = document.querySelector('link[rel="canonical"]');
+  if (canonical) canonical.setAttribute('href', canonicalUrl);
+}
+
+function syncSEOFromView() {
+  const hash = location.hash.replace('#', '');
+  if (hash && hash.startsWith('news-')) {
+    const art = allNewsPublic.find(a => a.id === hash);
+    if (art) {
+      updateSEOMeta('article', art);
+      return;
+    }
+  } else if (hash && (hash.startsWith('ogl-') || OGL_IDS.includes(hash))) {
+    let fullId = OGL_IDS.find(x => x === hash) || OGL_IDS.find(x => x.endsWith(hash)) || OGL_IDS[0];
+    const ann = allPublished.find(x => x.id === fullId);
+    if (ann) {
+      updateSEOMeta('announcement', ann);
+      return;
+    }
+  }
+  updateSEOMeta('list');
+}
+
+// Check hash for direct article link (e.g. #news-wizytacja) or announcement
 (function() {
   const hash = location.hash.slice(1);
   if (hash && hash.startsWith('news-')) {
@@ -766,6 +896,8 @@ renderNewsCards();
     if (tabContent) tabContent.classList.add('active');
     // Show article
     setTimeout(() => showArticle(hash), 50);
+  } else {
+    syncSEOFromView();
   }
 })();
 

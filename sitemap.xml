@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Strona główna -->
+  <url>
+    <loc>https://www.nspjczerwionka.pl/index.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Ogłoszenia i aktualności -->
+  <url>
+    <loc>https://www.nspjczerwionka.pl/strony/aktualnosci.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- O kościele -->
+  <url>
+    <loc>https://www.nspjczerwionka.pl/strony/duszpasterstwo.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.nspjczerwionka.pl/strony/wspolnoty.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.nspjczerwionka.pl/strony/historia.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.nspjczerwionka.pl/strony/standardy.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Msze i kontakt -->
+  <url>
+    <loc>https://www.nspjczerwionka.pl/strony/msze.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.nspjczerwionka.pl/strony/kontakt.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sakramenty -->
+  <url>
+    <loc>https://www.nspjczerwionka.pl/strony/sakramenty/chrzest.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.nspjczerwionka.pl/strony/sakramenty/komunia.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.nspjczerwionka.pl/strony/sakramenty/bierzmowanie.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.nspjczerwionka.pl/strony/sakramenty/slub.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.nspjczerwionka.pl/strony/sakramenty/namaszczenie.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.nspjczerwionka.pl/strony/sakramenty/pogrzeb.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.nspjczerwionka.pl/strony/sakramenty/spowiedz.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>
