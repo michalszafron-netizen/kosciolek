@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title id="page-title">Galeria parafii · Parafia NSPJ Czerwionka-Leszczyny</title>
+<meta name="description" id="page-desc" content="Galeria zdjęć z życia Parafii pw. Najświętszego Serca Pana Jezusa w Czerwionce-Leszczynach. Uroczystości, pielgrzymki, budowa nowego kościoła i codzienne życie wspólnoty.">
+<link rel="canonical" href="https://www.nspjczerwionka.pl/strony/galeria.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.nspjczerwionka.pl/strony/galeria.html">
+<meta property="og:title" content="Galeria parafii · Parafia NSPJ Czerwionka-Leszczyny">
+<meta property="og:description" content="Galeria zdjęć z życia Parafii pw. Najświętszego Serca Pana Jezusa w Czerwionce-Leszczynach.">
+<meta property="og:image" content="https://www.nspjczerwionka.pl/public/img/23-05-08-12-24-43-kosciol_nspj_01-large.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--beige:#f4ede0;--beige-deep:#ebe1cd;--cream:#faf6ee;--burgundy:#7a1f2b;--burgundy-dark:#5e1620;--copper:#b87a4a;--copper-light:#d6a572;--ink:#2b2520;--ink-soft:#5a5048;--line:#d8cdb6;--white:#ffffff}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:90px}
+  body{margin:0;padding:0;font-family:'Lato',sans-serif;color:var(--ink);background:var(--beige);line-height:1.65}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;color:var(--ink)}
+  a{color:var(--burgundy)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--burgundy);outline-offset:3px;border-radius:4px}
+  .container{max-width:1240px;margin:0 auto;padding:0 24px}
+  .container-narrow{max-width:900px;margin:0 auto;padding:0 24px}
+
+  /* HEADER */
+  .sticky-header{position:sticky;top:0;z-index:50}
+  .topbar{background:var(--burgundy-dark);color:#e8d9b8;font-size:.82rem;line-height:1;min-height:40px;display:flex;align-items:center}
+  .topbar .container{display:flex;justify-content:space-between;align-items:center;width:100%;padding:4px 24px;gap:12px}
+  .topbar a{color:#e8d9b8;text-decoration:none;display:inline-flex;align-items:center}
+  .topbar a:hover{color:#fff}
+  .topbar .left,.topbar .right{display:flex;gap:18px;align-items:center}
+  .topbar svg{flex-shrink:0;margin-right:6px}
+  .topbar-admin{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid rgba(232,217,184,.35);color:#e8d9b8;transition:all .15s;margin-left:4px;text-decoration:none}
+  .topbar-admin:hover{background:rgba(232,217,184,.15);border-color:rgba(232,217,184,.7);color:#fff}
+  .topbar-admin svg{margin-right:0;display:block}
+  .topbar-btn-wsparcie{background:#e8d9b8;color:var(--burgundy-dark)!important;font-weight:700;padding:5px 14px;border-radius:4px;font-size:.82rem;transition:all .15s;white-space:nowrap}
+  .topbar-btn-wsparcie:hover{background:#fff;text-decoration:none!important}
+  @media(max-width:768px){.topbar .left span:first-child{display:none}.topbar .right a:not(.topbar-admin){display:none}.topbar .container{justify-content:center}}
+  header.site{background:var(--cream);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px}
+  .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
+  .brand-mark{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;overflow:hidden;flex-shrink:0}
+  .brand-logo{width:46px;height:46px;object-fit:contain;display:block}
+  .brand-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:.95rem;line-height:1.2}
+  .brand-name small{display:block;font-family:'Lato',sans-serif;font-size:.7rem;letter-spacing:.16em;color:var(--copper);text-transform:uppercase;font-weight:700;margin-top:3px}
+  nav.main{display:flex;gap:4px;align-items:center}
+  nav.main a{padding:10px 12px;font-weight:400;font-size:.9rem;color:var(--ink);border-radius:6px;transition:background .15s;position:relative;white-space:nowrap;text-decoration:none}
+  nav.main a:hover{background:var(--beige);text-decoration:none}
+  nav.main a.active{color:var(--burgundy);font-weight:700}
+  nav.main a.has-sub::after{content:"▾";font-size:.7rem;margin-left:6px;color:var(--copper)}
+  .dropdown{position:relative}
+  .dropdown-menu{display:none;position:absolute;top:calc(100% + 6px);left:0;background:var(--cream);border:1px solid var(--line);border-radius:8px;min-width:230px;z-index:200;box-shadow:0 8px 32px rgba(43,37,32,.14);padding:6px 0}
+  .dropdown:hover .dropdown-menu,.dropdown.open .dropdown-menu{display:block}
+  .dropdown-menu a{display:block;padding:9px 18px;color:var(--ink);font-size:.88rem;font-weight:400;border-radius:0;white-space:nowrap;background:none}
+  .dropdown-menu a:hover{background:var(--beige);text-decoration:none}
+  .dropdown-menu hr{border:none;border-top:1px solid var(--line);margin:4px 12px}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--ink);padding:8px}
+  @media(max-width:980px){nav.main{display:none}.menu-toggle{display:block}}
+
+  /* PAGE HERO */
+  .eyebrow{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--copper);font-weight:700;margin-bottom:.8rem;display:inline-block}
+  .page-hero{padding:52px 0 36px;text-align:center}
+  .page-hero h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:600;margin:0 0 .5rem}
+  .page-hero .lead{font-size:1.05rem;color:var(--ink-soft);max-width:580px;margin:0 auto}
+
+  /* BREADCRUMB */
+  .breadcrumb{font-size:.82rem;color:var(--ink-soft);margin-bottom:12px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .breadcrumb a{color:var(--ink-soft);text-decoration:none}
+  .breadcrumb a:hover{color:var(--burgundy)}
+  .breadcrumb span{color:var(--copper-light)}
+
+  /* GALLERIES LIST */
+  #view-list{display:block}
+  #view-detail{display:none}
+
+  .galleries-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+  @media(max-width:900px){.galleries-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.galleries-grid{grid-template-columns:1fr}}
+
+  .gallery-card{
+    background:var(--white);border-radius:8px;overflow:hidden;cursor:pointer;
+    border:1px solid var(--line);transition:all .2s;text-decoration:none;color:inherit;display:block
+  }
+  .gallery-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px -10px rgba(43,37,32,.2);text-decoration:none}
+  .gallery-card .cover{height:200px;background-size:cover;background-position:center;background-color:var(--beige-deep);position:relative}
+  .gallery-card .cover .badge-count{
+    position:absolute;bottom:10px;right:10px;background:rgba(43,37,32,.82);color:#fff;
+    padding:4px 10px;border-radius:4px;font-size:.76rem;font-weight:700
+  }
+  .gallery-card .card-body{padding:16px 18px 14px}
+  .gallery-card h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.15rem;margin:0 0 5px;color:var(--ink);line-height:1.25}
+  .gallery-card .card-date{font-size:.8rem;color:var(--ink-soft)}
+
+  /* DETAIL VIEW */
+  .detail-back{display:inline-flex;align-items:center;gap:6px;color:var(--burgundy);font-weight:700;font-size:.88rem;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;margin-bottom:24px;background:none;border:none;padding:0}
+  .detail-back:hover{text-decoration:underline}
+  .detail-hero{
+    height:340px;border-radius:10px;background-size:cover;background-position:center;
+    background-color:var(--beige-deep);margin-bottom:28px;
+    box-shadow:0 20px 50px -16px rgba(43,37,32,.3)
+  }
+  .detail-head{margin-bottom:28px}
+  .detail-head h2{font-size:clamp(1.8rem,3.5vw,2.8rem);margin:0 0 6px}
+  .detail-head .meta{font-size:.88rem;color:var(--ink-soft)}
+
+  .photos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  @media(max-width:900px){.photos-grid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:560px){.photos-grid{grid-template-columns:repeat(2,1fr)}}
+  .photo-thumb{
+    aspect-ratio:1;border-radius:6px;overflow:hidden;cursor:pointer;
+    background-color:var(--beige-deep);background-size:cover;background-position:center;
+    transition:transform .2s,box-shadow .2s
+  }
+  .photo-thumb:hover{transform:scale(1.04);box-shadow:0 8px 24px -6px rgba(43,37,32,.25)}
+
+  /* LIGHTBOX */
+  .lightbox{
+    display:none;position:fixed;inset:0;background:rgba(22,17,14,.94);z-index:999;
+    align-items:center;justify-content:center;flex-direction:column
+  }
+  .lightbox.open{display:flex}
+  .lightbox img{max-width:90vw;max-height:85vh;border-radius:4px;object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .lb-close{position:absolute;top:16px;right:20px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;opacity:.7;line-height:1;padding:8px}
+  .lb-close:hover{opacity:1}
+  .lb-prev,.lb-next{
+    position:absolute;top:50%;transform:translateY(-50%);
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+    color:#fff;width:48px;height:48px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.3rem;
+    transition:background .15s
+  }
+  .lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.25)}
+  .lb-prev{left:16px}
+  .lb-next{right:16px}
+  .lb-counter{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.6);font-size:.85rem}
+  .lb-caption{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.85);font-size:.92rem;text-align:center;max-width:600px;padding:0 20px}
+
+  .no-results{text-align:center;padding:60px 20px;color:var(--ink-soft)}
+
+  /* FOOTER */
+  footer.site{background:var(--ink);color:#d8cdb6;padding:60px 0 30px;margin-top:60px}
+  footer.site a{color:var(--copper-light);text-decoration:none}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px}
+  .footer-brand{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+  .footer-brand .brand-name{color:#f6e9d3;font-size:1.15rem}
+  .footer-brand .brand-name small{color:var(--copper-light)}
+  footer.site p{color:rgba(216,205,182,.78);font-size:.92rem}
+  footer.site h5{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.05rem;color:#f6e9d3;margin-bottom:1rem}
+  footer.site ul{list-style:none;padding:0;margin:0}
+  footer.site ul li{margin-bottom:.6rem;font-size:.92rem}
+  footer.site ul a{color:rgba(216,205,182,.78)}
+  footer.site ul a:hover{color:#f6e9d3;text-decoration:none}
+  .footer-bank{font-size:.83rem;background:rgba(246,233,211,.06);padding:14px;border-radius:6px;margin-top:14px;border:1px solid rgba(246,233,211,.1)}
+  .footer-bank b{color:#f6e9d3;display:block;font-weight:700;margin-bottom:4px}
+  .footer-bank code{font-family:'Lato',monospace;color:var(--copper-light);font-weight:700;letter-spacing:.5px}
+  .footer-social{display:flex;gap:10px;margin-top:18px}
+  .footer-social a{width:36px;height:36px;border-radius:50%;background:rgba(246,233,211,.06);border:1px solid rgba(246,233,211,.15);display:grid;place-items:center;color:var(--copper-light);transition:all .15s}
+  .footer-social a:hover{background:rgba(246,233,211,.14);border-color:rgba(246,233,211,.4);color:#f6e9d3;text-decoration:none}
+  .footer-social svg{width:16px;height:16px}
+  .footer-bottom{border-top:1px solid rgba(216,205,182,.14);margin-top:40px;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:.85rem;color:rgba(216,205,182,.55)}
+  @media(max-width:980px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+  @media(max-width:560px){.footer-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="sticky-header">
+<div class="topbar">
+  <div class="container">
+    <div class="left">
+      <span><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>ul. 3-go Maja 36, 44-230 Czerwionka-Leszczyny</span>
+      <span><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.61 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58z"/></svg><a href="tel:+48324312992">32 43 12 992</a></span>
+    </div>
+    <div class="right">
+      <a href="../index.html#budowa" class="topbar-btn-wsparcie">Wsparcie budowy</a>
+      <a href="../admin/login.html" class="topbar-admin" title="Panel parafii" aria-label="Panel parafii">
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<header class="site">
+  <div class="container">
+    <div class="nav">
+      <a class="brand" href="../index.html">
+        <div class="brand-mark"><img src="../public/img/logo1.png" alt="Logo NSPJ" class="brand-logo"></div>
+        <div class="brand-name">Parafia Najświętszego Serca Pana Jezusa<small>Czerwionka-Leszczyny · od 1925</small></div>
+      </a>
+      <nav class="main">
+        <a href="../index.html">Strona główna</a>
+        <div class="dropdown">
+          <a href="#" class="has-sub">O kościele</a>
+          <div class="dropdown-menu">
+            <a href="duszpasterstwo.html">Kapłani</a>
+            <a href="wspolnoty.html">Wspólnoty</a>
+            <a href="historia.html">Historia</a>
+            <hr>
+            <a href="standardy.html">Standardy ochrony małoletnich</a>
+          </div>
+        </div>
+        <a href="msze.html">Msze święte</a>
+        <div class="dropdown">
+          <a href="#" class="has-sub">Sakramenty</a>
+          <div class="dropdown-menu">
+            <a href="sakramenty/chrzest.html">Chrzest</a>
+            <a href="sakramenty/komunia.html">I Komunia Święta</a>
+            <a href="sakramenty/bierzmowanie.html">Bierzmowanie</a>
+            <a href="sakramenty/slub.html">Ślub</a>
+            <hr>
+            <a href="sakramenty/namaszczenie.html">Namaszczenie chorych</a>
+            <a href="sakramenty/pogrzeb.html">Pogrzeb</a>
+            <a href="sakramenty/spowiedz.html">Spowiedź</a>
+          </div>
+        </div>
+        <a href="#">Cmentarz</a>
+        <a href="galeria.html" class="active">Galeria</a>
+        <a href="../index.html#aktualnosci">Aktualności</a>
+        <a href="kontakt.html">Kontakt</a>
+      </nav>
+      <button class="menu-toggle" aria-label="Menu">
+        <svg width="28" height="28" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+</div>
+
+<!-- VIEW: LISTA GALERII -->
+<div id="view-list">
+  <div class="page-hero">
+    <div class="container-narrow">
+      <span class="eyebrow">Życie wspólnoty w zdjęciach</span>
+      <h1>Galeria parafii</h1>
+      <p class="lead">Uroczystości, pielgrzymki, budowa nowego kościoła — chwile z życia naszej wspólnoty</p>
+    </div>
+  </div>
+
+  <div class="container" style="padding-bottom:60px">
+    <div class="galleries-grid" id="galleries-grid">
+      <div class="no-results" style="grid-column:1/-1">Ładowanie galerii…</div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW: SZCZEGÓŁY GALERII -->
+<div id="view-detail" style="padding:40px 0 60px">
+  <div class="container">
+    <nav aria-label="Ścieżka" class="breadcrumb">
+      <a href="../index.html">Strona główna</a>
+      <span>›</span>
+      <a href="galeria.html" id="back-link-bc">Galeria</a>
+      <span>›</span>
+      <span id="detail-breadcrumb-title">…</span>
+    </nav>
+
+    <button class="detail-back" id="btn-back" onclick="showList()">
+      <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/></svg>
+      Wszystkie galerie
+    </button>
+
+    <div class="detail-hero" id="detail-hero"></div>
+
+    <div class="detail-head">
+      <h2 id="detail-title"></h2>
+      <p class="meta" id="detail-meta"></p>
+      <p id="detail-opis" style="color:var(--ink-soft);margin-top:8px"></p>
+    </div>
+
+    <div class="photos-grid" id="photos-grid"></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+  <button class="lb-close" onclick="closeLightbox()" aria-label="Zamknij">✕</button>
+  <button class="lb-prev" onclick="lbPrev()" aria-label="Poprzednie">‹</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lb-next" onclick="lbNext()" aria-label="Następne">›</button>
+  <div class="lb-counter" id="lb-counter"></div>
+</div>
+
+<footer class="site">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="../public/img/logo1.png" alt="Logo NSPJ" class="brand-logo" style="width:46px;height:46px;object-fit:contain;border-radius:50%;flex-shrink:0">
+          <div class="brand-name">Parafia Najświętszego Serca Pana Jezusa<small>Czerwionka-Leszczyny · od 1925</small></div>
+        </div>
+        <p>ul. 3-go Maja 36<br>44-230 Czerwionka-Leszczyny<br>tel. <a href="tel:+48324312992" style="color:var(--copper-light)">32 43 12 992</a></p>
+        <div class="footer-bank">
+          <b>Konto parafii (Bank Spółdzielczy)</b>
+          <code>11 8454 1095 2003 0017 7467 0003</code>
+        </div>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/profile.php?id=61557137199765" target="_blank" rel="noopener" aria-label="Facebook"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a href="https://www.instagram.com/parafianspjczerwionka/" target="_blank" rel="noopener" aria-label="Instagram"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h5>Parafia</h5>
+        <ul>
+          <li><a href="historia.html">Historia</a></li>
+          <li><a href="duszpasterstwo.html">Kapłani</a></li>
+          <li><a href="msze.html">Msze święte</a></li>
+          <li><a href="sakramenty/chrzest.html">Sakramenty</a></li>
+          <li><a href="standardy.html">Standardy ochrony małoletnich</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Wspólnota</h5>
+        <ul>
+          <li><a href="../index.html#aktualnosci">Aktualności</a></li>
+          <li><a href="../index.html#ogloszenia">Ogłoszenia parafialne</a></li>
+          <li><a href="msze.html">Msze święte</a></li>
+          <li><a href="../index.html#intencje">Intencje mszalne</a></li>
+          <li><a href="galeria.html">Galeria</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Kontakt</h5>
+        <ul>
+          <li><a href="kontakt.html">Kancelaria</a></li>
+          <li><a href="#">RODO</a></li>
+          <li><a href="#">Polityka prywatności</a></li>
+          <li><a href="../index.html#budowa">Wsparcie budowy</a></li>
+          <li><a href="../admin/login.html" style="color:var(--copper-light);font-weight:700">→ Panel administracyjny</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Parafia NSPJ Czerwionka-Leszczyny. Wszelkie prawa zastrzeżone.</span>
+      <span>Wersja demonstracyjna · nowy CMS parafialny</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+var allGaleries = [];
+var currentPhotos = [];
+var lbIndex = 0;
+var currentFolder = '';
+
+// ─── LOAD DATA ─────────────────────────────────────────────
+function loadGaleries() {
+  try {
+    allGaleries = JSON.parse(localStorage.getItem('nspj_galerie')) || [];
+  } catch(e) { allGaleries = []; }
+  // Only published
+  allGaleries = allGaleries.filter(function(g){ return g.opublikowana; });
+  // Sort newest first
+  allGaleries.sort(function(a,b){ return (b.data||'').localeCompare(a.data||''); });
+}
+
+// ─── FORMAT DATE ───────────────────────────────────────────
+function fmtDate(s) {
+  if (!s) return '';
+  var p = s.split('-');
+  if (p.length < 3) return s;
+  var months = ['stycznia','lutego','marca','kwietnia','maja','czerwca','lipca','sierpnia','września','października','listopada','grudnia'];
+  var m = parseInt(p[1],10);
+  return parseInt(p[2],10)+' '+months[m-1]+' '+p[0];
+}
+
+// ─── RENDER LIST ───────────────────────────────────────────
+function renderList() {
+  var grid = document.getElementById('galleries-grid');
+  if (!allGaleries.length) {
+    grid.innerHTML = '<div class="no-results" style="grid-column:1/-1">Brak opublikowanych galerii.</div>';
+    return;
+  }
+  grid.innerHTML = allGaleries.map(function(g) {
+    var coverPos = g.cover_pos || 'center';
+    var coverStyle = (g.cover ? 'background-image:url(\'../'+g.cover+'\');' : '')+'background-position:'+coverPos;
+    var count = g.zdjecia ? g.zdjecia.length : 0;
+    return '<a class="gallery-card" href="galeria.html?id='+g.id+'" onclick="openGallery(\''+g.id+'\');return false;">'
+      +'<div class="cover" style="'+coverStyle+'">'
+      +'<div class="badge-count">'+count+' zdjęć</div>'
+      +'</div>'
+      +'<div class="card-body">'
+      +'<h3>'+g.tytul+'</h3>'
+      +'<div class="card-date">'+fmtDate(g.data)+'</div>'
+      +'</div>'
+      +'</a>';
+  }).join('');
+}
+
+// ─── OPEN GALLERY DETAIL ───────────────────────────────────
+function openGallery(id) {
+  var g = allGaleries.find(function(x){ return x.id===id; });
+  if (!g) return;
+
+  currentFolder = g.folder || '';
+  currentPhotos = g.zdjecia || [];
+
+  // Update page title + URL
+  history.pushState({id:id}, '', 'galeria.html?id='+id);
+  document.getElementById('page-title').textContent = g.tytul+' · Galeria NSPJ';
+
+  // Fill detail view
+  document.getElementById('detail-breadcrumb-title').textContent = g.tytul;
+  document.getElementById('detail-title').textContent = g.tytul;
+  document.getElementById('detail-meta').textContent = fmtDate(g.data) + (currentPhotos.length ? ' · ' + currentPhotos.length + ' zdjęć' : '');
+  document.getElementById('detail-opis').textContent = g.opis || '';
+  var hero = document.getElementById('detail-hero');
+  hero.style.backgroundImage    = g.cover ? 'url(\'../'+g.cover+'\')' : '';
+  hero.style.backgroundPosition = g.cover_pos || 'center';
+
+  // Render photo grid
+  var photosGrid = document.getElementById('photos-grid');
+  if (!currentPhotos.length) {
+    photosGrid.innerHTML = '<div class="no-results" style="grid-column:1/-1">Brak zdjęć w tej galerii.</div>';
+  } else {
+    photosGrid.innerHTML = currentPhotos.map(function(fname, i) {
+      var src = '../public/img/galerie/'+currentFolder+'/'+fname;
+      return '<div class="photo-thumb" style="background-image:url(\''+src+'\')" onclick="openLightbox('+i+')" role="button" tabindex="0" aria-label="Zdjęcie '+(i+1)+'"></div>';
+    }).join('');
+  }
+
+  // Switch views
+  document.getElementById('view-list').style.display = 'none';
+  document.getElementById('view-detail').style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ─── SHOW LIST ─────────────────────────────────────────────
+function showList() {
+  history.pushState({}, '', 'galeria.html');
+  document.getElementById('page-title').textContent = 'Galeria parafii · Parafia NSPJ Czerwionka-Leszczyny';
+  document.getElementById('view-list').style.display = 'block';
+  document.getElementById('view-detail').style.display = 'none';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ─── LIGHTBOX ──────────────────────────────────────────────
+function openLightbox(i) {
+  lbIndex = i;
+  showLbPhoto();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function showLbPhoto() {
+  var fname = currentPhotos[lbIndex];
+  var src = '../public/img/galerie/'+currentFolder+'/'+fname;
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lb-counter').textContent = (lbIndex+1)+' / '+currentPhotos.length;
+}
+
+function lbPrev() {
+  lbIndex = (lbIndex - 1 + currentPhotos.length) % currentPhotos.length;
+  showLbPhoto();
+}
+
+function lbNext() {
+  lbIndex = (lbIndex + 1) % currentPhotos.length;
+  showLbPhoto();
+}
+
+document.addEventListener('keydown', function(e) {
+  var lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'ArrowLeft')  lbPrev();
+  if (e.key === 'ArrowRight') lbNext();
+  if (e.key === 'Escape')     closeLightbox();
+});
+
+// keyboard on photo thumbs
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && e.target.classList.contains('photo-thumb')) {
+    var idx = Array.from(document.querySelectorAll('.photo-thumb')).indexOf(e.target);
+    if (idx >= 0) openLightbox(idx);
+  }
+});
+
+// ─── BACK BUTTON ───────────────────────────────────────────
+window.addEventListener('popstate', function(e) {
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('id')) {
+    openGallery(params.get('id'));
+  } else {
+    showList();
+  }
+});
+
+// ─── INIT ──────────────────────────────────────────────────
+loadGaleries();
+
+var params = new URLSearchParams(window.location.search);
+var initId = params.get('id');
+if (initId) {
+  renderList();
+  openGallery(initId);
+} else {
+  renderList();
+}
+
+// ─── NAV SCRIPTS ───────────────────────────────────────────
+document.querySelector('.menu-toggle')?.addEventListener('click',function(){
+  var nav=document.querySelector('nav.main');
+  if(nav.style.display==='flex'){nav.style.display='none';return}
+  nav.style.display='flex';
+  nav.style.position='absolute';nav.style.top='80px';nav.style.left='0';nav.style.right='0';
+  nav.style.flexDirection='column';nav.style.background='var(--cream)';
+  nav.style.padding='16px';nav.style.borderBottom='1px solid var(--line)';
+  nav.style.boxShadow='0 12px 30px rgba(0,0,0,.1)';nav.style.zIndex='100';
+});
+document.querySelectorAll('.dropdown > a').forEach(function(t){
+  t.addEventListener('click',function(e){
+    e.preventDefault();
+    var d=t.closest('.dropdown');
+    var w=d.classList.contains('open');
+    document.querySelectorAll('.dropdown.open').forEach(function(x){x.classList.remove('open');});
+    if(!w) d.classList.add('open');
+  });
+});
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.dropdown'))
+    document.querySelectorAll('.dropdown.open').forEach(function(d){d.classList.remove('open');});
+});
+</script>
+</body>
+</html>

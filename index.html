@@ -764,15 +764,10 @@
         <span class="eyebrow">Życie wspólnoty w zdjęciach</span>
         <h2>Galeria parafii</h2>
       </div>
-      <a href="#" class="more">Wszystkie galerie</a>
+      <a href="strony/galeria.html" class="more">Wszystkie galerie</a>
     </div>
-    <div class="gallery-grid">
-      <a href="#" class="wide tall" style="background-image:url('public/img/hero-1.jpg')"><span>100 lat Parafii<br>1 sierpnia 2025</span></a>
-      <a href="#" style="background-image:url('public/img/event-wizytacja-2.jpg')"><span>Wizytacja kanoniczna 2025</span></a>
-      <a href="#" style="background-image:url('public/img/budowa-1.jpg')"><span>Budowa — luty 2025</span></a>
-      <a href="#" style="background-image:url('public/img/event-odpust-1.jpg')"><span>Odpust parafialny 2024</span></a>
-      <a href="#" style="background-image:url('public/img/event-odpust-3.jpg')"><span>Suma odpustowa</span></a>
-      <a href="#" class="wide" style="background-image:url('public/img/budowa-3.jpg')"><span>Nowy kościół — podziemia · 5 marca 2025</span></a>
+    <div class="gallery-grid" id="hp-gallery-grid">
+      <!-- dynamically filled from nspj_galerie localStorage -->
     </div>
   </div>
 </section>
@@ -1293,6 +1288,51 @@ function downloadOgloszeniaTxt(e) {
     });
     tableEl.innerHTML = html;
   } catch(e) { /* silent fail — hardcoded fallback stays */ }
+})();
+</script>
+
+<!-- ── GALERIA — ładuje featured galerie z localStorage ── -->
+<script>
+(function() {
+  var grid = document.getElementById('hp-gallery-grid');
+  if (!grid) return;
+
+  // Fallback gdy brak danych
+  var FALLBACK = [
+    {tytul:'100 lat Parafii — 1 sierpnia 2025', cover:'public/img/hero-1.jpg',         cls:'wide tall'},
+    {tytul:'Wizytacja kanoniczna 2025',          cover:'public/img/event-wizytacja-2.jpg', cls:''},
+    {tytul:'Budowa — luty 2025',                 cover:'public/img/budowa-1.jpg',          cls:''},
+    {tytul:'Odpust parafialny 2024',             cover:'public/img/event-odpust-1.jpg',    cls:''},
+    {tytul:'Suma odpustowa',                     cover:'public/img/event-odpust-3.jpg',    cls:''},
+    {tytul:'Kościół i podziemia · 5 marca 2025', cover:'public/img/budowa-3.jpg',          cls:'wide'}
+  ];
+
+  try {
+    var galerie = JSON.parse(localStorage.getItem('nspj_galerie')) || [];
+    var featured = galerie.filter(function(g){ return g.featured && g.opublikowana; });
+    featured.sort(function(a,b){ return (b.data||'').localeCompare(a.data||''); });
+    if (!featured.length) throw new Error('no featured');
+
+    // Layout: first card is wide+tall, last card is wide
+    var MAX = 6;
+    var items = featured.slice(0, MAX);
+    var html = items.map(function(g, i) {
+      var cls = '';
+      if (i === 0) cls = 'wide tall';
+      else if (i === items.length - 1 && items.length >= 5) cls = 'wide';
+      var cover = g.cover ? g.cover : '';
+      var link = 'strony/galeria.html?id=' + g.id;
+      return '<a href="'+link+'" class="'+cls+'" style="background-image:url(\''+cover+'\')">'
+           + '<span>'+g.tytul+'</span></a>';
+    }).join('');
+    grid.innerHTML = html;
+  } catch(e) {
+    // Fallback hardkodowany
+    grid.innerHTML = FALLBACK.map(function(f) {
+      return '<a href="strony/galeria.html" class="'+f.cls+'" style="background-image:url(\''+f.cover+'\')">'
+           + '<span>'+f.tytul+'</span></a>';
+    }).join('');
+  }
 })();
 </script>
 

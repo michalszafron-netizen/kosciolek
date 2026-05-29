@@ -7,27 +7,73 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/admin.css">
 <style>
-  .gallery-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .gcard{
-    background:var(--white);border:1px solid var(--line);border-radius:8px;overflow:hidden;
-    transition:all .15s;cursor:pointer;text-decoration:none;color:inherit
-  }
-  .gcard:hover{transform:translateY(-3px);box-shadow:0 14px 30px -10px rgba(0,0,0,.15);text-decoration:none}
-  .gcard .cover{height:160px;background-size:cover;background-position:center;background-color:var(--beige-deep);position:relative}
-  .gcard .badge-count{
-    position:absolute;top:10px;right:10px;background:rgba(43,37,32,.85);color:#fff;
-    padding:4px 10px;border-radius:4px;font-size:.78rem;font-weight:700
-  }
-  .gcard .body{padding:14px 16px}
-  .gcard h4{font-family:'Playfair Display',serif;font-size:1.05rem;margin:0 0 5px;color:var(--ink)}
-  .gcard .meta{font-size:.78rem;color:var(--ink-soft);display:flex;justify-content:space-between;align-items:center;gap:8px}
-  .gcard .meta .pill-badge{padding:1px 7px}
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:1100px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:680px){.gallery-grid{grid-template-columns:1fr}}
 
-  .drag-info{
-    background:#e2f0e6;border-left:3px solid var(--green);padding:12px 14px;
-    border-radius:5px;font-size:.85rem;color:var(--ink);margin-bottom:18px
+  .gcard{background:var(--white);border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:box-shadow .15s}
+  .gcard:hover{box-shadow:0 8px 28px -8px rgba(0,0,0,.14)}
+  .gcard.is-featured{border-color:var(--amber,#c8952a);box-shadow:0 0 0 2px rgba(200,149,42,.18)}
+
+  .gcard-cover{height:160px;background-size:cover;background-position:center;background-color:var(--beige-deep);position:relative}
+  .gcard-cover .badge-count{position:absolute;top:10px;right:10px;background:rgba(43,37,32,.82);color:#fff;padding:3px 9px;border-radius:4px;font-size:.76rem;font-weight:700}
+  .gcard-cover .btn-feat{
+    position:absolute;top:8px;left:8px;background:none;border:none;cursor:pointer;
+    font-size:1.1rem;opacity:.55;transition:opacity .15s,transform .15s;padding:4px;line-height:1
   }
-  .drag-info b{display:block;margin-bottom:3px;color:var(--green)}
+  .gcard-cover .btn-feat:hover{opacity:1;transform:scale(1.2)}
+  .gcard-cover .btn-feat.active{opacity:1}
+
+  .gcard-body{padding:14px 16px 12px}
+  .gcard-body h4{font-family:'Playfair Display',serif;font-size:1rem;margin:0 0 5px;color:var(--ink);line-height:1.25}
+  .gcard-meta{font-size:.78rem;color:var(--ink-soft);display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+  .gcard-actions{display:flex;gap:6px}
+  .gcard-actions .btn{padding:5px 11px;font-size:.78rem}
+
+  .no-results{text-align:center;padding:60px 20px;color:var(--ink-soft)}
+  .no-results svg{width:48px;height:48px;opacity:.3;margin-bottom:12px;display:block;margin-left:auto;margin-right:auto}
+
+  /* Modal */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(43,37,32,.55);z-index:900;align-items:center;justify-content:center}
+  .modal-overlay.open{display:flex}
+  .modal{background:var(--white);border-radius:10px;width:520px;max-width:96vw;max-height:90vh;overflow-y:auto;box-shadow:0 24px 60px rgba(43,37,32,.28)}
+  .modal-head{padding:20px 24px 0;display:flex;align-items:center;justify-content:space-between}
+  .modal-head h3{font-family:'Playfair Display',serif;font-size:1.2rem;margin:0;color:var(--ink)}
+  .modal-body{padding:20px 24px 24px}
+  .modal-foot{padding:0 24px 20px;display:flex;gap:10px;justify-content:flex-end}
+  .btn-close-modal{background:none;border:none;cursor:pointer;color:var(--ink-soft);font-size:1.3rem;padding:4px 8px;line-height:1;border-radius:4px}
+  .btn-close-modal:hover{background:var(--beige)}
+
+  .pos-btn{padding:4px 11px;font-size:.8rem;border:1px solid var(--line);background:var(--white);border-radius:4px;cursor:pointer;color:var(--ink-soft);transition:all .15s;white-space:nowrap}
+  .pos-btn.active,.pos-btn:hover{background:var(--burgundy);color:#fff;border-color:var(--burgundy)}
+  .cover-strip{height:110px;border-radius:6px;border:1px solid var(--line);background:var(--beige-deep);background-size:cover;margin-bottom:10px;transition:background .2s}
+
+  .photo-thumb-pick{
+    aspect-ratio:1;border-radius:4px;border:2px solid transparent;
+    background-size:cover;background-position:center;cursor:pointer;
+    position:relative;overflow:hidden;transition:border-color .15s,box-shadow .15s
+  }
+  .photo-thumb-pick:hover{border-color:var(--copper)}
+  .photo-thumb-pick.is-cover{border-color:#c8952a;box-shadow:0 0 0 1px #c8952a}
+  .photo-thumb-pick .remove-btn{
+    display:none;position:absolute;top:2px;right:2px;width:18px;height:18px;
+    background:rgba(122,31,43,.88);color:#fff;border:none;border-radius:50%;
+    font-size:.55rem;cursor:pointer;line-height:1;align-items:center;justify-content:center;padding:0
+  }
+  .photo-thumb-pick:hover .remove-btn{display:flex}
+  .cover-label{position:absolute;bottom:2px;left:50%;transform:translateX(-50%);background:rgba(200,149,42,.92);color:#fff;font-size:.5rem;padding:1px 4px;border-radius:2px;white-space:nowrap;pointer-events:none}
+  .photos-scroll{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-height:220px;overflow-y:auto;padding:2px}
+
+  .toggle-row{display:flex;align-items:center;gap:10px;padding:6px 0}
+  .toggle-row label{font-size:.9rem;font-weight:600;color:var(--ink);cursor:pointer}
+  input[type="checkbox"].toggle{width:38px;height:20px;appearance:none;background:var(--line);border-radius:10px;cursor:pointer;position:relative;flex-shrink:0;transition:background .2s}
+  input[type="checkbox"].toggle:checked{background:var(--green,#3a7d44)}
+  input[type="checkbox"].toggle::after{content:"";position:absolute;width:16px;height:16px;border-radius:50%;background:#fff;top:2px;left:2px;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+  input[type="checkbox"].toggle:checked::after{left:20px}
+
+  .filter-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+  .filter-bar select,.filter-bar input{height:36px;border:1px solid var(--line);border-radius:6px;padding:0 10px;font-size:.88rem;background:var(--white);color:var(--ink);cursor:pointer}
+  .filter-bar label{font-size:.85rem;color:var(--ink-soft);display:flex;align-items:center;gap:6px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -37,13 +83,13 @@
     <nav>
       <a href="index.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/></svg>Pulpit</a>
       <div class="nav-section">Strona WWW</div>
-      <a href="aktualnosci.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/><path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2zm10 1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/></svg>Aktualności<span class="badge">3</span></a>
+      <a href="aktualnosci.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/><path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2zm10 1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/></svg>Aktualności</a>
       <a href="ogloszenia.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M11.5 2v4.793l3.347 7.36a.75.75 0 0 1-.682 1.06H1.835a.75.75 0 0 1-.682-1.06l3.347-7.36V2H4a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1z"/></svg>Ogłoszenia parafialne</a>
       <a href="galeria.html" class="active"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M14.002 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2z"/></svg>Galeria</a>
       <a href="#"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 0 0-1H5a.5.5 0 0 0-.5.5M5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/><path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/></svg>Strony statyczne</a>
       <div class="nav-section">Wspólnota</div>
       <a href="intencje.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z"/></svg>Intencje mszalne</a>
-      <a href="sakramenty.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6 1h6v7l-2-1-2 1V1z"/><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/></svg>Sakramenty</a>
+      <a href="sakramenty.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M6 1h6v7l-2-1-2 1V1z"/><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 1 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/></svg>Sakramenty</a>
       <a href="pogrzeby.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>Pogrzeby</a>
       <a href="parafianie.html"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>Parafianie</a>
       <div class="nav-section">System</div>
@@ -56,98 +102,467 @@
   <div class="main">
     <div class="topbar">
       <div class="crumbs"><a href="index.html">Pulpit</a><span>/</span><b>Galeria</b></div>
+      <div class="topbar-right">
+        <a href="../strony/galeria.html" target="_blank" class="btn btn-ghost" style="font-size:.82rem">
+          <svg fill="currentColor" viewBox="0 0 16 16" style="width:13px;height:13px;margin-right:4px"><path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9q-.13 0-.25.031A2 2 0 0 1 7 9H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z"/><path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4 4 0 0 1-.82 1H12a3 3 0 1 0 0-6z"/></svg>
+          Podgląd strony
+        </a>
+      </div>
     </div>
 
     <div class="content">
       <div class="page-head">
         <div>
           <h1>Galeria parafii</h1>
-          <div class="lead"><b>32</b> galerii · <b>244</b> zdjęcia · łącznie <b>71 MB</b></div>
+          <div class="lead" id="stats-lead">Ładowanie…</div>
         </div>
         <div class="right">
-          <button class="btn btn-secondary">
-            <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8.5 1.5a.5.5 0 0 0-1 0v9.293L4.354 7.646a.5.5 0 1 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0-.708-.708L8.5 10.793V1.5z"/></svg>
-            Import CSV/ZIP
-          </button>
-          <button class="btn btn-primary">
+          <button class="btn btn-primary" onclick="openModal()">
             <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/></svg>
             Nowa galeria
           </button>
         </div>
       </div>
 
-      <div class="drag-info">
-        <b>Jak dodawać zdjęcia?</b>
-        Kliknij w wybraną galerię, aby ją otworzyć. Wewnątrz galerii będzie można przeciągać zdjęcia z folderu bezpośrednio na siatkę oraz zmieniać ich kolejność metodą drag &amp; drop. Obsługiwane formaty: JPG, PNG, HEIC, WebP, AVIF — automatycznie optymalizowane do .webp w 3 rozmiarach. <i>Funkcja dostępna w pełnej wersji systemu — w demo nieaktywna.</i>
+      <div class="filter-bar">
+        <select id="filter-rok" onchange="renderGrid()">
+          <option value="">Wszystkie lata</option>
+        </select>
+        <select id="filter-status" onchange="renderGrid()">
+          <option value="">Wszystkie</option>
+          <option value="pub">Publiczne</option>
+          <option value="draft">Szkice</option>
+        </select>
+        <label>
+          <input type="checkbox" id="filter-featured" onchange="renderGrid()">
+          Tylko wyróżnione ⭐
+        </label>
       </div>
 
-      <div class="gallery-cards">
-        <a href="#" class="gcard">
-          <div class="cover" style="background-image:url('../public/img/hero-1.jpg')"><div class="badge-count">38 zdjęć</div></div>
-          <div class="body">
-            <h4>100 lat Parafii — 1.08.2025</h4>
-            <div class="meta"><span>3 sierpnia 2025</span><span class="pill-badge pub">● Publiczna</span></div>
-          </div>
-        </a>
-        <a href="#" class="gcard">
-          <div class="cover" style="background-image:url('../public/img/event-wizytacja-2.jpg')"><div class="badge-count">14 zdjęć</div></div>
-          <div class="body">
-            <h4>Wizytacja kanoniczna 2025</h4>
-            <div class="meta"><span>9 maja 2026</span><span class="pill-badge pub">● Publiczna</span></div>
-          </div>
-        </a>
-        <a href="#" class="gcard">
-          <div class="cover" style="background-image:url('../public/img/budowa-1.jpg')"><div class="badge-count">22 zdjęcia</div></div>
-          <div class="body">
-            <h4>Budowa — luty 2025</h4>
-            <div class="meta"><span>15 lutego 2025</span><span class="pill-badge pub">● Publiczna</span></div>
-          </div>
-        </a>
-        <a href="#" class="gcard">
-          <div class="cover" style="background-image:url('../public/img/event-odpust-1.jpg')"><div class="badge-count">26 zdjęć</div></div>
-          <div class="body">
-            <h4>Suma odpustowa — czerwiec 2024</h4>
-            <div class="meta"><span>9 czerwca 2024</span><span class="pill-badge pub">● Publiczna</span></div>
-          </div>
-        </a>
-        <a href="#" class="gcard">
-          <div class="cover" style="background-image:url('../public/img/budowa-3.jpg')"><div class="badge-count">18 zdjęć</div></div>
-          <div class="body">
-            <h4>Nowy kościół i podziemia — 5.03.2025</h4>
-            <div class="meta"><span>7 marca 2025</span><span class="pill-badge pub">● Publiczna</span></div>
-          </div>
-        </a>
-        <a href="#" class="gcard">
-          <div class="cover" style="background-image:url('../public/img/event-pozegnanie-1.jpg')"><div class="badge-count">12 zdjęć</div></div>
-          <div class="body">
-            <h4>Pożegnanie ks. proboszcza Antoniego</h4>
-            <div class="meta"><span>6 września 2023</span><span class="pill-badge pub">● Publiczna</span></div>
-          </div>
-        </a>
-        <a href="#" class="gcard">
-          <div class="cover" style="background-image:url('../public/img/event-odpust-3.jpg')"><div class="badge-count">21 zdjęć</div></div>
-          <div class="body">
-            <h4>Festyn odpustowy 2024</h4>
-            <div class="meta"><span>10 czerwca 2024</span><span class="pill-badge pub">● Publiczna</span></div>
-          </div>
-        </a>
-        <a href="#" class="gcard">
-          <div class="cover" style="background-image:url('../public/img/event-odpust-4.jpg')"><div class="badge-count">8 zdjęć</div></div>
-          <div class="body">
-            <h4>Boże Ciało 2024</h4>
-            <div class="meta"><span>30 maja 2024</span><span class="pill-badge pub">● Publiczna</span></div>
-          </div>
-        </a>
-        <a href="#" class="gcard">
-          <div class="cover" style="background-image:url('../public/img/noclegownia.jpg')"><div class="badge-count">3 zdjęcia</div></div>
-          <div class="body">
-            <h4>Noclegownia — stary kościół</h4>
-            <div class="meta"><span>22 czerwca 2023</span><span class="pill-badge draft">● Szkic</span></div>
-          </div>
-        </a>
-      </div>
+      <div class="gallery-grid" id="gallery-grid"></div>
     </div>
   </div>
 </div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" style="width:620px">
+    <div class="modal-head">
+      <h3 id="modal-title">Nowa galeria</h3>
+      <button class="btn-close-modal" onclick="closeModal()" title="Zamknij">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="m-id">
+
+      <div class="form-grid" style="grid-template-columns:1fr 1fr;gap:12px">
+        <div class="form-row" style="margin:0">
+          <label class="form-label">Tytuł galerii *</label>
+          <input type="text" class="form-input" id="m-tytul" placeholder="np. Odpust parafialny 2024">
+        </div>
+        <div class="form-row" style="margin:0">
+          <label class="form-label">Data wydarzenia</label>
+          <input type="date" class="form-input" id="m-data">
+        </div>
+      </div>
+      <div class="form-row" style="margin-top:10px">
+        <label class="form-label">Opis (opcjonalny)</label>
+        <textarea class="form-input" id="m-opis" rows="2" placeholder="Krótki opis galerii…" style="resize:vertical"></textarea>
+      </div>
+
+      <!-- SEKCJA ZDJĘCIA -->
+      <div style="margin-top:14px;border-top:1px solid var(--line);padding-top:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+          <span style="font-weight:700;font-size:.9rem;color:var(--ink)">Zdjęcia galerii <span id="m-photo-count" style="font-weight:400;color:var(--ink-soft);font-size:.82rem"></span></span>
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+            <span style="font-size:.78rem;color:var(--ink-soft)">Pozycja okładki:</span>
+            <div style="display:flex;gap:3px">
+              <button class="pos-btn" data-pos="top"    onclick="setCoverPos('top')">Góra</button>
+              <button class="pos-btn" data-pos="center" onclick="setCoverPos('center')">Środek</button>
+              <button class="pos-btn" data-pos="bottom" onclick="setCoverPos('bottom')">Dół</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Folder field -->
+        <div class="form-row" style="margin-bottom:10px">
+          <label class="form-label">Folder zdjęć</label>
+          <input type="text" class="form-input" id="m-folder" placeholder="np. odpust-parafialny-2024" oninput="onFolderChange()">
+          <small class="form-hint">Podfolder w <code>public/img/galerie/</code></small>
+        </div>
+
+        <!-- Cover preview strip -->
+        <div class="cover-strip" id="m-cover-strip" style="background-position:center"></div>
+
+        <!-- Photo picker grid -->
+        <div class="photos-scroll" id="m-photo-grid"></div>
+        <p style="font-size:.76rem;color:var(--ink-soft);margin:8px 0 0">
+          Kliknij zdjęcie = ustaw jako okładkę &nbsp;·&nbsp; × = usuń z listy galerii &nbsp;·&nbsp; Plik na dysku <em>nie</em> jest kasowany.
+        </p>
+      </div>
+
+      <!-- Toggles -->
+      <div style="display:flex;gap:24px;margin-top:14px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:12px">
+        <div class="toggle-row">
+          <input type="checkbox" class="toggle" id="m-featured">
+          <label for="m-featured">⭐ Wyróżniona (strona główna)</label>
+        </div>
+        <div class="toggle-row">
+          <input type="checkbox" class="toggle" id="m-opublikowana">
+          <label for="m-opublikowana">Opublikowana</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal()">Anuluj</button>
+      <button class="btn btn-primary" onclick="saveModal()">Zapisz</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const LS_KEY     = 'nspj_galerie';
+const LS_VER_KEY = 'nspj_galerie_v';
+const DATA_VERSION = 1;
+
+const DEFAULT_DATA = [
+  {id:'gal-001',slug:'100-lat-parafii-01-08-2025-r',tytul:"100 lat Parafii — 1 sierpnia 2025",data:'2025-08-01',opis:'',folder:'100-lat-parafii-01-08-2025-r',cover:'public/img/galerie/100-lat-parafii-01-08-2025-r/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg"],opublikowana:true,featured:true},
+  {id:'gal-002',slug:'120-lat-osp-czerwionka',tytul:"120 lat OSP Czerwionka",data:'2024-06-01',opis:'',folder:'120-lat-osp-czerwionka',cover:'public/img/galerie/120-lat-osp-czerwionka/01.jpg',zdjecia:["01.jpg","02.jpg"],opublikowana:true,featured:false},
+  {id:'gal-003',slug:'20-piesza-pielgrzymka-do-sanktuarium-matki-bozej-pokornej-w-rudach',tytul:"20. Piesza Pielgrzymka do Rud",data:'2024-08-10',opis:'',folder:'20-piesza-pielgrzymka-do-sanktuarium-matki-bozej-pokornej-w-rudach',cover:'public/img/galerie/20-piesza-pielgrzymka-do-sanktuarium-matki-bozej-pokornej-w-rudach/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg"],opublikowana:true,featured:false},
+  {id:'gal-004',slug:'akcja-sprzatanie',tytul:"Akcja Sprzątanie",data:'2024-04-13',opis:'',folder:'akcja-sprzatanie',cover:'public/img/galerie/akcja-sprzatanie/01.jpeg',zdjecia:["01.jpeg","02.jpeg","03.jpeg","04.jpeg","05.jpeg","06.jpeg","07.jpeg","08.jpeg","09.jpeg","10.jpeg","11.jpeg","12.jpeg","13.jpeg","14.jpeg"],opublikowana:true,featured:false},
+  {id:'gal-005',slug:'boze-cialo-2024-r',tytul:"Boże Ciało 2024",data:'2024-05-30',opis:'',folder:'boze-cialo-2024-r',cover:'public/img/galerie/boze-cialo-2024-r/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","18.jpg"],opublikowana:true,featured:false},
+  {id:'gal-006',slug:'boze-cialo',tytul:"Boże Ciało",data:'2023-06-08',opis:'',folder:'boze-cialo',cover:'public/img/galerie/boze-cialo/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","18.jpg"],opublikowana:true,featured:false},
+  {id:'gal-007',slug:'boze-narodzenie-2024',tytul:"Boże Narodzenie 2024",data:'2024-12-25',opis:'',folder:'boze-narodzenie-2024',cover:'public/img/galerie/boze-narodzenie-2024/01.jpeg',zdjecia:["01.jpeg","02.jpeg","03.jpeg","04.jpeg","05.jpeg","06.jpeg","07.jpeg","08.jpeg","09.jpeg","10.jpeg","11.jpeg","12.jpeg","13.jpeg","14.jpeg","15.jpeg","16.jpeg"],opublikowana:true,featured:false},
+  {id:'gal-008',slug:'budowa-luty-2025',tytul:"Budowa — luty 2025",data:'2025-02-15',opis:'',folder:'budowa-luty-2025',cover:'public/img/galerie/budowa-luty-2025/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","18.jpg","19.jpg","20.jpg"],opublikowana:true,featured:true},
+  {id:'gal-009',slug:'droga-krzyzowa-2024',tytul:"Droga Krzyżowa 2024",data:'2024-03-22',opis:'',folder:'droga-krzyzowa-2024',cover:'public/img/galerie/droga-krzyzowa-2024/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","18.jpg","19.jpg","20.jpg","21.jpg","22.jpg"],opublikowana:true,featured:false},
+  {id:'gal-010',slug:'dzien-fatimski-13-pazdziernika',tytul:"Dzień Fatimski 13 października",data:'2024-10-13',opis:'',folder:'dzien-fatimski-13-pazdziernika',cover:'public/img/galerie/dzien-fatimski-13-pazdziernika/01.jpeg',zdjecia:["01.jpeg","02.jpeg"],opublikowana:true,featured:false},
+  {id:'gal-011',slug:'etap-przygotowania-placu-budowy-1',tytul:"Etap przygotowania placu budowy cz. 2",data:'2023-09-01',opis:'',folder:'etap-przygotowania-placu-budowy-1',cover:'public/img/galerie/etap-przygotowania-placu-budowy-1/01.jpeg',zdjecia:["01.jpeg","02.jpeg"],opublikowana:true,featured:false},
+  {id:'gal-012',slug:'etap-przygotowania-placu-budowy',tytul:"Etap przygotowania placu budowy",data:'2023-07-01',opis:'',folder:'etap-przygotowania-placu-budowy',cover:'public/img/galerie/etap-przygotowania-placu-budowy/01.jpeg',zdjecia:["01.jpeg","02.jpeg","03.jpeg","04.jpeg","05.jpeg","06.jpeg","07.jpeg","08.jpeg","09.jpeg","10.jpeg","11.jpeg","12.jpeg","13.jpeg","14.jpeg"],opublikowana:true,featured:false},
+  {id:'gal-013',slug:'intencje-mszalne-ad-2024',tytul:"Intencje mszalne AD 2024",data:'2024-01-01',opis:'',folder:'intencje-mszalne-ad-2024',cover:'public/img/galerie/intencje-mszalne-ad-2024/01.jpg',zdjecia:["01.jpg"],opublikowana:false,featured:false},
+  {id:'gal-014',slug:'kolejny-etap-budowy-jesien-2025',tytul:"Kolejny etap budowy — jesień 2025",data:'2025-10-01',opis:'',folder:'kolejny-etap-budowy-jesien-2025',cover:'public/img/galerie/kolejny-etap-budowy-jesien-2025/01.jpeg',zdjecia:["01.jpeg","02.jpeg","03.jpeg","04.jpeg","05.jpeg","06.jpeg","07.jpeg","08.jpeg","09.jpeg","10.jpeg","11.jpeg","12.jpeg","13.jpeg","14.jpeg"],opublikowana:true,featured:false},
+  {id:'gal-015',slug:'kosciol-i-podziemia-05-03-2025',tytul:"Kościół i podziemia — 5 marca 2025",data:'2025-03-05',opis:'',folder:'kosciol-i-podziemia-05-03-2025',cover:'public/img/galerie/kosciol-i-podziemia-05-03-2025/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg"],opublikowana:true,featured:true},
+  {id:'gal-016',slug:'kosciol-noca',tytul:"Kościół nocą",data:'2024-11-01',opis:'',folder:'kosciol-noca',cover:'public/img/galerie/kosciol-noca/01.jpeg',zdjecia:["01.jpeg","02.jpeg","03.jpeg","04.jpeg","05.jpeg","06.jpeg","07.jpeg","08.jpeg","09.jpeg","10.jpeg"],opublikowana:true,featured:false},
+  {id:'gal-017',slug:'kosciol-z-wewnatrz',tytul:"Kościół od wewnątrz",data:'2024-05-01',opis:'',folder:'kosciol-z-wewnatrz',cover:'public/img/galerie/kosciol-z-wewnatrz/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpeg","05.jpeg","06.jpeg","07.jpeg","08.jpeg","09.jpeg","10.jpg","11.jpg","12.jpg","13.jpeg","14.jpeg","15.jpeg","16.jpeg","17.jpeg","18.jpeg"],opublikowana:true,featured:false},
+  {id:'gal-018',slug:'kosciol-z-zewnatrz',tytul:"Kościół z zewnątrz",data:'2024-04-01',opis:'',folder:'kosciol-z-zewnatrz',cover:'public/img/galerie/kosciol-z-zewnatrz/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","18.jpg","19.jpg","20.jpg","21.jpg","22.jpg"],opublikowana:true,featured:false},
+  {id:'gal-019',slug:'noclegownia-budynek-starego-kosciola',tytul:"Noclegownia — stary kościół",data:'2023-06-22',opis:'',folder:'noclegownia-budynek-starego-kosciola',cover:'public/img/galerie/noclegownia-budynek-starego-kosciola/01.jpg',zdjecia:["01.jpg","02.jpg"],opublikowana:true,featured:false},
+  {id:'gal-020',slug:'nowy-etap-budowy',tytul:"Nowy etap budowy",data:'2024-06-01',opis:'',folder:'nowy-etap-budowy',cover:'public/img/galerie/nowy-etap-budowy/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg"],opublikowana:true,featured:false},
+  {id:'gal-021',slug:'nowy-kosciol-i-podziemia-stan-05-03-2025',tytul:"Nowy kościół i podziemia — stan 5.03.2025",data:'2025-03-05',opis:'',folder:'nowy-kosciol-i-podziemia-stan-05-03-2025',cover:'public/img/galerie/nowy-kosciol-i-podziemia-stan-05-03-2025/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg"],opublikowana:true,featured:false},
+  {id:'gal-022',slug:'odpust-eucharystia',tytul:"Odpust — Eucharystia",data:'2024-06-09',opis:'',folder:'odpust-eucharystia',cover:'public/img/galerie/odpust-eucharystia/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","18.jpg","19.jpg","20.jpg","21.jpg","22.jpg"],opublikowana:true,featured:false},
+  {id:'gal-023',slug:'odpust-parafialny-09-06-2024-r',tytul:"Odpust parafialny — 9 czerwca 2024",data:'2024-06-09',opis:'',folder:'odpust-parafialny-09-06-2024-r',cover:'public/img/galerie/odpust-parafialny-09-06-2024-r/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","18.jpg","19.jpg","20.jpg","21.jpg","22.jpg"],opublikowana:true,featured:true},
+  {id:'gal-024',slug:'odpust-parafialny-2023',tytul:"Odpust parafialny 2023",data:'2023-06-11',opis:'',folder:'odpust-parafialny-2023',cover:'public/img/galerie/odpust-parafialny-2023/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg"],opublikowana:true,featured:false},
+  {id:'gal-025',slug:'odpust-parafialny-2025',tytul:"Odpust parafialny 2025",data:'2025-06-08',opis:'',folder:'odpust-parafialny-2025',cover:'public/img/galerie/odpust-parafialny-2025/01.jpeg',zdjecia:["01.jpeg","02.jpeg","03.jpeg","04.jpeg","05.jpeg","06.jpeg","07.jpeg","08.jpeg","09.jpeg","10.jpeg","11.jpeg","12.jpeg","13.jpeg","14.jpeg","15.jpeg","16.jpeg"],opublikowana:true,featured:false},
+  {id:'gal-026',slug:'pielgrzyma-iii-zakonu-do-bujakowa',tytul:"Pielgrzymka III Zakonu do Bujakowa",data:'2024-09-01',opis:'',folder:'pielgrzyma-iii-zakonu-do-bujakowa',cover:'public/img/galerie/pielgrzyma-iii-zakonu-do-bujakowa/01.jpeg',zdjecia:["01.jpeg","02.jpeg","03.jpeg","04.jpeg"],opublikowana:true,featured:false},
+  {id:'gal-027',slug:'pielgrzymka-do-rud-raciborskich',tytul:"Pielgrzymka do Rud Raciborskich",data:'2024-07-01',opis:'',folder:'pielgrzymka-do-rud-raciborskich',cover:'public/img/galerie/pielgrzymka-do-rud-raciborskich/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg"],opublikowana:true,featured:false},
+  {id:'gal-028',slug:'pielgrzymka-do-rud',tytul:"Pielgrzymka do Rud",data:'2023-07-01',opis:'',folder:'pielgrzymka-do-rud',cover:'public/img/galerie/pielgrzymka-do-rud/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg"],opublikowana:true,featured:false},
+  {id:'gal-029',slug:'pielgrzymka-dzieci-komunijnych-do-wroclawia',tytul:"Pielgrzymka dzieci komunijnych do Wrocławia",data:'2024-05-01',opis:'',folder:'pielgrzymka-dzieci-komunijnych-do-wroclawia',cover:'public/img/galerie/pielgrzymka-dzieci-komunijnych-do-wroclawia/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg"],opublikowana:true,featured:false},
+  {id:'gal-030',slug:'plyty-elewacji-zewnetrznej',tytul:"Płyty elewacji zewnętrznej",data:'2025-01-01',opis:'',folder:'plyty-elewacji-zewnetrznej',cover:'public/img/galerie/plyty-elewacji-zewnetrznej/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg"],opublikowana:true,featured:false},
+  {id:'gal-031',slug:'pozegnanie-ks-proboszcza-antoniego-szczypkii',tytul:"Pożegnanie ks. proboszcza Antoniego Szczypki",data:'2023-09-06',opis:'',folder:'pozegnanie-ks-proboszcza-antoniego-szczypkii',cover:'public/img/galerie/pozegnanie-ks-proboszcza-antoniego-szczypkii/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg"],opublikowana:true,featured:false},
+  {id:'gal-032',slug:'rada-budowy',tytul:"Rada Budowy",data:'2024-08-01',opis:'',folder:'rada-budowy',cover:'public/img/galerie/rada-budowy/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpeg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpeg","11.jpg","12.jpg","13.jpg","14.jpg"],opublikowana:true,featured:false},
+  {id:'gal-033',slug:'suma-odpustowa-09-06-2024r',tytul:"Suma odpustowa — 9 czerwca 2024",data:'2024-06-09',opis:'',folder:'suma-odpustowa-09-06-2024r',cover:'public/img/galerie/suma-odpustowa-09-06-2024r/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","18.jpg","19.jpg","20.jpg"],opublikowana:true,featured:true},
+  {id:'gal-034',slug:'swietliki-i-podziemia',tytul:"Świetliki i podziemia",data:'2024-12-01',opis:'',folder:'swietliki-i-podziemia',cover:'public/img/galerie/swietliki-i-podziemia/01.jpeg',zdjecia:["01.jpeg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpeg","07.jpg","08.jpg","09.jpg","10.jpg"],opublikowana:true,featured:false},
+  {id:'gal-035',slug:'swieto-ministrantow',tytul:"Święto ministrantów",data:'2024-08-06',opis:'',folder:'swieto-ministrantow',cover:'public/img/galerie/swieto-ministrantow/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg"],opublikowana:true,featured:false},
+  {id:'gal-036',slug:'wczesna-komunia-swieta-2023',tytul:"Wczesna Komunia Święta 2023",data:'2023-05-14',opis:'',folder:'wczesna-komunia-swieta-2023',cover:'public/img/galerie/wczesna-komunia-swieta-2023/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg"],opublikowana:true,featured:false},
+  {id:'gal-037',slug:'wizytacja-kanoniczna-2025-r',tytul:"Wizytacja kanoniczna 2025",data:'2025-05-09',opis:'',folder:'wizytacja-kanoniczna-2025-r',cover:'public/img/galerie/wizytacja-kanoniczna-2025-r/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg","17.jpg","18.jpg","19.jpg","20.jpg"],opublikowana:true,featured:true},
+  {id:'gal-038',slug:'wycieczka',tytul:"Wycieczka parafialna",data:'2024-06-01',opis:'',folder:'wycieczka',cover:'public/img/galerie/wycieczka/01.jpg',zdjecia:["01.jpg"],opublikowana:true,featured:false},
+  {id:'gal-039',slug:'wylewka-w-podziemiach-1',tytul:"Wylewka w podziemiach cz. 2",data:'2024-10-01',opis:'',folder:'wylewka-w-podziemiach-1',cover:'public/img/galerie/wylewka-w-podziemiach-1/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg"],opublikowana:true,featured:false},
+  {id:'gal-040',slug:'wylewka-w-podziemiach',tytul:"Wylewka w podziemiach",data:'2024-09-15',opis:'',folder:'wylewka-w-podziemiach',cover:'public/img/galerie/wylewka-w-podziemiach/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg"],opublikowana:true,featured:false},
+  {id:'gal-041',slug:'zegnamy-ksiedza-antoniego',tytul:"Żegnamy ks. Antoniego",data:'2023-09-06',opis:'',folder:'zegnamy-ksiedza-antoniego',cover:'public/img/galerie/zegnamy-ksiedza-antoniego/01.jpg',zdjecia:["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg"],opublikowana:true,featured:false}
+];
+
+var allData = [];
+
+function loadData() {
+  var ver = parseInt(localStorage.getItem(LS_VER_KEY)||'0');
+  if (ver < DATA_VERSION) {
+    allData = JSON.parse(JSON.stringify(DEFAULT_DATA));
+    saveData();
+    return;
+  }
+  try { allData = JSON.parse(localStorage.getItem(LS_KEY)) || []; }
+  catch(e) { allData = JSON.parse(JSON.stringify(DEFAULT_DATA)); }
+}
+
+function saveData() {
+  localStorage.setItem(LS_KEY, JSON.stringify(allData));
+  localStorage.setItem(LS_VER_KEY, String(DATA_VERSION));
+}
+
+function fmtDate(s) {
+  if (!s) return '—';
+  var p = s.split('-');
+  if (p.length < 3) return s;
+  return p[2]+'.'+p[1]+'.'+p[0];
+}
+
+function genId() {
+  return 'gal-' + Date.now();
+}
+
+// ─── STATS ────────────────────────────────────────────────
+function updateStats() {
+  var total = allData.length;
+  var pub   = allData.filter(function(g){return g.opublikowana;}).length;
+  var feat  = allData.filter(function(g){return g.featured;}).length;
+  var photos = allData.reduce(function(s,g){return s+(g.zdjecia?g.zdjecia.length:0);},0);
+  document.getElementById('stats-lead').innerHTML =
+    '<b>'+total+'</b> galerii · <b>'+photos+'</b> zdjęć · <b>'+pub+'</b> publicznych · <b>'+feat+'</b> wyróżnionych';
+}
+
+// ─── FILTER YEARS ─────────────────────────────────────────
+function populateYears() {
+  var years = [];
+  allData.forEach(function(g){
+    var y = g.data ? g.data.substring(0,4) : null;
+    if (y && years.indexOf(y) < 0) years.push(y);
+  });
+  years.sort().reverse();
+  var sel = document.getElementById('filter-rok');
+  sel.innerHTML = '<option value="">Wszystkie lata</option>';
+  years.forEach(function(y){
+    sel.innerHTML += '<option value="'+y+'">'+y+'</option>';
+  });
+}
+
+// ─── RENDER GRID ──────────────────────────────────────────
+function renderGrid() {
+  var rokFilter      = document.getElementById('filter-rok').value;
+  var statusFilter   = document.getElementById('filter-status').value;
+  var featuredFilter = document.getElementById('filter-featured').checked;
+
+  var filtered = allData.filter(function(g) {
+    if (rokFilter && (!g.data || g.data.substring(0,4) !== rokFilter)) return false;
+    if (statusFilter === 'pub'   && !g.opublikowana) return false;
+    if (statusFilter === 'draft' &&  g.opublikowana) return false;
+    if (featuredFilter && !g.featured) return false;
+    return true;
+  });
+
+  // Sort: newest first
+  filtered.sort(function(a,b){
+    return (b.data||'').localeCompare(a.data||'');
+  });
+
+  var grid = document.getElementById('gallery-grid');
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="no-results" style="grid-column:1/-1"><svg fill="currentColor" viewBox="0 0 16 16"><path d="M14.002 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2z"/></svg>Brak galerii dla wybranych filtrów</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(function(g) {
+    var coverPos = g.cover_pos || 'center';
+    var coverStyle = (g.cover ? 'background-image:url(\'../'+g.cover+'\');' : '') + 'background-position:'+coverPos;
+    var count = g.zdjecia ? g.zdjecia.length : 0;
+    var featClass = g.featured ? ' is-featured' : '';
+    var featIcon  = g.featured ? '⭐' : '☆';
+    var featTitle = g.featured ? 'Usuń z wyróżnionych' : 'Wyróżnij na stronie głównej';
+    var statusBadge = g.opublikowana
+      ? '<span class="pill-badge pub">● Publiczna</span>'
+      : '<span class="pill-badge draft">● Szkic</span>';
+    return '<div class="gcard'+featClass+'" data-id="'+g.id+'">'
+      +'<div class="gcard-cover" style="'+coverStyle+'">'
+      +'<div class="badge-count">'+count+' zdjęć</div>'
+      +'<button class="btn-feat'+(g.featured?' active':'')+'" title="'+featTitle+'" onclick="toggleFeatured(\''+g.id+'\')" data-id="'+g.id+'">'+featIcon+'</button>'
+      +'</div>'
+      +'<div class="gcard-body">'
+      +'<h4>'+g.tytul+'</h4>'
+      +'<div class="gcard-meta"><span>'+fmtDate(g.data)+'</span>'+statusBadge+'</div>'
+      +'<div class="gcard-actions">'
+      +'<button class="btn btn-secondary" onclick="editGallery(\''+g.id+'\')">Edytuj</button>'
+      +'<button class="btn btn-danger" onclick="deleteGallery(\''+g.id+'\')">Usuń</button>'
+      +'</div>'
+      +'</div>'
+      +'</div>';
+  }).join('');
+}
+
+// ─── TOGGLE FEATURED ──────────────────────────────────────
+function toggleFeatured(id) {
+  var g = allData.find(function(x){return x.id===id;});
+  if (!g) return;
+  g.featured = !g.featured;
+  saveData();
+  updateStats();
+  renderGrid();
+}
+
+// ─── DELETE ───────────────────────────────────────────────
+function deleteGallery(id) {
+  var g = allData.find(function(x){return x.id===id;});
+  if (!g) return;
+  if (!confirm('Usunąć galerię „'+g.tytul+'"?\n\nZdjęcia na dysku nie zostaną usunięte.')) return;
+  allData = allData.filter(function(x){return x.id!==id;});
+  saveData();
+  updateStats();
+  populateYears();
+  renderGrid();
+}
+
+// ─── MODAL STATE ──────────────────────────────────────────
+var editingId    = null;
+var modalPhotos  = [];   // kopia listy zdjęć edytowanej galerii
+var modalCover   = '';   // filename wybranego cover
+var modalFolder  = '';
+var modalCoverPos = 'center';
+
+function openModal(id) {
+  editingId = id || null;
+  var g = id ? allData.find(function(x){return x.id===id;}) : null;
+  document.getElementById('modal-title').textContent = g ? 'Edytuj galerię' : 'Nowa galeria';
+  document.getElementById('m-id').value             = g ? g.id : '';
+  document.getElementById('m-tytul').value          = g ? g.tytul : '';
+  document.getElementById('m-data').value           = g ? (g.data||'') : '';
+  document.getElementById('m-opis').value           = g ? (g.opis||'') : '';
+  document.getElementById('m-folder').value         = g ? (g.folder||'') : '';
+  document.getElementById('m-featured').checked     = g ? !!g.featured : false;
+  document.getElementById('m-opublikowana').checked = g ? !!g.opublikowana : true;
+
+  modalFolder   = g ? (g.folder||'') : '';
+  modalPhotos   = g ? (g.zdjecia ? g.zdjecia.slice() : []) : [];
+  modalCoverPos = g ? (g.cover_pos || 'center') : 'center';
+
+  // Extract cover filename from full path
+  if (g && g.cover) {
+    var parts = g.cover.split('/');
+    modalCover = parts[parts.length - 1];
+  } else {
+    modalCover = modalPhotos.length ? modalPhotos[0] : '';
+  }
+
+  updatePosButtons();
+  renderModalPhotos();
+  updateCoverStrip();
+  document.getElementById('modal-overlay').classList.add('open');
+  setTimeout(function(){ document.getElementById('m-tytul').focus(); }, 50);
+}
+
+function editGallery(id) { openModal(id); }
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+// Zmiana folderu — odśwież miniatury
+function onFolderChange() {
+  modalFolder = document.getElementById('m-folder').value.trim();
+  renderModalPhotos();
+  updateCoverStrip();
+}
+
+// ─── PHOTO PICKER ─────────────────────────────────────────
+function renderModalPhotos() {
+  var count = document.getElementById('m-photo-count');
+  count.textContent = '(' + modalPhotos.length + ' zdjęć)';
+  var grid = document.getElementById('m-photo-grid');
+  if (!modalPhotos.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;color:var(--ink-soft);font-size:.82rem;padding:10px 0">'
+      + 'Brak zdjęć w tej galerii.</div>';
+    return;
+  }
+  grid.innerHTML = modalPhotos.map(function(fname) {
+    var src = '../public/img/galerie/' + modalFolder + '/' + fname;
+    var isCover = (fname === modalCover);
+    return '<div class="photo-thumb-pick'+(isCover?' is-cover':'')+'"'
+      +' style="background-image:url(\''+src+'\')"'
+      +' onclick="selectModalCover(\''+fname+'\')"'
+      +' title="Kliknij aby ustawić jako okładkę">'
+      +'<button class="remove-btn" onclick="removeModalPhoto(event,\''+fname+'\')" title="Usuń z galerii">✕</button>'
+      +(isCover ? '<div class="cover-label">COVER</div>' : '')
+      +'</div>';
+  }).join('');
+}
+
+function selectModalCover(fname) {
+  modalCover = fname;
+  renderModalPhotos();
+  updateCoverStrip();
+}
+
+function removeModalPhoto(e, fname) {
+  e.stopPropagation();
+  if (!confirm('Usunąć "'+fname+'" z listy galerii?\n(Plik na dysku pozostaje nienaruszony.)')) return;
+  modalPhotos = modalPhotos.filter(function(f){return f!==fname;});
+  if (modalCover === fname) modalCover = modalPhotos.length ? modalPhotos[0] : '';
+  renderModalPhotos();
+  updateCoverStrip();
+}
+
+// ─── COVER POSITION ───────────────────────────────────────
+function setCoverPos(pos) {
+  modalCoverPos = pos;
+  updatePosButtons();
+  updateCoverStrip();
+}
+
+function updatePosButtons() {
+  document.querySelectorAll('.pos-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.pos === modalCoverPos);
+  });
+}
+
+function updateCoverStrip() {
+  var strip = document.getElementById('m-cover-strip');
+  if (modalCover && modalFolder) {
+    strip.style.backgroundImage = 'url(\'../public/img/galerie/'+modalFolder+'/'+modalCover+'\')';
+  } else {
+    strip.style.backgroundImage = '';
+  }
+  strip.style.backgroundPosition = modalCoverPos;
+}
+
+// ─── SAVE ─────────────────────────────────────────────────
+function saveModal() {
+  var tytul = document.getElementById('m-tytul').value.trim();
+  if (!tytul) { alert('Podaj tytuł galerii.'); document.getElementById('m-tytul').focus(); return; }
+
+  var folder   = document.getElementById('m-folder').value.trim();
+  var coverPath = (modalCover && folder) ? 'public/img/galerie/'+folder+'/'+modalCover : '';
+
+  if (editingId) {
+    var g = allData.find(function(x){return x.id===editingId;});
+    if (g) {
+      g.tytul        = tytul;
+      g.data         = document.getElementById('m-data').value;
+      g.opis         = document.getElementById('m-opis').value.trim();
+      g.cover        = coverPath;
+      g.cover_pos    = modalCoverPos;
+      g.folder       = folder;
+      g.featured     = document.getElementById('m-featured').checked;
+      g.opublikowana = document.getElementById('m-opublikowana').checked;
+      g.zdjecia      = modalPhotos;
+    }
+  } else {
+    var slug = folder || tytul.toLowerCase().replace(/[\s]+/g,'-').replace(/[^a-z0-9-]/g,'');
+    allData.unshift({
+      id:            genId(),
+      slug:          slug,
+      tytul:         tytul,
+      data:          document.getElementById('m-data').value,
+      opis:          document.getElementById('m-opis').value.trim(),
+      folder:        folder,
+      cover:         coverPath,
+      cover_pos:     modalCoverPos,
+      zdjecia:       modalPhotos,
+      opublikowana:  document.getElementById('m-opublikowana').checked,
+      featured:      document.getElementById('m-featured').checked
+    });
+  }
+
+  saveData();
+  updateStats();
+  populateYears();
+  renderGrid();
+  closeModal();
+}
+
+// ─── KEYBOARD ─────────────────────────────────────────────
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ─── INIT ─────────────────────────────────────────────────
+loadData();
+updateStats();
+populateYears();
+renderGrid();
+</script>
 </body>
 </html>
