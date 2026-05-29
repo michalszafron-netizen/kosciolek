@@ -176,9 +176,11 @@
           <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
             <span style="font-size:.78rem;color:var(--ink-soft)">Pozycja okładki:</span>
             <div style="display:flex;gap:3px">
-              <button class="pos-btn" data-pos="top"    onclick="setCoverPos('top')">Góra</button>
-              <button class="pos-btn" data-pos="center" onclick="setCoverPos('center')">Środek</button>
-              <button class="pos-btn" data-pos="bottom" onclick="setCoverPos('bottom')">Dół</button>
+              <button class="pos-btn" data-pos="20%"  onclick="setCoverPos('20%')">1/5</button>
+              <button class="pos-btn" data-pos="40%"  onclick="setCoverPos('40%')">2/5</button>
+              <button class="pos-btn" data-pos="60%"  onclick="setCoverPos('60%')">3/5</button>
+              <button class="pos-btn" data-pos="80%"  onclick="setCoverPos('80%')">4/5</button>
+              <button class="pos-btn" data-pos="100%" onclick="setCoverPos('100%')">5/5</button>
             </div>
           </div>
         </div>
@@ -348,8 +350,8 @@ function renderGrid() {
   }
 
   grid.innerHTML = filtered.map(function(g) {
-    var coverPos = g.cover_pos || 'center';
-    var coverStyle = (g.cover ? 'background-image:url(\'../'+g.cover+'\');' : '') + 'background-position:'+coverPos;
+    var coverPos = normPos(g.cover_pos);
+    var coverStyle = (g.cover ? 'background-image:url(\'../'+g.cover+'\');' : '') + 'background-position:center '+coverPos;
     var count = g.zdjecia ? g.zdjecia.length : 0;
     var featClass = g.featured ? ' is-featured' : '';
     var featIcon  = g.featured ? '⭐' : '☆';
@@ -398,10 +400,18 @@ function deleteGallery(id) {
 
 // ─── MODAL STATE ──────────────────────────────────────────
 var editingId    = null;
-var modalPhotos  = [];   // kopia listy zdjęć edytowanej galerii
-var modalCover   = '';   // filename wybranego cover
+var modalPhotos  = [];
+var modalCover   = '';
 var modalFolder  = '';
-var modalCoverPos = 'center';
+var modalCoverPos = '40%';
+
+// Konwersja starych wartości (top/center/bottom) na procenty
+function normPos(p) {
+  if (!p || p === 'center') return '40%';
+  if (p === 'top')    return '20%';
+  if (p === 'bottom') return '80%';
+  return p; // już jest procentem
+}
 
 function openModal(id) {
   editingId = id || null;
@@ -417,7 +427,7 @@ function openModal(id) {
 
   modalFolder   = g ? (g.folder||'') : '';
   modalPhotos   = g ? (g.zdjecia ? g.zdjecia.slice() : []) : [];
-  modalCoverPos = g ? (g.cover_pos || 'center') : 'center';
+  modalCoverPos = normPos(g ? g.cover_pos : null);
 
   // Extract cover filename from full path
   if (g && g.cover) {
@@ -505,7 +515,7 @@ function updateCoverStrip() {
   } else {
     strip.style.backgroundImage = '';
   }
-  strip.style.backgroundPosition = modalCoverPos;
+  strip.style.backgroundPosition = 'center ' + modalCoverPos;
 }
 
 // ─── SAVE ─────────────────────────────────────────────────

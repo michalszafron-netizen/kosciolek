@@ -343,6 +343,13 @@ var currentPhotos = [];
 var lbIndex = 0;
 var currentFolder = '';
 
+function normPos(p) {
+  if (!p || p === 'center') return '40%';
+  if (p === 'top')    return '20%';
+  if (p === 'bottom') return '80%';
+  return p;
+}
+
 // ─── LOAD DATA ─────────────────────────────────────────────
 function loadGaleries() {
   try {
@@ -372,8 +379,8 @@ function renderList() {
     return;
   }
   grid.innerHTML = allGaleries.map(function(g) {
-    var coverPos = g.cover_pos || 'center';
-    var coverStyle = (g.cover ? 'background-image:url(\'../'+g.cover+'\');' : '')+'background-position:'+coverPos;
+    var coverPos = normPos(g.cover_pos);
+    var coverStyle = (g.cover ? 'background-image:url(\'../'+g.cover+'\');' : '')+'background-position:center '+coverPos;
     var count = g.zdjecia ? g.zdjecia.length : 0;
     return '<a class="gallery-card" href="galeria.html?id='+g.id+'" onclick="openGallery(\''+g.id+'\');return false;">'
       +'<div class="cover" style="'+coverStyle+'">'
@@ -406,7 +413,7 @@ function openGallery(id) {
   document.getElementById('detail-opis').textContent = g.opis || '';
   var hero = document.getElementById('detail-hero');
   hero.style.backgroundImage    = g.cover ? 'url(\'../'+g.cover+'\')' : '';
-  hero.style.backgroundPosition = g.cover_pos || 'center';
+  hero.style.backgroundPosition = 'center ' + normPos(g.cover_pos);
 
   // Render photo grid
   var photosGrid = document.getElementById('photos-grid');
